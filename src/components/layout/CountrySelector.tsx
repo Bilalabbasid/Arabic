@@ -60,7 +60,7 @@ export default function CountrySelector({ currentCountryCode, onCountrySelect, c
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-emerald-500 bg-white text-slate-800 text-sm font-medium transition-colors shadow-sm"
+        className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-lg border border-slate-200 hover:border-emerald-500 bg-white text-slate-800 text-sm font-medium transition-colors shadow-sm"
         aria-label="اختر الدولة"
       >
         <span className="text-base" role="img" aria-label={selectedCountry.nameAr}>

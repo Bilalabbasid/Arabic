@@ -59,7 +59,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl" className={cairo.variable}>
-      <body className="flex flex-col min-h-screen antialiased bg-slate-50 text-slate-900">
+      <body className="flex flex-col min-h-screen antialiased bg-slate-50 text-slate-900 overflow-x-clip">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

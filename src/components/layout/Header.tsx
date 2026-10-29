@@ -21,22 +21,22 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm overflow-hidden">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
           {/* Logo & Brand */}
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+          <div className="flex items-center gap-4 sm:gap-6 shrink-0">
+            <Link href="/" className="flex items-center gap-2 group shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform shrink-0">
                 <Calculator className="w-5 h-5" />
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold text-xl text-slate-900 tracking-tight flex items-center gap-1">
+                <span className="font-extrabold text-lg sm:text-xl text-slate-900 tracking-tight flex items-center gap-1">
                   لِسيارتك
-                  <span className="text-xs px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold font-mono">
+                  <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold font-mono">
                     .com
                   </span>
                 </span>
-                <span className="text-[10px] text-slate-500 -mt-1 font-medium">
+                <span className="text-[10px] text-slate-500 -mt-1 font-medium hidden sm:block">
                   منصة الحاسبات العربية
                 </span>
               </div>
@@ -64,12 +64,12 @@ export default function Header() {
           </div>
 
           {/* Right Header Actions: Search, Country Selector, Mobile Menu */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Search Trigger */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 text-sm font-medium transition-colors"
+              className="flex items-center gap-2 p-2 sm:px-3 sm:py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 text-sm font-medium transition-colors"
               aria-label="البحث في الحاسبات"
             >
               <Search className="w-4 h-4 text-emerald-600" />
