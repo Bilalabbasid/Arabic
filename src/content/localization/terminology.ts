@@ -406,3 +406,4 @@ export function getLocalizedTerm(conceptId: string, countryCode?: string): strin
   }
   return entry.preferredArabicTerm;
 }
+
