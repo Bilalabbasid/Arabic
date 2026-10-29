@@ -40,3 +40,4 @@ export const EG_ELECTRICITY_RULES: CountryRegulatedRule<EgyptElectricityParams>[
     ],
   },
 ];
+

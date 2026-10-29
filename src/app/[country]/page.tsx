@@ -11,7 +11,7 @@ import { getCalculatorsByCountry } from '@/data/calculators';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AdSlot from '@/components/layout/AdSlot';
 import { Calculator, ArrowLeft, ShieldCheck, CheckCircle2, Globe, Building } from 'lucide-react';
-import { formatMetaTitle, constructCanonicalUrl } from '@/lib/seo/metadata';
+import { formatMetaTitle, constructCanonicalUrl, isCountryCalculatorValid } from '@/lib/seo/metadata';
 
 interface PageProps {
   params: Promise<{ country: string }>;
@@ -113,36 +113,43 @@ export default async function CountryHubPage({ params }: PageProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {availableCalculators.map((calc) => (
-            <Link
-              key={calc.slug}
-              href={`/${country.countryCode.toLowerCase()}/${calc.slug}/`}
-              className="group bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="w-12 h-12 rounded-2xl bg-emerald-100/70 text-emerald-800 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                    <Calculator className="w-6 h-6" />
-                  </span>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
-                    {calc.subcategory}
-                  </span>
+          {availableCalculators.map((calc) => {
+            const isLocalized = isCountryCalculatorValid(calc, country.countryCode);
+            const targetHref = isLocalized
+              ? `/${country.countryCode.toLowerCase()}/${calc.slug}/`
+              : `/calculators/${calc.slug}/`;
+
+            return (
+              <Link
+                key={calc.slug}
+                href={targetHref}
+                className="group bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="w-12 h-12 rounded-2xl bg-emerald-100/70 text-emerald-800 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                      <Calculator className="w-6 h-6" />
+                    </span>
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
+                      {calc.subcategory}
+                    </span>
+                  </div>
+
+                  <h3 className="font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors text-base sm:text-lg mb-2">
+                    {calc.nameAr}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-3">
+                    {calc.descriptionAr}
+                  </p>
                 </div>
 
-                <h3 className="font-extrabold text-slate-900 group-hover:text-emerald-700 transition-colors text-base sm:text-lg mb-2">
-                  {calc.nameAr}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-3">
-                  {calc.descriptionAr}
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
-                <span>احسب بـ {country.currencySymbolAr}</span>
-                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
-              </div>
-            </Link>
-          ))}
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
+                  <span>احسب بـ {country.currencySymbolAr}</span>
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
 

@@ -17,6 +17,10 @@ import {
   generateBreadcrumbSchema,
   formatMetaTitle,
   constructCanonicalUrl,
+  generateLocalizedCalculatorTitle,
+  generateLocalizedCalculatorDescription,
+  generateHreflangAlternates,
+  isCountryCalculatorValid,
 } from '@/lib/seo/metadata';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CalculatorRunner from '@/components/calculator/CalculatorRunner';
@@ -38,12 +42,7 @@ export async function generateStaticParams() {
   for (const country of COUNTRIES) {
     const cCode = country.countryCode.toLowerCase();
     for (const calc of ALL_CALCULATORS) {
-      const isSupported =
-        calc.supportedCountries.includes('*') ||
-        calc.supportedCountries.map((c) => c.toUpperCase()).includes(country.countryCode.toUpperCase());
-
-      // Only generate localized URLs for calculators that are meaningful for that country
-      if (isSupported) {
+      if (calc.publicationStatus === 'PUBLISHED' && isCountryCalculatorValid(calc, country.countryCode)) {
         paramsList.push({
           country: cCode,
           calculator: calc.slug,
@@ -60,24 +59,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const country = getCountryByCode(countryParam);
   const calc = getCalculatorBySlug(calcSlug);
 
-  if (!country || !calc) {
+  if (!country || !calc || !isCountryCalculatorValid(calc, country.countryCode)) {
     return {
       title: 'الصفحة غير موجودة',
     };
   }
 
-  const title = formatMetaTitle(`${calc.nameAr} في ${country.nameAr} (${country.currencySymbolAr})`);
-  const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/${calc.slug}/`);
+  const title = generateLocalizedCalculatorTitle(calc, country);
+  const description = generateLocalizedCalculatorDescription(calc, country);
+  const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/${calc.slug}`);
+  const alternatesLanguages = generateHreflangAlternates(calc);
 
   return {
     title,
-    description: `${calc.nameAr} مخصصة لـ ${country.nameAr}: احسب بالعملة المحلية (${country.currencyNameAr} ${country.currencySymbolAr}) وفق المعايير واللوائح المعتمدة محلياً.`,
+    description,
     alternates: {
       canonical,
+      languages: alternatesLanguages,
     },
     openGraph: {
       title,
-      description: calc.descriptionAr,
+      description,
       url: canonical,
       siteName: 'لِسيارتك',
       locale: country.locale,
@@ -86,7 +88,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: 'summary_large_image',
       title,
-      description: calc.descriptionAr,
+      description,
     },
   };
 }
@@ -96,16 +98,7 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
   const country = getCountryByCode(countryParam);
   const calc = getCalculatorBySlug(calcSlug);
 
-  if (!country || !calc) {
-    notFound();
-  }
-
-  // Verify availability in this country
-  const isSupported =
-    calc.supportedCountries.includes('*') ||
-    calc.supportedCountries.map((c) => c.toUpperCase()).includes(country.countryCode.toUpperCase());
-
-  if (!isSupported) {
+  if (!country || !calc || !isCountryCalculatorValid(calc, country.countryCode)) {
     notFound();
   }
 

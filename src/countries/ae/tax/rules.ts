@@ -29,3 +29,4 @@ export const AE_TAX_RULES: CountryRegulatedRule<UaeVatParams>[] = [
     ],
   },
 ];
+

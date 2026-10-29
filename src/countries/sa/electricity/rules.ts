@@ -88,3 +88,4 @@ export const SA_ELECTRICITY_RULES: CountryRegulatedRule<SaudiElectricityParams>[
     limitations: ['فترة تاريخية سابقة كانت تطبق فيها ضريبة القيمة المضافة بنسبة 5% فقط.'],
   },
 ];
+

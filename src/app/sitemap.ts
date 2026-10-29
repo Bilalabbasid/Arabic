@@ -3,7 +3,7 @@ import { ALL_CALCULATORS } from '@/data/calculators';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES } from '@/data/countries';
 import { GUIDES } from '@/data/guides';
-import { SITE_DOMAIN } from '@/lib/seo/metadata';
+import { SITE_DOMAIN, isCountryCalculatorValid } from '@/lib/seo/metadata';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_DOMAIN;
@@ -47,16 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Country calculator pages
+  // Verified Country calculator pages (strictly avoiding thin/duplicate universal calculators)
   const countryCalculatorPages: MetadataRoute.Sitemap = [];
   for (const country of COUNTRIES) {
     const cCode = country.countryCode.toLowerCase();
     for (const calc of ALL_CALCULATORS) {
-      const isSupported =
-        calc.supportedCountries.includes('*') ||
-        calc.supportedCountries.map((c) => c.toUpperCase()).includes(country.countryCode.toUpperCase());
-
-      if (isSupported) {
+      if (calc.publicationStatus === 'PUBLISHED' && isCountryCalculatorValid(calc, country.countryCode)) {
         countryCalculatorPages.push({
           url: `${baseUrl}/${cCode}/${calc.slug}/`,
           lastModified: calc.lastReviewedAt ? new Date(calc.lastReviewedAt) : now,

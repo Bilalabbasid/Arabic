@@ -48,13 +48,13 @@ export function calculateVat(
   if (calculationType === 'add') {
     // Amount is Net (غير شامل) -> add tax
     netAmount = amount;
-    taxAmount = (netAmount * vatRate) / 100;
-    grossAmount = netAmount + taxAmount;
+    taxAmount = Math.round(((netAmount * vatRate) / 100) * 100) / 100;
+    grossAmount = Math.round((netAmount + taxAmount) * 100) / 100;
   } else {
     // Amount is Gross (شامل) -> extract tax and net
     grossAmount = amount;
-    netAmount = grossAmount / (1 + vatRate / 100);
-    taxAmount = grossAmount - netAmount;
+    netAmount = Math.round((grossAmount / (1 + vatRate / 100)) * 100) / 100;
+    taxAmount = Math.round((grossAmount - netAmount) * 100) / 100;
   }
 
   return {

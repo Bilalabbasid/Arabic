@@ -53,3 +53,4 @@ export const SA_TAX_RULES: CountryRegulatedRule<SaudiVatParams>[] = [
     limitations: ['فترة تاريخية سابقة كانت تطبق فيها ضريبة 5% بالمملكة.'],
   },
 ];
+

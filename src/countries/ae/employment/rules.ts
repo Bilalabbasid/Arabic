@@ -63,3 +63,4 @@ export const AE_EMPLOYMENT_RULES: CountryRegulatedRule<UaeEmploymentParams>[] = 
     limitations: ['قانون العمل التاريخي القديم الملغى بالمرسوم بقانون 33 لسنة 2021.'],
   },
 ];
+

@@ -13,6 +13,7 @@ import {
   generateBreadcrumbSchema,
   formatMetaTitle,
   constructCanonicalUrl,
+  generateHreflangAlternates,
 } from '@/lib/seo/metadata';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CalculatorRunner from '@/components/calculator/CalculatorRunner';
@@ -29,9 +30,11 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return ALL_CALCULATORS.map((c) => ({
-    slug: c.slug,
-  }));
+  return ALL_CALCULATORS
+    .filter((c) => c.publicationStatus === 'PUBLISHED')
+    .map((c) => ({
+      slug: c.slug,
+    }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -45,13 +48,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = formatMetaTitle(calc.metaTitle);
-  const canonical = constructCanonicalUrl(`/calculators/${calc.slug}/`);
+  const canonical = constructCanonicalUrl(`/calculators/${calc.slug}`);
+  const alternatesLanguages = generateHreflangAlternates(calc);
 
   return {
     title,
     description: calc.metaDescription,
     alternates: {
       canonical,
+      languages: alternatesLanguages,
     },
     openGraph: {
       title,

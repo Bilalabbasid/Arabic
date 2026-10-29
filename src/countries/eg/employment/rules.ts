@@ -34,3 +34,4 @@ export const EG_EMPLOYMENT_RULES: CountryRegulatedRule<EgyptEmploymentParams>[] 
     ],
   },
 ];
+

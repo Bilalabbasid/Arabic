@@ -29,3 +29,4 @@ export const AE_CUSTOMS_RULES: CountryRegulatedRule<UaeCustomsParams>[] = [
     limitations: ['التعرفة الجمركية الاتحادية الموحدة في موانئ ومطارات دولة الإمارات.'],
   },
 ];
+

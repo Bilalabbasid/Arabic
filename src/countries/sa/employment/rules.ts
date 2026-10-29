@@ -45,3 +45,4 @@ export const SA_EMPLOYMENT_RULES: CountryRegulatedRule<SaudiEmploymentParams>[] 
     ],
   },
 ];
+

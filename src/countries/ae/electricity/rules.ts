@@ -68,3 +68,4 @@ export const AE_ELECTRICITY_RULES: CountryRegulatedRule<UaeElectricityParams>[] 
     ],
   },
 ];
+

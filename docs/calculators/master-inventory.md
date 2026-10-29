@@ -393,3 +393,4 @@ This document establishes the master inventory of 200+ planned and implemented c
   - `UNIVERSAL`: 138 calculators (56.5%)
   - `COUNTRY_CONFIGURABLE`: 68 calculators (27.9%)
   - `COUNTRY_REGULATED`: 38 calculators (15.6%)
+

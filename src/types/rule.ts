@@ -46,3 +46,4 @@ export interface RuleResolutionResult<TParams = Record<string, any>> {
     customerCategories?: string[];
   };
 }
+

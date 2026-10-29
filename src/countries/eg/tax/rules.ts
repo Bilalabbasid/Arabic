@@ -29,3 +29,4 @@ export const EG_TAX_RULES: CountryRegulatedRule<EgyptVatParams>[] = [
     ],
   },
 ];
+
