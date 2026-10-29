@@ -56,3 +56,4 @@ testLocalUI().catch(err => {
   console.error('Error during local UI test:', err);
   process.exit(1);
 });
+
