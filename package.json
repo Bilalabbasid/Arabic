@@ -20,11 +20,14 @@
     "audit:arabic": "tsx scripts/audit-arabic.ts",
     "audit:links": "tsx scripts/audit-links.ts",
     "audit:metadata": "tsx scripts/audit-metadata.ts",
-    "audit:content": "tsx scripts/audit-content.ts",
+    "audit:content": "tsx scripts/audit-content-quality.ts",
+    "audit:google": "tsx scripts/audit-google-compliance.ts",
+    "audit:country-seo": "tsx scripts/audit-country-pages.ts",
+    "audit:seo-safety": "tsx scripts/audit-seo-safety.ts",
     "audit:math": "tsx scripts/audit-calculation-results.ts",
     "audit:arabic-seo": "tsx scripts/audit-arabic-seo.ts",
     "audit:localization": "tsx scripts/audit-localization.ts",
-    "audit:all": "tsx scripts/audit-calculators.ts && tsx scripts/audit-country.ts && tsx scripts/audit-sources.ts && tsx scripts/audit-seo.ts && tsx scripts/audit-arabic.ts && tsx scripts/audit-links.ts && tsx scripts/audit-metadata.ts && tsx scripts/audit-content.ts && tsx scripts/audit-localization.ts && tsx scripts/audit-calculation-results.ts"
+    "audit:all": "tsx scripts/audit-calculators.ts && tsx scripts/audit-country.ts && tsx scripts/audit-sources.ts && tsx scripts/audit-seo.ts && tsx scripts/audit-arabic.ts && tsx scripts/audit-links.ts && tsx scripts/audit-metadata.ts && tsx scripts/audit-content-quality.ts && tsx scripts/audit-localization.ts && tsx scripts/audit-calculation-results.ts && tsx scripts/audit-google-compliance.ts && tsx scripts/audit-country-pages.ts && tsx scripts/audit-seo-safety.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

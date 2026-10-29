@@ -7,6 +7,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
-    exclude: ['**/node_modules/**', '**/rechenhafen-ref/**'],
+    include: ['src/__tests__/**/*.test.ts'],
+    exclude: ['**/node_modules/**', '**/rechenhafen-ref/**', '**/tests/e2e/**'],
   },
 });
