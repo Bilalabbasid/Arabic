@@ -33,7 +33,14 @@ export function calculateLoan(
   let totalRepayment = 0;
   const breakdownRows: CalculationBreakdownRow[] = [];
 
-  if (annualRate <= 0) {
+  if (isNaN(annualRate) || annualRate < 0) {
+    return {
+      primary: { label: 'القسط الشهري', value: 0, formattedValue: '-' },
+      error: 'يرجى إدخال نسبة فائدة أو ربح سنوي صالحة (صفر أو أكثر).',
+    };
+  }
+
+  if (annualRate === 0) {
     // Zero interest loan
     monthlyPayment = loanAmount / termMonths;
     totalInterest = 0;
@@ -41,8 +48,8 @@ export function calculateLoan(
   } else if (rateType === 'flat') {
     // Flat rate (مرابحة على كامل الأصل)
     const years = termMonths / 12;
-    totalInterest = loanAmount * (annualRate / 100) * years;
-    totalRepayment = loanAmount + totalInterest;
+    totalInterest = Math.round(loanAmount * (annualRate / 100) * years * 100) / 100;
+    totalRepayment = Math.round((loanAmount + totalInterest) * 100) / 100;
     monthlyPayment = totalRepayment / termMonths;
 
     let balance = loanAmount;

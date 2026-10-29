@@ -1,0 +1,28 @@
+country,calculator,jurisdiction,ruleVersion,source,sourceVerified,formulaTested,expectedResult,actualResult,status,issues
+SA,electricity-bill,SERA,2026.1,sera-sa,true,true,948.75 SAR for 4500 kWh residential,948.75 SAR,VERIFIED,None
+SA,end-of-service-reward,HRSD,2026.1,hrsd-sa,true,true,18666.67 SAR for 6yr resignation at 8000 SAR,18666.67 SAR,VERIFIED,None
+SA,vat-calculator,ZATCA,2026.1,zatca-sa,true,true,150.00 SAR tax on 1000 SAR (15%),150.00 SAR,VERIFIED,None
+SA,car-fuel-cost,Ministry of Energy / Aramco,2026.1,sa-aramco-fuel-pricing,true,true,109.00 SAR for 500 km at 10 L/100km,109.00 SAR,VERIFIED,None
+SA,loan-calculator,SAMA,2026.1,sama-sa,true,true,1864.30 SAR/mo for 100k 5yr at 4.5% reducing,1864.30 SAR/mo,VERIFIED,None
+AE,electricity-bill,DEWA,2026.1,dewa-ae,true,true,640.50 AED for 2000 kWh residential,640.50 AED,VERIFIED,None
+AE,electricity-bill,ADDC,2026.1,addc-ae,true,true,619.50 AED for 2000 kWh residential expat,619.50 AED,VERIFIED,None
+AE,end-of-service-reward,MoHRE,2026.1,mohre-ae,true,true,35000.00 AED for 5yr at 10000 AED basic,35000.00 AED,VERIFIED,None
+AE,vat-calculator,FTA,2026.1,fta-ae,true,true,50.00 AED tax on 1000 AED (5%),50.00 AED,VERIFIED,None
+AE,car-fuel-cost,Fuel Price Committee,2026.1,ae-fuel-price-committee,true,true,137.50 AED for 500 km at 10 L/100km,137.50 AED,VERIFIED,None
+AE,loan-calculator,CBUAE,2026.1,cbuae,true,true,1864.30 AED/mo for 100k 5yr at 4.5% reducing,1864.30 AED/mo,VERIFIED,None
+EG,electricity-bill,EgyptERA,2024.1,egyptera-eg,true,true,573.00 EGP for 450 kWh residential,573.00 EGP,VERIFIED,None
+EG,end-of-service-reward,Ministry of Manpower,2026.1,mom-eg,true,true,10000.00 EGP for 4yr at 5000 EGP,10000.00 EGP,VERIFIED,None
+EG,vat-calculator,ETA,2026.1,eta-eg,true,true,140.00 EGP tax on 1000 EGP (14%),140.00 EGP,VERIFIED,None
+EG,car-fuel-cost,Automatic Fuel Pricing Committee,2026.1,eg-petroleum-fuel-pricing,true,true,612.50 EGP for 500 km at 10 L/100km,612.50 EGP,VERIFIED,None
+KW,car-fuel-cost,KNPC,2026.1,kw-fuel-subsidy,true,true,8.50 KWD for 1000 km at 10 L/100km,8.50 KWD,VERIFIED,None
+KW,vat-calculator,Ministry of Finance,2026.1,mof-kw,true,true,0.00 KWD tax on 1000 KWD (0% standard),0.00 KWD,VERIFIED,None
+QA,car-fuel-cost,QatarEnergy,2026.1,qa-energy-fuel,true,true,38.00 QAR for 200 km at 10 L/100km,38.00 QAR,VERIFIED,None
+QA,vat-calculator,General Tax Authority,2026.1,gta-qa,true,true,0.00 QAR tax on 1000 QAR (0% standard),0.00 QAR,VERIFIED,None
+BH,vat-calculator,National Bureau for Revenue (NBR),2026.1,nbr-bh,true,true,100.00 BHD tax on 1000 BHD (10%),100.00 BHD,VERIFIED,None
+OM,vat-calculator,Tax Authority Oman,2026.1,ota-om,true,true,50.00 OMR tax on 1000 OMR (5%),50.00 OMR,VERIFIED,None
+JO,vat-calculator,Income and Sales Tax Dept (ISTD),2026.1,istd-jo,true,true,160.00 JOD tax on 1000 JOD (16%),160.00 JOD,VERIFIED,None
+MA,vat-calculator,General Tax Directorate (DGI),2026.1,dgi-ma,true,true,200.00 MAD tax on 1000 MAD (20%),200.00 MAD,VERIFIED,None
+DZ,vat-calculator,General Directorate of Taxes,2026.1,dgi-dz,true,true,190.00 DZD tax on 1000 DZD (19%),190.00 DZD,VERIFIED,None
+TN,vat-calculator,Ministry of Finance,2026.1,mof-tn,true,true,190.00 TND tax on 1000 TND (19%),190.00 TND,VERIFIED,None
+MA,electricity-bill,ONEE (Unverified),None,None,false,true,Explicit Unavailable Fallback Notice,Explicit Unavailable Fallback Notice,FALLBACK_UNVERIFIED,Morocco residential progressive tariff not yet codified in system
+JO,end-of-service-reward,Ministry of Labor (Unverified),None,None,false,true,Explicit Error Rejecting Calculation,Explicit Error Rejecting Calculation,BLOCKED_UNVERIFIED,Jordan Labor Law not yet approved in system
