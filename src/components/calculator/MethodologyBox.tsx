@@ -2,12 +2,13 @@ import React from 'react';
 import { ShieldCheck, ExternalLink, Calendar, CheckCircle2, AlertCircle } from 'lucide-react';
 import { getSourcesByIds } from '@/data/sources';
 import { formatDateAr } from '@/lib/formatters';
+import { VerificationStatus } from '@/types/rule';
 
 interface Props {
   sourceIds: string[];
   ruleVersion: string;
   lastReviewedAt: string;
-  verificationStatus: 'VERIFIED' | 'PROVISIONAL' | 'COMMUNITY';
+  verificationStatus: VerificationStatus;
   assumptions?: string[];
   qualifications?: string[];
   className?: string;
@@ -34,9 +35,19 @@ export default function MethodologyBox({
         </div>
 
         <div className="flex items-center gap-2">
-          {verificationStatus === 'VERIFIED' && (
+          {verificationStatus === 'APPROVED' && (
             <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-full">
-              <CheckCircle2 className="w-3.5 h-3.5" /> تم التحقق الرسمي
+              <CheckCircle2 className="w-3.5 h-3.5" /> تم الاعتماد والتدقيق الرسمي
+            </span>
+          )}
+          {verificationStatus === 'FORMULA_TESTED' && (
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 bg-blue-100/70 px-2.5 py-1 rounded-full">
+              <CheckCircle2 className="w-3.5 h-3.5" /> تم اختبار المعادلات الرياضية
+            </span>
+          )}
+          {verificationStatus === 'REVIEW_REQUIRED' && (
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 bg-amber-100/70 px-2.5 py-1 rounded-full">
+              <AlertCircle className="w-3.5 h-3.5" /> يتطلب مراجعة التحديثات
             </span>
           )}
           <span className="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-1 rounded-md">

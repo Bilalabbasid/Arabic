@@ -12,9 +12,9 @@ interface AuditFinding {
 
 const findings: AuditFinding[] = [];
 
-console.log('------------------------------------------------------------');
-console.log(`بدء التدقيق الآلي لمنصة lsayartk.com عبر ${ALL_CALCULATORS.length} حاسبة...`);
-console.log('------------------------------------------------------------');
+console.log('============================================================');
+console.log(`[AUDIT 1/4] تدقيق تعريفات وميتاداتا الحاسبات: ${ALL_CALCULATORS.length} حاسبة`);
+console.log('============================================================');
 
 const categoryIds = new Set(CATEGORIES.map((c) => c.id));
 const countryCodes = new Set(COUNTRIES.map((c) => c.countryCode.toUpperCase()));
@@ -22,7 +22,7 @@ const sourceIds = new Set(SOURCES.map((s) => s.id));
 const seenSlugs = new Set<string>();
 
 ALL_CALCULATORS.forEach((calc) => {
-  // 1. Slug uniqueness
+  // 1. Duplicate slug
   if (seenSlugs.has(calc.slug)) {
     findings.push({
       severity: 'Critical',
@@ -32,38 +32,58 @@ ALL_CALCULATORS.forEach((calc) => {
   }
   seenSlugs.add(calc.slug);
 
-  // 2. Category validity
+  // 2. Category existence
   if (!categoryIds.has(calc.category)) {
     findings.push({
       severity: 'Critical',
       calculatorSlug: calc.slug,
-      issue: `القسم المرفق (${calc.category}) غير مسجل في فئات المنصة الرسمية`,
+      issue: `القسم المرفق (${calc.category}) غير مسجل في فئات المنصة`,
     });
   }
 
-  // 3. Supported countries validity
-  calc.supportedCountries.forEach((c) => {
-    if (c !== '*' && !countryCodes.has(c.toUpperCase())) {
-      findings.push({
-        severity: 'High',
-        calculatorSlug: calc.slug,
-        issue: `كود الدولة (${c}) غير معتمد في سجل الدول العربية الـ 22`,
-      });
-    }
-  });
+  // 3. SEO Metadata check
+  if (!calc.metaTitle || calc.metaTitle.length < 15) {
+    findings.push({
+      severity: 'High',
+      calculatorSlug: calc.slug,
+      issue: 'عنوان الميتا (metaTitle) مفقود أو قصير جداً',
+    });
+  }
 
-  // 4. Source IDs validity
-  calc.sourceIds.forEach((sId) => {
-    if (!sourceIds.has(sId)) {
-      findings.push({
-        severity: 'High',
-        calculatorSlug: calc.slug,
-        issue: `معرف المصدر (${sId}) غير مسجل في سجل المصادر الرسمية`,
-      });
-    }
-  });
+  if (!calc.metaDescription || calc.metaDescription.length < 30) {
+    findings.push({
+      severity: 'High',
+      calculatorSlug: calc.slug,
+      issue: 'وصف الميتا (metaDescription) مفقود أو قصير جداً',
+    });
+  }
 
-  // 5. Input default values & sanity checks
+  // 4. Formula & Explanation check
+  if (!calc.formula || calc.formula.trim().length === 0) {
+    findings.push({
+      severity: 'Critical',
+      calculatorSlug: calc.slug,
+      issue: 'المعادلة الرياضية (formula) مفقودة',
+    });
+  }
+
+  if (!calc.formulaExplanation || calc.formulaExplanation.trim().length === 0) {
+    findings.push({
+      severity: 'High',
+      calculatorSlug: calc.slug,
+      issue: 'شرح وتوضيح المعادلة مفقود',
+    });
+  }
+
+  // 5. Inputs validation
+  if (!calc.inputs || calc.inputs.length === 0) {
+    findings.push({
+      severity: 'Critical',
+      calculatorSlug: calc.slug,
+      issue: 'لا توجد أي حقول إدخال معرفة للحاسبة',
+    });
+  }
+
   const defaultInputs: Record<string, any> = {};
   calc.inputs.forEach((inp) => {
     if (inp.defaultValue === undefined || inp.defaultValue === null) {
@@ -76,15 +96,32 @@ ALL_CALCULATORS.forEach((calc) => {
     defaultInputs[inp.id] = inp.defaultValue;
   });
 
-  // 6. Execution verification on default inputs
+  // 6. Test default calculation run
   try {
     const result = calc.calculate(defaultInputs);
     if (!result || !result.primary || result.primary.value === undefined) {
       findings.push({
         severity: 'Critical',
         calculatorSlug: calc.slug,
-        issue: 'دالة الحساب لم تعد نتيجة أولية صالحة بالقيم الافتراضية',
+        issue: 'دالة الحساب لم تعد نتيجة صالحة بالقيم الافتراضية',
       });
+    } else {
+      if (typeof result.primary.value === 'number') {
+        if (isNaN(result.primary.value)) {
+          findings.push({
+            severity: 'Critical',
+            calculatorSlug: calc.slug,
+            issue: 'القيمة الأساسية الناتجة هي NaN',
+          });
+        }
+        if (!isFinite(result.primary.value)) {
+          findings.push({
+            severity: 'Critical',
+            calculatorSlug: calc.slug,
+            issue: 'القيمة الأساسية الناتجة هي ما لا نهاية (Infinity)',
+          });
+        }
+      }
     }
   } catch (err: any) {
     findings.push({
@@ -95,12 +132,12 @@ ALL_CALCULATORS.forEach((calc) => {
     });
   }
 
-  // 7. Worked examples check
+  // 7. Worked Examples check
   if (!calc.workedExamples || calc.workedExamples.length === 0) {
     findings.push({
       severity: 'Medium',
       calculatorSlug: calc.slug,
-      issue: 'لا يوجد أمثلة عملية توضيحية لهذه الحاسبة',
+      issue: 'لا يوجد أمثلة عملية توضيحية',
     });
   }
 
@@ -109,12 +146,12 @@ ALL_CALCULATORS.forEach((calc) => {
     findings.push({
       severity: 'Medium',
       calculatorSlug: calc.slug,
-      issue: 'لا توجد أسئلة شائعة مخصصة لهذه الحاسبة',
+      issue: 'لا توجد أسئلة شائعة مخصصة',
     });
   }
 });
 
-// 9. Related calculator links check
+// 9. Related calculator links verification
 ALL_CALCULATORS.forEach((calc) => {
   calc.relatedCalculatorIds.forEach((relId) => {
     if (!seenSlugs.has(relId)) {
@@ -127,11 +164,8 @@ ALL_CALCULATORS.forEach((calc) => {
   });
 });
 
-console.log(`تم فحص ${ALL_CALCULATORS.length} حاسبة، ${CATEGORIES.length} قسماً، و ${COUNTRIES.length} دولة.`);
 console.log(`إجمالي الملاحظات المكتشفة: ${findings.length}`);
-
 if (findings.length > 0) {
-  console.log('\nتفاصيل الملاحظات:');
   findings.forEach((f) => {
     console.log(`[${f.severity}] ${f.calculatorSlug}: ${f.issue} ${f.details ? `(${f.details})` : ''}`);
   });
@@ -139,5 +173,5 @@ if (findings.length > 0) {
     process.exit(1);
   }
 } else {
-  console.log('✓ نجح التدقيق الآلي بنسبة 100%! جميع الحاسبات والروابط والمعادلات سليمة تماماً.');
+  console.log('✓ نجح تدقيق تعريفات الحاسبات بنسبة 100%!');
 }

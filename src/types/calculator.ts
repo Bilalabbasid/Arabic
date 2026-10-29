@@ -1,3 +1,5 @@
+import { VerificationStatus } from './rule';
+
 export type InputType =
   | 'number'
   | 'decimal'
@@ -71,19 +73,6 @@ export interface CalculationBreakdownRow {
   values: Record<string, string | number>;
 }
 
-export interface ChartDataPoint {
-  label: string;
-  value: number;
-  secondaryValue?: number;
-  color?: string;
-}
-
-export interface CalculationChart {
-  type: 'bar' | 'donut' | 'line';
-  title?: string;
-  data: ChartDataPoint[];
-}
-
 export interface CalculationResult {
   primary: ResultItem;
   secondary?: ResultItem[];
@@ -102,7 +91,6 @@ export interface CalculationResult {
   country?: string;
   currency?: string;
   effectiveDate?: string;
-  chart?: CalculationChart;
   error?: string;
 }
 
@@ -129,7 +117,6 @@ export interface WorkedExample {
 }
 
 export type CountryMode = 'UNIVERSAL' | 'COUNTRY_CONFIGURABLE' | 'COUNTRY_REGULATED';
-export type VerificationStatus = 'VERIFIED' | 'PROVISIONAL' | 'COMMUNITY';
 export type PublicationStatus = 'PUBLISHED' | 'DRAFT' | 'ARCHIVED';
 
 export interface CalculatorDefinition {

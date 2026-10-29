@@ -10,7 +10,11 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "audit": "tsx scripts/audit-calculators.ts"
+    "audit": "tsx scripts/audit-calculators.ts",
+    "audit:rules": "tsx scripts/audit-country-rules.ts",
+    "audit:sources": "tsx scripts/audit-sources.ts",
+    "audit:math": "tsx scripts/audit-calculation-results.ts",
+    "audit:all": "tsx scripts/audit-calculators.ts && tsx scripts/audit-country-rules.ts && tsx scripts/audit-sources.ts && tsx scripts/audit-calculation-results.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
