@@ -17,7 +17,10 @@
     "audit:seo": "tsx scripts/audit-seo.ts",
     "audit:content": "tsx scripts/audit-content.ts",
     "audit:math": "tsx scripts/audit-calculation-results.ts",
-    "audit:all": "tsx scripts/audit-calculators.ts && tsx scripts/audit-country-rules.ts && tsx scripts/audit-sources.ts && tsx scripts/audit-seo.ts && tsx scripts/audit-content.ts && tsx scripts/audit-calculation-results.ts"
+    "audit:arabic": "tsx scripts/audit-arabic.ts",
+    "audit:arabic-seo": "tsx scripts/audit-arabic-seo.ts",
+    "audit:localization": "tsx scripts/audit-localization.ts",
+    "audit:all": "tsx scripts/audit-calculators.ts && tsx scripts/audit-country-rules.ts && tsx scripts/audit-sources.ts && tsx scripts/audit-seo.ts && tsx scripts/audit-content.ts && tsx scripts/audit-arabic.ts && tsx scripts/audit-arabic-seo.ts && tsx scripts/audit-localization.ts && tsx scripts/audit-calculation-results.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

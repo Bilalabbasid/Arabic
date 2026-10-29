@@ -76,14 +76,14 @@ export default function ResultDisplay({ result, currency, countryCode, className
           </div>
         </div>
 
-        {/* Primary Value */}
+        {/* Primary Value with Bidi Isolation */}
         <div className="flex items-baseline gap-2 mt-2">
-          <span className="text-3xl sm:text-5xl font-black font-sans tracking-tight">
-            {result.primary.formattedValue || result.primary.value}
+          <span className="text-3xl sm:text-5xl font-black font-sans tracking-tight" dir="ltr">
+            <bdi>{result.primary.formattedValue || result.primary.value}</bdi>
           </span>
           {result.primary.unit && !result.primary.isCurrency && (
             <span className="text-base sm:text-xl font-bold text-emerald-200">
-              {result.primary.unit}
+              <bdi>{result.primary.unit}</bdi>
             </span>
           )}
         </div>
@@ -124,8 +124,8 @@ export default function ResultDisplay({ result, currency, countryCode, className
               }`}
             >
               <div className="text-xs font-medium text-slate-500 mb-1">{sec.label}</div>
-              <div className="text-lg sm:text-xl font-bold text-slate-900 font-sans">
-                {sec.formattedValue || sec.value} {sec.unit && !sec.isCurrency ? sec.unit : ''}
+              <div className="text-lg sm:text-xl font-bold text-slate-900 font-sans" dir="ltr">
+                <bdi>{sec.formattedValue || sec.value}</bdi> {sec.unit && !sec.isCurrency ? <bdi className="text-sm font-medium text-slate-600">{sec.unit}</bdi> : ''}
               </div>
             </div>
           ))}

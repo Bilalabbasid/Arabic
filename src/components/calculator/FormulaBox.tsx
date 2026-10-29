@@ -17,9 +17,12 @@ export default function FormulaBox({ formula, explanation, className = '' }: Pro
         <h3 className="text-base font-bold">المعادلة الرياضية المستخدمة</h3>
       </div>
 
-      {/* Formula Display Banner */}
-      <div className="bg-white rounded-xl p-4 border border-slate-200/60 font-mono text-sm sm:text-base text-emerald-950 font-bold overflow-x-auto text-start shadow-inner">
-        {formula}
+      {/* Formula Display Banner (enforces LTR for mathematical symbols while isolating Arabic labels) */}
+      <div
+        dir="ltr"
+        className="bg-white rounded-xl p-4 border border-slate-200/60 font-mono text-sm sm:text-base text-emerald-950 font-bold overflow-x-auto text-left shadow-inner"
+      >
+        <bdi>{formula}</bdi>
       </div>
 
       {/* Explanation */}

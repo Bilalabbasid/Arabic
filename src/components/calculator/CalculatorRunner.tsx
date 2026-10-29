@@ -296,8 +296,8 @@ export default function CalculatorRunner({
                     {def.required && <span className="text-rose-500 ms-1">*</span>}
                   </label>
                   {unit && (
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">
-                      {unit}
+                    <span className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-sans" dir="ltr">
+                      <bdi>{unit}</bdi>
                     </span>
                   )}
                 </div>
@@ -362,6 +362,7 @@ export default function CalculatorRunner({
                     <input
                       id={inputId}
                       type={def.type === 'number' || def.type === 'decimal' || def.type === 'currency' || def.type === 'percentage' ? 'number' : 'text'}
+                      dir={def.type === 'number' || def.type === 'decimal' || def.type === 'currency' || def.type === 'percentage' ? 'ltr' : 'rtl'}
                       value={inputs[def.id] ?? ''}
                       min={def.min}
                       max={def.max}
