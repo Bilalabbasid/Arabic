@@ -10,6 +10,7 @@ const MODULE_LOADERS: Record<string, () => Promise<{ [key: string]: any }>> = {
   electricity: () => import('@/lib/calculators/electricity'),
   health: () => import('@/lib/calculators/health'),
   math: () => import('@/lib/calculators/math'),
+  converters: () => import('@/lib/calculators/converters'),
 };
 
 const ENGINE_MAP: Record<string, { moduleKey: string; fnName: string }> = {
@@ -21,6 +22,8 @@ const ENGINE_MAP: Record<string, { moduleKey: string; fnName: string }> = {
   'electricity.calculateElectricityBill': { moduleKey: 'electricity', fnName: 'calculateElectricityBill' },
   'health.calculateBmi': { moduleKey: 'health', fnName: 'calculateBmi' },
   'math.calculatePercentage': { moduleKey: 'math', fnName: 'calculatePercentage' },
+  'converters.calculateLengthConverter': { moduleKey: 'converters', fnName: 'calculateLengthConverter' },
+  'converters.calculateTimeConverter': { moduleKey: 'converters', fnName: 'calculateTimeConverter' },
 };
 
 /**

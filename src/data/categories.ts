@@ -206,7 +206,7 @@ export const CATEGORIES: CategoryDefinition[] = [
     metaTitle: 'حاسبة تحويل الوحدات – الطول والوزن والمساحة والحرارة',
     metaDescription: 'محول وحدات شامل وسهل: تحويل الكيلومتر إلى ميل، الكيلوغرام إلى باوند، المتر المربع إلى قدم وقصبة وفدان، ودرجات الحرارة.',
     iconName: 'ArrowLeftRight',
-    subcategories: ['تحويل الأطوال والمسافات', 'تحويل الأوزان والكتل', 'تحويل المساحات والأراضي', 'تحويل درجات الحرارة'],
+    subcategories: ['تحويل الأطوال والمسافات', 'تحويل الوقت والزمن', 'تحويل الأوزان والكتل', 'تحويل المساحات والأراضي', 'تحويل درجات الحرارة'],
     relatedCategorySlugs: ['cooking-household', 'construction-renovation', 'mathematics-percentages'],
   },
   {

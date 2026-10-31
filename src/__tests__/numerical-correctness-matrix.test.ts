@@ -7,6 +7,7 @@ import { calculateEndOfService } from '@/lib/calculators/salary';
 import { calculateElectricityBill } from '@/lib/calculators/electricity';
 import { calculateBmi } from '@/lib/calculators/health';
 import { calculatePercentage } from '@/lib/calculators/math';
+import { calculateLengthConverter, calculateTimeConverter } from '@/lib/calculators/converters';
 
 describe('Phase 3: Master Numerical Calculation & Matrix Verification', () => {
 
@@ -343,6 +344,80 @@ describe('Phase 3: Master Numerical Calculation & Matrix Verification', () => {
       const divZero = calculatePercentage({ mode: 'is_what_percent', valueA: 50, valueB: 0 });
       expect(divZero.error).toBeDefined();
       expect(divZero.primary.value).toBe(0);
+    });
+  });
+
+  // 9. Length & Distance Converter Engine
+  describe('Calculator: length-converter', () => {
+    it('1. Default inputs return valid calculation (10 in = 25.4 cm)', () => {
+      const res = calculateLengthConverter({ value: 10, fromUnit: 'in', toUnit: 'cm', precision: 4 });
+      expect(res.error).toBeUndefined();
+      expect(res.primary.value).toBe(25.4);
+      expect(res.primary.formattedValue).toBe('25.4');
+      expect(res.primary.unit).toBe('سم');
+    });
+
+    it('2. Statutorily exact conversions (10 mi = 16.09344 km)', () => {
+      const res = calculateLengthConverter({ value: 10, fromUnit: 'mi', toUnit: 'km', precision: 5 });
+      expect(res.primary.value).toBe(16.09344);
+      expect(res.primary.formattedValue).toBe('16.09344');
+    });
+
+    it('3. Metric to Imperial conversions (100 cm = 39.370079 in)', () => {
+      const res = calculateLengthConverter({ value: 100, fromUnit: 'cm', toUnit: 'in', precision: 6 });
+      expect(res.primary.value).toBeCloseTo(39.37007874, 5);
+      expect(res.primary.formattedValue).toBe('39.370079');
+    });
+
+    it('4. Handles zero input properly without NaN or error', () => {
+      const res = calculateLengthConverter({ value: 0, fromUnit: 'm', toUnit: 'ft' });
+      expect(res.primary.value).toBe(0);
+      expect(res.primary.formattedValue).toBe('0');
+      expect(res.error).toBeUndefined();
+    });
+
+    it('5. Handles NaN and invalid input cleanly', () => {
+      const res = calculateLengthConverter({ value: 'abc', fromUnit: 'in', toUnit: 'cm' });
+      expect(res.error).toBeDefined();
+      expect(res.primary.formattedValue).toBe('-');
+    });
+  });
+
+  // 10. Time & Duration Converter Engine
+  describe('Calculator: time-converter', () => {
+    it('1. Default inputs return valid calculation (90 min = 1.5 hr)', () => {
+      const res = calculateTimeConverter({ value: 90, fromUnit: 'min', toUnit: 'hr', precision: 2 });
+      expect(res.error).toBeUndefined();
+      expect(res.primary.value).toBe(1.5);
+      expect(res.primary.formattedValue).toBe('1.5');
+      expect(res.primary.unit).toBe('س');
+    });
+
+    it('2. Compound duration decomposition (90061s = 1d 1h 1m 1s)', () => {
+      const res = calculateTimeConverter({ value: 90061, fromUnit: 's', toUnit: 'hr' });
+      const breakdownDetail = res.details?.find((d) => d.label === 'المدة الزمنية المركبة');
+      expect(breakdownDetail?.value).toBe('1 يوم و 1 ساعة و 1 دقيقة و 1 ثانية');
+    });
+
+    it('3. Year convention handling (Julian 365.25 vs Common 365)', () => {
+      const julianRes = calculateTimeConverter({ value: 1, fromUnit: 'year', toUnit: 'day', yearConvention: 'julian' });
+      expect(julianRes.primary.value).toBe(365.25);
+
+      const commonRes = calculateTimeConverter({ value: 1, fromUnit: 'year', toUnit: 'day', yearConvention: 'common' });
+      expect(commonRes.primary.value).toBe(365);
+    });
+
+    it('4. Handles zero input without error', () => {
+      const res = calculateTimeConverter({ value: 0, fromUnit: 's', toUnit: 'min' });
+      expect(res.primary.value).toBe(0);
+      expect(res.primary.formattedValue).toBe('0');
+      expect(res.error).toBeUndefined();
+    });
+
+    it('5. Handles NaN cleanly with error message', () => {
+      const res = calculateTimeConverter({ value: 'not_a_number', fromUnit: 's', toUnit: 'min' });
+      expect(res.error).toBeDefined();
+      expect(res.primary.formattedValue).toBe('-');
     });
   });
 });
