@@ -70,6 +70,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'نوع الوقود',
         type: 'select',
         defaultValue: 'octane91',
+        helpText: 'اختر نوع الوقود المناسب لمركبتك لحساب التكلفة وفق التسعيرة المحلية الرسمية.',
         options: [
           { value: 'octane91', label: 'بنزين 91 ممتاز' },
           { value: 'octane95', label: 'بنزين 95 سوبر' },
@@ -81,6 +82,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'الدولة لتطبيق تسعيرة الوقود الرسمية',
         type: 'country',
         defaultValue: 'SA',
+        helpText: 'اختر دولتك لتطبيق أسعار لتر البنزين والديزل الرسمية المعتمدة والمعلنة محلياً.',
         options: [
           { value: 'SA', label: 'المملكة العربية السعودية (ر.س)' },
           { value: 'AE', label: 'الإمارات العربية المتحدة (د.إ)' },
@@ -179,6 +181,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'طريقة الحساب',
         type: 'radio',
         defaultValue: 'add',
+        helpText: 'اختر إضافة الضريبة إذا كان السعر أصلياً، أو استخراجها إذا كان المبلغ شاملاً لها.',
         options: [
           { value: 'add', label: 'إضافة الضريبة (المبلغ غير شامل الضريبة)' },
           { value: 'extract', label: 'استخراج الضريبة (المبلغ شامل الضريبة)' },
@@ -189,6 +192,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'الدولة ونسبة الضريبة الرسمية',
         type: 'country',
         defaultValue: 'SA',
+        helpText: 'اختر الدولة لتطبيق نسبة ضريبة القيمة المضافة المعتمدة نظاماً وفق القوانين الرسمية.',
         options: [
           { value: 'SA', label: 'السعودية (15%)' },
           { value: 'AE', label: 'الإمارات (5%)' },
@@ -300,6 +304,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'مدة التمويل (بالسنوات)',
         type: 'select',
         defaultValue: '5',
+        helpText: 'مدة التمويل أو القرض الإجمالية بالسنوات حتى اكتمال السداد.',
         options: [
           { value: '1', label: 'سنة واحدة (12 شهراً)' },
           { value: '2', label: 'سنتان (24 شهراً)' },
@@ -316,6 +321,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'نوع احتساب الفائدة',
         type: 'radio',
         defaultValue: 'reducing',
+        helpText: 'اختر طريقة احتساب جهة التمويل للفوائد والأرباح: نسبة متناقصة دورية أو نسبة سنوية ثابتة.',
         options: [
           { value: 'reducing', label: 'فائدة متناقصة بنكية (معيار البنوك المركزية)' },
           { value: 'flat', label: 'مرابحة ثابتة (Flat Rate على كامل المبلغ)' },
@@ -401,6 +407,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         step: 1,
         unit: 'سنة',
         required: true,
+        helpText: 'عدد السنوات الكاملة المستمرة التي قضيتها في الخدمة لدى جهة العمل.',
       },
       {
         id: 'months',
@@ -411,12 +418,14 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         max: 11,
         step: 1,
         unit: 'شهر',
+        helpText: 'الأشهر الإضافية المتبقية بعد السنوات لاحتساب كسور السنة في المكافأة بدقة.',
       },
       {
         id: 'terminationReason',
         label: 'سبب انتهاء العلاقة التعاقدية',
         type: 'select',
         defaultValue: 'employer_end',
+        helpText: 'سبب ترك العمل وفقاً لنظام العمل لتطبيق نسبة الاستحقاق النظامية المقررة.',
         options: [
           { value: 'employer_end', label: 'إنهاء العقد من صاحب العمل / انتهاء مدة العقد (استحقاق كامل 100%)' },
           { value: 'resignation', label: 'استقالة بمبادرة من العامل (تخضع لنسب المادة 85)' },
@@ -427,6 +436,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'الدولة لتطبيق نظام العمل',
         type: 'country',
         defaultValue: 'SA',
+        helpText: 'اختر الدولة لتطبيق مواد نظام وقانون العمل المعتمدة رسمياً لمكافأة نهاية الخدمة.',
         options: [
           { value: 'SA', label: 'المملكة العربية السعودية (نظام العمل م/51)' },
           { value: 'AE', label: 'دولة الإمارات (المرسوم بقانون 33 لسنة 2021)' },
@@ -550,6 +560,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'التقويم المعتمد للحول',
         type: 'radio',
         defaultValue: 'hijri',
+        helpText: 'اختر الحول القمري الهجري بنسبة 2.5% أو الشمسي الميلادي بنسبة 2.577% شرعاً.',
         options: [
           { value: 'hijri', label: 'سنة هجرية (354 يوماً - النسبة 2.5%)' },
           { value: 'gregorian', label: 'سنة ميلادية (365 يوماً - النسبة 2.577%)' },
@@ -630,6 +641,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'نوع الاستهلاك / النشاط',
         type: 'select',
         defaultValue: 'residential',
+        helpText: 'فئة اشتراك العقار لتحديد تعرفة الشرائح المعتمدة نظاماً (سكني أو تجاري).',
         options: [
           { value: 'residential', label: 'سكني (منازل وشقق)' },
           { value: 'commercial', label: 'تجاري (محلات ومكاتب)' },
@@ -640,6 +652,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'سعة قاطع العداد (أمبير)',
         type: 'select',
         defaultValue: '60',
+        helpText: 'سعة قاطع العداد بالأمبير لحساب المقابل المالي الثابت لخدمة قراءة وصيانة العداد.',
         options: [
           { value: '60', label: 'حتى 60 أمبير (مقابل خدمة 15 ر.س)' },
           { value: '100', label: 'أكثر من 60 أمبير (مقابل خدمة 20 ر.س)' },
@@ -650,6 +663,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'الدولة والتعرفة التنظيمية',
         type: 'country',
         defaultValue: 'SA',
+        helpText: 'اختر دولتك لتطبيق شرائح الاستهلاك والتعرفة والرسوم المعتمدة من الجهة المنظمة للكهرباء.',
         options: [
           { value: 'SA', label: 'السعودية (هيئة تنظيم المياه والكهرباء SERA)' },
           { value: 'AE', label: 'الإمارات' },
@@ -678,6 +692,10 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
       {
         question: 'ما هي شرائح الكهرباء السكنية في السعودية؟',
         answer: 'تنقسم التعرفة السكنية في السعودية إلى شريحتين: الشريحة الأولى من 1 إلى 6000 ك.و.س بتعرفة 18 هللة، والشريحة الثانية لأكثر من 6000 ك.و.س بتعرفة 30 هللة لكل كيلوواط/ساعة.',
+      },
+      {
+        question: 'كيف يمكن خفض استهلاك الكهرباء الصيفي في المكيفات؟',
+        answer: 'ضبط درجة حرارة المكيف على 24 درجة مئوية يوفر ما يصل إلى 15% من الاستهلاك، مع الحرص على تنظيف فلاتر الهواء دورياً وإحكام عزل الأبواب والنوافذ لمنع تسرب التبريد.',
       },
     ],
     relatedCalculatorIds: ['car-fuel-cost', 'vat-calculator', 'loan-calculator'],
@@ -759,6 +777,10 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         question: 'ما هي المعدلات الطبيعية لمؤشر كتلة الجسم؟',
         answer: 'وفقاً لمنظمة الصحة العالمية: أقل من 18.5 يعني نحافة، من 18.5 إلى 24.9 يعتبر وزناً طبيعياً وصحياً، من 25 إلى 29.9 زيادة وزن، و30 فأكثر يعتبر سمنة.',
       },
+      {
+        question: 'هل ينطبق مؤشر كتلة الجسم على الرياضيين والحوامل؟',
+        answer: 'لا يُعتبر المؤشر دقيقاً للرياضيين ذوي الكتلة العضلية العالية لأن العضلات أثقل من الدهون، كما لا ينطبق على النساء الحوامل والأطفال دون 18 عاماً حيث تُستخدم منحنيات نمو طبية مخصصة.',
+      },
     ],
     relatedCalculatorIds: ['percentage-calculator', 'car-fuel-cost'],
   },
@@ -797,6 +819,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'نوع العملية الحسابية للنسبة المئوية',
         type: 'select',
         defaultValue: 'percent_of',
+        helpText: 'اختر نوع المسألة الرياضية لحساب قيمة النسبة أو نسبة عدد لآخر أو نسبة التغير.',
         options: [
           { value: 'percent_of', label: 'حساب قيمة نسبة مئوية من مبلغ (مثال: كم يساوي 15% من 500؟)' },
           { value: 'is_what_percent', label: 'حساب نسبة عدد إلى عدد آخر (مثال: 50 يمثل كم بالمئة من 200؟)' },
@@ -810,6 +833,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         defaultValue: 15,
         step: 0.1,
         required: true,
+        helpText: 'أدخل النسبة المئوية أو القيمة الابتدائية حسب نوع العملية المختارة.',
         conditionalLabels: [
           { condition: { field: 'mode', value: 'percent_of' }, label: 'النسبة المئوية (%)', unit: '%' },
           { condition: { field: 'mode', value: 'is_what_percent' }, label: 'العدد الجزئي (البسط)' },
@@ -824,6 +848,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         defaultValue: 500,
         step: 0.1,
         required: true,
+        helpText: 'أدخل العدد الإجمالي أو القيمة المقارن بها لاكتمال الحساب.',
         conditionalLabels: [
           { condition: { field: 'mode', value: 'percent_of' }, label: 'المبلغ الإجمالي (العدد الكلي)' },
           { condition: { field: 'mode', value: 'is_what_percent' }, label: 'العدد الكلي (المقام)' },
@@ -851,6 +876,10 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         question: 'كيف أحسب النسبة المئوية لخصم معين في المتاجر؟',
         answer: 'لحساب قيمة الخصم: اضرب السعر الأصلي في نسبة الخصم واقسم الناتج على 100. لمعرفة السعر النهائي بعد الخصم: اطرح قيمة الخصم من السعر الأصلي.',
       },
+      {
+        question: 'ما هي معادلة حساب نسبة الزيادة أو النقصان بين قيمتين؟',
+        answer: 'لحساب التغير المئوي: اطرح القيمة القديمة من القيمة الجديدة، واقسم الناتج على القيمة القديمة، ثم اضرب في 100. إذا كانت النتيجة موجبة فهي زيادة، وإن كانت سالبة فهي نقصان.',
+      },
     ],
     relatedCalculatorIds: ['vat-calculator', 'loan-calculator', 'zakat-wealth', 'length-converter'],
   },
@@ -863,7 +892,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     category: 'unit-conversion',
     subcategory: 'تحويل الأطوال والمسافات',
     descriptionAr: 'تحويل فوري ودقيق بين مختلف وحدات الطول والمسافة: الإنش إلى سنتيمتر، المتر إلى قدم، الميل إلى كيلومتر، والياردة والمليمتر وفق الاتفاقية الدولية للمعايير القياسية.',
-    metaTitle: 'محول وحدات الطول والمسافة – تحويل الإنش لسم والمتر للقدم والميل للكيلو',
+    metaTitle: 'حاسبة تحويل وحدات الطول والمسافة – تحويل الإنش لسم والمتر للقدم',
     metaDescription: 'أداة مجانية ودقيقة للتحويل بين وحدات الطول والمسافات: تحويل من انش الى سم، ومن متر الى قدم، ومن ميل الى كيلو بدقة متناهية بالمعايير القياسية الدولية.',
     h1: 'محول وحدات الطول والمسافات الدولي',
     searchKeywords: [
@@ -903,6 +932,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'من وحدة',
         type: 'select',
         defaultValue: 'in',
+        helpText: 'اختر وحدة الطول أو المسافة المراد التحويل منها.',
         options: [
           { value: 'mm', label: 'مليمتر (مم - mm)' },
           { value: 'cm', label: 'سنتيمتر (سم - cm)' },
@@ -919,6 +949,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'إلى وحدة',
         type: 'select',
         defaultValue: 'cm',
+        helpText: 'اختر وحدة الطول أو المسافة المستهدفة لعرض الناتج بها.',
         options: [
           { value: 'mm', label: 'مليمتر (مم - mm)' },
           { value: 'cm', label: 'سنتيمتر (سم - cm)' },
@@ -935,6 +966,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'دقة المنازل العشرية للناتج',
         type: 'select',
         defaultValue: '4',
+        helpText: 'اختر عدد المنازل العشرية المعروضة بعد الفاصلة لدقة النتيجة.',
         options: [
           { value: '2', label: 'منزلتان عشريتان (0.01)' },
           { value: '4', label: '4 منازل عشرية (0.0001)' },
@@ -1016,7 +1048,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     category: 'unit-conversion',
     subcategory: 'تحويل الوقت والزمن',
     descriptionAr: 'تحويل دقيق وفوري بين وحدات الزمن: الثواني، الدقائق، الساعات، الأيام، الأسابيع، والسنوات مع تحليل وتفكيك المدة الزمنية المركبة.',
-    metaTitle: 'محول وحدات الوقت والزمن – تحويل الدقائق لساعات والساعات لأيام والثواني',
+    metaTitle: 'حاسبة تحويل وحدات الوقت والزمن – تحويل الدقائق لساعات والساعات لأيام',
     metaDescription: 'أداة مجانية للتحويل بين مختلف وحدات الوقت: تحويل الدقائق إلى ساعات، الساعات إلى أيام، الثواني إلى دقائق، مع تفكيك المدة المركبة بدقة رياضية كاملة.',
     h1: 'محول وحدات الوقت وتحليل المدة الزمنية',
     searchKeywords: [
@@ -1055,6 +1087,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'من وحدة زمنية',
         type: 'select',
         defaultValue: 'min',
+        helpText: 'اختر الوحدة الزمنية الأساسية المراد التحويل منها.',
         options: [
           { value: 'ms', label: 'ميلي ثانية (ms)' },
           { value: 's', label: 'ثانية (s)' },
@@ -1070,6 +1103,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'إلى وحدة زمنية',
         type: 'select',
         defaultValue: 'hr',
+        helpText: 'اختر الوحدة الزمنية المستهدفة لعرض الناتج بها.',
         options: [
           { value: 'ms', label: 'ميلي ثانية (ms)' },
           { value: 's', label: 'ثانية (s)' },
@@ -1085,6 +1119,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'معيار حساب طول السنة',
         type: 'select',
         defaultValue: 'julian',
+        helpText: 'اختر معيار حساب طول السنة المعتمد: فلكي يولياني أو تقويمي بسيط أو كبيس.',
         options: [
           { value: 'julian', label: 'السنة الشمسية اليوليانية (365.25 يوماً - المعيار الفلكي)' },
           { value: 'common', label: 'السنة التقويمية البسيطة (365 يوماً)' },
@@ -1096,6 +1131,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         label: 'دقة المنازل العشرية للناتج',
         type: 'select',
         defaultValue: '4',
+        helpText: 'اختر عدد المنازل العشرية المعروضة بعد الفاصلة لدقة النتيجة.',
         options: [
           { value: '2', label: 'منزلتان عشريتان (0.01)' },
           { value: '4', label: '4 منازل عشرية (0.0001)' },
@@ -1121,7 +1157,8 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         description: 'حساب الفترات الزمنية للعمل أو السفر بالأيام الكاملة.',
         inputs: { value: 48, fromUnit: 'hr', toUnit: 'day', precision: 2 },
         steps: [
-          'القسمة المباشرة على عدد ساعات اليوم (24): 48 ÷ 24 = 2 يوم',
+          'معرفة عدد ساعات اليوم الكامل: 1 يوم = 24 ساعة',
+          'القسمة المباشرة على ساعات اليوم: 48 ÷ 24 = 2 يوم',
         ],
         resultSummary: '48 ساعة تعادل يومين بالضبط',
       },
@@ -1141,7 +1178,8 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
         description: 'حساب المدة الإجمالية للأسبوع بالثواني.',
         inputs: { value: 7, fromUnit: 'day', toUnit: 's', precision: 0 },
         steps: [
-          'الضرب في عدد ثواني اليوم (86400): 7 × 86,400 = 604,800 ثانية',
+          'حساب إجمالي ساعات الأسبوع: 7 أيام × 24 ساعة = 168 ساعة',
+          'الضرب في عدد ثواني الساعة: 168 × 3,600 = 604,800 ثانية',
         ],
         resultSummary: '7 أيام تعادل 604,800 ثانية بالضبط',
       },
