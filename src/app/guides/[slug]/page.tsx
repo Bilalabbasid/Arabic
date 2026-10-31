@@ -7,7 +7,12 @@ import { getCalculatorBySlug } from '@/data/calculators';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AdSlot from '@/components/layout/AdSlot';
 import { BookOpen, Clock, Calendar, Calculator, ArrowLeft } from 'lucide-react';
-import { formatMetaTitle, constructCanonicalUrl } from '@/lib/seo/metadata';
+import {
+  formatMetaTitle,
+  constructCanonicalUrl,
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+} from '@/lib/seo/metadata';
 import { formatDateAr } from '@/lib/formatters';
 
 interface PageProps {
@@ -64,8 +69,31 @@ export default async function GuideDetailPage({ params }: PageProps) {
     { label: guide.titleAr, href: `/guides/${guide.slug}/` },
   ];
 
+  const articleSchema = generateArticleSchema({
+    slug: guide.slug,
+    titleAr: guide.titleAr,
+    summaryAr: guide.summaryAr,
+    updatedAt: guide.updatedAt,
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'الرئيسية', url: '/' },
+    { name: 'الأدلة والشروحات', url: '/guides/' },
+    { name: guide.titleAr, url: `/guides/${guide.slug}/` },
+  ]);
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      {/* Article & Breadcrumb Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       <Breadcrumbs items={breadcrumbs} />
 
       <article className="space-y-8">

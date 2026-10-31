@@ -1,8 +1,13 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Cairo } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { SITE_DOMAIN, DEFAULT_META_DESCRIPTION, SITE_NAME } from '@/lib/seo/metadata';
+import {
+  SITE_DOMAIN,
+  DEFAULT_META_DESCRIPTION,
+  SITE_NAME,
+  generateWebSiteSchema,
+} from '@/lib/seo/metadata';
 import './globals.css';
 
 const cairo = Cairo({
@@ -11,6 +16,13 @@ const cairo = Cairo({
   variable: '--font-arabic',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  themeColor: '#059669',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_DOMAIN),
@@ -23,6 +35,11 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_NAME, url: SITE_DOMAIN }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
+  icons: {
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    apple: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+  },
+  manifest: '/manifest.webmanifest',
   alternates: {
     canonical: SITE_DOMAIN,
   },
@@ -57,8 +74,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const websiteSchema = generateWebSiteSchema();
+
   return (
     <html lang="ar" dir="rtl" className={cairo.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen antialiased bg-slate-50 text-slate-900 overflow-x-clip">
         <Header />
         <main className="flex-1">{children}</main>

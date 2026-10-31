@@ -255,3 +255,66 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
     })),
   };
 }
+
+/**
+ * WebSite structured data schema conforming to Google Search Site Names & Sitelinks guidelines
+ * See: https://developers.google.com/search/docs/appearance/site-names
+ */
+export function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'لِسيارتك',
+    alternateName: ['Lsayartk', 'lsayartk.com', 'منصة لِسيارتك', 'حاسبات لِسيارتك'],
+    url: SITE_DOMAIN,
+    inLanguage: 'ar',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_DOMAIN}/calculators/?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+/**
+ * Article structured data schema conforming to Google Search Article & Byline Dates guidelines
+ * See: https://developers.google.com/search/docs/appearance/structured-data/article
+ */
+export function generateArticleSchema(guide: {
+  slug: string;
+  titleAr: string;
+  summaryAr: string;
+  updatedAt: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: guide.titleAr,
+    description: guide.summaryAr,
+    inLanguage: 'ar',
+    url: constructCanonicalUrl(`/guides/${guide.slug}`),
+    datePublished: guide.updatedAt,
+    dateModified: guide.updatedAt,
+    author: {
+      '@type': 'Organization',
+      name: 'لِسيارتك',
+      url: SITE_DOMAIN,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'لِسيارتك',
+      url: SITE_DOMAIN,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_DOMAIN}/icon.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': constructCanonicalUrl(`/guides/${guide.slug}`),
+    },
+  };
+}

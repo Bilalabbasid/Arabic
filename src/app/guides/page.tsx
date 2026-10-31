@@ -52,7 +52,7 @@ export default function GuidesIndexPage() {
             </div>
 
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
-              <span>اقرأ الدليل الكامل</span>
+              <span>قراءة {guide.titleAr}</span>
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
             </div>
           </Link>

@@ -3,29 +3,28 @@ import { ALL_CALCULATORS } from '@/data/calculators';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES } from '@/data/countries';
 import { GUIDES } from '@/data/guides';
-import { SITE_DOMAIN, isCountryCalculatorValid } from '@/lib/seo/metadata';
+import { constructCanonicalUrl, isCountryCalculatorValid } from '@/lib/seo/metadata';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_DOMAIN;
-  const now = new Date('2026-10-29T00:00:00.000Z');
+  const now = new Date('2026-10-31T00:00:00.000Z');
 
-  // Static core pages
+  // Static core pages (strictly matching canonical tags)
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
-    { url: `${baseUrl}/calculators/`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
-    { url: `${baseUrl}/categories/`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${baseUrl}/guides/`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/methodology/`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${baseUrl}/sources/`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${baseUrl}/about/`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${baseUrl}/contact/`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${baseUrl}/privacy/`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/terms/`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: constructCanonicalUrl('/'), lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: constructCanonicalUrl('/calculators'), lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: constructCanonicalUrl('/categories'), lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: constructCanonicalUrl('/guides'), lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: constructCanonicalUrl('/methodology'), lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: constructCanonicalUrl('/sources'), lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: constructCanonicalUrl('/about'), lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: constructCanonicalUrl('/contact'), lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    { url: constructCanonicalUrl('/privacy'), lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: constructCanonicalUrl('/terms'), lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ];
 
   // Category pages
   const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((cat) => ({
-    url: `${baseUrl}/categories/${cat.slug}/`,
+    url: constructCanonicalUrl(`/categories/${cat.slug}`),
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.8,
@@ -33,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Universal calculator pages
   const calculatorPages: MetadataRoute.Sitemap = ALL_CALCULATORS.map((calc) => ({
-    url: `${baseUrl}/calculators/${calc.slug}/`,
+    url: constructCanonicalUrl(`/calculators/${calc.slug}`),
     lastModified: calc.lastReviewedAt ? new Date(calc.lastReviewedAt) : now,
     changeFrequency: 'weekly',
     priority: 0.9,
@@ -41,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Country hub pages
   const countryHubPages: MetadataRoute.Sitemap = COUNTRIES.map((c) => ({
-    url: `${baseUrl}/${c.countryCode.toLowerCase()}/`,
+    url: constructCanonicalUrl(`/${c.countryCode.toLowerCase()}`),
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.8,
@@ -54,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const calc of ALL_CALCULATORS) {
       if (calc.publicationStatus === 'PUBLISHED' && isCountryCalculatorValid(calc, country.countryCode)) {
         countryCalculatorPages.push({
-          url: `${baseUrl}/${cCode}/${calc.slug}/`,
+          url: constructCanonicalUrl(`/${cCode}/${calc.slug}`),
           lastModified: calc.lastReviewedAt ? new Date(calc.lastReviewedAt) : now,
           changeFrequency: 'weekly',
           priority: 0.8,
@@ -65,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Guide pages
   const guidePages: MetadataRoute.Sitemap = GUIDES.map((g) => ({
-    url: `${baseUrl}/guides/${g.slug}/`,
+    url: constructCanonicalUrl(`/guides/${g.slug}`),
     lastModified: new Date(g.updatedAt),
     changeFrequency: 'monthly',
     priority: 0.7,

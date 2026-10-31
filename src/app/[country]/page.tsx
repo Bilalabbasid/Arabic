@@ -11,7 +11,12 @@ import { getCalculatorsByCountry } from '@/data/calculators';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AdSlot from '@/components/layout/AdSlot';
 import { Calculator, ArrowLeft, ShieldCheck, CheckCircle2, Globe, Building } from 'lucide-react';
-import { formatMetaTitle, constructCanonicalUrl, isCountryCalculatorValid } from '@/lib/seo/metadata';
+import {
+  formatMetaTitle,
+  constructCanonicalUrl,
+  isCountryCalculatorValid,
+  generateBreadcrumbSchema,
+} from '@/lib/seo/metadata';
 
 interface PageProps {
   params: Promise<{ country: string }>;
@@ -67,8 +72,19 @@ export default async function CountryHubPage({ params }: PageProps) {
     { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}/` },
   ];
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'الرئيسية', url: '/' },
+    { name: country.nameAr, url: `/${country.countryCode.toLowerCase()}/` },
+  ]);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       <Breadcrumbs items={breadcrumbs} />
 
       {/* Country Hero Banner */}

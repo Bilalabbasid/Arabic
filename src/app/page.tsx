@@ -179,7 +179,7 @@ export default function HomePage() {
                   {cat.descriptionAr}
                 </p>
                 <div className="mt-3 text-[11px] font-semibold text-emerald-600 flex items-center gap-1">
-                  <span>تصفح حاسبات القسم</span>
+                  <span>تصفح حاسبات {cat.shortNameAr || cat.nameAr}</span>
                   <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
                 </div>
               </Link>

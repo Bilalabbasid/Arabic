@@ -7,7 +7,11 @@ import { getCalculatorsByCategory } from '@/data/calculators';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AdSlot from '@/components/layout/AdSlot';
 import { Calculator, ArrowLeft, Layers, Sparkles } from 'lucide-react';
-import { formatMetaTitle, constructCanonicalUrl } from '@/lib/seo/metadata';
+import {
+  formatMetaTitle,
+  constructCanonicalUrl,
+  generateBreadcrumbSchema,
+} from '@/lib/seo/metadata';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -63,8 +67,20 @@ export default async function CategoryDetailPage({ params }: PageProps) {
     { label: category.nameAr, href: `/categories/${category.slug}/` },
   ];
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'الرئيسية', url: '/' },
+    { name: 'أقسام الحاسبات', url: '/categories/' },
+    { name: category.nameAr, url: `/categories/${category.slug}/` },
+  ]);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+      {/* Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       <Breadcrumbs items={breadcrumbs} />
 
       <div className="space-y-3 max-w-3xl">

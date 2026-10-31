@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#0f766e" />
+    </linearGradient>
+  </defs>
+  <!-- Rounded Background Container -->
+  <rect width="48" height="48" rx="12" fill="url(#bgGrad)" />
+  
+  <!-- Calculator Display Screen -->
+  <rect x="10" y="10" width="28" height="8" rx="3" fill="#ffffff" fill-opacity="0.95" />
+  <rect x="26" y="12.5" width="9" height="3" rx="1.5" fill="#0f766e" />
+
+  <!-- Calculator Buttons Grid -->
+  <!-- Row 1 -->
+  <rect x="10" y="22" width="6.5" height="5" rx="2" fill="#ffffff" fill-opacity="0.9" />
+  <rect x="19" y="22" width="6.5" height="5" rx="2" fill="#ffffff" fill-opacity="0.9" />
+  <rect x="28" y="22" width="10" height="5" rx="2" fill="#34d399" />
+
+  <!-- Row 2 -->
+  <rect x="10" y="29.5" width="6.5" height="5" rx="2" fill="#ffffff" fill-opacity="0.9" />
+  <rect x="19" y="29.5" width="6.5" height="5" rx="2" fill="#ffffff" fill-opacity="0.9" />
+  <rect x="28" y="29.5" width="10" height="5" rx="2" fill="#ffffff" fill-opacity="0.9" />
+
+  <!-- Row 3 -->
+  <rect x="10" y="37" width="15.5" height="5" rx="2" fill="#ffffff" fill-opacity="0.9" />
+  <rect x="28" y="37" width="10" height="5" rx="2" fill="#fbbf24" />
+</svg>
