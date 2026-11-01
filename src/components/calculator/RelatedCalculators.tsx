@@ -16,7 +16,7 @@ export default function RelatedCalculators({ calculators, currentCountryCode, cl
     <div className={`space-y-4 ${className}`}>
       <div className="flex items-center justify-between">
         <h3 className="text-base font-bold text-slate-900">حاسبات ذات صلة قد تهمك</h3>
-        <Link href="/calculators/" className="text-xs font-bold text-emerald-600 hover:underline">
+        <Link href="/calculators" className="text-xs font-bold text-emerald-600 hover:underline">
           عرض كل الحاسبات &larr;
         </Link>
       </div>
@@ -24,8 +24,8 @@ export default function RelatedCalculators({ calculators, currentCountryCode, cl
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {calculators.map((calc) => {
           const href = currentCountryCode
-            ? `/${currentCountryCode.toLowerCase()}/${calc.slug}/`
-            : `/calculators/${calc.slug}/`;
+            ? `/${currentCountryCode.toLowerCase()}/${calc.slug}`
+            : `/calculators/${calc.slug}`;
 
           return (
             <Link

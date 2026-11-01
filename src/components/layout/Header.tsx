@@ -14,9 +14,9 @@ export default function Header() {
 
   const navLinks = [
     { label: 'الرئيسية', href: '/' },
-    { label: 'جميع الحاسبات', href: '/calculators/' },
-    { label: 'الأقسام', href: '/categories/' },
-    { label: 'المصادر والمنهجية', href: '/methodology/' },
+    { label: 'جميع الحاسبات', href: '/calculators' },
+    { label: 'الأقسام', href: '/categories' },
+    { label: 'المصادر والمنهجية', href: '/methodology' },
   ];
 
   return (
@@ -95,7 +95,7 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}

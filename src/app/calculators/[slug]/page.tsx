@@ -86,8 +86,8 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
   const relatedCalculators = getRelatedCalculators(calc, 6);
 
   const breadcrumbs = [
-    ...(category ? [{ label: category.nameAr, href: `/categories/${category.slug}/` }] : []),
-    { label: calc.shortNameAr || calc.nameAr, href: `/calculators/${calc.slug}/` },
+    ...(category ? [{ label: category.nameAr, href: `/categories/${category.slug}` }] : []),
+    { label: calc.shortNameAr || calc.nameAr, href: `/calculators/${calc.slug}` },
   ];
 
   // Precalculate initial result on the server using default inputs for instant LCP (0ms)
@@ -116,8 +116,8 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
   const faqSchema = generateFaqSchema(calc.faqs);
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'الرئيسية', url: '/' },
-    ...(category ? [{ name: category.nameAr, url: `/categories/${category.slug}/` }] : []),
-    { name: calc.nameAr, url: `/calculators/${calc.slug}/` },
+    ...(category ? [{ name: category.nameAr, url: `/categories/${category.slug}` }] : []),
+    { name: calc.nameAr, url: `/calculators/${calc.slug}` },
   ]);
 
   return (

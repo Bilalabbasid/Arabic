@@ -38,13 +38,13 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-slate-400">
               {popularCategories.map((cat) => (
                 <li key={cat.slug}>
-                  <Link href={`/categories/${cat.slug}/`} className="hover:text-emerald-400 transition-colors">
+                  <Link href={`/categories/${cat.slug}`} className="hover:text-emerald-400 transition-colors">
                     {cat.nameAr}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/categories/" className="text-emerald-400 font-medium hover:underline">
+                <Link href="/categories" className="text-emerald-400 font-medium hover:underline">
                   جميع الأقسام الـ 18 &larr;
                 </Link>
               </li>
@@ -57,7 +57,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-slate-400">
               {keyCountries.map((c) => (
                 <li key={c.countryCode}>
-                  <Link href={`/${c.countryCode.toLowerCase()}/`} className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
+                  <Link href={`/${c.countryCode.toLowerCase()}`} className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
                     <span>{c.flagEmoji}</span>
                     <span>{c.nameAr}</span>
                   </Link>
@@ -71,32 +71,32 @@ export default function Footer() {
             <h4 className="text-sm font-bold text-white uppercase tracking-wider">عن المنصة والشفافية</h4>
             <ul className="space-y-2 text-sm text-slate-400">
               <li>
-                <Link href="/about/" className="hover:text-emerald-400 transition-colors">
+                <Link href="/about" className="hover:text-emerald-400 transition-colors">
                   من نحن ورؤيتنا
                 </Link>
               </li>
               <li>
-                <Link href="/methodology/" className="hover:text-emerald-400 transition-colors">
+                <Link href="/methodology" className="hover:text-emerald-400 transition-colors">
                   منهجية الحساب والمعايير
                 </Link>
               </li>
               <li>
-                <Link href="/sources/" className="hover:text-emerald-400 transition-colors">
+                <Link href="/sources" className="hover:text-emerald-400 transition-colors">
                   المصادر الرسمية والجهات
                 </Link>
               </li>
               <li>
-                <Link href="/contact/" className="hover:text-emerald-400 transition-colors">
+                <Link href="/contact" className="hover:text-emerald-400 transition-colors">
                   اتصل بنا والمقترحات
                 </Link>
               </li>
               <li>
-                <Link href="/privacy/" className="hover:text-emerald-400 transition-colors">
+                <Link href="/privacy" className="hover:text-emerald-400 transition-colors">
                   سياسة الخصوصية
                 </Link>
               </li>
               <li>
-                <Link href="/terms/" className="hover:text-emerald-400 transition-colors">
+                <Link href="/terms" className="hover:text-emerald-400 transition-colors">
                   شروط الاستخدام وإخلاء المسؤولية
                 </Link>
               </li>

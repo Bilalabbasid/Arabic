@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: formatMetaTitle('سياسة الخصوصية وحماية البيانات'),
   description: 'سياسة الخصوصية لمنصة لِسيارتك: تأكيد عدم استخدام أي قواعد بيانات خادم لحفظ مدخلاتك، وحفظ التفضيلات محلياً في متصفحك فقط.',
   alternates: {
-    canonical: constructCanonicalUrl('/privacy/'),
+    canonical: constructCanonicalUrl('/privacy'),
   },
 };
 
 export default function PrivacyPage() {
-  const breadcrumbs = [{ label: 'سياسة الخصوصية', href: '/privacy/' }];
+  const breadcrumbs = [{ label: 'سياسة الخصوصية', href: '/privacy' }];
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">

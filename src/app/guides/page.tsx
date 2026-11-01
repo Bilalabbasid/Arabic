@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: formatMetaTitle('الأدلة والشروحات الحسابية'),
   description: 'مقالات وأدلة تعليمية تشرح بالخطوات كيفية حساب تكلفة الوقود، مكافأة نهاية الخدمة، أقساط القروض، والضرائب بدقة.',
   alternates: {
-    canonical: constructCanonicalUrl('/guides/'),
+    canonical: constructCanonicalUrl('/guides'),
   },
 };
 
 export default function GuidesIndexPage() {
-  const breadcrumbs = [{ label: 'الأدلة والشروحات', href: '/guides/' }];
+  const breadcrumbs = [{ label: 'الأدلة والشروحات', href: '/guides' }];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -34,7 +34,7 @@ export default function GuidesIndexPage() {
         {GUIDES.map((guide) => (
           <Link
             key={guide.slug}
-            href={`/guides/${guide.slug}/`}
+            href={`/guides/${guide.slug}`}
             className="group bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between"
           >
             <div className="space-y-3">

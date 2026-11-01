@@ -22,7 +22,20 @@ export default function SearchModal({ isOpen, onClose }: Props) {
       setQuery('');
       setResults(ALL_CALCULATORS.slice(0, 5));
     }
-  }, [isOpen]);
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (!query.trim()) {
@@ -71,6 +84,7 @@ export default function SearchModal({ isOpen, onClose }: Props) {
               type="button"
               onClick={() => setQuery('')}
               className="p-1 text-slate-400 hover:text-slate-600 rounded-md"
+              aria-label="مسح البحث"
             >
               <X className="w-4 h-4" />
             </button>
@@ -105,7 +119,7 @@ export default function SearchModal({ isOpen, onClose }: Props) {
             results.map((calc) => (
               <Link
                 key={calc.slug}
-                href={`/calculators/${calc.slug}/`}
+                href={`/calculators/${calc.slug}`}
                 onClick={onClose}
                 className="group flex items-start justify-between p-3 rounded-xl hover:bg-emerald-50/70 transition-colors"
               >

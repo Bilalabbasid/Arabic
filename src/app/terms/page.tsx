@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: formatMetaTitle('شروط الاستخدام وإخلاء المسؤولية'),
   description: 'شروط استخدام منصة لِسيارتك وإخلاء المسؤولية القانونية والمالية المتعلقة بنتائج الحاسبات والتقديرات التوجيهية.',
   alternates: {
-    canonical: constructCanonicalUrl('/terms/'),
+    canonical: constructCanonicalUrl('/terms'),
   },
 };
 
 export default function TermsPage() {
-  const breadcrumbs = [{ label: 'شروط الاستخدام', href: '/terms/' }];
+  const breadcrumbs = [{ label: 'شروط الاستخدام', href: '/terms' }];
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">

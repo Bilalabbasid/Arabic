@@ -105,8 +105,8 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
   const relatedCalculators = getRelatedCalculators(calc, 6, country.countryCode);
 
   const breadcrumbs = [
-    { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}/` },
-    { label: calc.shortNameAr || calc.nameAr, href: `/${country.countryCode.toLowerCase()}/${calc.slug}/` },
+    { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}` },
+    { label: calc.shortNameAr || calc.nameAr, href: `/${country.countryCode.toLowerCase()}/${calc.slug}` },
   ];
 
   // Default inputs preset to country and currency
@@ -143,8 +143,8 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
   const faqSchema = generateFaqSchema(calc.faqs);
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'الرئيسية', url: '/' },
-    { name: country.nameAr, url: `/${country.countryCode.toLowerCase()}/` },
-    { name: calc.nameAr, url: `/${country.countryCode.toLowerCase()}/${calc.slug}/` },
+    { name: country.nameAr, url: `/${country.countryCode.toLowerCase()}` },
+    { name: calc.nameAr, url: `/${country.countryCode.toLowerCase()}/${calc.slug}` },
   ]);
 
   return (

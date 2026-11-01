@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = formatMetaTitle(category.metaTitle);
-  const canonical = constructCanonicalUrl(`/categories/${category.slug}/`);
+  const canonical = constructCanonicalUrl(`/categories/${category.slug}`);
 
   return {
     title,
@@ -63,14 +63,14 @@ export default async function CategoryDetailPage({ params }: PageProps) {
 
   const calculators = getCalculatorsByCategory(category.id);
   const breadcrumbs = [
-    { label: 'الأقسام', href: '/categories/' },
-    { label: category.nameAr, href: `/categories/${category.slug}/` },
+    { label: 'الأقسام', href: '/categories' },
+    { label: category.nameAr, href: `/categories/${category.slug}` },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'الرئيسية', url: '/' },
-    { name: 'أقسام الحاسبات', url: '/categories/' },
-    { name: category.nameAr, url: `/categories/${category.slug}/` },
+    { name: 'أقسام الحاسبات', url: '/categories' },
+    { name: category.nameAr, url: `/categories/${category.slug}` },
   ]);
 
   return (
@@ -110,7 +110,7 @@ export default async function CategoryDetailPage({ params }: PageProps) {
           {calculators.map((calc) => (
             <Link
               key={calc.slug}
-              href={`/calculators/${calc.slug}/`}
+              href={`/calculators/${calc.slug}`}
               className="group bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between"
             >
               <div>

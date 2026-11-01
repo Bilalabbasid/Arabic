@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   title: formatMetaTitle('أقسام وتصنيفات الحاسبات'),
   description: 'دليل الأقسام والتصنيفات الشامل لمنصة لِسيارتك، يضم 18 قسماً تغطي الرياضيات والسيارات والمالية والضرائب والرواتب والعقارات.',
   alternates: {
-    canonical: constructCanonicalUrl('/categories/'),
+    canonical: constructCanonicalUrl('/categories'),
   },
 };
 
 export default function CategoriesIndexPage() {
-  const breadcrumbs = [{ label: 'أقسام الحاسبات', href: '/categories/' }];
+  const breadcrumbs = [{ label: 'أقسام الحاسبات', href: '/categories' }];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -37,7 +37,7 @@ export default function CategoriesIndexPage() {
           return (
             <Link
               key={cat.slug}
-              href={`/categories/${cat.slug}/`}
+              href={`/categories/${cat.slug}`}
               className="group bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between"
             >
               <div>

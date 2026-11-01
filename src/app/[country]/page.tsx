@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = formatMetaTitle(`حاسبات ${country.nameAr} – العملة والضرائب واللوائح الرسمية`);
-  const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/`);
+  const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}`);
 
   return {
     title,
@@ -69,12 +69,12 @@ export default async function CountryHubPage({ params }: PageProps) {
   const availableCalculators = getCalculatorsByCountry(country.countryCode);
   const breadcrumbs = [
     { label: 'الدول', href: '/' },
-    { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}/` },
+    { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}` },
   ];
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'الرئيسية', url: '/' },
-    { name: country.nameAr, url: `/${country.countryCode.toLowerCase()}/` },
+    { name: country.nameAr, url: `/${country.countryCode.toLowerCase()}` },
   ]);
 
   return (
@@ -132,8 +132,8 @@ export default async function CountryHubPage({ params }: PageProps) {
           {availableCalculators.map((calc) => {
             const isLocalized = isCountryCalculatorValid(calc, country.countryCode);
             const targetHref = isLocalized
-              ? `/${country.countryCode.toLowerCase()}/${calc.slug}/`
-              : `/calculators/${calc.slug}/`;
+              ? `/${country.countryCode.toLowerCase()}/${calc.slug}`
+              : `/calculators/${calc.slug}`;
 
             return (
               <Link

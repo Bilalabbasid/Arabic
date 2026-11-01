@@ -213,11 +213,17 @@ export default function CalculatorRunner({
     setIsFavorited(nowFav);
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     if (typeof window !== 'undefined') {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedLink(true);
-      setTimeout(() => setCopiedLink(false), 2000);
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(window.location.href);
+          setCopiedLink(true);
+          setTimeout(() => setCopiedLink(false), 2000);
+        }
+      } catch (err) {
+        console.warn('Clipboard write failed:', err);
+      }
     }
   };
 

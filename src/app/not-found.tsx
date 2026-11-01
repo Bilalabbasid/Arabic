@@ -15,12 +15,14 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   const topCalculators = [
-    { name: 'حاسبة استهلاك وتكلفة الوقود', href: '/calculators/car-fuel-cost/' },
-    { name: 'حاسبة ضريبة القيمة المضافة (15% و 5%)', href: '/calculators/vat-calculator/' },
-    { name: 'حاسبة القروض والتمويل البنكي', href: '/calculators/loan-calculator/' },
-    { name: 'حاسبة مكافأة نهاية الخدمة', href: '/calculators/end-of-service-reward/' },
-    { name: 'حاسبة فاتورة الكهرباء والشرائح', href: '/calculators/electricity-bill/' },
-    { name: 'حاسبة النسبة المئوية الشاملة', href: '/calculators/percentage-calculator/' },
+    { name: 'حاسبة استهلاك وتكلفة الوقود', href: '/calculators/car-fuel-cost' },
+    { name: 'حاسبة ضريبة القيمة المضافة (15% و 5%)', href: '/calculators/vat-calculator' },
+    { name: 'حاسبة القروض والتمويل البنكي', href: '/calculators/loan-calculator' },
+    { name: 'حاسبة مكافأة نهاية الخدمة', href: '/calculators/end-of-service-reward' },
+    { name: 'حاسبة فاتورة الكهرباء والشرائح', href: '/calculators/electricity-bill' },
+    { name: 'حاسبة محول الطول والمسافات', href: '/calculators/length-converter' },
+    { name: 'حاسبة محول الوقت والزمن', href: '/calculators/time-converter' },
+    { name: 'حاسبة النسبة المئوية الشاملة', href: '/calculators/percentage-calculator' },
   ];
 
   return (
@@ -50,11 +52,11 @@ export default function NotFound() {
           <span>العودة للصفحة الرئيسية</span>
         </Link>
         <Link
-          href="/calculators/"
+          href="/calculators"
           className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition-all hover:scale-[1.02]"
         >
           <Calculator className="w-4 h-4" />
-          <span>دليل كافة الحاسبات (8 أدوات)</span>
+          <span>دليل كافة الحاسبات</span>
         </Link>
       </div>
 

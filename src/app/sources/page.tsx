@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   title: formatMetaTitle('المصادر الرسمية والجهات المعتمدة'),
   description: 'دليل الجهات والمصادر الرسمية والبنوك المركزية وهيئات الضرائب المعتمدة في بناء حاسبات منصة لِسيارتك.',
   alternates: {
-    canonical: constructCanonicalUrl('/sources/'),
+    canonical: constructCanonicalUrl('/sources'),
   },
 };
 
 export default function SourcesPage() {
-  const breadcrumbs = [{ label: 'المصادر والجهات الرسمية', href: '/sources/' }];
+  const breadcrumbs = [{ label: 'المصادر والجهات الرسمية', href: '/sources' }];
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">

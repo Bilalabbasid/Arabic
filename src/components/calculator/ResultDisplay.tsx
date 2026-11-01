@@ -37,11 +37,17 @@ export default function ResultDisplay({ result, currency, countryCode, className
     );
   }
 
-  const handleCopy = () => {
-    const textToCopy = `${result.primary.label}: ${result.primary.formattedValue || result.primary.value} ${result.primary.unit || ''}`;
-    navigator.clipboard.writeText(textToCopy);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      const textToCopy = `${result.primary.label}: ${result.primary.formattedValue || result.primary.value} ${result.primary.unit || ''}`;
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(textToCopy);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Graceful clipboard fallback
+    }
   };
 
   return (

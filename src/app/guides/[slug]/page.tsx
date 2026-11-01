@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = formatMetaTitle(guide.titleAr);
-  const canonical = constructCanonicalUrl(`/guides/${guide.slug}/`);
+  const canonical = constructCanonicalUrl(`/guides/${guide.slug}`);
 
   return {
     title,
@@ -65,8 +65,8 @@ export default async function GuideDetailPage({ params }: PageProps) {
 
   const relatedCalc = getCalculatorBySlug(guide.relatedCalculatorSlug);
   const breadcrumbs = [
-    { label: 'الأدلة', href: '/guides/' },
-    { label: guide.titleAr, href: `/guides/${guide.slug}/` },
+    { label: 'الأدلة', href: '/guides' },
+    { label: guide.titleAr, href: `/guides/${guide.slug}` },
   ];
 
   const articleSchema = generateArticleSchema({
@@ -78,8 +78,8 @@ export default async function GuideDetailPage({ params }: PageProps) {
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'الرئيسية', url: '/' },
-    { name: 'الأدلة والشروحات', url: '/guides/' },
-    { name: guide.titleAr, url: `/guides/${guide.slug}/` },
+    { name: 'الأدلة والشروحات', url: '/guides' },
+    { name: guide.titleAr, url: `/guides/${guide.slug}` },
   ]);
 
   return (
@@ -149,7 +149,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
               </div>
 
               <Link
-                href={`/calculators/${relatedCalc.slug}/`}
+                href={`/calculators/${relatedCalc.slug}`}
                 className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm transition-colors shrink-0 shadow-md shadow-emerald-600/20"
               >
                 فتح الحاسبة الآن

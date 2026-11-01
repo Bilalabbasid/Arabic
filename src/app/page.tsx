@@ -51,7 +51,7 @@ export default function HomePage() {
             {popularCalculators.map((c) => (
               <Link
                 key={c.slug}
-                href={`/calculators/${c.slug}/`}
+                href={`/calculators/${c.slug}`}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-emerald-500/20 text-slate-200 hover:text-white border border-white/10 text-xs font-medium transition-all"
               >
                 <Calculator className="w-3.5 h-3.5 text-emerald-400" />
@@ -76,7 +76,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="/calculators/"
+              href="/calculators"
               className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-colors shrink-0 shadow-md shadow-emerald-600/20"
             >
               استعراض كافة الحاسبات
@@ -87,7 +87,7 @@ export default function HomePage() {
             {topCountries.map((c) => (
               <Link
                 key={c.countryCode}
-                href={`/${c.countryCode.toLowerCase()}/`}
+                href={`/${c.countryCode.toLowerCase()}`}
                 className="flex items-center gap-2.5 p-3 rounded-xl border border-slate-100 hover:border-emerald-300 hover:bg-emerald-50/50 transition-all text-xs font-semibold text-slate-700 group"
               >
                 <span className="text-2xl">{c.flagEmoji}</span>
@@ -113,7 +113,7 @@ export default function HomePage() {
               حاسبات يومية يحتاجها كل مواطن ومقيم
             </h2>
           </div>
-          <Link href="/calculators/" className="text-sm font-bold text-emerald-600 hover:underline hidden sm:inline-flex items-center gap-1">
+          <Link href="/calculators" className="text-sm font-bold text-emerald-600 hover:underline hidden sm:inline-flex items-center gap-1">
             <span>عرض الكل</span>
             <ArrowLeft className="w-4 h-4" />
           </Link>
@@ -123,7 +123,7 @@ export default function HomePage() {
           {popularCalculators.map((calc) => (
             <Link
               key={calc.slug}
-              href={`/calculators/${calc.slug}/`}
+              href={`/calculators/${calc.slug}`}
               className="group bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between"
             >
               <div>
@@ -169,7 +169,7 @@ export default function HomePage() {
             {featuredCategories.map((cat) => (
               <Link
                 key={cat.slug}
-                href={`/categories/${cat.slug}/`}
+                href={`/categories/${cat.slug}`}
                 className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-emerald-400 transition-all group"
               >
                 <div className="font-bold text-slate-900 group-hover:text-emerald-700 transition-colors text-sm sm:text-base">
@@ -188,7 +188,7 @@ export default function HomePage() {
 
           <div className="text-center pt-4">
             <Link
-              href="/categories/"
+              href="/categories"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition-colors"
             >
               <span>استعراض جميع الأقسام الـ 18</span>

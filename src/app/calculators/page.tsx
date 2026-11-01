@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default function CalculatorsIndexPage() {
-  const breadcrumbs = [{ label: 'جميع الحاسبات', href: '/calculators/' }];
+  const breadcrumbs = [{ label: 'جميع الحاسبات', href: '/calculators' }];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -37,7 +37,7 @@ export default function CalculatorsIndexPage() {
         {ALL_CALCULATORS.map((calc) => (
           <Link
             key={calc.slug}
-            href={`/calculators/${calc.slug}/`}
+            href={`/calculators/${calc.slug}`}
             className="group bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between"
           >
             <div>

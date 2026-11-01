@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: formatMetaTitle('عن منصة لِسيارتك'),
   description: 'تعرف على قصة ورؤية منصة لِسيارتك (lsayartk.com)، المنصة العربية الرائدة للحاسبات والأدوات المالية واليومية لـ 22 دولة عربية.',
   alternates: {
-    canonical: constructCanonicalUrl('/about/'),
+    canonical: constructCanonicalUrl('/about'),
   },
 };
 
 export default function AboutPage() {
-  const breadcrumbs = [{ label: 'عن المنصة', href: '/about/' }];
+  const breadcrumbs = [{ label: 'عن المنصة', href: '/about' }];
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
