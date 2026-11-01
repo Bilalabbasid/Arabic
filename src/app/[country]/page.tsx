@@ -9,6 +9,7 @@ import {
 } from '@/data/countries';
 import { getCalculatorsByCountry } from '@/data/calculators';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
 import { Calculator, ArrowLeft, ShieldCheck, CheckCircle2, Globe, Building } from 'lucide-react';
 import {
@@ -92,7 +93,13 @@ export default async function CountryHubPage({ params }: PageProps) {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <span className="text-4xl sm:text-5xl">{country.flagEmoji}</span>
+              <CountryFlag
+                countryCode={country.countryCode}
+                nameAr={country.nameAr}
+                size="xl"
+                className="w-12 h-8 rounded-lg shadow-md"
+                fallbackEmoji={country.flagEmoji}
+              />
               <div>
                 <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
                   حاسبات {country.nameAr}

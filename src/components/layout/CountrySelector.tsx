@@ -8,6 +8,7 @@ import { getCalculatorBySlug } from '@/data/calculators';
 import { isCountryCalculatorValid } from '@/lib/seo/metadata';
 import { getSavedCountryCode, saveUserCountryCode } from '@/lib/storage/country';
 import { Globe, Check, ChevronDown, X, Search } from 'lucide-react';
+import CountryFlag from '../common/CountryFlag';
 
 interface Props {
   currentCountryCode?: string;
@@ -163,9 +164,12 @@ export default function CountrySelector({ currentCountryCode, onCountrySelect, c
         aria-haspopup="listbox"
         aria-label="اختر الدولة والعملة"
       >
-        <span className="text-base leading-none" role="img" aria-label={selectedCountry.nameAr}>
-          {selectedCountry.flagEmoji}
-        </span>
+        <CountryFlag
+          countryCode={selectedCountry.countryCode}
+          nameAr={selectedCountry.nameAr}
+          size="sm"
+          fallbackEmoji={selectedCountry.flagEmoji}
+        />
         <span className="hidden sm:inline font-semibold">{selectedCountry.nameAr}</span>
         <span className="text-xs text-slate-500 font-mono">({selectedCountry.currencySymbolAr})</span>
         <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform ${isOpen ? 'rotate-180 text-emerald-600' : ''}`} />
@@ -232,7 +236,12 @@ export default function CountrySelector({ currentCountryCode, onCountrySelect, c
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className="text-xl leading-none">{c.flagEmoji}</span>
+                      <CountryFlag
+                        countryCode={c.countryCode}
+                        nameAr={c.nameAr}
+                        size="md"
+                        fallbackEmoji={c.flagEmoji}
+                      />
                       <div>
                         <div className="leading-tight text-xs sm:text-sm">{c.nameAr}</div>
                         <div className="text-[11px] text-slate-400 font-sans">{c.nameEn}</div>

@@ -23,6 +23,7 @@ import {
   isCountryCalculatorValid,
 } from '@/lib/seo/metadata';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import CountryFlag from '@/components/common/CountryFlag';
 import CalculatorRunner from '@/components/calculator/CalculatorRunner';
 import FormulaBox from '@/components/calculator/FormulaBox';
 import MethodologyBox from '@/components/calculator/MethodologyBox';
@@ -171,7 +172,12 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
       <div className="space-y-3 max-w-4xl">
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
-            <span>{country.flagEmoji}</span>
+            <CountryFlag
+              countryCode={country.countryCode}
+              nameAr={country.nameAr}
+              size="xs"
+              fallbackEmoji={country.flagEmoji}
+            />
             <span>{country.nameAr}</span>
           </span>
           <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">

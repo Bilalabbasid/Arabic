@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ALL_CALCULATORS } from '@/data/calculators';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES } from '@/data/countries';
+import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
 import {
   Calculator,
@@ -90,7 +91,12 @@ export default function HomePage() {
                 href={`/${c.countryCode.toLowerCase()}`}
                 className="flex items-center gap-2.5 p-3 rounded-xl border border-slate-100 hover:border-emerald-300 hover:bg-emerald-50/50 transition-all text-xs font-semibold text-slate-700 group"
               >
-                <span className="text-2xl">{c.flagEmoji}</span>
+                <CountryFlag
+                  countryCode={c.countryCode}
+                  nameAr={c.nameAr}
+                  size="md"
+                  fallbackEmoji={c.flagEmoji}
+                />
                 <div className="overflow-hidden">
                   <div className="group-hover:text-emerald-700 truncate">{c.nameAr}</div>
                   <div className="text-[10px] text-slate-400 font-mono">({c.currencySymbolAr})</div>

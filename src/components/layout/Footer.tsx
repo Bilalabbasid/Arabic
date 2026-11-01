@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES } from '@/data/countries';
+import CountryFlag from '../common/CountryFlag';
 import { Calculator, ShieldCheck, Heart, ExternalLink, Globe } from 'lucide-react';
 
 export default function Footer() {
@@ -57,8 +58,13 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-slate-400">
               {keyCountries.map((c) => (
                 <li key={c.countryCode}>
-                  <Link href={`/${c.countryCode.toLowerCase()}`} className="hover:text-emerald-400 transition-colors flex items-center gap-1.5">
-                    <span>{c.flagEmoji}</span>
+                  <Link href={`/${c.countryCode.toLowerCase()}`} className="hover:text-emerald-400 transition-colors flex items-center gap-2">
+                    <CountryFlag
+                      countryCode={c.countryCode}
+                      nameAr={c.nameAr}
+                      size="xs"
+                      fallbackEmoji={c.flagEmoji}
+                    />
                     <span>{c.nameAr}</span>
                   </Link>
                 </li>
