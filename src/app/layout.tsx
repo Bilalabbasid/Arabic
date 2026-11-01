@@ -3,6 +3,7 @@ import { Cairo } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import {
+  SITE_URL,
   SITE_DOMAIN,
   DEFAULT_META_DESCRIPTION,
   SITE_NAME,
@@ -25,14 +26,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_DOMAIN),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${SITE_NAME} | منصة الحاسبات العربية المتكاملة لجميع الدول`,
-    template: `%s | ${SITE_NAME}`,
+    template: '%s',
   },
   description: DEFAULT_META_DESCRIPTION,
   applicationName: SITE_NAME,
-  authors: [{ name: SITE_NAME, url: SITE_DOMAIN }],
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   icons: {
@@ -40,13 +41,10 @@ export const metadata: Metadata = {
     apple: [{ url: '/icon.svg', type: 'image/svg+xml' }],
   },
   manifest: '/manifest.webmanifest',
-  alternates: {
-    canonical: SITE_DOMAIN,
-  },
   openGraph: {
     type: 'website',
     locale: 'ar_AR',
-    url: SITE_DOMAIN,
+    url: SITE_URL,
     siteName: SITE_NAME,
     title: `${SITE_NAME} | منصة الحاسبات العربية الموثوقة`,
     description: DEFAULT_META_DESCRIPTION,

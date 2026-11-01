@@ -1,10 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { ALL_CALCULATORS } from '@/data/calculators';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES } from '@/data/countries';
 import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
+import {
+  SITE_NAME,
+  SITE_URL,
+  DEFAULT_META_DESCRIPTION,
+  constructCanonicalUrl,
+} from '@/lib/seo/metadata';
 import {
   Calculator,
   Search,
@@ -22,6 +29,22 @@ import {
   Scale,
   Award,
 } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: `${SITE_NAME} | منصة الحاسبات العربية المتكاملة`,
+  description: DEFAULT_META_DESCRIPTION,
+  alternates: {
+    canonical: constructCanonicalUrl('/'),
+  },
+  openGraph: {
+    title: `${SITE_NAME} | منصة الحاسبات العربية المتكاملة`,
+    description: DEFAULT_META_DESCRIPTION,
+    url: constructCanonicalUrl('/'),
+    siteName: SITE_NAME,
+    locale: 'ar_AR',
+    type: 'website',
+  },
+};
 
 export default function HomePage() {
   const popularCalculators = ALL_CALCULATORS.slice(0, 6);

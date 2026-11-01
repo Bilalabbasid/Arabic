@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: formatMetaTitle('دليل كافة الحاسبات العربية المتاحة'),
   description: 'فهرس شامل لجميع الحاسبات والأدوات المالية والرياضية وحاسبات السيارات والرواتب والضرائب المتاحة على منصة لِسيارتك.',
   alternates: {
-    canonical: constructCanonicalUrl('/calculators/'),
+    canonical: constructCanonicalUrl('/calculators'),
   },
 };
 

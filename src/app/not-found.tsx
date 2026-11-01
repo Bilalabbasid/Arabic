@@ -9,7 +9,10 @@ export const metadata: Metadata = {
   description: 'عذراً، الصفحة التي تحاول الوصول إليها غير موجودة أو تم نقلها. يمكنك استكشاف أشهر الحاسبات على منصة لِسيارتك أو العودة للرئيسية.',
   robots: {
     index: false,
-    follow: true,
+    follow: false,
+  },
+  alternates: {
+    canonical: undefined,
   },
 };
 

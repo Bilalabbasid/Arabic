@@ -3,9 +3,11 @@ import { CalculatorDefinition } from '@/types/calculator';
 import { CountryDefinition } from '@/types/country';
 import { COUNTRIES, getCountryByCode } from '@/data/countries';
 import { ALL_COUNTRY_RULES } from '@/lib/rules/rule-resolver';
+import { SITE_URL, SITE_DOMAIN, PRIMARY_HOST } from '@/lib/config';
+
+export { SITE_URL, SITE_DOMAIN, PRIMARY_HOST };
 
 export const SITE_NAME = 'لِسيارتك';
-export const SITE_DOMAIN = 'https://lsayartk.com';
 export const DEFAULT_META_DESCRIPTION =
   'منصة لِسيارتك (lsayartk.com) – المنصة العربية الموثوقة للحاسبات المجانية: حاسبات السيارات وتكلفة الوقود، القروض والتمويل، ضريبة القيمة المضافة، مكافأة نهاية الخدمة، وفاتورة الكهرباء لمختلف الدول العربية.';
 
@@ -17,12 +19,11 @@ export function formatMetaTitle(pageTitle: string): string {
 
 export function constructCanonicalUrl(path: string): string {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  // Ensure consistent no-trailing-slash or trailing-slash. Standardizing on no-trailing-slash except root
   if (cleanPath === '/' || cleanPath === '') {
-    return `${SITE_DOMAIN}/`;
+    return `${SITE_URL}`;
   }
   const trimmed = cleanPath.replace(/\/+$/, '');
-  return `${SITE_DOMAIN}${trimmed}`;
+  return `${SITE_URL}${trimmed}`;
 }
 
 /**
