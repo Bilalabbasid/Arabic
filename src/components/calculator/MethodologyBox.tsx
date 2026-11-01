@@ -31,23 +31,13 @@ export default function MethodologyBox({
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-5 h-5 text-emerald-600" />
-          <h3 className="text-base font-bold text-slate-800">المنهجية والتحقق والمصادر الرسمية</h3>
+          <h3 className="text-base font-bold text-slate-800">المنهجية والمصادر المرجعية</h3>
         </div>
 
         <div className="flex items-center gap-2">
-          {verificationStatus === 'APPROVED' && (
+          {lastReviewedAt && (
             <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-full">
-              <CheckCircle2 className="w-3.5 h-3.5" /> تم الاعتماد والتدقيق الرسمي
-            </span>
-          )}
-          {verificationStatus === 'FORMULA_TESTED' && (
-            <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 bg-blue-100/70 px-2.5 py-1 rounded-full">
-              <CheckCircle2 className="w-3.5 h-3.5" /> تم اختبار المعادلات الرياضية
-            </span>
-          )}
-          {verificationStatus === 'REVIEW_REQUIRED' && (
-            <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 bg-amber-100/70 px-2.5 py-1 rounded-full">
-              <AlertCircle className="w-3.5 h-3.5" /> يتطلب مراجعة التحديثات
+              <CheckCircle2 className="w-3.5 h-3.5" /> آخر تحديث للبيانات: {formatDateAr(lastReviewedAt)}
             </span>
           )}
           <span className="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-1 rounded-md">
@@ -56,18 +46,16 @@ export default function MethodologyBox({
         </div>
       </div>
 
-      {/* Verification date */}
-      {lastReviewedAt && (
-        <div className="flex items-center gap-2 text-xs text-slate-500">
-          <Calendar className="w-3.5 h-3.5 text-slate-400" />
-          <span>آخر مراجعة وتحديث للمعايير: {formatDateAr(lastReviewedAt)}</span>
-        </div>
-      )}
+      {/* Verification status and source note */}
+      <div className="flex items-center gap-2 text-xs text-slate-500">
+        <Calendar className="w-3.5 h-3.5 text-slate-400" />
+        <span>تعتمد الحسابات على النصوص النظامية والمعادلات الرياضية المعلنة، وهي نتائج استرشادية غير ملزمة.</span>
+      </div>
 
       {/* Official Sources */}
       {sources.length > 0 && (
         <div className="space-y-2">
-          <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">الجهات والمراجع الرسمية المعتمدة:</h4>
+          <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">الجهات والمصادر المرجعية:</h4>
           <div className="space-y-2">
             {sources.map((s) => (
               <a

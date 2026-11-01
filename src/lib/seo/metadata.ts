@@ -9,7 +9,7 @@ export { SITE_URL, SITE_DOMAIN, PRIMARY_HOST };
 
 export const SITE_NAME = 'لِسيارتك';
 export const DEFAULT_META_DESCRIPTION =
-  'منصة لِسيارتك (lsayartk.com) – المنصة العربية الموثوقة للحاسبات المجانية: حاسبات السيارات وتكلفة الوقود، القروض والتمويل، ضريبة القيمة المضافة، مكافأة نهاية الخدمة، وفاتورة الكهرباء لمختلف الدول العربية.';
+  'منصة لِسيارتك (lsayartk.com) – حاسبات عربية دقيقة ومجانية: حاسبات السيارات وتكلفة الوقود، القروض والتمويل، ضريبة القيمة المضافة، مكافأة نهاية الخدمة، وفاتورة الكهرباء لعدة دول عربية.';
 
 export function formatMetaTitle(pageTitle: string): string {
   if (!pageTitle) return SITE_NAME;

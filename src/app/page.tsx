@@ -267,9 +267,9 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h3 className="font-bold text-slate-900 text-sm sm:text-base">خصوصية تامة 100%</h3>
+              <h3 className="font-bold text-slate-900 text-sm sm:text-base">حسابات محلية بالكامل في متصفحك</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                تتم جميع العمليات الحسابية داخل متصفحك مباشرة؛ لا نقوم بتخزين رواتبك أو أرقامك في أي خوادم أو قواعد بيانات.
+                تتم جميع العمليات الحسابية داخل متصفح جهازك مباشرة دون إرسال أو حفظ مدخلاتك وأرقامك في أي خوادم خارجية.
               </p>
             </div>
           </div>
