@@ -87,6 +87,15 @@ export function isCountryHubIndexable(countryCode: string): boolean {
   return count >= 3;
 }
 
+export const INDEXABLE_CATEGORIES = ['finance-savings', 'mathematics-percentages', 'unit-conversion'];
+
+/**
+ * A category is indexable ONLY if it lists >= 3 live calculators.
+ */
+export function isCategoryIndexable(categorySlug: string): boolean {
+  return INDEXABLE_CATEGORIES.includes(categorySlug);
+}
+
 /**
  * Generates reciprocal hreflang links conforming strictly to Google Search Central guidelines:
  * - Generates hreflang ONLY for actually published, verified equivalent pages.

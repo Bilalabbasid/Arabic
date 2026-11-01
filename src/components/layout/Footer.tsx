@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES } from '@/data/countries';
-import { isCountryHubIndexable } from '@/lib/seo/metadata';
+import { isCountryHubIndexable, isCategoryIndexable } from '@/lib/seo/metadata';
 import CountryFlag from '../common/CountryFlag';
 import { Calculator, ShieldCheck, Heart, ExternalLink, Globe } from 'lucide-react';
 
 export default function Footer() {
-  const indexableCategories = CATEGORIES.filter((c) => (c.calculatorCount ?? 0) >= 3 || ['mathematics-percentages', 'taxation', 'unit-conversion', 'loans-installments'].includes(c.id)).slice(0, 6);
+  const indexableCategories = CATEGORIES.filter((c) => isCategoryIndexable(c.id));
   const indexableCountries = COUNTRIES.filter((c) => isCountryHubIndexable(c.countryCode));
 
   return (
@@ -38,7 +38,7 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider">الأقسام الرئيسية</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              {popularCategories.map((cat) => (
+              {indexableCategories.map((cat) => (
                 <li key={cat.slug}>
                   <Link href={`/categories/${cat.slug}`} className="hover:text-emerald-400 transition-colors">
                     {cat.nameAr}
@@ -47,7 +47,7 @@ export default function Footer() {
               ))}
               <li>
                 <Link href="/categories" className="text-emerald-400 font-medium hover:underline">
-                  جميع الأقسام الـ 18 &larr;
+                  أقسام الحاسبات ({indexableCategories.length}) &larr;
                 </Link>
               </li>
             </ul>

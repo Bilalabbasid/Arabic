@@ -16,6 +16,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Car Fuel Cost & Consumption Calculator',
     shortNameAr: 'حساب تكلفة البنزين',
     category: 'cars-transportation',
+    additionalCategories: ['finance-savings'],
     subcategory: 'تكلفة الوقود والرحلات',
     descriptionAr: 'احسب كمية البنزين المطلوبة وتكلفة المشوار أو السفر بالكيلومتر بالريال والدرهم والجنيه مع خيارات أسعار الوقود المعتمدة في دولتك.',
     metaTitle: 'حاسبة تكلفة الوقود واستهلاك البنزين – حساب سعر المشوار والرحلات',
@@ -141,6 +142,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Value Added Tax (VAT) Calculator',
     shortNameAr: 'حساب القيمة المضافة',
     category: 'taxation',
+    additionalCategories: ['finance-savings'],
     subcategory: 'ضريبة القيمة المضافة (VAT)',
     descriptionAr: 'احسب ضريبة القيمة المضافة أو استخرج المبلغ الأساسي قبل الضريبة لجميع الدول العربية (السعودية 15%، الإمارات 5%، مصر 14%، وغيرها).',
     metaTitle: 'حاسبة ضريبة القيمة المضافة – حساب واستخراج الضريبة 15% و 5% و 14%',
@@ -251,6 +253,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Personal & Auto Loan Calculator',
     shortNameAr: 'حساب القسط الشهري',
     category: 'loans-installments',
+    additionalCategories: ['finance-savings'],
     subcategory: 'القروض الشخصية',
     descriptionAr: 'احسب القسط الشهري للتمويل الشخصي أو قرض السيارة أو التمويل العقاري مع إجمالي الفوائد وجدول السداد التفصيلي المعتمد.',
     metaTitle: 'حاسبة القروض والأقساط الشهرية – حساب التمويل الشخصي والسيارات',
@@ -362,6 +365,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'End of Service Gratuity Calculator',
     shortNameAr: 'مكافأة نهاية الخدمة',
     category: 'salary-employment',
+    additionalCategories: ['finance-savings'],
     subcategory: 'مكافأة نهاية الخدمة',
     descriptionAr: 'احسب مستحقات مكافأة نهاية الخدمة بدقة متناهية وفق نظام العمل السعودي (المادتين 84 و 85) وقانون العمل الإماراتي الجديد لجميع حالات إنهاء العقد والاستقالة.',
     metaTitle: 'حاسبة مكافأة نهاية الخدمة – حساب مستحقات العمل في السعودية والإمارات',
@@ -479,6 +483,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Zakat on Wealth & Commercial Goods Calculator',
     shortNameAr: 'حساب زكاة المال',
     category: 'taxation',
+    additionalCategories: ['finance-savings'],
     subcategory: 'زكاة المال والأسهم',
     descriptionAr: 'احسب زكاة أموالك، الأرصدة البنكية، عروض التجارة، والأسهم، مع التحقق التلقائي من بلوغ النصاب الشرعي (85 غرام ذهب عيار 24).',
     metaTitle: 'حاسبة زكاة المال وعروض التجارة – حساب النصاب الشرعي 2.5%',
@@ -601,6 +606,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Electricity Bill & Consumption Tariff Calculator',
     shortNameAr: 'حساب فاتورة الكهرباء',
     category: 'electricity-energy',
+    additionalCategories: ['finance-savings'],
     subcategory: 'فاتورة الكهرباء بالشرائح',
     descriptionAr: 'احسب التكلفة المتوقعة لفاتورة الكهرباء الشهرية بالشرائح المعتمدة في السعودية وخدمة العداد وضريبة القيمة المضافة.',
     metaTitle: 'حاسبة فاتورة الكهرباء – حساب الشرائح المنزلية والتجارية بالسعودية',
@@ -791,6 +797,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Comprehensive Percentage & Percent Change Calculator',
     shortNameAr: 'حساب النسبة المئوية',
     category: 'mathematics-percentages',
+    additionalCategories: ['unit-conversion'],
     subcategory: 'حساب النسب المئوية',
     descriptionAr: 'احسب النسبة المئوية من أي مبلغ، أو احسب نسبة عدد من آخر، ومعدل الزيادة أو النقصان المئوي بدقة وفورية.',
     metaTitle: 'حاسبة النسبة المئوية – حساب النسبة من مبلغ ومعدل الزيادة والنقصان',
@@ -890,6 +897,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Length & Distance Converter',
     shortNameAr: 'تحويل الأطوال',
     category: 'unit-conversion',
+    additionalCategories: ['mathematics-percentages'],
     subcategory: 'تحويل الأطوال والمسافات',
     descriptionAr: 'تحويل فوري ودقيق بين مختلف وحدات الطول والمسافة: الإنش إلى سنتيمتر، المتر إلى قدم، الميل إلى كيلومتر، والياردة والمليمتر وفق الاتفاقية الدولية للمعايير القياسية.',
     metaTitle: 'حاسبة تحويل وحدات الطول والمسافة – تحويل الإنش لسم والمتر للقدم',
@@ -1046,6 +1054,7 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
     nameEn: 'Time & Duration Converter',
     shortNameAr: 'تحويل الوقت',
     category: 'unit-conversion',
+    additionalCategories: ['mathematics-percentages'],
     subcategory: 'تحويل الوقت والزمن',
     descriptionAr: 'تحويل دقيق وفوري بين وحدات الزمن: الثواني، الدقائق، الساعات، الأيام، الأسابيع، والسنوات مع تحليل وتفكيك المدة الزمنية المركبة.',
     metaTitle: 'حاسبة تحويل وحدات الوقت والزمن – تحويل الدقائق لساعات والساعات لأيام',
@@ -1218,7 +1227,9 @@ export function getCalculatorBySlug(slug: string): CalculatorDefinition | undefi
 }
 
 export function getCalculatorsByCategory(categorySlug: string): CalculatorDefinition[] {
-  return ALL_CALCULATORS.filter((c) => c.category === categorySlug);
+  return ALL_CALCULATORS.filter(
+    (c) => c.category === categorySlug || c.additionalCategories?.includes(categorySlug)
+  );
 }
 
 export function getCalculatorsByCountry(countryCode: string): CalculatorDefinition[] {

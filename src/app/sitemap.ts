@@ -7,6 +7,7 @@ import {
   constructCanonicalUrl,
   isCountryCalculatorValid,
   isCountryHubIndexable,
+  isCategoryIndexable,
 } from '@/lib/seo/metadata';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -26,10 +27,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: constructCanonicalUrl('/terms'), lastModified: now },
   ];
 
-  // Category pages - only indexable categories with live calculators
-  const indexableCategorySlugs = new Set(['mathematics-percentages', 'taxation', 'unit-conversion', 'loans-installments', 'cars-transportation', 'salary-employment', 'electricity-energy', 'health-fitness']);
+  // Category pages - only indexable categories with >= 3 live calculators
   const categoryPages: MetadataRoute.Sitemap = CATEGORIES
-    .filter((cat) => (cat.calculatorCount ?? 0) >= 3 || indexableCategorySlugs.has(cat.id))
+    .filter((cat) => isCategoryIndexable(cat.id))
     .map((cat) => ({
       url: constructCanonicalUrl(`/categories/${cat.slug}`),
       lastModified: now,

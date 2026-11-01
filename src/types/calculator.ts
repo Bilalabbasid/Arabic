@@ -110,8 +110,8 @@ export interface FAQItem {
 
 export interface WorkedExample {
   title: string;
-  description: string;
-  inputs: Record<string, any>;
+  description?: string;
+  inputs?: Record<string, any>;
   steps: string[];
   resultSummary: string;
 }
@@ -126,6 +126,7 @@ export interface CalculatorDefinition {
   nameEn: string;
   shortNameAr: string;
   category: string;
+  additionalCategories?: string[];
   subcategory: string;
   descriptionAr: string;
   metaTitle: string;

@@ -123,7 +123,9 @@ for (const calc of ALL_CALCULATORS) {
 
   for (const [idx, eg] of calc.workedExamples.entries()) {
     inspectArabicText(eg.title, `${calc.slug}:example#${idx + 1}`, 'title');
-    inspectArabicText(eg.description, `${calc.slug}:example#${idx + 1}`, 'description');
+    if (eg.description) {
+      inspectArabicText(eg.description, `${calc.slug}:example#${idx + 1}`, 'description');
+    }
     for (const step of eg.steps) {
       inspectArabicText(step, `${calc.slug}:example#${idx + 1}`, 'step');
     }

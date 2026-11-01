@@ -4,12 +4,12 @@ import { Metadata } from 'next';
 import { CATEGORIES } from '@/data/categories';
 import { getCalculatorsByCategory } from '@/data/calculators';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
-import { Grid, ArrowLeft, Layers } from 'lucide-react';
-import { formatMetaTitle, constructCanonicalUrl } from '@/lib/seo/metadata';
+import { ArrowLeft, Layers, Calculator } from 'lucide-react';
+import { formatMetaTitle, constructCanonicalUrl, isCategoryIndexable } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = {
   title: formatMetaTitle('أقسام وتصنيفات الحاسبات'),
-  description: 'دليل الأقسام والتصنيفات الشامل لمنصة لِسيارتك، يضم 18 قسماً تغطي الرياضيات والسيارات والمالية والضرائب والرواتب والعقارات.',
+  description: 'دليل أقسام الحاسبات المعتمدة لمنصة لِسيارتك، يضم أقساماً تخصصية معتمدة تغطي المالية والرياضيات ومحولات القياس القياسية.',
   alternates: {
     canonical: constructCanonicalUrl('/categories'),
   },
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 
 export default function CategoriesIndexPage() {
   const breadcrumbs = [{ label: 'أقسام الحاسبات', href: '/categories' }];
+  const indexableCategories = CATEGORIES.filter((c) => isCategoryIndexable(c.id));
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
@@ -24,15 +25,15 @@ export default function CategoriesIndexPage() {
 
       <div className="space-y-3 max-w-3xl">
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-          أقسام وتصنيفات الحاسبات
+          أقسام وتصنيفات الحاسبات ({indexableCategories.length})
         </h1>
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-          اختر القسم الذي يناسب متطلباتك للوصول السريع إلى الأدوات والمعادلات التخصصية المعدة لكل مجال.
+          اختر القسم الذي يناسب متطلباتك للوصول السريع إلى الأدوات والمعادلات التخصصية المعتمدة لكل مجال.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {CATEGORIES.map((cat) => {
+        {indexableCategories.map((cat) => {
           const calcs = getCalculatorsByCategory(cat.id);
           return (
             <Link

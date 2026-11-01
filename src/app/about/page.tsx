@@ -6,7 +6,7 @@ import { formatMetaTitle, constructCanonicalUrl } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = {
   title: formatMetaTitle('عن منصة لِسيارتك'),
-  description: 'تعرف على قصة ورؤية منصة لِسيارتك (lsayartk.com)، المنصة العربية الرائدة للحاسبات والأدوات المالية واليومية لـ 22 دولة عربية.',
+  description: 'تعرف على قصة ورؤية منصة لِسيارتك (lsayartk.com)، المنصة العربية المتخصصة في تقديم حاسبات وأدوات مالية ويومية دقيقة وموثوقة.',
   alternates: {
     canonical: constructCanonicalUrl('/about'),
   },
@@ -43,9 +43,9 @@ export default function AboutPage() {
           <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
             <Globe className="w-6 h-6" />
           </div>
-          <h2 className="text-lg font-bold text-slate-900">تغطية جغرافية شاملة</h2>
+          <h2 className="text-lg font-bold text-slate-900">تغطية جغرافية مخصصة</h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            تغطي منصتنا كافة الدول العربية الـ 22، حيث تراعي الفروق الجوهرية في أسعار الوقود، العملات المحلية، ونسب ضريبة القيمة المضافة، وقوانين العمل المتباينة.
+            توفر منصتنا حاسبات مخصصة لعدة دول عربية تراعي الفروق الجوهرية في أسعار الوقود، العملات المحلية، ونسب ضريبة القيمة المضافة، وقوانين العمل المعتمدة رسمياً.
           </p>
         </div>
       </div>

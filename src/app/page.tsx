@@ -12,6 +12,7 @@ import {
   DEFAULT_META_DESCRIPTION,
   constructCanonicalUrl,
   isCountryHubIndexable,
+  isCategoryIndexable,
 } from '@/lib/seo/metadata';
 import {
   Calculator,
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const popularCalculators = ALL_CALCULATORS.slice(0, 6);
-  const featuredCategories = CATEGORIES.slice(0, 8);
+  const featuredCategories = CATEGORIES.filter((c) => isCategoryIndexable(c.id));
   const indexableCountries = COUNTRIES.filter((c) => isCountryHubIndexable(c.countryCode));
 
   return (
@@ -60,7 +61,7 @@ export default function HomePage() {
         <div className="relative max-w-5xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-semibold mb-2">
             <Sparkles className="w-4 h-4" />
-            <span>منصة الحاسبات العربية المعتمدة لجميع الدول العربية الـ 22</span>
+            <span>منصة الحاسبات العربية – أدوات حسابية معتمدة ومحدثة لعام 2026</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
@@ -188,14 +189,14 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-              18 قسماً تخصصياً يغطي كافة مناحي الحياة
+              {featuredCategories.length} أقسام تخصصية معتمدة تغطي أهم الاحتياجات اليومية
             </h2>
             <p className="text-slate-500 text-xs sm:text-sm">
               تصفح تصنيفاتنا المصممة لتسهيل وصولك للحاسبة المناسبة لسيارتك أو عملك أو تمويلك
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {featuredCategories.map((cat) => (
               <Link
                 key={cat.slug}
@@ -221,7 +222,7 @@ export default function HomePage() {
               href="/categories"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition-colors"
             >
-              <span>استعراض جميع الأقسام الـ 18</span>
+              <span>استعراض أقسام الحاسبات ({featuredCategories.length})</span>
               <ArrowLeft className="w-4 h-4" />
             </Link>
           </div>
