@@ -1,20 +1,19 @@
 import { CalculationResult } from '@/types/calculator';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/formatters';
+import { ALL_COUNTRY_LEGAL_RULES } from '@/data/rules';
 
-export const COUNTRY_VAT_RATES: Record<string, { rate: number; nameAr: string; currency: string }> = {
-  SA: { rate: 15, nameAr: 'ضريبة القيمة المضافة السعودية (15%)', currency: 'SAR' },
-  AE: { rate: 5, nameAr: 'ضريبة القيمة المضافة الإماراتية (5%)', currency: 'AED' },
-  BH: { rate: 10, nameAr: 'ضريبة القيمة المضافة البحرينية (10%)', currency: 'BHD' },
-  OM: { rate: 5, nameAr: 'ضريبة القيمة المضافة العُمانية (5%)', currency: 'OMR' },
-  EG: { rate: 14, nameAr: 'ضريبة القيمة المضافة المصرية (14%)', currency: 'EGP' },
-  JO: { rate: 16, nameAr: 'ضريبة المبيعات العامة الأردنية (16%)', currency: 'JOD' },
-  MA: { rate: 20, nameAr: 'الضريبة على القيمة المضافة المغربية (20%)', currency: 'MAD' },
-  DZ: { rate: 19, nameAr: 'الرسم على القيمة المضافة الجزائري (19%)', currency: 'DZD' },
-  TN: { rate: 19, nameAr: 'الأداء على القيمة المضافة التونسي (19%)', currency: 'TND' },
-  LB: { rate: 11, nameAr: 'ضريبة القيمة المضافة اللبنانية (11%)', currency: 'LBP' },
-  KW: { rate: 0, nameAr: 'الكويت (لا تطبق ضريبة قيمة مضافة حالياً)', currency: 'KWD' },
-  QA: { rate: 0, nameAr: 'قطر (لا تطبق ضريبة قيمة مضافة حالياً)', currency: 'QAR' },
-};
+export const COUNTRY_VAT_RATES: Record<string, { rate: number; nameAr: string; currency: string }> = Object.fromEntries(
+  Object.entries(ALL_COUNTRY_LEGAL_RULES).map(([code, rule]) => [
+    code,
+    {
+      rate: rule.hasVat && rule.vatStandardRate ? rule.vatStandardRate.value : 0,
+      nameAr: rule.hasVat && rule.vatStandardRate
+        ? `ضريبة القيمة المضافة ${rule.countryNameAr} (${rule.vatStandardRate.value}%)`
+        : `${rule.countryNameAr} (لا تطبق ضريبة قيمة مضافة حالياً)`,
+      currency: rule.currency,
+    },
+  ])
+);
 
 /**
  * Calculates VAT addition or extraction

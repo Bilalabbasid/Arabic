@@ -1,5 +1,6 @@
 import { CalculationResult } from '@/types/calculator';
 import { formatCurrency, formatNumber } from '@/lib/formatters';
+import { ALL_COUNTRY_LEGAL_RULES } from '@/data/rules';
 
 export interface VerifiedFuelPrice {
   octane91: number;
@@ -13,80 +14,27 @@ export interface VerifiedFuelPrice {
 }
 
 /**
- * Verified national retail fuel prices with authentic publication dates and source citations
+ * Verified national retail fuel prices derived from centralized single source of truth in src/data/rules/
  */
-export const VERIFIED_COUNTRY_FUEL_PRICES: Record<string, VerifiedFuelPrice> = {
-  SA: {
-    octane91: 2.18,
-    octane95: 2.33,
-    diesel: 1.15,
-    currency: 'SAR',
-    lastUpdated: '2026-10-01',
-    sourceId: 'sa-aramco-fuel-pricing',
-    sourceLabel: 'وزارة الطاقة / شركة أرامكو السعودية (سقف رسمي معتمد)',
-    isGovernmentCapped: true,
-  },
-  AE: {
-    octane91: 2.75,
-    octane95: 2.87,
-    diesel: 2.95,
-    currency: 'AED',
-    lastUpdated: '2026-10-01',
-    sourceId: 'ae-fuel-price-committee',
-    sourceLabel: 'لجنة متابعة أسعار الوقود بوزارة الطاقة الإماراتية',
-    isGovernmentCapped: false,
-  },
-  KW: {
-    octane91: 0.085,
-    octane95: 0.105,
-    diesel: 0.115,
-    currency: 'KWD',
-    lastUpdated: '2026-10-01',
-    sourceId: 'kw-fuel-subsidy',
-    sourceLabel: 'شركة البترول الوطنية الكويتية (أسعار مدعومة رسمياً)',
-    isGovernmentCapped: true,
-  },
-  QA: {
-    octane91: 1.90,
-    octane95: 2.10,
-    diesel: 2.05,
-    currency: 'QAR',
-    lastUpdated: '2026-10-01',
-    sourceId: 'qa-energy-fuel',
-    sourceLabel: 'قطر للطاقة (التسعيرة الشهرية المعتمدة)',
-    isGovernmentCapped: false,
-  },
-  BH: {
-    octane91: 0.140,
-    octane95: 0.200,
-    diesel: 0.160,
-    currency: 'BHD',
-    lastUpdated: '2026-10-01',
-    sourceId: 'bh-noga-fuel',
-    sourceLabel: 'الهيئة الوطنية للنفط والغاز بمملكة البحرين',
-    isGovernmentCapped: true,
-  },
-  OM: {
-    octane91: 0.229,
-    octane95: 0.239,
-    diesel: 0.258,
-    currency: 'OMR',
-    lastUpdated: '2026-10-01',
-    sourceId: 'om-energy-fuel',
-    sourceLabel: 'وزارة الطاقة والمعادن بسلطنة عُمان',
-    isGovernmentCapped: true,
-  },
-  EG: {
-    octane91: 12.25,
-    octane95: 15.00,
-    diesel: 11.50,
-    currency: 'EGP',
-    lastUpdated: '2026-10-01',
-    sourceId: 'eg-petroleum-fuel-pricing',
-    sourceLabel: 'لجنة التسعير التلقائي للمنتجات البترولية بمصر',
-    isGovernmentCapped: false,
-  },
-};
+export const VERIFIED_COUNTRY_FUEL_PRICES: Record<string, VerifiedFuelPrice> = Object.fromEntries(
+  Object.entries(ALL_COUNTRY_LEGAL_RULES)
+    .filter(([, rule]) => rule.fuelPrices !== undefined)
+    .map(([code, rule]) => [
+      code,
+      {
+        octane91: rule.fuelPrices!.value.octane91,
+        octane95: rule.fuelPrices!.value.octane95,
+        diesel: rule.fuelPrices!.value.diesel,
+        currency: rule.currency,
+        lastUpdated: rule.fuelPrices!.checkedAt,
+        sourceId: `${code.toLowerCase()}-fuel-pricing`,
+        sourceLabel: `${rule.fuelPrices!.authority} (${rule.fuelPrices!.value.pricingModel})`,
+        isGovernmentCapped:
+          rule.fuelPrices!.value.pricingModel.includes('سقف') ||
+          rule.fuelPrices!.value.pricingModel.includes('مدعوم'),
+      },
+    ])
+);
 
 /**
  * Calculates vehicle trip fuel cost, consumption in liters, cost per km,
