@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { CalculatorDefinition } from '@/types/calculator';
+import { isCountryCalculatorValid } from '@/lib/seo/metadata';
 import { Calculator, ArrowLeft } from 'lucide-react';
 
 interface Props {
@@ -23,7 +24,7 @@ export default function RelatedCalculators({ calculators, currentCountryCode, cl
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {calculators.map((calc) => {
-          const href = currentCountryCode
+          const href = currentCountryCode && isCountryCalculatorValid(calc, currentCountryCode)
             ? `/${currentCountryCode.toLowerCase()}/${calc.slug}`
             : `/calculators/${calc.slug}`;
 

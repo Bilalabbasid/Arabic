@@ -11,6 +11,7 @@ import {
   SITE_URL,
   DEFAULT_META_DESCRIPTION,
   constructCanonicalUrl,
+  isCountryHubIndexable,
 } from '@/lib/seo/metadata';
 import {
   Calculator,
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   const popularCalculators = ALL_CALCULATORS.slice(0, 6);
   const featuredCategories = CATEGORIES.slice(0, 8);
-  const topCountries = COUNTRIES.slice(0, 10);
+  const indexableCountries = COUNTRIES.filter((c) => isCountryHubIndexable(c.countryCode));
 
   return (
     <div className="space-y-16 pb-16">
@@ -96,7 +97,7 @@ export default function HomePage() {
                 <span>اختر دولتك لاستعراض الحاسبات والعملات المخصصة</span>
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                نغطي جميع الدول العربية الـ 22 مع دعم القوانين والضرائب الرسمية المحلية.
+                بوابات مخصصة للدول المدعومة بأنظمة عمل وضرائب وتعرفة كهرباء موثقة.
               </p>
             </div>
             <Link
@@ -107,12 +108,12 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-6">
-            {topCountries.map((c) => (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
+            {indexableCountries.map((c) => (
               <Link
                 key={c.countryCode}
                 href={`/${c.countryCode.toLowerCase()}`}
-                className="flex items-center gap-2.5 p-3 rounded-xl border border-slate-100 hover:border-emerald-300 hover:bg-emerald-50/50 transition-all text-xs font-semibold text-slate-700 group"
+                className="flex items-center gap-3 p-4 rounded-2xl border border-slate-100 hover:border-emerald-300 hover:bg-emerald-50/50 transition-all text-sm font-semibold text-slate-700 group shadow-xs"
               >
                 <CountryFlag
                   countryCode={c.countryCode}
@@ -121,8 +122,8 @@ export default function HomePage() {
                   fallbackEmoji={c.flagEmoji}
                 />
                 <div className="overflow-hidden">
-                  <div className="group-hover:text-emerald-700 truncate">{c.nameAr}</div>
-                  <div className="text-[10px] text-slate-400 font-mono">({c.currencySymbolAr})</div>
+                  <div className="group-hover:text-emerald-700 font-bold truncate">{c.nameAr}</div>
+                  <div className="text-xs text-slate-400 font-mono">({c.currencySymbolAr} - {c.currencyCode})</div>
                 </div>
               </Link>
             ))}

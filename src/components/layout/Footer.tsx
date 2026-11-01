@@ -2,12 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES } from '@/data/countries';
+import { isCountryHubIndexable } from '@/lib/seo/metadata';
 import CountryFlag from '../common/CountryFlag';
 import { Calculator, ShieldCheck, Heart, ExternalLink, Globe } from 'lucide-react';
 
 export default function Footer() {
-  const popularCategories = CATEGORIES.slice(0, 6);
-  const keyCountries = COUNTRIES.slice(0, 8);
+  const indexableCategories = CATEGORIES.filter((c) => (c.calculatorCount ?? 0) >= 3 || ['mathematics-percentages', 'taxation', 'unit-conversion', 'loans-installments'].includes(c.id)).slice(0, 6);
+  const indexableCountries = COUNTRIES.filter((c) => isCountryHubIndexable(c.countryCode));
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
@@ -56,7 +57,7 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider">الدول المغطاة</h4>
             <ul className="space-y-2 text-sm text-slate-400">
-              {keyCountries.map((c) => (
+              {indexableCountries.map((c) => (
                 <li key={c.countryCode}>
                   <Link href={`/${c.countryCode.toLowerCase()}`} className="hover:text-emerald-400 transition-colors flex items-center gap-2">
                     <CountryFlag

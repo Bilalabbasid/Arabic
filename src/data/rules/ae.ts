@@ -1,0 +1,71 @@
+import { CountryLegalRules } from './types';
+
+export const AE_RULES: CountryLegalRules = {
+  countryCode: 'AE',
+  countryNameAr: 'الإمارات العربية المتحدة',
+  currency: 'AED',
+  currencySymbolAr: 'د.إ',
+  hasVat: true,
+  vatStandardRate: {
+    value: 5,
+    unit: '%',
+    law: 'المرسوم بقانون اتحادي رقم (8) لسنة 2017 في شأن ضريبة القيمة المضافة وتعديلاته بالمرسوم بقانون رقم (18) لسنة 2022',
+    authority: 'الهيئة الاتحادية للضرائب (FTA)',
+    sourceUrl: 'https://tax.gov.ae/ar/legislation.aspx',
+    validFrom: '2018-01-01',
+    verified: true,
+    checkedAt: '2026-11-01',
+    notes: 'النسبة القياسية 5% في دولة الإمارات على كافة التوريدات غير المعفاة وغير الخاضعة لنسبة الصفر.',
+  },
+  vatExemptions: [
+    'الخدمات المالية غير المحملة برسوم صريحة والفوائد المصرفية',
+    'توريد العقارات السكنية بعد التوريد الأول',
+    'الأراضي الفضاء',
+    'النقل المحلي للركاب',
+  ],
+  endOfService: {
+    value: {
+      articles: 'المادة (51) من المرسوم بقانون اتحادي رقم (33) لسنة 2021 بشأن تنظيم علاقات العمل',
+      summary: 'أجر 21 يوماً عن كل سنة من السنوات الخمس الأولى، وأجر 30 يوماً عن كل سنة تالية، بسقف إجمالي لا يتجاوز أجر سنتين.',
+    },
+    law: 'قانون تنظيم علاقات العمل ولائحته التنفيذية (المرسوم بقانون رقم 33 لسنة 2021)',
+    authority: 'وزارة الموارد البشرية والتوطين (MOHRE)',
+    sourceUrl: 'https://www.mohre.gov.ae/ar/laws-and-regulations/labour-law.aspx',
+    validFrom: '2022-02-02',
+    verified: true,
+    checkedAt: '2026-11-01',
+  },
+  electricityTariff: {
+    value: {
+      residentialTiers: [
+        { limitKwh: 2000, rate: 0.23 },
+        { limitKwh: 4000, rate: 0.28 },
+        { limitKwh: 6000, rate: 0.32 },
+        { limitKwh: Infinity, rate: 0.38 },
+      ],
+      meterFeeText: 'يضاف رسم الوقود الإضافي المتغير شهرياً (Fuel Surcharge) حسب استهلاك الكيلوواط ساعي.',
+    },
+    unit: 'درهم/ك.و.س',
+    law: 'نظام التعرفة السكنية المعتمد لهيئة كهرباء ومياه دبي (ديوا)',
+    authority: 'هيئة كهرباء ومياه دبي (DEWA) / دائرة الطاقة بأبوظبي',
+    sourceUrl: 'https://www.dewa.gov.ae/ar/consumer/billing/slab-tariff',
+    validFrom: '2023-01-01',
+    verified: true,
+    checkedAt: '2026-11-01',
+  },
+  fuelPrices: {
+    value: {
+      octane91: 2.75,
+      octane95: 2.87,
+      diesel: 2.95,
+      pricingModel: 'تسعيرة معلنة شهرياً ترتبط بالأسعار العالمية للنفط',
+    },
+    unit: 'درهم/لتر',
+    law: 'التسعيرة الشهرية الصادرة عن لجنة متابعة أسعار الوقود برئاسة وزارة الطاقة والبنية التحتية',
+    authority: 'وزارة الطاقة والبنية التحتية الإماراتية',
+    sourceUrl: 'https://www.moei.gov.ae/ar/services/fuel-prices.aspx',
+    validFrom: '2026-10-01',
+    verified: true,
+    checkedAt: '2026-10-01',
+  },
+};

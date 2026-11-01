@@ -1,0 +1,73 @@
+import { CountryLegalRules } from './types';
+
+export const EG_RULES: CountryLegalRules = {
+  countryCode: 'EG',
+  countryNameAr: 'جمهورية مصر العربية',
+  currency: 'EGP',
+  currencySymbolAr: 'ج.م',
+  hasVat: true,
+  vatStandardRate: {
+    value: 14,
+    unit: '%',
+    law: 'قانون الضريبة على القيمة المضافة رقم 67 لسنة 2016 وتعديلاته بالقانون رقم 3 لسنة 2022',
+    authority: 'مصلحة الضرائب المصرية - وزارة المالية',
+    sourceUrl: 'https://www.eta.gov.eg/ar/legislation',
+    validFrom: '2017-07-01',
+    verified: true,
+    checkedAt: '2026-11-01',
+    notes: 'النسبة العامة للضريبة في مصر 14% وتطبق على معظم السلع والخدمات وتخضع بعض السلع لضريبة الجدول المحددة.',
+  },
+  vatExemptions: [
+    '57 مجموعة سلعية وخدمية معفاة بموجب المادة 3 قائمة الإعفاءات المرفقة بالقانون (ألبان، أدوية، خبز، خضروات)',
+    'الخدمات التعليمية والصحية والمصرفية المعتمدة',
+    'النقل المائي والجوي المجاني أو الخارجي',
+  ],
+  endOfService: {
+    value: {
+      articles: 'المادة (126) من قانون العمل الموحد رقم 12 لسنة 2003',
+      summary: 'أجر نصف شهر عن كل سنة من السنوات الخمس الأولى، وأجر شهر عن كل سنة تالية لمن يبلغ سن التقاعد (60 سنة) دون استحقاق معاش تأميني كامل.',
+    },
+    law: 'قانون العمل رقم 12 لسنة 2003 وتعديلاته',
+    authority: 'وزارة العمل المصرية',
+    sourceUrl: 'https://www.manpower.gov.eg',
+    validFrom: '2003-07-01',
+    verified: true,
+    checkedAt: '2026-11-01',
+  },
+  electricityTariff: {
+    value: {
+      residentialTiers: [
+        { limitKwh: 50, rate: 0.68 },
+        { limitKwh: 100, rate: 0.78 },
+        { limitKwh: 200, rate: 0.95 },
+        { limitKwh: 350, rate: 1.55 },
+        { limitKwh: 650, rate: 1.95 },
+        { limitKwh: 1000, rate: 2.10 },
+        { limitKwh: Infinity, rate: 2.23 },
+      ],
+      meterFeeText: 'يضاف مقابل خدمة العملاء الشهري لكل شريحة يبدأ من 1 جنيه للشريحة الأولى حتى 40 جنيهاً للشرائح العليا.',
+    },
+    unit: 'جنيه/ك.و.س',
+    law: 'تعرفة بيع الطاقة الكهربائية المنزلية الصادرة عن جهاز تنظيم مرفق الكهرباء وحماية المستهلك',
+    authority: 'جهاز تنظيم مرفق الكهرباء وحماية المستهلك (EgyptERA)',
+    sourceUrl: 'http://egyptera.org/ar/Tarrif2024.aspx',
+    validFrom: '2024-08-01',
+    verified: true,
+    checkedAt: '2026-11-01',
+  },
+  fuelPrices: {
+    value: {
+      octane91: 12.25,
+      octane95: 15.00,
+      diesel: 11.50,
+      pricingModel: 'تسعير ربع سنوي تقرره لجنة التسعير التلقائي للمنتجات البترولية',
+    },
+    unit: 'جنيه/لتر',
+    law: 'قرارات لجنة التسعير التلقائي للمنتجات البترولية الصادرة عن وزارة البترول والثروة المعدنية',
+    authority: 'وزارة البترول والثروة المعدنية المصرية',
+    sourceUrl: 'https://www.petroleum.gov.eg',
+    validFrom: '2024-10-18',
+    verified: true,
+    checkedAt: '2026-10-01',
+  },
+};

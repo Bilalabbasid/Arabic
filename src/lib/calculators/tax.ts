@@ -28,9 +28,12 @@ export function calculateVat(
   const country = (context?.countryCode || String(inputs.country || 'SA')).toUpperCase();
   const currency = context?.currencyCode || inputs.currency || COUNTRY_VAT_RATES[country]?.currency || 'SAR';
 
-  // Resolve rate
-  let vatRate = Number(inputs.customRate);
-  if (isNaN(vatRate) || vatRate < 0 || vatRate > 100) {
+  // Resolve rate: prefer explicit customRate only if positive; otherwise preselect official country rate
+  let vatRate: number;
+  const customRateNum = Number(inputs.customRate);
+  if (!isNaN(customRateNum) && customRateNum > 0 && customRateNum <= 100) {
+    vatRate = customRateNum;
+  } else {
     vatRate = COUNTRY_VAT_RATES[country]?.rate ?? 15;
   }
 

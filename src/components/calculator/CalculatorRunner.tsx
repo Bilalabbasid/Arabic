@@ -91,7 +91,11 @@ export default function CalculatorRunner({
   const [inputs, setInputs] = useState<Record<string, any>>(() => {
     const init: Record<string, any> = {};
     for (const inp of inputDefs) {
-      init[inp.id] = inp.defaultValue;
+      if (countryCode && (inp.id === 'country' || inp.type === 'country')) {
+        init[inp.id] = countryCode.toUpperCase();
+      } else {
+        init[inp.id] = inp.defaultValue;
+      }
     }
     return init;
   });
