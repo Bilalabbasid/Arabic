@@ -1,15 +1,15 @@
-import { isIndexable } from '@/lib/seo/gating';
 import React from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
+import Link from 'next/link';
 import { Metadata } from 'next';
 import {
   COUNTRIES,
   getCountryByCode,
+  getCountryData,
 } from '@/data/countries';
 import {
   ALL_CALCULATORS,
   getCalculatorBySlug,
-  getRelatedCalculators,
 } from '@/data/calculators';
 import {
   generateCalculatorSchema,
@@ -30,12 +30,13 @@ import FormulaBox from '@/components/calculator/FormulaBox';
 import MethodologyBox from '@/components/calculator/MethodologyBox';
 import WorkedExampleBox from '@/components/calculator/WorkedExampleBox';
 import FaqAccordion from '@/components/calculator/FaqAccordion';
-import RelatedCalculators from '@/components/calculator/RelatedCalculators';
+import RelatedCalculatorsBlock from '@/components/calculator/RelatedCalculatorsBlock';
+import CountryVariantsBlock from '@/components/calculator/CountryVariantsBlock';
 import RelatedGuides from '@/components/calculator/RelatedGuides';
 import { getGuidesByCalculatorSlug } from '@/data/guides';
 import AdSlot from '@/components/layout/AdSlot';
 import { CalculationResult } from '@/types/calculator';
-import { ExternalLink, ShieldCheck, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, ShieldCheck, AlertCircle, FileText, CheckCircle2, Fuel } from 'lucide-react';
 
 interface PageProps {
   params: Promise<{ country: string; calculator: string }>;
@@ -75,15 +76,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/${calc.slug}`);
   const alternatesLanguages = generateHreflangAlternates(calc);
 
-  const indexable = isIndexable({ countryCode: country.countryCode, calculatorSlug: calc.slug });
-
   return {
     title,
     description,
-    robots: {
-      index: indexable,
-      follow: true,
-    },
     alternates: {
       canonical,
       languages: alternatesLanguages,
@@ -113,30 +108,20 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
     notFound();
   }
 
-  // If this country/calculator pairing has no genuine localized rules, 301 redirect to universal calculator
+  // Soft-404 / Hard Gating: If not valid for this country, permanent redirect to universal calculator
   if (!isCountryCalculatorValid(calc, country.countryCode)) {
     permanentRedirect(`/calculators/${calc.slug}`);
   }
 
   const countryContent = getCountryCalculatorContent(calc.slug, country.countryCode);
-  const isNoVatCountry = calc.slug === 'vat-calculator' && (country.countryCode === 'KW' || country.countryCode === 'QA');
-
-  const relatedCalculators = getRelatedCalculators(calc, 6, country.countryCode);
+  const countryData = getCountryData(country.countryCode);
   const relatedGuides = getGuidesByCalculatorSlug(calc.slug);
 
-  const breadcrumbs = [
-    { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}` },
-    { label: calc.shortNameAr || calc.nameAr, href: `/${country.countryCode.toLowerCase()}/${calc.slug}` },
-  ];
+  const isNoVatCountry = calc.slug === 'vat-calculator' && (country.countryCode === 'KW' || country.countryCode === 'QA');
 
-  // Default inputs preset to country and currency
   const defaultInputs: Record<string, any> = {};
   for (const inp of calc.inputs) {
-    if (inp.id === 'country') {
-      defaultInputs[inp.id] = country.countryCode;
-    } else {
-      defaultInputs[inp.id] = inp.defaultValue;
-    }
+    defaultInputs[inp.id] = inp.defaultValue;
   }
 
   let initialResult: CalculationResult;
@@ -147,56 +132,62 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
     });
   } catch (err) {
     initialResult = {
-      primary: { label: 'النتيجة', value: 0, formattedValue: '-' },
-      error: 'تعذر الحساب التلقائي الأولي.',
+      primary: {
+        label: 'النتيجة',
+        value: 0,
+        formattedValue: '0',
+      },
+      details: [],
     };
   }
 
-  // Schemas
-  const effectiveFaqs = countryContent?.faqs || calc.faqs;
+  const breadcrumbs = [
+    { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}` },
+    { label: calc.shortNameAr || calc.nameAr, href: `/${country.countryCode.toLowerCase()}/${calc.slug}` },
+  ];
+
+  const effectiveFaqs = countryContent?.faqs?.length
+    ? countryContent.faqs
+    : calc.faqs;
+
   const calculatorSchema = generateCalculatorSchema({
-    nameAr: countryContent?.h1 || `${calc.nameAr} - ${country.nameAr}`,
-    descriptionAr: countryContent?.metaDescription || calc.metaDescription,
+    nameAr: countryContent?.h1 || calc.nameAr,
+    descriptionAr: countryContent?.intro || calc.descriptionAr,
     slug: calc.slug,
     countryCode: country.countryCode,
   });
-
   const faqSchema = generateFaqSchema(effectiveFaqs);
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'الرئيسية', url: '/' },
-    { name: country.nameAr, url: `/${country.countryCode.toLowerCase()}` },
-    { name: countryContent?.h1 || calc.nameAr, url: `/${country.countryCode.toLowerCase()}/${calc.slug}` },
+    ...breadcrumbs.map((b) => ({ name: b.label, url: b.href })),
   ]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
-      {/* Schemas */}
+    <div className="max-w-4xl mx-auto px-4 py-8 space-y-8" dir="rtl">
+      {/* Structured Data (Schema.org) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(calculatorSchema) }}
       />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
+      {/* Breadcrumb Navigation */}
       <Breadcrumbs items={breadcrumbs} />
 
-      {/* Header with Country Badge */}
-      <div className="space-y-4 max-w-4xl">
-        <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
+      {/* Header Banner */}
+      <div className="space-y-4">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/60">
             <CountryFlag
               countryCode={country.countryCode}
-              nameAr={country.nameAr}
-              size="xs"
-              fallbackEmoji={country.flagEmoji}
+              className="w-4 h-3 rounded-xs"
             />
             <span>{country.nameAr}</span>
           </span>
@@ -217,6 +208,22 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
           {countryContent?.intro || calc.descriptionAr}
         </p>
+
+        {/* Link to Country Fuel Prices Hub for car calculators */}
+        {calc.category === 'cars-transportation' && countryData?.fuel?.status === 'verified' && (
+          <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-3.5 flex items-center justify-between gap-2 shadow-xs">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-emerald-950 font-semibold">
+              <Fuel className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>هل تبحث عن أسعار الوقود الرسمية المحدثة لهذا الشهر في {country.nameAr}؟</span>
+            </div>
+            <Link
+              href={`/${country.countryCode.toLowerCase()}/fuel-prices`}
+              className="text-xs font-bold text-emerald-700 hover:text-emerald-800 hover:underline shrink-0"
+            >
+              عرض تسعيرة البنزين &larr;
+            </Link>
+          </div>
+        )}
 
         {/* Honest Notice for Countries with No VAT (Kuwait & Qatar) */}
         {isNoVatCountry && (
@@ -261,6 +268,13 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
           </div>
         )}
       </div>
+
+      {/* Available in other Countries Block */}
+      <CountryVariantsBlock
+        calculatorSlug={calc.slug}
+        currentCountryCode={country.countryCode}
+        calculatorNameAr={calc.nameAr}
+      />
 
       {/* Interactive Calculator Runner */}
       <CalculatorRunner
@@ -342,6 +356,9 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         ruleVersion={calc.ruleVersion}
         lastReviewedAt={calc.lastReviewedAt}
         verificationStatus={calc.verificationStatus}
+        officialSourceName={countryContent?.authorityName}
+        calculatorSlug={calc.slug}
+        countryCode={country.countryCode}
         assumptions={initialResult.assumptions}
         qualifications={initialResult.qualifications}
       />
@@ -354,9 +371,9 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         <RelatedGuides guides={relatedGuides} />
       )}
 
-      {/* Related Calculators */}
-      <RelatedCalculators
-        calculators={relatedCalculators}
+      {/* Recommended & Related Calculators */}
+      <RelatedCalculatorsBlock
+        calculatorSlug={calc.slug}
         currentCountryCode={country.countryCode}
       />
     </div>

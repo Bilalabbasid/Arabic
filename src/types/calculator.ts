@@ -153,6 +153,10 @@ export interface CalculatorDefinition {
   workedExamples: WorkedExample[];
   faqs: FAQItem[];
   relatedCalculatorIds: string[];
+  relatedCalculators?: Array<{ slug: string; reason: string }>;
+  guides?: string[];
+  intentTags?: string[];
+  publishAt?: string;
   countryMode: CountryMode;
   supportedCountries: string[]; // ISO codes or ['*'] for all 22
   supportedJurisdictions: string[];

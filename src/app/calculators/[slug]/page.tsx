@@ -4,7 +4,6 @@ import { Metadata } from 'next';
 import {
   ALL_CALCULATORS,
   getCalculatorBySlug,
-  getRelatedCalculators,
 } from '@/data/calculators';
 import { getCategoryBySlug } from '@/data/categories';
 import {
@@ -23,7 +22,8 @@ import WorkedExampleBox from '@/components/calculator/WorkedExampleBox';
 import CommonMistakesBox from '@/components/calculator/CommonMistakesBox';
 import RelatedGuides from '@/components/calculator/RelatedGuides';
 import FaqAccordion from '@/components/calculator/FaqAccordion';
-import RelatedCalculators from '@/components/calculator/RelatedCalculators';
+import RelatedCalculatorsBlock from '@/components/calculator/RelatedCalculatorsBlock';
+import CountryVariantsBlock from '@/components/calculator/CountryVariantsBlock';
 import AdSlot from '@/components/layout/AdSlot';
 import { getGuidesByCalculatorSlug } from '@/data/guides';
 import { CalculationResult } from '@/types/calculator';
@@ -86,7 +86,6 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
   }
 
   const category = getCategoryBySlug(calc.category);
-  const relatedCalculators = getRelatedCalculators(calc, 6);
   const relatedGuides = getGuidesByCalculatorSlug(calc.slug);
 
   const breadcrumbs = [
@@ -105,48 +104,46 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
     initialResult = calc.calculate(defaultInputs);
   } catch (err) {
     initialResult = {
-      primary: { label: 'النتيجة', value: 0, formattedValue: '-' },
-      error: 'تعذر الحساب التلقائي الأولي.',
+      primary: {
+        label: 'النتيجة',
+        value: 0,
+        formattedValue: '0',
+      },
+      details: [],
     };
   }
 
-  // Schemas
   const calculatorSchema = generateCalculatorSchema({
     nameAr: calc.nameAr,
-    descriptionAr: calc.metaDescription,
+    descriptionAr: calc.descriptionAr,
     slug: calc.slug,
   });
-
   const faqSchema = generateFaqSchema(calc.faqs);
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'الرئيسية', url: '/' },
-    ...(category ? [{ name: category.nameAr, url: `/categories/${category.slug}` }] : []),
-    { name: calc.nameAr, url: `/calculators/${calc.slug}` },
-  ]);
+  const breadcrumbSchema = generateBreadcrumbSchema(
+    breadcrumbs.map((b) => ({ name: b.label, url: b.href }))
+  );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
-      {/* JSON-LD Schemas */}
+    <div className="max-w-4xl mx-auto px-4 py-8 space-y-8" dir="rtl">
+      {/* Structured Data (Schema.org) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(calculatorSchema) }}
       />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* Breadcrumbs */}
+      {/* Breadcrumb Navigation */}
       <Breadcrumbs items={breadcrumbs} />
 
-      {/* Page Header */}
-      <div className="space-y-3 max-w-4xl">
+      {/* Header with Title & Direct Answer */}
+      <div className="space-y-4">
         <div className="inline-block text-xs font-bold text-emerald-700 bg-emerald-100/70 px-3 py-1 rounded-full">
           {calc.subcategory}
         </div>
@@ -163,6 +160,9 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
           {calc.descriptionAr}
         </p>
       </div>
+
+      {/* Available in Specific Countries Block */}
+      <CountryVariantsBlock calculatorSlug={calc.slug} />
 
       {/* Interactive Calculator Runner */}
       <CalculatorRunner
@@ -197,6 +197,7 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
         ruleVersion={calc.ruleVersion}
         lastReviewedAt={calc.lastReviewedAt}
         verificationStatus={calc.verificationStatus}
+        calculatorSlug={calc.slug}
         assumptions={initialResult.assumptions}
         qualifications={initialResult.qualifications}
       />
@@ -209,8 +210,8 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
         <RelatedGuides guides={relatedGuides} />
       )}
 
-      {/* Related Calculators */}
-      <RelatedCalculators calculators={relatedCalculators} />
+      {/* Recommended & Related Calculators */}
+      <RelatedCalculatorsBlock calculatorSlug={calc.slug} />
     </div>
   );
 }

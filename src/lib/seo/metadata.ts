@@ -87,15 +87,7 @@ export function isCountryHubIndexable(countryCode: string): boolean {
   return count >= 3;
 }
 
-export const INDEXABLE_CATEGORIES = [
-  'cars-transportation',
-  'dates-time',
-  'finance-savings',
-  'loans-installments',
-  'mathematics-percentages',
-  'taxation',
-  'unit-conversion',
-];
+export const INDEXABLE_CATEGORIES = ['finance-savings', 'mathematics-percentages', 'unit-conversion'];
 
 /**
  * A category is indexable ONLY if it lists >= 3 live calculators.
@@ -104,36 +96,39 @@ export function isCategoryIndexable(categorySlug: string): boolean {
   return INDEXABLE_CATEGORIES.includes(categorySlug);
 }
 
+import { isIndexable } from './gating';
+
 /**
  * Generates reciprocal hreflang links conforming strictly to Google Search Central guidelines:
- * - Generates hreflang ONLY for actually published, verified equivalent pages.
+ * - Generates hreflang ONLY for actually published, indexable equivalent pages.
  * - Adds x-default pointing to the global universal calculator route.
- * - Prevents duplicate regional links for universal calculators.
+ * - Excludes any unverified or noindex country pages.
  */
 export function generateHreflangAlternates(calc: CalculatorDefinition): Record<string, string> {
   const languages: Record<string, string> = {};
+  const universalUrl = constructCanonicalUrl(`/calculators/${calc.slug}`);
 
-  // For universal calculators or calculators with no country pages, there is one authoritative canonical global Arabic URL
-  const validForAnyCountry = Object.keys(VALID_COUNTRY_CALCULATORS).includes(calc.slug);
-  if (!validForAnyCountry || calc.countryMode === 'UNIVERSAL') {
-    const universalUrl = constructCanonicalUrl(`/calculators/${calc.slug}`);
+  // Populate hreflang ONLY for indexable countries that pass all gating checks
+  let indexableCount = 0;
+  for (const country of COUNTRIES) {
+    const cCode = country.countryCode.toLowerCase();
+    if (isCountryCalculatorValid(calc, country.countryCode) && isIndexable({ countryCode: cCode, calculatorSlug: calc.slug })) {
+      const localeTag = ARABIC_LOCALE_CODES[country.countryCode];
+      if (localeTag) {
+        languages[localeTag] = constructCanonicalUrl(`/${cCode}/${calc.slug}`);
+        indexableCount++;
+      }
+    }
+  }
+
+  if (indexableCount === 0 || calc.countryMode === 'UNIVERSAL') {
     languages['ar'] = universalUrl;
     languages['x-default'] = universalUrl;
     return languages;
   }
 
-  // Populate hreflang for verified published countries
-  for (const country of COUNTRIES) {
-    if (isCountryCalculatorValid(calc, country.countryCode)) {
-      const localeTag = ARABIC_LOCALE_CODES[country.countryCode];
-      if (localeTag) {
-        languages[localeTag] = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/${calc.slug}`);
-      }
-    }
-  }
-
   // x-default points to the universal fallback calculator
-  languages['x-default'] = constructCanonicalUrl(`/calculators/${calc.slug}`);
+  languages['x-default'] = universalUrl;
 
   return languages;
 }

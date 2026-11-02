@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, ExternalLink, Calendar, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ShieldCheck, ExternalLink, Calendar, CheckCircle2, AlertCircle, Flag } from 'lucide-react';
 import { getSourcesByIds } from '@/data/sources';
 import { formatDateAr } from '@/lib/formatters';
 import { VerificationStatus } from '@/types/rule';
@@ -9,6 +9,10 @@ interface Props {
   ruleVersion: string;
   lastReviewedAt: string;
   verificationStatus: VerificationStatus;
+  officialSourceName?: string;
+  checkedAt?: string;
+  calculatorSlug?: string;
+  countryCode?: string;
   assumptions?: string[];
   qualifications?: string[];
   className?: string;
@@ -19,11 +23,21 @@ export default function MethodologyBox({
   ruleVersion,
   lastReviewedAt,
   verificationStatus,
+  officialSourceName,
+  checkedAt,
+  calculatorSlug,
+  countryCode,
   assumptions,
   qualifications,
   className = '',
 }: Props) {
   const sources = getSourcesByIds(sourceIds);
+  const effectiveDate = checkedAt || lastReviewedAt;
+  const sourceName = officialSourceName || (sources.length > 0 ? sources[0].nameAr : 'الجهات الرسمية المعتمدة');
+
+  const reportSubject = encodeURIComponent(`إبلاغ عن خطأ حسابي: ${calculatorSlug || ''} (${countryCode || 'عام'}) v${ruleVersion}`);
+  const reportBody = encodeURIComponent(`السلام عليكم فريق منصة لِسيارتك،\n\nأود الإبلاغ عن ملاحظة أو خطأ في صفحة:\nالحاسبة: ${calculatorSlug || ''}\nالدولة: ${countryCode || 'عام'}\nإصدار اللائحة: v${ruleVersion}\n\nتفاصيل الملاحظة أو النتيجة المتوقعة:\n\n`);
+  const reportMailto = `mailto:support@lsayartk.com?subject=${reportSubject}&body=${reportBody}`;
 
   return (
     <div className={`bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-5 ${className}`}>
@@ -35,9 +49,9 @@ export default function MethodologyBox({
         </div>
 
         <div className="flex items-center gap-2">
-          {lastReviewedAt && (
+          {effectiveDate && (
             <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-full">
-              <CheckCircle2 className="w-3.5 h-3.5" /> آخر تحديث للبيانات: {formatDateAr(lastReviewedAt)}
+              <CheckCircle2 className="w-3.5 h-3.5" /> آخر تحديث: {formatDateAr(effectiveDate)}
             </span>
           )}
           <span className="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-1 rounded-md">
@@ -46,10 +60,15 @@ export default function MethodologyBox({
         </div>
       </div>
 
-      {/* Verification status and source note */}
-      <div className="flex items-center gap-2 text-xs text-slate-500">
-        <Calendar className="w-3.5 h-3.5 text-slate-400" />
-        <span>تعتمد الحسابات على النصوص النظامية والمعادلات الرياضية المعلنة، وهي نتائج استرشادية غير ملزمة.</span>
+      {/* Freshness & Source Statement */}
+      <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/60 text-xs sm:text-sm text-slate-700 space-y-1.5">
+        <div className="font-semibold text-slate-800 flex items-center gap-2">
+          <Calendar className="w-4 h-4 text-emerald-600" />
+          <span>آخر مراجعة وتحديث للقيم: {formatDateAr(effectiveDate)} استناداً إلى {sourceName}</span>
+        </div>
+        <p className="text-xs text-slate-500 leading-relaxed">
+          تعتمد الحسابات على النصوص النظامية والمعادلات الرياضية المعلنة، وهي نتائج استرشادية غير ملزمة.
+        </p>
       </div>
 
       {/* Official Sources */}
@@ -104,6 +123,18 @@ export default function MethodologyBox({
           )}
         </div>
       )}
+
+      {/* Report an Error Link */}
+      <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+        <span>هل لاحظت اختلافاً في الأرقام أو اللوائح؟</span>
+        <a
+          href={reportMailto}
+          className="inline-flex items-center gap-1.5 font-bold text-amber-700 hover:text-amber-800 hover:underline bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200/60 transition-colors"
+        >
+          <Flag className="w-3.5 h-3.5" />
+          <span>أبلغ عن خطأ في الحساب</span>
+        </a>
+      </div>
     </div>
   );
 }
