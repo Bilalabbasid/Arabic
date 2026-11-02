@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: constructCanonicalUrl('/contact'), lastModified: now },
     { url: constructCanonicalUrl('/privacy'), lastModified: now },
     { url: constructCanonicalUrl('/terms'), lastModified: now },
+    { url: constructCanonicalUrl('/changelog'), lastModified: now },
   ];
 
   // Category pages - only indexable categories with >= 3 live calculators
