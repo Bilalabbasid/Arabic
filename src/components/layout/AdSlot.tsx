@@ -7,15 +7,24 @@ interface Props {
 }
 
 export default function AdSlot({ slotId, format = 'horizontal', className = '' }: Props) {
+  // Hide all ad placeholders until AdSense account is approved and enabled
+  if (process.env.NEXT_PUBLIC_ADS_ENABLED !== 'true') {
+    return null;
+  }
+
   return (
     <div
       className={`my-6 mx-auto w-full max-w-4xl bg-slate-50/80 border border-dashed border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center min-h-[100px] text-center text-xs text-slate-400 ${className}`}
       aria-label="إعلان"
     >
-      <span className="text-[10px] tracking-wider text-slate-400 uppercase mb-1">مساحة إعلانية</span>
-      <div className="w-full flex items-center justify-center text-slate-300">
-        <span>Google AdSense Slot</span>
-      </div>
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client="[FILL: pub-XXXXXXXXXXXXXXXX]"
+        data-ad-slot={slotId}
+        data-ad-format={format}
+        data-full-width-responsive="true"
+      />
     </div>
   );
 }

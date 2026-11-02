@@ -409,7 +409,7 @@ export default function CalculatorRunner({
       </div>
 
       {/* Right Column: Live Results Display */}
-      <div className="lg:col-span-6 space-y-6">
+      <div className="lg:col-span-6 space-y-6" aria-live="polite" aria-atomic="true">
         <ResultDisplay
           result={result}
           currency={currencyCode}

@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { SITE_DOMAIN } from '@/lib/seo/metadata';
+import { SITE_URL } from '@/lib/seo/metadata';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/'],
     },
-    sitemap: `${SITE_DOMAIN}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

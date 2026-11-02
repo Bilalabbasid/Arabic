@@ -169,13 +169,16 @@ export function generateCalculatorSchema(options: {
   countryCode?: string;
 }) {
   const path = options.countryCode ? `/${options.countryCode.toLowerCase()}/${options.slug}` : `/calculators/${options.slug}`;
+  const financeSlugs = ['vat-calculator', 'loan-calculator', 'zakat-wealth', 'end-of-service-reward'];
+  const applicationCategory = financeSlugs.includes(options.slug) ? 'FinanceApplication' : 'UtilitiesApplication';
+
   return {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: options.nameAr,
     description: options.descriptionAr,
     url: constructCanonicalUrl(path),
-    applicationCategory: 'CalculatorApplication',
+    applicationCategory,
     operatingSystem: 'All',
     browserRequirements: 'يتطلب متصفح حديث مع تفعيل جافاسكريبت',
     inLanguage: 'ar',
@@ -184,7 +187,7 @@ export function generateCalculatorSchema(options: {
 }
 
 export function generateFaqSchema(faqs: { question: string; answer: string }[]) {
-  if (!faqs || faqs.length === 0) return null;
+  if (!faqs || faqs.length < 3) return null;
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -246,6 +249,7 @@ export function generateOrganizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/icon.svg`,
     email: '[FILL: contact email]',
+    sameAs: [],
     publishingPrinciples: `${SITE_URL}/methodology`,
   };
 }
@@ -272,15 +276,15 @@ export function generateArticleSchema(guide: {
     author: {
       '@type': 'Organization',
       name: 'لِسيارتك',
-      url: SITE_DOMAIN,
+      url: SITE_URL,
     },
     publisher: {
       '@type': 'Organization',
       name: 'لِسيارتك',
-      url: SITE_DOMAIN,
+      url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_DOMAIN}/icon.svg`,
+        url: `${SITE_URL}/icon.svg`,
       },
     },
     mainEntityOfPage: {
