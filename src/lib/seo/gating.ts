@@ -28,7 +28,7 @@ export interface GatingDetails {
 }
 
 // Map each calculator slug to the country rules it strictly requires
-export function getRequiredRuleKeysForCalculator(calculatorSlug: string): Array<keyof Omit<CountryData, 'basics'>> {
+export function getRequiredRuleKeysForCalculator(calculatorSlug: string): Array<keyof Omit<CountryData, 'basics' | 'routes' | 'countryCode'>> {
   const normSlug = calculatorSlug === 'car-fuel-cost' ? 'fuel-cost' : calculatorSlug;
 
   switch (normSlug) {
@@ -47,13 +47,12 @@ export function getRequiredRuleKeysForCalculator(calculatorSlug: string): Array<
     case 'car-finance':
     case 'car-affordability':
     case 'lease-vs-buy':
-      return ['finance'];
+      return ['consumerFinance'];
     case 'car-import-customs':
-      return ['customs', 'vat'];
+      return ['vehicle', 'vat'];
     case 'traffic-fines':
-      return ['trafficFines'];
     case 'vehicle-fees':
-      return ['vehicleRegistration'];
+      return ['vehicle'];
     default:
       return [];
   }

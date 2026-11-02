@@ -6,7 +6,7 @@ import { metadata } from '@/app/changelog/page';
 describe('Phase 5: Freshness & Legislative Changelog', () => {
   it('runFreshnessCheck verifies all 22 countries with 0 stale rules', () => {
     const result = runFreshnessCheck(new Date('2026-11-02T06:00:00Z'));
-    expect(result.totalRulesChecked).toBe(220); // 22 countries * 10 rule categories
+    expect(result.totalRulesChecked).toBe(198); // 22 countries * 9 rule categories
     expect(result.verifiedCount).toBeGreaterThanOrEqual(115);
     expect(result.staleRules.length).toBe(0);
   });

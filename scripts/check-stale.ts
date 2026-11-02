@@ -18,17 +18,16 @@ export function runFreshnessCheck(referenceDate: Date = new Date()): {
   verifiedCount: number;
   staleRules: StaleRuleReport[];
 } {
-  const ruleKeys: Array<keyof Omit<CountryData, 'basics'>> = [
+  const ruleKeys: Array<keyof Omit<CountryData, 'basics' | 'routes' | 'countryCode'>> = [
     'vat',
     'fuel',
     'electricity',
     'endOfService',
     'socialInsurance',
     'incomeTax',
-    'finance',
-    'customs',
-    'trafficFines',
-    'vehicleRegistration',
+    'consumerFinance',
+    'vehicle',
+    'zakat',
   ];
 
   let totalRulesChecked = 0;
