@@ -1,4 +1,5 @@
 import { CalculationResult, CalculationFunction } from '@/types/calculator';
+import { ALL_CALCULATORS } from '@/data/calculators';
 
 const ENGINE_CACHE = new Map<string, CalculationFunction>();
 
@@ -34,20 +35,26 @@ export async function loadCalculatorEngine(engineId: string): Promise<Calculatio
     return ENGINE_CACHE.get(engineId)!;
   }
 
+  // 1. Check legacy module loaders
   const entry = ENGINE_MAP[engineId];
-  if (!entry || !MODULE_LOADERS[entry.moduleKey]) {
-    return null;
+  if (entry && MODULE_LOADERS[entry.moduleKey]) {
+    try {
+      const mod = await MODULE_LOADERS[entry.moduleKey]();
+      const fn = mod[entry.fnName];
+      if (typeof fn === 'function') {
+        ENGINE_CACHE.set(engineId, fn);
+        return fn;
+      }
+    } catch (err) {
+      console.error(`Failed to dynamically load calculation engine: ${engineId}`, err);
+    }
   }
 
-  try {
-    const mod = await MODULE_LOADERS[entry.moduleKey]();
-    const fn = mod[entry.fnName];
-    if (typeof fn === 'function') {
-      ENGINE_CACHE.set(engineId, fn);
-      return fn;
-    }
-  } catch (err) {
-    console.error(`Failed to dynamically load calculation engine: ${engineId}`, err);
+  // 2. Check ALL_CALCULATORS registry
+  const calc = ALL_CALCULATORS.find((c) => c.calculationEngineId === engineId);
+  if (calc && typeof calc.calculate === 'function') {
+    ENGINE_CACHE.set(engineId, calc.calculate);
+    return calc.calculate;
   }
 
   return null;

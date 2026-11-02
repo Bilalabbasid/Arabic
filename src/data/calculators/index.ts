@@ -8,7 +8,10 @@ import { calculateBmi } from '@/lib/calculators/health';
 import { calculatePercentage } from '@/lib/calculators/math';
 import { calculateLengthConverter, calculateTimeConverter } from '@/lib/calculators/converters';
 
-export const ALL_CALCULATORS: CalculatorDefinition[] = [
+import { NEW_17_CALCULATORS } from './new-calculators';
+export * from './new-calculators';
+
+const LEGACY_CALCULATORS: CalculatorDefinition[] = [
   {
     id: 'car-fuel-cost',
     slug: 'car-fuel-cost',
@@ -1637,6 +1640,11 @@ export const ALL_CALCULATORS: CalculatorDefinition[] = [
 ],
     relatedCalculatorIds: ['length-converter', 'percentage-calculator', 'car-fuel-cost'],
   },
+];
+
+export const ALL_CALCULATORS: CalculatorDefinition[] = [
+  ...LEGACY_CALCULATORS,
+  ...NEW_17_CALCULATORS,
 ];
 
 // O(1) lookup map

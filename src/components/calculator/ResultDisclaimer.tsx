@@ -101,7 +101,11 @@ export function getDisclaimerForCalculator(
         lastChecked: '2026-11-01',
       };
 
-    case 'car-fuel-cost': {
+    case 'car-fuel-cost':
+    case 'fuel-cost':
+    case 'fuel-prices':
+    case 'trip-cost':
+    case 'fuel-consumption-converter': {
       if (rule && rule.fuelPrices) {
         return {
           disclaimerType: 'fuel-electricity',
@@ -119,6 +123,75 @@ export function getDisclaimerForCalculator(
         lastChecked: '2026-11-01',
       };
     }
+
+    case 'traffic-fines':
+      return {
+        disclaimerType: 'fines',
+        disclaimerText: 'قيم المخالفات الواردة استرشادية مبنية على لوائح المرور وجداول الغرامات المقررة نظاماً؛ وقد تختلف الغرامة الفعلية بحسب ظروف الضبط، أو تطبيق التخفيضات الرسمية المعلنة، أو تراكم النقاط المرورية وسجل السائق.',
+        authority: 'الإدارات العامة للمرور ووزارات الداخلية',
+        sourceUrl: 'https://www.moi.gov.sa',
+        lastChecked: '2026-11-01',
+      };
+
+    case 'car-import-customs':
+      return {
+        disclaimerType: 'customs',
+        disclaimerText: 'الرسوم الجمركية وضريبة القيمة المضافة محسوبة وفق جداول التعريفة الجمركية وضوابط سنة الموديل. القيمة الجمركية النهائية تحددها السلطات الجمركية عند المنفذ بناءً على فواتير الشراء والتأمين والشحن (CIF) وحالة المركبة.',
+        authority: 'هيئات ومصالح الجمارك الرسمية',
+        sourceUrl: 'https://zatca.gov.sa',
+        lastChecked: '2026-11-01',
+      };
+
+    case 'lease-vs-buy':
+    case 'car-finance':
+    case 'car-affordability':
+      return {
+        disclaimerType: 'lease',
+        disclaimerText: 'مقارنة استرشادية لخيارات الشراء النقدي والتمويل التأجيري والمرابحة. العروض التمويلية الفعلية ومعدل النسبة السنوي (APR) وقيمة الدفعة الأخيرة وجدول السداد تحددها البنوك وشركات التمويل المرخصة من البنك المركزي.',
+        authority: 'البنوك المركزية وهيئات الرقابة المالية والمصرفية',
+        sourceUrl: 'https://www.sama.gov.sa',
+        lastChecked: '2026-11-01',
+      };
+
+    case 'car-depreciation':
+    case 'tire-size':
+    case 'ev-vs-petrol':
+      return {
+        disclaimerType: 'depreciation',
+        disclaimerText: 'حسابات تقديرية مبنية على معدلات الاستهلاك والمسافات السنوية المتوسطة وتكاليف الصيانة الدورية. القيمة السوقية وتكاليف التشغيل الفعلية تتأثر مباشرة بطريقة الاستخدام وظروف المناخ ونوع المركبة.',
+        authority: 'معايير تقييم المركبات والاستهلاك المعتمدة',
+        sourceUrl: 'https://lsayartk.com/sources',
+        lastChecked: '2026-11-01',
+      };
+
+    case 'vehicle-fees':
+      return {
+        disclaimerType: 'vehicle-fees',
+        disclaimerText: 'رسوم تجديد الاستمارة أو رخصة السير والفحص الدوري والتأمين تستند إلى اللوائح النظامية الرسمية المعتمدة لكل فئة ونوع مركبة.',
+        authority: 'إدارات المرور وهيئات المواصفات والمقاييس',
+        sourceUrl: 'https://www.moi.gov.sa',
+        lastChecked: '2026-11-01',
+      };
+
+    case 'net-salary':
+      return {
+        disclaimerType: 'salary',
+        disclaimerText: 'احتساب صافي الراتب يعتمد على نسب اشتراكات التأمينات الاجتماعية والتقاعد وشرائح ضريبة الدخل الشخصي النظامية المعتمدة لكل دولة للمواطنين والمقيمين.',
+        authority: 'مؤسسات التأمينات الاجتماعية ومصالح الضرائب',
+        sourceUrl: 'https://gosi.gov.sa',
+        lastChecked: '2026-11-01',
+      };
+
+    case 'hijri-converter':
+    case 'hijri-age':
+    case 'ramadan-countdown':
+      return {
+        disclaimerType: 'calendar',
+        disclaimerText: 'الحسابات مبنية على تقويم أم القرى والحسابات الفلكية المعتمدة للاقتران القمري. بداية الأشهر الهجرية الفعلية ومناسبات شهر رمضان ترتبط بالرؤية الشرعية للهلال والمحاكم العليا وهيئات الإفتاء الرسمية.',
+        authority: 'تقويم أم القرى والمحاكم العليا وهيئات الإفتاء الشرعية',
+        sourceUrl: 'https://www.ummulqura.org.sa',
+        lastChecked: '2026-11-01',
+      };
 
     case 'electricity-bill': {
       if (rule && rule.electricityTariff) {

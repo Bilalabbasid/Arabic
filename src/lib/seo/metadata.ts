@@ -87,7 +87,15 @@ export function isCountryHubIndexable(countryCode: string): boolean {
   return count >= 3;
 }
 
-export const INDEXABLE_CATEGORIES = ['finance-savings', 'mathematics-percentages', 'unit-conversion'];
+export const INDEXABLE_CATEGORIES = [
+  'cars-transportation',
+  'dates-time',
+  'finance-savings',
+  'loans-installments',
+  'mathematics-percentages',
+  'taxation',
+  'unit-conversion',
+];
 
 /**
  * A category is indexable ONLY if it lists >= 3 live calculators.

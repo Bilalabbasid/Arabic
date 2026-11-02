@@ -18,10 +18,18 @@ describe('Phase 4: Categories Architecture', () => {
     }
   });
 
-  it('should have exactly 3 indexable categories with current live calculators', () => {
+  it('should have exactly 7 indexable categories with current live calculators', () => {
     const indexableCats = CATEGORIES.filter((c) => isCategoryIndexable(c.id));
     expect(indexableCats.map((c) => c.id).sort()).toEqual(
-      ['finance-savings', 'mathematics-percentages', 'unit-conversion'].sort()
+      [
+        'cars-transportation',
+        'dates-time',
+        'finance-savings',
+        'loans-installments',
+        'mathematics-percentages',
+        'taxation',
+        'unit-conversion',
+      ].sort()
     );
   });
 
@@ -55,11 +63,11 @@ describe('Phase 4: Categories Architecture', () => {
       .map((e) => e.url)
       .filter((u) => u.includes('/categories/'));
 
-    // Should contain exactly the 3 indexable categories
-    expect(categoryLocs).toHaveLength(3);
-    expect(categoryLocs).toContain('https://lsayartk.com/categories/finance-savings');
-    expect(categoryLocs).toContain('https://lsayartk.com/categories/mathematics-percentages');
-    expect(categoryLocs).toContain('https://lsayartk.com/categories/unit-conversion');
+    // Should contain exactly the indexable categories
+    expect(categoryLocs).toHaveLength(INDEXABLE_CATEGORIES.length);
+    for (const slug of INDEXABLE_CATEGORIES) {
+      expect(categoryLocs).toContain(`https://lsayartk.com/categories/${slug}`);
+    }
 
     // Should NOT contain any non-indexable category
     const nonIndexableSlugs = CATEGORIES.filter((c) => !isCategoryIndexable(c.id)).map((c) => c.slug);

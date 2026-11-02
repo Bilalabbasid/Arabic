@@ -5,7 +5,7 @@ import { GUIDES } from '@/data/guides';
 
 describe('Phase 10: Content Quality on Kept Pages', () => {
   it('all 10 calculators have a direct, non-empty answer-first explanation (1-2 sentences)', () => {
-    expect(ALL_CALCULATORS.length).toBe(10);
+    expect(ALL_CALCULATORS.length).toBe(27);
 
     for (const calc of ALL_CALCULATORS) {
       expect(calc.answerFirstAr, `Calculator ${calc.slug} must have answerFirstAr`).toBeDefined();

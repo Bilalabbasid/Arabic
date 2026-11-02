@@ -45,6 +45,16 @@ const nextConfig: NextConfig = {
         destination: '/calculators',
         permanent: true,
       },
+      {
+        source: '/calculators/car-fuel-cost',
+        destination: '/calculators/fuel-cost',
+        permanent: true,
+      },
+      {
+        source: '/:country/car-fuel-cost',
+        destination: '/:country/fuel-cost',
+        permanent: true,
+      },
     ];
   },
 };
