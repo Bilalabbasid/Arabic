@@ -1,3 +1,4 @@
+import { isIndexable } from '@/lib/seo/gating';
 import React from 'react';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { Metadata } from 'next';
@@ -74,9 +75,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/${calc.slug}`);
   const alternatesLanguages = generateHreflangAlternates(calc);
 
+  const indexable = isIndexable({ countryCode: country.countryCode, calculatorSlug: calc.slug });
+
   return {
     title,
     description,
+    robots: {
+      index: indexable,
+      follow: true,
+    },
     alternates: {
       canonical,
       languages: alternatesLanguages,

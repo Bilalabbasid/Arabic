@@ -1,3 +1,4 @@
+import { isIndexable } from '@/lib/seo/gating';
 import { MetadataRoute } from 'next';
 import { ALL_CALCULATORS } from '@/data/calculators';
 import { CATEGORIES } from '@/data/categories';
@@ -54,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const country of COUNTRIES) {
     const cCode = country.countryCode.toLowerCase();
     for (const calc of ALL_CALCULATORS) {
-      if (calc.publicationStatus === 'PUBLISHED' && isCountryCalculatorValid(calc, country.countryCode)) {
+      if (calc.publicationStatus === 'PUBLISHED' && isCountryCalculatorValid(calc, country.countryCode) && isIndexable({ countryCode: country.countryCode, calculatorSlug: calc.slug })) {
         countryCalculatorPages.push({
           url: constructCanonicalUrl(`/${cCode}/${calc.slug}`),
           lastModified: calc.lastReviewedAt ? new Date(calc.lastReviewedAt) : now,

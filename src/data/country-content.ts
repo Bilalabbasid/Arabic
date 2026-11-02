@@ -1387,7 +1387,8 @@ export const COUNTRY_CALCULATOR_CONTENT: Record<string, Record<string, CountryCa
 };
 
 export function getCountryCalculatorContent(calculatorSlug: string, countryCode: string): CountryCalculatorContent | undefined {
-  const calcData = COUNTRY_CALCULATOR_CONTENT[calculatorSlug];
+  const normSlug = calculatorSlug === 'fuel-cost' ? 'car-fuel-cost' : calculatorSlug;
+  const calcData = COUNTRY_CALCULATOR_CONTENT[normSlug] || COUNTRY_CALCULATOR_CONTENT[calculatorSlug];
   if (!calcData) return undefined;
   return calcData[countryCode.toLowerCase()];
 }
