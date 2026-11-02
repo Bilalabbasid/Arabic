@@ -414,7 +414,7 @@ export default function CalculatorRunner({
           result={result}
           currency={currencyCode}
           countryCode={countryCode}
-          calculatorSlug={calculator.slug}
+          calculatorSlug={slug}
         />
       </div>
     </div>

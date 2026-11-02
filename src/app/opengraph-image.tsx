@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'لِسيارتك – منصة الحاسبات العربية';
+export const alt = 'lsayartk.com – Arabic Financial & Utility Calculators';
 export const size = {
   width: 1200,
   height: 630,
@@ -48,13 +48,13 @@ export default async function Image() {
             %
           </div>
           <span style={{ fontSize: '64px', fontWeight: '900', letterSpacing: '-1px' }}>
-            لِسيارتك<span style={{ color: '#34d399', fontSize: '40px' }}>.com</span>
+            lsayartk<span style={{ color: '#34d399', fontSize: '40px' }}>.com</span>
           </span>
         </div>
 
         <div
           style={{
-            fontSize: '34px',
+            fontSize: '36px',
             fontWeight: 'bold',
             color: '#e2e8f0',
             textAlign: 'center',
@@ -63,7 +63,7 @@ export default async function Image() {
             marginBottom: '20px',
           }}
         >
-          منصة الحاسبات العربية المعتمدة
+          Arabic Financial &amp; Utility Calculators
         </div>
 
         <div
@@ -74,7 +74,7 @@ export default async function Image() {
             maxWidth: '800px',
           }}
         >
-          أدوات مالية وضريبية ووقود دقيقة ومجانية لمختلف الدول العربية
+          Accurate VAT, Fuel, Loan, and Gratuity Calculations
         </div>
       </div>
     ),

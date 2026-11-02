@@ -20,9 +20,12 @@ import CalculatorRunner from '@/components/calculator/CalculatorRunner';
 import FormulaBox from '@/components/calculator/FormulaBox';
 import MethodologyBox from '@/components/calculator/MethodologyBox';
 import WorkedExampleBox from '@/components/calculator/WorkedExampleBox';
+import CommonMistakesBox from '@/components/calculator/CommonMistakesBox';
+import RelatedGuides from '@/components/calculator/RelatedGuides';
 import FaqAccordion from '@/components/calculator/FaqAccordion';
 import RelatedCalculators from '@/components/calculator/RelatedCalculators';
 import AdSlot from '@/components/layout/AdSlot';
+import { getGuidesByCalculatorSlug } from '@/data/guides';
 import { CalculationResult } from '@/types/calculator';
 
 interface PageProps {
@@ -84,6 +87,7 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
 
   const category = getCategoryBySlug(calc.category);
   const relatedCalculators = getRelatedCalculators(calc, 6);
+  const relatedGuides = getGuidesByCalculatorSlug(calc.slug);
 
   const breadcrumbs = [
     ...(category ? [{ label: category.nameAr, href: `/categories/${category.slug}` }] : []),
@@ -149,6 +153,12 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
         <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
           {calc.h1 || calc.nameAr}
         </h1>
+        {calc.answerFirstAr && (
+          <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-emerald-950 font-medium text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
+            <span className="font-extrabold text-emerald-800 shrink-0">إجابة مباشرة:</span>
+            <span>{calc.answerFirstAr}</span>
+          </div>
+        )}
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
           {calc.descriptionAr}
         </p>
@@ -176,6 +186,11 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
       {/* Worked Examples */}
       <WorkedExampleBox examples={calc.workedExamples} />
 
+      {/* Common Mistakes */}
+      {calc.commonMistakes && calc.commonMistakes.length > 0 && (
+        <CommonMistakesBox mistakes={calc.commonMistakes} />
+      )}
+
       {/* Methodology, Sources & Assumptions */}
       <MethodologyBox
         sourceIds={calc.sourceIds}
@@ -188,6 +203,11 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
 
       {/* FAQs */}
       <FaqAccordion faqs={calc.faqs} />
+
+      {/* Related Guides */}
+      {relatedGuides.length > 0 && (
+        <RelatedGuides guides={relatedGuides} />
+      )}
 
       {/* Related Calculators */}
       <RelatedCalculators calculators={relatedCalculators} />

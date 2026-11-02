@@ -108,6 +108,12 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface CommonMistakeItem {
+  mistake: string;
+  correction: string;
+  explanation: string;
+}
+
 export interface WorkedExample {
   title: string;
   description?: string;
@@ -142,6 +148,8 @@ export interface CalculatorDefinition {
   calculate: CalculationFunction;
   formula: string;
   formulaExplanation: string;
+  answerFirstAr?: string;
+  commonMistakes?: CommonMistakeItem[];
   workedExamples: WorkedExample[];
   faqs: FAQItem[];
   relatedCalculatorIds: string[];

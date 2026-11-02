@@ -6,6 +6,7 @@ import { GUIDES, getGuideBySlug } from '@/data/guides';
 import { getCalculatorBySlug } from '@/data/calculators';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import AdSlot from '@/components/layout/AdSlot';
+import MarkdownLinkRenderer from '@/components/common/MarkdownLinkRenderer';
 import { BookOpen, Clock, Calendar, Calculator, ArrowLeft } from 'lucide-react';
 import {
   formatMetaTitle,
@@ -121,7 +122,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
         {/* Content Body */}
         <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm space-y-8 text-slate-700 text-sm sm:text-base leading-relaxed">
           <p className="text-base text-slate-800 leading-relaxed font-semibold bg-slate-50 p-4 rounded-2xl border border-slate-100">
-            {guide.content.intro}
+            <MarkdownLinkRenderer text={guide.content.intro} />
           </p>
 
           {guide.content.sections.map((section, idx) => (
@@ -129,9 +130,9 @@ export default async function GuideDetailPage({ params }: PageProps) {
               <h2 className="text-lg sm:text-xl font-bold text-slate-900">
                 {section.heading}
               </h2>
-              <p className="text-slate-600 leading-relaxed">
-                {section.body}
-              </p>
+              <div className="text-slate-600 leading-relaxed whitespace-pre-line">
+                <MarkdownLinkRenderer text={section.body} />
+              </div>
             </section>
           ))}
 
@@ -158,7 +159,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
           )}
 
           <div className="pt-4 border-t border-slate-100 text-sm text-slate-500 italic">
-            {guide.content.conclusion}
+            <MarkdownLinkRenderer text={guide.content.conclusion} />
           </div>
         </div>
       </article>

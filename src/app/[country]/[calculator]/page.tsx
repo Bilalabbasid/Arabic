@@ -30,6 +30,8 @@ import MethodologyBox from '@/components/calculator/MethodologyBox';
 import WorkedExampleBox from '@/components/calculator/WorkedExampleBox';
 import FaqAccordion from '@/components/calculator/FaqAccordion';
 import RelatedCalculators from '@/components/calculator/RelatedCalculators';
+import RelatedGuides from '@/components/calculator/RelatedGuides';
+import { getGuidesByCalculatorSlug } from '@/data/guides';
 import AdSlot from '@/components/layout/AdSlot';
 import { CalculationResult } from '@/types/calculator';
 import { ExternalLink, ShieldCheck, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
@@ -113,6 +115,7 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
   const isNoVatCountry = calc.slug === 'vat-calculator' && (country.countryCode === 'KW' || country.countryCode === 'QA');
 
   const relatedCalculators = getRelatedCalculators(calc, 6, country.countryCode);
+  const relatedGuides = getGuidesByCalculatorSlug(calc.slug);
 
   const breadcrumbs = [
     { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}` },
@@ -198,6 +201,12 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
           {countryContent?.h1 || `${calc.nameAr} في ${country.nameAr}`}
         </h1>
+        {calc.answerFirstAr && (
+          <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-emerald-950 font-medium text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
+            <span className="font-extrabold text-emerald-800 shrink-0">إجابة مباشرة:</span>
+            <span>{calc.answerFirstAr}</span>
+          </div>
+        )}
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
           {countryContent?.intro || calc.descriptionAr}
         </p>
@@ -332,6 +341,11 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
 
       {/* FAQs */}
       <FaqAccordion faqs={effectiveFaqs} />
+
+      {/* Related Guides */}
+      {relatedGuides.length > 0 && (
+        <RelatedGuides guides={relatedGuides} />
+      )}
 
       {/* Related Calculators */}
       <RelatedCalculators
