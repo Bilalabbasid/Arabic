@@ -222,16 +222,31 @@ export function generateWebSiteSchema() {
     '@type': 'WebSite',
     name: 'لِسيارتك',
     alternateName: ['Lsayartk', 'lsayartk.com', 'منصة لِسيارتك', 'حاسبات لِسيارتك'],
-    url: SITE_DOMAIN,
+    url: SITE_URL,
     inLanguage: 'ar',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${SITE_DOMAIN}/calculators/?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}/calculators/?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
+  };
+}
+
+/**
+ * Organization structured data schema conforming to Google publisher & transparency guidelines
+ */
+export function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'لِسيارتك',
+    url: SITE_URL,
+    logo: `${SITE_URL}/icon.svg`,
+    email: '[FILL: contact email]',
+    publishingPrinciples: `${SITE_URL}/methodology`,
   };
 }
 

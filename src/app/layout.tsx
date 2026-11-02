@@ -8,6 +8,7 @@ import {
   DEFAULT_META_DESCRIPTION,
   SITE_NAME,
   generateWebSiteSchema,
+  generateOrganizationSchema,
 } from '@/lib/seo/metadata';
 import './globals.css';
 
@@ -76,6 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const websiteSchema = generateWebSiteSchema();
+  const organizationSchema = generateOrganizationSchema();
 
   return (
     <html lang="ar" dir="rtl" className={cairo.variable}>
@@ -83,6 +85,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
       <body className="flex flex-col min-h-screen antialiased bg-slate-50 text-slate-900 overflow-x-clip">
