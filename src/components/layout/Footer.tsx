@@ -113,8 +113,8 @@ export default function Footer() {
 
         {/* Bottom Bar & Disclaimer */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p className="text-center md:text-start leading-relaxed max-w-2xl">
-            <strong>إخلاء مسؤولية:</strong> نتائج كافة الحاسبات تقدم لأغراض إرشادية وتثقيفية استناداً إلى المعايير الحسابية واللوائح المعلنة. المنصة لا تقدم استشارات قانونية أو ضريبية ملزمة، ويُنصح دائماً بمراجعة الجهات الرسمية أو المستشارين المعتمدين في المسائل ذات الأثر المالي الكبير.
+          <p className="text-center md:text-start text-xs text-slate-400">
+            <strong>تنويه:</strong> نتائج كافة الحاسبات استرشادية تعليمية غير ملزمة رسمياً، وتعتمد على اللوائح والمعادلات المعلنة بتاريخ مراجعتها.
           </p>
           <div className="text-center md:text-end shrink-0">
             <p>© {new Date().getFullYear()} lsayartk.com – جميع الحقوق محفوظة</p>

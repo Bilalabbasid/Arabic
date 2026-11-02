@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { CalculationResult } from '@/types/calculator';
+import ResultDisclaimer from './ResultDisclaimer';
 import {
   Sparkles,
   AlertTriangle,
@@ -19,10 +20,17 @@ interface Props {
   result: CalculationResult;
   currency?: string;
   countryCode?: string;
+  calculatorSlug?: string;
   className?: string;
 }
 
-export default function ResultDisplay({ result, currency, countryCode, className = '' }: Props) {
+export default function ResultDisplay({
+  result,
+  currency,
+  countryCode,
+  calculatorSlug,
+  className = '',
+}: Props) {
   const [copied, setCopied] = useState(false);
 
   if (result.error) {
@@ -39,7 +47,7 @@ export default function ResultDisplay({ result, currency, countryCode, className
 
   const handleCopy = async () => {
     try {
-      const textToCopy = `${result.primary.label}: ${result.primary.formattedValue || result.primary.value} ${result.primary.unit || ''}`;
+      const textToCopy = `${result.primary.label}: ${result.primary.formattedValue || result.primary.value} ${result.primary.unit || ''} — تم الحساب عبر منصة لِسيارتك lsayartk.com – نتائج استرشادية غير ملزمة رسمياً.`;
       if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(textToCopy);
       }
@@ -101,6 +109,13 @@ export default function ResultDisplay({ result, currency, countryCode, className
           </div>
         )}
       </div>
+
+      {/* Unambiguous Result Disclaimer directly below primary result card */}
+      <ResultDisclaimer
+        calculatorSlug={calculatorSlug}
+        result={result}
+        countryCode={countryCode}
+      />
 
       {/* Warnings if any */}
       {result.warnings && result.warnings.length > 0 && (
