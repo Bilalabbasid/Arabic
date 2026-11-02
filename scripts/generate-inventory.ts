@@ -261,8 +261,8 @@ export function runInventory() {
     ...inventoryRows.map(r => headers.map(h => escapeCsv(r[h])).join(',')),
   ];
   
-  fs.writeFileSync(path.join(OUTPUT_DIR, 'inventory.csv'), '\uFEFF' + csvLines.join('\n'), 'utf8');
-  console.log(`Saved ${inventoryRows.length} rows to seo-audit/inventory.csv`);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'inventory-after.csv'), '\uFEFF' + csvLines.join('\n'), 'utf8');
+  console.log(`Saved ${inventoryRows.length} rows to seo-audit/inventory-after.csv`);
 
   // Duplicates analysis
   const duplicateRows: any[] = [];
@@ -302,8 +302,8 @@ export function runInventory() {
     dupHeaders.join(','),
     ...duplicateRows.map(r => dupHeaders.map(h => escapeCsv(r[h])).join(',')),
   ];
-  fs.writeFileSync(path.join(OUTPUT_DIR, 'duplicates.csv'), '\uFEFF' + dupLines.join('\n'), 'utf8');
-  console.log(`Saved ${duplicateRows.length} rows to seo-audit/duplicates.csv`);
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'duplicates-after.csv'), '\uFEFF' + dupLines.join('\n'), 'utf8');
+  console.log(`Saved ${duplicateRows.length} rows to seo-audit/duplicates-after.csv`);
 }
 
 runInventory();
