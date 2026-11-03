@@ -160,7 +160,7 @@ export function getDisclaimerForCalculator(
         disclaimerType: 'depreciation',
         disclaimerText: 'حسابات تقديرية مبنية على معدلات الاستهلاك والمسافات السنوية المتوسطة وتكاليف الصيانة الدورية. القيمة السوقية وتكاليف التشغيل الفعلية تتأثر مباشرة بطريقة الاستخدام وظروف المناخ ونوع المركبة.',
         authority: 'معايير تقييم المركبات والاستهلاك المعتمدة',
-        sourceUrl: 'https://lsayartk.com/sources',
+        sourceUrl: 'https://www.lsayartk.com/sources',
         lastChecked: '2026-11-01',
       };
 
@@ -244,7 +244,7 @@ export function getDisclaimerForCalculator(
         disclaimerType: 'general',
         disclaimerText: 'نتائج هذه الحاسبة استرشادية تعليمية غير ملزمة رسمياً، وتعتمد على المعادلات واللوائح المعلنة بتاريخ مراجعتها.',
         authority: 'المراجع واللوائح الرسمية المعتمدة',
-        sourceUrl: 'https://lsayartk.com/sources',
+        sourceUrl: 'https://www.lsayartk.com/sources',
         lastChecked: '2026-11-01',
       };
   }

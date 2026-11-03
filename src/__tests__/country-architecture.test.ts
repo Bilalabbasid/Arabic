@@ -101,11 +101,11 @@ describe('Phase 3: Country Architecture & Localized Calculators', () => {
     const vat = getCalculatorBySlug('vat-calculator')!;
     const alternates = generateHreflangAlternates(vat);
 
-    expect(alternates['x-default']).toBe('https://lsayartk.com/calculators/vat-calculator');
-    expect(alternates['ar-SA']).toBe('https://lsayartk.com/sa/vat-calculator');
-    expect(alternates['ar-AE']).toBe('https://lsayartk.com/ae/vat-calculator');
-    expect(alternates['ar-EG']).toBe('https://lsayartk.com/eg/vat-calculator');
-    expect(alternates['ar-KW']).toBe('https://lsayartk.com/kw/vat-calculator');
-    expect(alternates['ar-QA']).toBe('https://lsayartk.com/qa/vat-calculator');
+    expect(alternates['x-default']).toBe('https://www.lsayartk.com/calculators/vat-calculator');
+    expect(alternates['ar-SA']).toBe('https://www.lsayartk.com/sa/vat-calculator');
+    expect(alternates['ar-AE']).toBe('https://www.lsayartk.com/ae/vat-calculator');
+    expect(alternates['ar-EG']).toBe('https://www.lsayartk.com/eg/vat-calculator');
+    expect(alternates['ar-KW']).toBe('https://www.lsayartk.com/kw/vat-calculator');
+    expect(alternates['ar-QA']).toBe('https://www.lsayartk.com/qa/vat-calculator');
   });
 });

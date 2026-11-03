@@ -2,6 +2,7 @@ import { getCountryData, ALL_COUNTRY_CODES } from '@/data/countries';
 import { CountryCode, CountryData } from '@/data/countries/types';
 import { getCalculatorBySlug, ALL_CALCULATORS } from '@/data/calculators';
 import { getCountryCalculatorContent } from '@/data/country-content';
+import { SITE_URL } from '@/lib/config';
 
 export interface CountryCalculatorPageInput {
   countryCode: string;
@@ -98,7 +99,7 @@ export function calculateCountryCalculatorWordCount(countryCode: string, calcula
 export function getGatingDetails(page: CountryCalculatorPageInput): GatingDetails {
   const cCode = page.countryCode.toLowerCase();
   const slug = page.calculatorSlug;
-  const url = `https://lsayartk.com/${cCode}/${slug}`;
+  const url = `${SITE_URL}/${cCode}/${slug}`;
 
   const country = getCountryData(cCode);
   const calc = getCalculatorBySlug(slug);

@@ -204,10 +204,10 @@ describe('Phase 16: Multi-Country Regression & Isolation Suite (SA, AE, EG, KW, 
       const elec = getCalculatorBySlug('electricity-bill')!;
       const alternates = generateHreflangAlternates(elec);
 
-      expect(alternates['ar-SA']).toBe('https://lsayartk.com/sa/electricity-bill');
-      expect(alternates['ar-AE']).toBe('https://lsayartk.com/ae/electricity-bill');
-      expect(alternates['ar-EG']).toBe('https://lsayartk.com/eg/electricity-bill');
-      expect(alternates['x-default']).toBe('https://lsayartk.com/calculators/electricity-bill');
+      expect(alternates['ar-SA']).toBe('https://www.lsayartk.com/sa/electricity-bill');
+      expect(alternates['ar-AE']).toBe('https://www.lsayartk.com/ae/electricity-bill');
+      expect(alternates['ar-EG']).toBe('https://www.lsayartk.com/eg/electricity-bill');
+      expect(alternates['x-default']).toBe('https://www.lsayartk.com/calculators/electricity-bill');
 
       // Unverified countries must NOT be in hreflang
       expect(alternates['ar-MA']).toBeUndefined();

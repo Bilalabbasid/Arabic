@@ -14,12 +14,12 @@ describe('Phase 5: Freshness & Legislative Changelog', () => {
   it('changelog page metadata has proper title, canonical, and description', () => {
     expect(metadata.title).toContain('سجل التحديثات التشريعية');
     expect(metadata.description).toBeTruthy();
-    expect(metadata.alternates?.canonical).toBe('https://lsayartk.com/changelog');
+    expect(metadata.alternates?.canonical).toBe('https://www.lsayartk.com/changelog');
   });
 
   it('sitemap includes /changelog URL with canonical apex format', () => {
     const entries = sitemap();
     const urls = entries.map((e) => e.url);
-    expect(urls).toContain('https://lsayartk.com/changelog');
+    expect(urls).toContain('https://www.lsayartk.com/changelog');
   });
 });

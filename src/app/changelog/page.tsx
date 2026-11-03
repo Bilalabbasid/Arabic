@@ -46,7 +46,7 @@ const LEGISLATIVE_CHANGELOG: ChangelogEntry[] = [
     title: 'إطلاق طبقة البيانات التشريعية الموحدة وتحديث المصادر الرسمية',
     decreeOrLaw: 'معايير التحقق والتوثيق المعتمدة لمنصة لِسيارتك الإصدار 2026.1',
     authority: 'الهيئات الضريبية والمصارف المركزية ووزارات العمل العربية',
-    sourceUrl: 'https://lsayartk.com/sources',
+    sourceUrl: 'https://www.lsayartk.com/sources',
     changeSummary:
       'إكمال تدقيق وتوثيق نسب الضرائب والرسوم الجمركية وأنظمة العمل وسقوف المديونية لجميع الدول الـ 22، وتأكيد وسم الحالات غير المطبقة (مثل عدم وجود ضريبة قيمة مضافة في الكويت وقطر) بشفافية تامة دون أي تزييف.',
     impactOnCalculators: ['vat-calculator', 'fuel-prices', 'end-of-service-reward', 'car-finance'],

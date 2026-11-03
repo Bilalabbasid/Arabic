@@ -66,13 +66,13 @@ describe('Phase 4: Categories Architecture', () => {
     // Should contain exactly the indexable categories
     expect(categoryLocs).toHaveLength(INDEXABLE_CATEGORIES.length);
     for (const slug of INDEXABLE_CATEGORIES) {
-      expect(categoryLocs).toContain(`https://lsayartk.com/categories/${slug}`);
+      expect(categoryLocs).toContain(`https://www.lsayartk.com/categories/${slug}`);
     }
 
     // Should NOT contain any non-indexable category
     const nonIndexableSlugs = CATEGORIES.filter((c) => !isCategoryIndexable(c.id)).map((c) => c.slug);
     for (const slug of nonIndexableSlugs) {
-      expect(categoryLocs).not.toContain(`https://lsayartk.com/categories/${slug}`);
+      expect(categoryLocs).not.toContain(`https://www.lsayartk.com/categories/${slug}`);
     }
   });
 

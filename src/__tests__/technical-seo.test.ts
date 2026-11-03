@@ -38,8 +38,8 @@ describe('Phase 9: Technical SEO Verification', () => {
     expect(entries.length).toBeGreaterThan(0);
 
     for (const entry of entries) {
-      expect(entry.url).toMatch(/^https:\/\/lsayartk\.com/);
-      expect(entry.url).not.toContain('www.lsayartk.com');
+      expect(entry.url).toMatch(/^https:\/\/www\.lsayartk\.com/);
+      expect(entry.url).toContain('www.lsayartk.com');
       expect(entry.url).not.toMatch(/\/$/); // no trailing slash (except apex)
       expect(entry.lastModified).toBeInstanceOf(Date);
       // Ensure Google-ignored priority and changefreq are omitted
@@ -133,3 +133,4 @@ describe('Phase 9: Technical SEO Verification', () => {
     expect(adSlotCode).not.toContain('Google AdSense Slot');
   });
 });
+
