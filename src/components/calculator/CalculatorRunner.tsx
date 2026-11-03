@@ -110,7 +110,7 @@ export default function CalculatorRunner({
   const [isFavorited, setIsFavorited] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
 
-  // Record interaction on mount & sync favorite state
+  // Record interaction on mount & sync favorite state and country preference
   useEffect(() => {
     recordCalculatorInteraction(slug);
     setIsFavorited(isCalculatorFavorite(slug));
@@ -121,8 +121,38 @@ export default function CalculatorRunner({
       }
     };
     window.addEventListener('lsayartk_favorites_changed', handler);
-    return () => window.removeEventListener('lsayartk_favorites_changed', handler);
-  }, [slug]);
+
+    // Sync country changes from header CountrySelector when on generic calculator
+    const countryHandler = (e: any) => {
+      const newCountry = e.detail?.countryCode;
+      if (!countryCode && newCountry) {
+        const countryInput = inputDefs.find((inp) => inp.id === 'country' || inp.type === 'country');
+        if (countryInput) {
+          const optionExists = countryInput.options?.some((o: any) => o.value.toUpperCase() === newCountry.toUpperCase());
+          if (optionExists) {
+            handleInputChange(countryInput.id, newCountry.toUpperCase());
+          }
+        }
+      }
+    };
+    window.addEventListener('lsayartk_country_changed', countryHandler);
+
+    // Check stored user country on mount
+    if (!countryCode && typeof window !== 'undefined') {
+      const saved = localStorage.getItem('lsayartk_user_country');
+      if (saved) {
+        const countryInput = inputDefs.find((inp) => inp.id === 'country' || inp.type === 'country');
+        if (countryInput && countryInput.options?.some((o: any) => o.value.toUpperCase() === saved.toUpperCase())) {
+          handleInputChange(countryInput.id, saved.toUpperCase());
+        }
+      }
+    }
+
+    return () => {
+      window.removeEventListener('lsayartk_favorites_changed', handler);
+      window.removeEventListener('lsayartk_country_changed', countryHandler);
+    };
+  }, [slug, countryCode, inputDefs]);
 
   // Validation function: NEVER silently clamps, shows explicit message
   const validateInputs = (newInputs: Record<string, any>): Record<string, string> => {

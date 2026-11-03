@@ -121,18 +121,28 @@ export default function CountrySelector({ currentCountryCode, onCountrySelect, c
         const calcSlug = segments[1];
         const calc = getCalculatorBySlug(calcSlug);
         if (calc && isCountryCalculatorValid(calc, country.countryCode)) {
-          router.push(`/${targetCode}/${calcSlug}/`);
+          router.push(`/${targetCode}/${calcSlug}`);
           return;
         }
       }
       // Redirect to the new country hub
-      router.push(`/${targetCode}/`);
+      router.push(`/${targetCode}`);
       return;
     }
 
-    // If on homepage, redirect to the selected country hub
-    if (pathname === '/' || pathname === '') {
-      router.push(`/${targetCode}/`);
+    // If currently on a generic calculator page (e.g. /calculators/vat-calculator)
+    if (firstSegment === 'calculators' && segments.length >= 2) {
+      const calcSlug = segments[1];
+      const calc = getCalculatorBySlug(calcSlug);
+      if (calc && isCountryCalculatorValid(calc, country.countryCode)) {
+        router.push(`/${targetCode}/${calcSlug}`);
+        return;
+      }
+    }
+
+    // If on homepage or calculators index, redirect to the selected country hub
+    if (pathname === '/' || pathname === '' || pathname === '/calculators') {
+      router.push(`/${targetCode}`);
       return;
     }
   };

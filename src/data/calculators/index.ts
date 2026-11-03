@@ -252,6 +252,8 @@ const LEGACY_CALCULATORS: CalculatorDefinition[] = [
         options: [
           { value: 'SA', label: 'السعودية (15%)' },
           { value: 'AE', label: 'الإمارات (5%)' },
+          { value: 'KW', label: 'الكويت (0% - لا تطبق ضريبة)' },
+          { value: 'QA', label: 'قطر (0% - غير مفروضة حالياً)' },
           { value: 'BH', label: 'البحرين (10%)' },
           { value: 'OM', label: 'سلطنة عُمان (5%)' },
           { value: 'EG', label: 'مصر (14%)' },
@@ -1721,3 +1723,4 @@ export function getRelatedCalculators(
 export function getAllCalculatorSlugs(): string[] {
   return ALL_CALCULATORS.map((c) => c.slug);
 }
+
