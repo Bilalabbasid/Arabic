@@ -65,7 +65,9 @@ for (const calc of ALL_CALCULATORS) {
 
     try {
       const result = calc.calculate(defaultInputs);
-      if (!result || !result.primary || typeof result.primary.value !== 'number' || isNaN(result.primary.value)) {
+      const v = result?.primary?.value;
+      const invalid = typeof v === 'number' ? !Number.isFinite(v) : !(typeof v === 'string' && v.trim() !== '' && !/NaN|undefined|Invalid/.test(v));
+      if (!result || !result.primary || invalid) {
         findings.push({
           policy: 'Misleading Functionality',
           item: calc.slug,

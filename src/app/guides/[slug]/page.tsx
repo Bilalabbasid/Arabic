@@ -13,6 +13,7 @@ import {
   constructCanonicalUrl,
   generateArticleSchema,
   generateBreadcrumbSchema,
+  DEFAULT_OG_IMAGES,
 } from '@/lib/seo/metadata';
 import { formatDateAr } from '@/lib/formatters';
 
@@ -46,6 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical,
     },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title,
       description: guide.summaryAr,
       url: canonical,

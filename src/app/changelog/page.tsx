@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { formatMetaTitle, constructCanonicalUrl } from '@/lib/seo/metadata';
+import { formatMetaTitle, constructCanonicalUrl, DEFAULT_OG_IMAGES } from '@/lib/seo/metadata';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import { ShieldCheck, Calendar, ExternalLink, Scale, CheckCircle2, AlertCircle, ArrowLeft, History } from 'lucide-react';
 
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     canonical: constructCanonicalUrl('/changelog'),
   },
   openGraph: {
+    images: DEFAULT_OG_IMAGES,
     title: formatMetaTitle('سجل التحديثات التشريعية والضريبية – لِسيارتك'),
     description: 'توثيق مؤرخ للقرارات الوزارية والتعديلات التشريعية لنسب الضرائب والوقود والتأمينات في الدول العربية.',
     url: constructCanonicalUrl('/changelog'),

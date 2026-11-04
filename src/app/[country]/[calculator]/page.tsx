@@ -21,6 +21,7 @@ import {
   generateLocalizedCalculatorDescription,
   generateHreflangAlternates,
   isCountryCalculatorValid,
+  DEFAULT_OG_IMAGES,
 } from '@/lib/seo/metadata';
 import { getCountryCalculatorContent } from '@/data/country-content';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
@@ -84,6 +85,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       languages: alternatesLanguages,
     },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title,
       description,
       url: canonical,
@@ -92,6 +94,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'website',
     },
     twitter: {
+      images: DEFAULT_OG_IMAGES,
       card: 'summary_large_image',
       title,
       description,
@@ -217,7 +220,7 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
               <span>هل تبحث عن أسعار الوقود الرسمية المحدثة لهذا الشهر في {country.nameAr}؟</span>
             </div>
             <Link
-              href={`/${country.countryCode.toLowerCase()}/fuel-prices`}
+              href="/calculators/fuel-prices"
               className="text-xs font-bold text-emerald-700 hover:text-emerald-800 hover:underline shrink-0"
             >
               عرض تسعيرة البنزين &larr;

@@ -98,7 +98,7 @@ describe('SEO On-Page & Schema.org Validation', () => {
     expect(schema.itemListElement[2].item).toContain('/calculators/fuel-cost');
   });
 
-  it('Schema.org Article: valid for all 10 guides (test)', () => {
+  it('Schema.org Article: valid for all guides (test)', () => {
     for (const guide of GUIDES) {
       const schema = generateArticleSchema(guide);
       expect(['Article', 'TechArticle']).toContain(schema['@type']);

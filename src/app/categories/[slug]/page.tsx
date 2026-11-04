@@ -13,6 +13,7 @@ import {
   constructCanonicalUrl,
   generateBreadcrumbSchema,
   isCategoryIndexable,
+  DEFAULT_OG_IMAGES,
 } from '@/lib/seo/metadata';
 
 interface PageProps {
@@ -49,6 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? { index: true, follow: true }
       : { index: false, follow: true },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title,
       description: category.metaDescription,
       url: canonical,

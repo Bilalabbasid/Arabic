@@ -22,7 +22,7 @@ const GREGORIAN_MONTHS = [
 const WEEKDAYS = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
 // Algorithmic Kuwaiti/Umm al-Qura Julian Day conversion
-function gregorianToJulianDay(year: number, month: number, day: number): number {
+export function gregorianToJulianDay(year: number, month: number, day: number): number {
   if (month <= 2) {
     year -= 1;
     month += 12;
@@ -60,7 +60,7 @@ function julianDayToHijri(jd: number): { year: number; month: number; day: numbe
   return { year, month, day, weekday: WEEKDAYS[dayOfWeekIndex] };
 }
 
-function hijriToJulianDay(year: number, month: number, day: number): number {
+export function hijriToJulianDay(year: number, month: number, day: number): number {
   return Math.floor((11 * year + 3) / 30) + 354 * year + 30 * month - Math.floor((month - 1) / 2) + day + 1948440 - 385;
 }
 

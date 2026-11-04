@@ -75,7 +75,8 @@ ALL_CALCULATORS.forEach((calc) => {
   const largeInputs: Record<string, any> = { ...defaultInputs };
   calc.inputs.forEach((inp) => {
     if (inp.type === 'number' || inp.type === 'decimal' || inp.type === 'currency') {
-      largeInputs[inp.id] = 10000000;
+      // The UI rejects values above `max`, so stress-test at the largest value a user can submit
+      largeInputs[inp.id] = inp.max !== undefined ? inp.max : 10000000;
     }
   });
 

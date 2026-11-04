@@ -2,22 +2,38 @@ import { CalculationResult } from '../../types/calculator';
 
 export interface RamadanCountdownInputs {
   targetHijriYear?: number;
+  /** Optional reference "today" (for tests). Defaults to the user's current date. */
+  referenceDate?: Date | string;
+}
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+// Approximate (astronomical / Umm al-Qura) start dates of Ramadan, stored as UTC calendar days
+// so that toISOString() never shifts the date for users east of UTC (e.g. the Gulf, UTC+3/+4).
+const RAMADAN_START_UTC: Record<number, number> = {
+  1448: Date.UTC(2027, 1, 8), // 2027-02-08
+  1449: Date.UTC(2028, 0, 28), // 2028-01-28
+};
+
+function toUtcDay(d: Date): number {
+  return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
 export function calculateRamadanCountdown(inputs: RamadanCountdownInputs): CalculationResult {
-  // Approximate Ramadan dates:
-  // 1448 AH: Starts approx 2027-02-08
-  // 1449 AH: Starts approx 2028-01-28
-  const targetYear = Number(inputs.targetHijriYear) || 1448;
+  const targetYear = RAMADAN_START_UTC[Number(inputs.targetHijriYear)] ? Number(inputs.targetHijriYear) : 1448;
 
-  const today = new Date(2026, 10, 2); // 2026-11-02
-  const ramadanDate = targetYear === 1449 ? new Date(2028, 0, 28) : new Date(2027, 1, 8);
-  const eidDate = new Date(ramadanDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+  const ref = inputs.referenceDate ? new Date(inputs.referenceDate) : new Date();
+  const todayUtc = toUtcDay(isNaN(ref.getTime()) ? new Date() : ref);
+  const ramadanUtc = RAMADAN_START_UTC[targetYear];
+  // Shawwal 1 is 29 or 30 days later depending on the crescent sighting; 30 is the conservative estimate
+  const eidUtc = ramadanUtc + 30 * DAY_MS;
 
-  const diffMs = ramadanDate.getTime() - today.getTime();
-  const daysRemaining = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+  const daysRemaining = Math.max(0, Math.round((ramadanUtc - todayUtc) / DAY_MS));
   const monthsRemaining = Math.floor(daysRemaining / 30);
   const leftoverDays = daysRemaining % 30;
+  const todayIso = new Date(todayUtc).toISOString().split('T')[0];
+  const ramadanIso = new Date(ramadanUtc).toISOString().split('T')[0];
+  const eidIso = new Date(eidUtc).toISOString().split('T')[0];
 
   return {
     primary: {
@@ -30,11 +46,11 @@ export function calculateRamadanCountdown(inputs: RamadanCountdownInputs): Calcu
     secondary: [
       {
         label: 'التاريخ الميلادي المتوقع لبداية رمضان',
-        value: ramadanDate.toISOString().split('T')[0],
+        value: ramadanIso,
       },
       {
         label: 'التاريخ المتوقع لعيد الفطر المبارك (1 شوال)',
-        value: eidDate.toISOString().split('T')[0],
+        value: eidIso,
       },
     ],
     details: [
@@ -43,8 +59,8 @@ export function calculateRamadanCountdown(inputs: RamadanCountdownInputs): Calcu
       { label: 'حالة التحقق الشرعي', value: 'حساب فلكي تقريبي – البداية الرسمية معلقة على الرؤية الشرعية للهلال' },
     ],
     calculationSteps: [
-      `التاريخ الحالي المرجعي: 2026-11-02 م`,
-      `تاريخ غرة رمضان المتوقع: ${ramadanDate.toISOString().split('T')[0]} م`,
+      `التاريخ الحالي المرجعي: ${todayIso} م`,
+      `تاريخ غرة رمضان المتوقع: ${ramadanIso} م`,
       `الفارق الزمني المتبقي: ${daysRemaining} يوماً.`,
     ],
   };

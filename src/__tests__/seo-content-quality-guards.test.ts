@@ -6,7 +6,7 @@ import { CATEGORIES } from '@/data/categories';
 import { INDEXABLE_CATEGORIES } from '@/lib/seo/metadata';
 import { isIndexable, calculateCountryCalculatorWordCount } from '@/lib/seo/gating';
 import { getCountryCalculatorContent } from '@/data/country-content';
-import { RELEASE_PLAN, isPageReleased, WaveConfig } from '@/seo/releasePlan';
+import { RELEASE_PLAN, isPageReleased } from '@/seo/releasePlan';
 
 function getShingles(text: string, size = 4): Set<string> {
   const words = text
@@ -69,8 +69,8 @@ describe('SEO Content Quality & Programmatic Guards', () => {
     }
   });
 
-  it('Minimum words: all 10 guides must have >= 800 words (test)', () => {
-    expect(GUIDES.length).toBe(10);
+  it('Minimum words: all 13 guides must have >= 800 words (test)', () => {
+    expect(GUIDES.length).toBe(13);
     for (const g of GUIDES) {
       const text = [
         g.titleAr,

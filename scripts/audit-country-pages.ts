@@ -9,6 +9,7 @@
  */
 
 import { ALL_CALCULATORS } from '../src/data/calculators';
+import { SITE_DOMAIN } from '../src/lib/config';
 import { COUNTRIES } from '../src/data/countries';
 import {
   isCountryCalculatorValid,
@@ -35,7 +36,7 @@ for (const country of COUNTRIES) {
 
   // Canonical for country hub
   const hubCanonical = constructCanonicalUrl(`/${code.toLowerCase()}`);
-  if (!hubCanonical.startsWith('https://lsayartk.com/')) {
+  if (!hubCanonical.startsWith(`${SITE_DOMAIN}/`)) {
     issues.push({ item: code, type: 'ERROR', message: `Invalid hub canonical: ${hubCanonical}` });
   }
 }
@@ -62,7 +63,7 @@ for (const calc of ALL_CALCULATORS) {
     }
 
     for (const [lang, url] of Object.entries(alternates)) {
-      if (!url.startsWith('https://lsayartk.com/')) {
+      if (!url.startsWith(`${SITE_DOMAIN}/`)) {
         issues.push({ item: `${calc.slug}:${lang}`, type: 'ERROR', message: `Invalid alternate URL: ${url}` });
       }
     }

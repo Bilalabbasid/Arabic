@@ -13,6 +13,7 @@ import {
   constructCanonicalUrl,
   isCountryHubIndexable,
   isCategoryIndexable,
+  DEFAULT_OG_IMAGES,
 } from '@/lib/seo/metadata';
 import {
   Calculator,
@@ -39,6 +40,7 @@ export const metadata: Metadata = {
     canonical: constructCanonicalUrl('/'),
   },
   openGraph: {
+    images: DEFAULT_OG_IMAGES,
     title: `${SITE_NAME} | منصة الحاسبات العربية المتكاملة`,
     description: DEFAULT_META_DESCRIPTION,
     url: constructCanonicalUrl('/'),

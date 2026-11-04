@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { getCountryByCode, getCountryData, COUNTRIES } from '@/data/countries';
-import { formatMetaTitle, constructCanonicalUrl, generateBreadcrumbSchema } from '@/lib/seo/metadata';
+import { formatMetaTitle, constructCanonicalUrl, generateBreadcrumbSchema, DEFAULT_OG_IMAGES } from '@/lib/seo/metadata';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
@@ -60,6 +60,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical,
     },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title,
       description,
       url: canonical,
@@ -297,7 +298,7 @@ export default async function TripRoutePage({ params }: PageProps) {
           )}
 
           <Link
-            href={`/${country.countryCode.toLowerCase()}/fuel-prices`}
+            href="/calculators/fuel-prices"
             className="flex items-center gap-2 p-3 bg-white rounded-xl border border-slate-200 hover:border-emerald-300 text-xs font-bold text-slate-700 hover:text-emerald-700 transition-colors shadow-xs"
           >
             <Fuel className="w-4 h-4 text-emerald-600" />

@@ -20,6 +20,7 @@ import {
   isCountryCalculatorValid,
   isCountryHubIndexable,
   generateBreadcrumbSchema,
+  DEFAULT_OG_IMAGES,
 } from '@/lib/seo/metadata';
 
 interface PageProps {
@@ -57,6 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical,
     },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title,
       description: `حاسبات معتمدة لـ ${country.nameAr} بالعملة المحلية (${country.currencySymbolAr})`,
       url: canonical,

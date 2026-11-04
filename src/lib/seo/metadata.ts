@@ -7,6 +7,20 @@ import { SITE_URL, SITE_DOMAIN, PRIMARY_HOST } from '@/lib/config';
 
 export { SITE_URL, SITE_DOMAIN, PRIMARY_HOST };
 
+/**
+ * Default social share image. Next.js replaces (not merges) a parent's openGraph/twitter
+ * objects when a page defines its own, so every page that sets openGraph must pass this
+ * explicitly or the share preview loses its image.
+ */
+export const DEFAULT_OG_IMAGES = [
+  {
+    url: `${SITE_URL}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: 'لِسيارتك – منصة الحاسبات العربية',
+  },
+];
+
 export const SITE_NAME = 'لِسيارتك';
 export const DEFAULT_META_DESCRIPTION =
   'منصة لِسيارتك (lsayartk.com) – حاسبات عربية دقيقة ومجانية: حاسبات السيارات وتكلفة الوقود، القروض والتمويل، ضريبة القيمة المضافة، مكافأة نهاية الخدمة، وفاتورة الكهرباء لعدة دول عربية.';

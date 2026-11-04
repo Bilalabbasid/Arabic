@@ -12,7 +12,7 @@ describe('Car Depreciation Engine', () => {
   it('applies steeper depreciation for luxury tier', () => {
     const mainstream = calculateCarDepreciation({ purchasePrice: 200000, vehicleAgeYears: 3, brandTier: 'mainstream' }, COUNTRY_DATA_SA);
     const luxury = calculateCarDepreciation({ purchasePrice: 200000, vehicleAgeYears: 3, brandTier: 'luxury' }, COUNTRY_DATA_SA);
-    expect(luxury.primary.value).toBeLessThan(mainstream.primary.value);
+    expect(Number(luxury.primary.value)).toBeLessThan(Number(mainstream.primary.value));
   });
 
   it('provides complete 7-year curve breakdown', () => {

@@ -45,7 +45,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ar_AR',
-    url: SITE_URL,
     siteName: SITE_NAME,
     title: `${SITE_NAME} – حاسبات عربية دقيقة ومجانية`,
     description: DEFAULT_META_DESCRIPTION,

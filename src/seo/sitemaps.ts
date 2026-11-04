@@ -45,13 +45,8 @@ export function getCountriesSitemap(): SitemapUrlEntry[] {
         lastmod: hubLastmod,
       });
 
-      // Fuel hub
-      if (cData?.fuel && (cData.fuel.status === 'verified' || cData.fuel.status === 'not_applicable')) {
-        entries.push({
-          url: constructCanonicalUrl(`/${cCode}/fuel-prices`),
-          lastmod: cData.fuel.checkedAt || '2026-11-01',
-        });
-      }
+      // Note: there is no per-country fuel-prices page (/{cc}/fuel-prices 308-redirects to
+      // /calculators/fuel-prices), so it must not be listed here.
 
       // Intercity trip routes
       if (cData?.routes && cData.fuel?.status === 'verified') {
@@ -101,7 +96,7 @@ export function getGuidesSitemap(): SitemapUrlEntry[] {
   const entries: SitemapUrlEntry[] = [
     {
       url: constructCanonicalUrl('/guides'),
-      lastmod: '2026-10-22',
+      lastmod: '2026-11-05',
     },
   ];
 

@@ -78,7 +78,8 @@ for (const calc of ALL_CALCULATORS) {
     // Verify each hreflang points to a valid country code and valid BCP-47 tag
     for (const [langCode, targetUrl] of Object.entries(hreflangs)) {
       if (langCode === 'x-default') continue;
-      const validBcp = Object.values(ARABIC_LOCALE_CODES).includes(langCode);
+      // 'ar' (language-only) is a valid BCP-47 tag used when no country variant is indexable
+      const validBcp = langCode === 'ar' || Object.values(ARABIC_LOCALE_CODES).includes(langCode);
       if (!validBcp) {
         issues.push({
           slug: calc.slug,

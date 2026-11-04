@@ -39,8 +39,8 @@ console.log(`📊 Auditing ${sitemap.length} sitemap URLs...`);
 const seenUrls = new Set<string>();
 for (const entry of sitemap) {
   // Check URL format
-  if (!entry.url.startsWith('https://lsayartk.com/')) {
-    issues.push({ item: entry.url, type: 'ERROR', message: 'URL does not start with https://lsayartk.com/' });
+  if (entry.url !== SITE_DOMAIN && !entry.url.startsWith(`${SITE_DOMAIN}/`)) {
+    issues.push({ item: entry.url, type: 'ERROR', message: `URL does not start with ${SITE_DOMAIN}/` });
   }
 
   // Check duplicate URLs in sitemap
@@ -54,8 +54,8 @@ for (const entry of sitemap) {
     issues.push({ item: entry.url, type: 'ERROR', message: `Invalid lastModified date in sitemap` });
   }
 
-  // Check priority is between 0 and 1
-  if (typeof entry.priority !== 'number' || entry.priority < 0 || entry.priority > 1) {
+  // priority is optional (Google ignores it); validate only when present
+  if (entry.priority !== undefined && (typeof entry.priority !== 'number' || entry.priority < 0 || entry.priority > 1)) {
     issues.push({ item: entry.url, type: 'ERROR', message: `Invalid priority value: ${entry.priority}` });
   }
 }

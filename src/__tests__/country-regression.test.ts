@@ -15,21 +15,21 @@ describe('Phase 16: Multi-Country Regression & Isolation Suite (SA, AE, EG, KW, 
       const res = calculateVat({ amount: 1000, calculationType: 'add', country: 'SA' });
       expect(res.primary.value).toBe(150); // tax amount
       expect(res.secondary?.[0].value).toBe(1150); // gross total
-      expect(res.details?.some((d) => d.value.includes('15%'))).toBe(true);
+      expect(res.details?.some((d) => String(d.value).includes('15%'))).toBe(true);
     });
 
     it('correctly calculates UAE VAT at 5% with FTA metadata', () => {
       const res = calculateVat({ amount: 1000, calculationType: 'add', country: 'AE' });
       expect(res.primary.value).toBe(50); // tax amount
       expect(res.secondary?.[0].value).toBe(1050); // gross total
-      expect(res.details?.some((d) => d.value.includes('5%'))).toBe(true);
+      expect(res.details?.some((d) => String(d.value).includes('5%'))).toBe(true);
     });
 
     it('correctly calculates Egypt VAT at 14% with ETA metadata', () => {
       const res = calculateVat({ amount: 1000, calculationType: 'add', country: 'EG' });
       expect(res.primary.value).toBe(140); // tax amount
       expect(res.secondary?.[0].value).toBe(1140); // gross total
-      expect(res.details?.some((d) => d.value.includes('14%'))).toBe(true);
+      expect(res.details?.some((d) => String(d.value).includes('14%'))).toBe(true);
     });
 
     it('correctly calculates Bahrain VAT at 10%', () => {

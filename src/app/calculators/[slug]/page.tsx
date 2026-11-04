@@ -13,6 +13,7 @@ import {
   formatMetaTitle,
   constructCanonicalUrl,
   generateHreflangAlternates,
+  DEFAULT_OG_IMAGES,
 } from '@/lib/seo/metadata';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CalculatorRunner from '@/components/calculator/CalculatorRunner';
@@ -62,6 +63,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       languages: alternatesLanguages,
     },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title,
       description: calc.metaDescription,
       url: canonical,
@@ -70,6 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'website',
     },
     twitter: {
+      images: DEFAULT_OG_IMAGES,
       card: 'summary_large_image',
       title,
       description: calc.metaDescription,

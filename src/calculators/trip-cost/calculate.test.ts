@@ -17,6 +17,6 @@ describe('Trip Cost Calculator Engine', () => {
   it('calculates Cairo to Alexandria trip cost in Egypt', () => {
     const result = calculateTripCost({ routeId: 'cairo-alexandria', fuelConsumption: 8 }, COUNTRY_DATA_EG);
     expect(result.primary.value).toBeGreaterThan(0);
-    expect(result.secondary?.[0].value).toBe(result.primary.value * 2);
+    expect(result.secondary?.[0].value).toBe(Number(result.primary.value) * 2);
   });
 });

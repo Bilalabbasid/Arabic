@@ -65,7 +65,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'loan-calculator', reason: 'جدول استهلاك القرض وحساب الفوائد التراكمية' },
       { slug: 'car-depreciation', reason: 'احسب انخفاض قيمة السيارة خلال فترة سداد الأقساط' },
     ],
-    guides: ['loan-installment-calculation-guide'],
+    guides: ['car-finance-installment-guide', 'loan-installment-calculation-guide'],
     intentTags: ['cars', 'finance', 'loans', 'installments'],
     contextualLinks: [
       { slug: 'car-affordability', anchorText: 'حاسبة القدرة على شراء سيارة' },
@@ -81,7 +81,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'car-depreciation', reason: 'تقدير القيمة الاستردادية للسيارة بعد سنوات الاستخدام' },
       { slug: 'loan-calculator', reason: 'حساب نسبة الاستقطاع النظامي للتمويل الشخصي' },
     ],
-    guides: ['loan-installment-calculation-guide'],
+    guides: ['car-finance-installment-guide', 'loan-installment-calculation-guide'],
     intentTags: ['cars', 'finance', 'budget', 'buying-car'],
     contextualLinks: [
       { slug: 'car-finance', anchorText: 'حاسبة أقساط التمويل' },
@@ -97,7 +97,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'car-depreciation', reason: 'أثر إهلاك السيارة على قرار التملك أو الإيجار' },
       { slug: 'loan-calculator', reason: 'مقارنة تكلفة الفوائد الإجمالية بين الخيارين' },
     ],
-    guides: ['loan-installment-calculation-guide'],
+    guides: ['car-finance-installment-guide', 'loan-installment-calculation-guide'],
     intentTags: ['cars', 'finance', 'leasing', 'buying-car'],
     contextualLinks: [
       { slug: 'car-finance', anchorText: 'حساب قسط تمويل السيارات' },
@@ -273,7 +273,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'percentage-calculator', reason: 'حساب نسب الاستحقاق وفق سنوات الخدمة المعتمدة' },
       { slug: 'zakat-wealth', reason: 'حساب زكاة الأموال المدخرة من مستحقات التقاعد' },
     ],
-    guides: ['saudi-end-of-service-gratuity-guide'],
+    guides: ['saudi-end-of-service-gratuity-guide', 'uae-end-of-service-gratuity-guide'],
     intentTags: ['salary', 'employment', 'labor-law', 'gratuity'],
     contextualLinks: [
       { slug: 'net-salary', anchorText: 'حساب صافي الراتب والبدلات' },
@@ -399,7 +399,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'ramadan-countdown', reason: 'معرفة موعد دخول شهر رمضان وعيدي الفطر والأضحى' },
       { slug: 'time-converter', reason: 'تحويل الفترات الزمنية بين الأيام والأسابيع والشهور' },
     ],
-    guides: [],
+    guides: ['hijri-gregorian-date-conversion-guide'],
     intentTags: ['calendar', 'dates', 'hijri', 'islamic-calendar'],
     contextualLinks: [
       { slug: 'hijri-age', anchorText: 'حاسبة العمر بالهجري والميلادي' },
@@ -414,7 +414,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'time-converter', reason: 'حساب عدد الساعات والأيام التي عشتها بالتفصيل' },
       { slug: 'ramadan-countdown', reason: 'معرفة المناسبات الدينية القادمة في عامك الجديد' },
     ],
-    guides: [],
+    guides: ['hijri-gregorian-date-conversion-guide'],
     intentTags: ['calendar', 'age', 'hijri', 'birthdays'],
     contextualLinks: [
       { slug: 'hijri-converter', anchorText: 'تحويل تاريخ الميلاد' },
@@ -430,7 +430,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'time-converter', reason: 'تحويل الساعات والدقائق لمواقيت الصيام والإفطار' },
       { slug: 'hijri-age', reason: 'معرفة العمر ومحطات الحياة بالتقويم الهجري المبارك' },
     ],
-    guides: ['zakat-wealth-calculation-guide'],
+    guides: ['hijri-gregorian-date-conversion-guide', 'zakat-wealth-calculation-guide'],
     intentTags: ['calendar', 'ramadan', 'islamic-events', 'countdown'],
     contextualLinks: [
       { slug: 'zakat-wealth', anchorText: 'حاسبة زكاة المال وزكاة الفطر' },
