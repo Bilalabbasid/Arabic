@@ -58,9 +58,10 @@ import { getCountryCalculatorContent } from '@/data/country-content';
 
 export const VALID_COUNTRY_CALCULATORS: Record<string, string[]> = {
   'vat-calculator': ['SA', 'AE', 'BH', 'OM', 'EG', 'JO', 'MA', 'DZ', 'TN', 'LB', 'KW', 'QA'],
-  'end-of-service-reward': ['SA', 'AE', 'EG'],
+  'end-of-service-reward': ['SA', 'AE'],
   'electricity-bill': ['SA', 'AE', 'EG'],
   'car-fuel-cost': ['SA', 'AE', 'KW', 'QA', 'BH', 'OM', 'EG'],
+  'fuel-cost': ['SA', 'AE', 'KW', 'QA', 'BH', 'OM', 'EG'],
 };
 
 /**
@@ -68,7 +69,8 @@ export const VALID_COUNTRY_CALCULATORS: Record<string, string[]> = {
  * Genuinely country-specific rules or data only; currency alone is never a reason.
  */
 export function isCountryCalculatorValid(calc: CalculatorDefinition, countryCode: string): boolean {
-  const allowed = VALID_COUNTRY_CALCULATORS[calc.slug];
+  const normSlug = calc.slug === 'car-fuel-cost' ? 'fuel-cost' : calc.slug;
+  const allowed = VALID_COUNTRY_CALCULATORS[normSlug] || VALID_COUNTRY_CALCULATORS[calc.slug];
   if (!allowed) return false;
   return allowed.includes(countryCode.toUpperCase());
 }
@@ -78,13 +80,14 @@ export function isCountryCalculatorValid(calc: CalculatorDefinition, countryCode
  */
 export function isCountryHubIndexable(countryCode: string): boolean {
   const upperCode = countryCode.toUpperCase();
-  let count = 0;
-  for (const [, countries] of Object.entries(VALID_COUNTRY_CALCULATORS)) {
+  const countedSlugs = new Set<string>();
+  for (const [slug, countries] of Object.entries(VALID_COUNTRY_CALCULATORS)) {
+    const canonicalSlug = slug === 'car-fuel-cost' ? 'fuel-cost' : slug;
     if (countries.includes(upperCode)) {
-      count++;
+      countedSlugs.add(canonicalSlug);
     }
   }
-  return count >= 3;
+  return countedSlugs.size >= 3;
 }
 
 export const INDEXABLE_CATEGORIES = [

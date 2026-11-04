@@ -148,7 +148,7 @@ export const COUNTRY_DATA_SA: CountryData = {
         },
         "diesel": {
           "nameAr": "ديزل نقل وصناعي",
-          "pricePerLiter": 1.15,
+          "pricePerLiter": 1.79,
           "unitAr": "ر.س/لتر"
         }
       },
@@ -158,7 +158,7 @@ export const COUNTRY_DATA_SA: CountryData = {
           "prices": {
             "octane91": 2.18,
             "octane95": 2.33,
-            "diesel": 1.15
+            "diesel": 1.79
           }
         },
         {
@@ -166,7 +166,7 @@ export const COUNTRY_DATA_SA: CountryData = {
           "prices": {
             "octane91": 2.18,
             "octane95": 2.33,
-            "diesel": 1.15
+            "diesel": 1.79
           }
         }
       ],

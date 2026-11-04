@@ -2,7 +2,7 @@ import { ALL_CALCULATORS, getCalculatorBySlug } from '@/data/calculators';
 import { CATEGORIES } from '@/data/categories';
 import { COUNTRIES, getCountryData } from '@/data/countries';
 import { GUIDES } from '@/data/guides';
-import { INDEXABLE_CATEGORIES, constructCanonicalUrl, SITE_URL } from '@/lib/seo/metadata';
+import { INDEXABLE_CATEGORIES, constructCanonicalUrl, SITE_URL, isCountryHubIndexable } from '@/lib/seo/metadata';
 import { isIndexable, isCountryHubGatedIndexable } from '@/lib/seo/gating';
 
 export interface SitemapUrlEntry {
@@ -19,7 +19,7 @@ export function getCalculatorsSitemap(): SitemapUrlEntry[] {
   ];
 
   for (const calc of ALL_CALCULATORS) {
-    if (calc.publicationStatus === 'PUBLISHED') {
+    if (calc.publicationStatus === 'PUBLISHED' && calc.slug !== 'car-fuel-cost') {
       entries.push({
         url: constructCanonicalUrl(`/calculators/${calc.slug}`),
         lastmod: calc.lastReviewedAt || '2026-10-20',
@@ -33,10 +33,10 @@ export function getCalculatorsSitemap(): SitemapUrlEntry[] {
 export function getCountriesSitemap(): SitemapUrlEntry[] {
   const entries: SitemapUrlEntry[] = [];
 
-  // Indexable country hubs
+  // Indexable country hubs (SA, AE, EG only)
   for (const c of COUNTRIES) {
     const cCode = c.countryCode.toLowerCase();
-    if (isCountryHubGatedIndexable(cCode)) {
+    if (isCountryHubIndexable(cCode)) {
       const cData = getCountryData(cCode);
       const hubLastmod = cData?.fuel?.checkedAt || cData?.vat?.checkedAt || '2026-10-15';
 
@@ -65,12 +65,13 @@ export function getCountriesSitemap(): SitemapUrlEntry[] {
     }
   }
 
-  // Indexable country calculators (all 32 indexable)
+  // Indexable country calculators (excluding 301 redirects like car-fuel-cost)
   for (const c of COUNTRIES) {
     const cCode = c.countryCode.toLowerCase();
     const cData = getCountryData(cCode);
 
     for (const calc of ALL_CALCULATORS) {
+      if (calc.slug === 'car-fuel-cost') continue;
       if (isIndexable({ countryCode: cCode, calculatorSlug: calc.slug })) {
         let calcDate = calc.lastReviewedAt || '2026-10-20';
         if (cData) {

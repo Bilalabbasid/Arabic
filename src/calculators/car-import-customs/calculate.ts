@@ -20,7 +20,7 @@ export function calculateCarImportCustoms(inputs: CarImportInputs, country?: Cou
   const cifValue = fob + shipping;
 
   const customsDutyPercent = country?.vehicle.value?.customsDutyPercent ?? 5.0;
-  const customsVatPercent = country?.vehicle.value?.customsVatPercent ?? (country?.vat.status === 'verified' ? country.vat.value?.standardRate || 0 : 0);
+  const customsVatPercent = country ? (country.vehicle.value?.customsVatPercent ?? (country.vat.status === 'verified' ? country.vat.value?.standardRate ?? 0 : 0)) : 15.0;
 
   const customsDutyAmount = cifValue * (customsDutyPercent / 100);
   const vatTaxableBase = cifValue + customsDutyAmount;

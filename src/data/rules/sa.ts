@@ -54,7 +54,7 @@ export const SA_RULES: CountryLegalRules = {
     value: {
       octane91: 2.18,
       octane95: 2.33,
-      diesel: 1.15,
+      diesel: 1.79,
       pricingModel: 'سقف رسمي معتمد بأمر ملكي كريم لحماية المستهلك',
     },
     unit: 'ريال/لتر',

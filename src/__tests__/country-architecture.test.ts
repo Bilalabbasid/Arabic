@@ -25,9 +25,9 @@ describe('Phase 3: Country Architecture & Localized Calculators', () => {
       ['SA', 'AE', 'BH', 'OM', 'EG', 'JO', 'MA', 'DZ', 'TN', 'LB', 'KW', 'QA'].sort()
     );
 
-    // End of service
+    // End of service (Egypt gated/unverified pending Law 14/2025 review)
     const validEosCountries = COUNTRIES.filter((c) => isCountryCalculatorValid(eos, c.countryCode)).map((c) => c.countryCode);
-    expect(validEosCountries.sort()).toEqual(['SA', 'AE', 'EG'].sort());
+    expect(validEosCountries.sort()).toEqual(['SA', 'AE'].sort());
 
     // Electricity
     const validElecCountries = COUNTRIES.filter((c) => isCountryCalculatorValid(elec, c.countryCode)).map((c) => c.countryCode);

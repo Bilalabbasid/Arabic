@@ -6,6 +6,7 @@ import {
   COUNTRIES,
   getCountryByCode,
   getAllCountryCodes,
+  getCountryData,
 } from '@/data/countries';
 import { ALL_CALCULATORS } from '@/data/calculators';
 import { getCountryLegalRules } from '@/data/rules';
@@ -75,6 +76,7 @@ export default async function CountryHubPage({ params }: PageProps) {
   }
 
   const countryRules = getCountryLegalRules(country.countryCode);
+  const countryData = getCountryData(country.countryCode.toLowerCase());
 
   // Separate localized calculators from generic/universal calculators
   const localizedCalculators = ALL_CALCULATORS.filter(
@@ -226,6 +228,45 @@ export default async function CountryHubPage({ params }: PageProps) {
                 <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
                   <span>احسب بـ {country.currencySymbolAr}</span>
                   <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+{/* Section: Intercity Trip Routes */}
+      {countryData?.routes && countryData.routes.length > 0 && countryData.fuel?.status === 'verified' && (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              تكلفة السفر والتنقل بالسيارة بين مدن {country.nameAr}
+            </h2>
+            <Link
+              href={`/${country.countryCode.toLowerCase()}/fuel-cost`}
+              className="text-xs font-bold text-emerald-600 hover:underline"
+            >
+              حاسبة استهلاك الوقود &larr;
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {countryData.routes.slice(0, 6).map((route) => (
+              <Link
+                key={route.id}
+                href={`/${country.countryCode.toLowerCase()}/trip-cost/${route.id}`}
+                className="group bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs hover:border-emerald-400 hover:shadow-md transition-all flex items-center justify-between"
+              >
+                <div>
+                  <div className="font-bold text-slate-900 group-hover:text-emerald-700 text-sm">
+                    من {route.fromCityAr} إلى {route.toCityAr}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">
+                    مسافة {route.distanceKm} كم • طريق سريع
+                  </div>
+                </div>
+                <div className="p-2 rounded-xl bg-slate-50 group-hover:bg-emerald-50 text-slate-400 group-hover:text-emerald-600 transition-colors">
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}

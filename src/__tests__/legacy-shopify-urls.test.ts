@@ -21,6 +21,9 @@ describe('Legacy Shopify URLs and Middleware (Phase 2)', () => {
     '/pages/warranty',
     '/pages/track-order',
     '/pages/data-sharing-opt-out',
+    '/pages/faq',
+    '/collections',
+    '/collections/all',
     '/sitemap_products_1.xml',
     '/sitemap_collections_1.xml',
     '/sitemap_pages_1.xml',
@@ -51,9 +54,6 @@ describe('Legacy Shopify URLs and Middleware (Phase 2)', () => {
       expect(redirectMap['/pages/privacy']).toEqual({ destination: '/privacy', permanent: true });
       expect(redirectMap['/pages/terms']).toEqual({ destination: '/terms', permanent: true });
       expect(redirectMap['/pages/about']).toEqual({ destination: '/about', permanent: true });
-      expect(redirectMap['/pages/faq']).toEqual({ destination: '/about', permanent: true });
-      expect(redirectMap['/collections/:path*']).toEqual({ destination: '/calculators', permanent: true });
-      expect(redirectMap['/collections']).toEqual({ destination: '/calculators', permanent: true });
     }
   });
 

@@ -55,9 +55,9 @@ export const AE_RULES: CountryLegalRules = {
   },
   fuelPrices: {
     value: {
-      octane91: 2.75,
-      octane95: 2.87,
-      diesel: 2.95,
+      octane91: 4.20,
+      octane95: 4.28,
+      diesel: 4.80,
       pricingModel: 'تسعيرة معلنة شهرياً ترتبط بالأسعار العالمية للنفط',
     },
     unit: 'درهم/لتر',

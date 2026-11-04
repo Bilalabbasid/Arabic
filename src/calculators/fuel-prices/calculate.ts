@@ -15,7 +15,7 @@ export function calculateFuelPrices(inputs: FuelPricesInputs, country?: CountryD
   const grades = fuelData?.grades || {
     octane91: { nameAr: 'بنزين 91 ممتاز', pricePerLiter: 2.18, unitAr: 'ر.س/لتر' },
     octane95: { nameAr: 'بنزين 95 سوبر', pricePerLiter: 2.33, unitAr: 'ر.س/لتر' },
-    diesel: { nameAr: 'ديزل', pricePerLiter: 1.15, unitAr: 'ر.س/لتر' },
+    diesel: { nameAr: 'ديزل', pricePerLiter: 1.79, unitAr: 'ر.س/لتر' },
   };
 
   const selectedKey = inputs.fuelGrade && grades[inputs.fuelGrade] ? inputs.fuelGrade : Object.keys(grades)[0];
@@ -72,6 +72,7 @@ export function calculateFuelPrices(inputs: FuelPricesInputs, country?: CountryD
       { label: 'تاريخ آخر تحديث رسمي', value: country?.fuel.checkedAt || '2026-11-01' },
     ],
     breakdown: {
+      periodLabel: 'نوع الوقود',
       columns: [
         { key: 'price', label: 'سعر اللتر' },
         { key: 'fill50L', label: 'تعبئة 50 لتر' },

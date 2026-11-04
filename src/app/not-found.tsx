@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   const topCalculators = [
-    { name: 'حاسبة استهلاك وتكلفة الوقود', href: '/calculators/car-fuel-cost' },
+    { name: 'حاسبة استهلاك وتكلفة الوقود', href: '/calculators/fuel-cost' },
     { name: 'حاسبة ضريبة القيمة المضافة (15% و 5%)', href: '/calculators/vat-calculator' },
     { name: 'حاسبة القروض والتمويل البنكي', href: '/calculators/loan-calculator' },
     { name: 'حاسبة مكافأة نهاية الخدمة', href: '/calculators/end-of-service-reward' },

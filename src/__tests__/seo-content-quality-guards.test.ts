@@ -118,7 +118,8 @@ describe('SEO Content Quality & Programmatic Guards', () => {
         }
       }
     }
-    expect(indexableCount).toBe(32);
+    // 31 indexable country variants (Egypt end-of-service noindexed pending Law 14/2025 review)
+    expect(indexableCount).toBe(31);
   });
 
   it('Minimum words: indexable category hubs have rich intro >= 150 words (test)', () => {

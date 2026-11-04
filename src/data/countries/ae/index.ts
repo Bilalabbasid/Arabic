@@ -124,22 +124,22 @@ export const COUNTRY_DATA_AE: CountryData = {
       "grades": {
         "super98": {
           "nameAr": "سوبر 98 ممتاز",
-          "pricePerLiter": 3.14,
+          "pricePerLiter": 4.40,
           "unitAr": "د.إ/لتر"
         },
         "special95": {
           "nameAr": "خصوصي 95",
-          "pricePerLiter": 3.03,
+          "pricePerLiter": 4.28,
           "unitAr": "د.إ/لتر"
         },
         "eplus91": {
           "nameAr": "إي بلس 91",
-          "pricePerLiter": 2.95,
+          "pricePerLiter": 4.20,
           "unitAr": "د.إ/لتر"
         },
         "diesel": {
           "nameAr": "ديزل",
-          "pricePerLiter": 3.08,
+          "pricePerLiter": 4.80,
           "unitAr": "د.إ/لتر"
         }
       },

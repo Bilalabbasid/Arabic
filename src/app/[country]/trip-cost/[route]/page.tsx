@@ -217,6 +217,63 @@ export default async function TripRoutePage({ params }: PageProps) {
         </div>
       )}
 
+{/* Round Trip Calculation & Highway Analysis */}
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+          تفاصيل رحلة الذهاب والعودة (مسار كامل {route.distanceKm * 2} كم)
+        </h2>
+        <p className="text-sm text-slate-600 leading-relaxed">
+          في حال التخطيط لرحلة ذهاباً وإياباً بين {route.fromCityAr} و{route.toCityAr}، تبلغ المسافة الإجمالية المقطوعة <strong>{route.distanceKm * 2} كم</strong>. ويتطلب المشوار الكامل ما يقارب <strong>{(fuelLiters * 2).toFixed(1)} لتر</strong> من الوقود، بتكلفة تقديرية إجمالية تبدأ من {primaryCost ? `${(Number(primaryCost) * 2).toFixed(2)} ${currencySymbol}` : 'حسب التسعيرة'} لنوع {primaryGrade?.nameAr || 'الوقود'}.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-2">
+            <h3 className="font-bold text-sm text-slate-800">معدل الاستهلاك حسب نوع وحجم السيارة</h3>
+            <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+              <li><strong>سيارة سيدان اقتصادية (4 سلندر):</strong> حوالي 6.5 إلى 7.5 لتر / 100 كم ({(route.distanceKm * 0.07).toFixed(1)} لتر ذهاباً).</li>
+              <li><strong>سيارة عائلية متوسطة (SUV 6 سلندر):</strong> حوالي 9.5 إلى 11.5 لتر / 100 كم ({(route.distanceKm * 0.105).toFixed(1)} لتر ذهاباً).</li>
+              <li><strong>مركبة دفع رباعي ثقيلة أو نقل:</strong> حوالي 12.0 إلى 15.0 لتر / 100 كم ({(route.distanceKm * 0.135).toFixed(1)} لتر ذهاباً).</li>
+            </ul>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-2">
+            <h3 className="font-bold text-sm text-slate-800">عوامل مؤثرة على استهلاك البنزين أثناء السفر</h3>
+            <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+              <li><strong>السرعة الزائدة:</strong> القيادة بسرعة 120 كم/س تستهلك وقوداً إضافياً بنسبة تصل إلى 20% مقارنة بالسرعة الاقتصادية 90-100 كم/س.</li>
+              <li><strong>مكيف الهواء:</strong> يزيد تشغيل التكييف في الأجواء الحارة من استهلاك المحرك بنسبة تتراوح بين 5% و12%.</li>
+              <li><strong>ضغط الإطارات:</strong> انخفاض ضغط الإطارات عن المستوى الموصى به يرفع مقاومة الدوران ويزيد حرق الوقود.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/70 text-amber-900 text-xs sm:text-sm leading-relaxed">
+          <strong>إرشادات السلامة والتزود بالوقود:</strong> يُنصح بتعبئة خزان الوقود بالكامل قبل مغادرة {route.fromCityAr} ومتابعة مؤشر الوقود عند الاقتراب من منتصف المسافة، والالتزام بالسرعات القانونية المحددة على الطريق السريع لضمان سلامتك وتحقيق أفضل كفاءة استهلاك ممكنة لسيارتك.
+        </div>
+      </div>
+
+      {/* Other Intercity Routes in Country */}
+      {countryData.routes && countryData.routes.filter((r) => r.id !== route.id).length > 0 && (
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-4">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+            مسارات أخرى بين المدن في {country.nameAr}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {countryData.routes
+              .filter((r) => r.id !== route.id)
+              .slice(0, 6)
+              .map((otherRoute) => (
+                <Link
+                  key={otherRoute.id}
+                  href={`/${country.countryCode.toLowerCase()}/trip-cost/${otherRoute.id}`}
+                  className="p-3 bg-slate-50 hover:bg-emerald-50/60 rounded-xl border border-slate-200 hover:border-emerald-300 text-xs font-bold text-slate-700 hover:text-emerald-800 transition-colors shadow-2xs"
+                >
+                  من {otherRoute.fromCityAr} إلى {otherRoute.toCityAr} ({otherRoute.distanceKm} كم)
+                </Link>
+              ))}
+          </div>
+        </div>
+      )}
+
       {/* Action Links & Related Intercity Routes */}
       <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200/80 space-y-4">
         <h3 className="text-base font-bold text-slate-800">روابط ذات صلة بهذا المسار</h3>

@@ -77,6 +77,7 @@ export function calculateVat(
         formattedValue: formatCurrency(grossAmount, currency),
         unit: currency,
         highlight: calculationType === 'add',
+        isCurrency: true,
       },
       {
         id: 'netAmount',
@@ -85,6 +86,7 @@ export function calculateVat(
         formattedValue: formatCurrency(netAmount, currency),
         unit: currency,
         highlight: calculationType === 'extract',
+        isCurrency: true,
       },
       {
         id: 'vatRate',

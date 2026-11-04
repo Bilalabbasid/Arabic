@@ -10,7 +10,7 @@ describe('Phase 8: Trust & Transparency Pages (/about, /contact, /methodology, /
     expect(aboutContent).not.toContain('[FILL');
     expect(aboutContent).not.toContain('200–400+');
     expect(aboutContent).not.toContain('200-400+');
-    expect(aboutContent).toContain('10 حاسبات متخصصة');
+    expect(aboutContent).toContain('26 حاسبة متخصصة');
     expect(aboutContent).toContain('نموذج التمويل');
     expect(aboutContent).toContain('/contact');
     expect(aboutContent).toContain('/methodology');

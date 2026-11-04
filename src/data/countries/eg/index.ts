@@ -110,7 +110,7 @@ export const COUNTRY_DATA_EG: CountryData = {
     "staleAfterDays": 365
   },
   "endOfService": {
-    "status": "verified",
+    "status": "unverified",
     "value": {
       "standardFormula": "أجر نصف شهر عن كل سنة من السنوات الخمس الأولى، وأجر شهر كامل عن كل سنة تالية (عند سن التقاعد 60 سنة).",
       "firstTierYears": 5,
@@ -130,7 +130,7 @@ export const COUNTRY_DATA_EG: CountryData = {
       "wageBasis": "gross_wage_with_fixed_allowances",
       "articles": "المادة 126 من قانون العمل المصري الموحد رقم 12 لسنة 2003"
     },
-    "law": "قانون العمل المصري الموحد رقم 12 لسنة 2003",
+    "law": "قيد المراجعة التشريعية بعد صدور قانون العمل الجديد رقم 14 لسنة 2025",
     "authority": "وزارة العمل المصرية",
     "sourceUrl": "https://www.manpower.gov.eg",
     "validFrom": "2003-07-01",
@@ -159,22 +159,22 @@ export const COUNTRY_DATA_EG: CountryData = {
       "grades": {
         "octane80": {
           "nameAr": "بنزين 80",
-          "pricePerLiter": 13.75,
+          "pricePerLiter": 20.00,
           "unitAr": "ج.م/لتر"
         },
         "octane92": {
           "nameAr": "بنزين 92",
-          "pricePerLiter": 15.25,
+          "pricePerLiter": 22.25,
           "unitAr": "ج.م/لتر"
         },
         "octane95": {
           "nameAr": "بنزين 95",
-          "pricePerLiter": 17,
+          "pricePerLiter": 24.00,
           "unitAr": "ج.م/لتر"
         },
         "solar": {
           "nameAr": "سولار (ديزل)",
-          "pricePerLiter": 13.5,
+          "pricePerLiter": 20.50,
           "unitAr": "ج.م/لتر"
         }
       },

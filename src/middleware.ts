@@ -7,6 +7,8 @@ const GONE_EXACT_PATHS = new Set([
   '/checkouts',
   '/policies',
   '/products',
+  '/collections',
+  '/pages/faq',
   '/pages/shipping',
   '/pages/returns',
   '/pages/warranty',
@@ -20,6 +22,7 @@ const GONE_EXACT_PATHS = new Set([
 
 const GONE_PREFIX_PATHS = [
   '/products/',
+  '/collections/',
   '/cart/',
   '/account/',
   '/checkouts/',

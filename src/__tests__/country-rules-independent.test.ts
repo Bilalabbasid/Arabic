@@ -237,9 +237,9 @@ describe('Phase I: Vehicle & Fuel Distinctions', () => {
     expect(saRun.secondary?.[0].value).toBe(40.0);
     expect(aeRun.secondary?.[0].value).toBe(40.0);
 
-    // But costs differ: SA (40 * 2.18 = 87.20 SAR) vs AE (40 * 2.75 = 110.00 AED)
+    // But costs differ: SA (40 * 2.18 = 87.20 SAR) vs AE (40 * 4.20 = 168.00 AED)
     expect(saRun.primary.value).toBeCloseTo(87.2, 2);
-    expect(aeRun.primary.value).toBeCloseTo(110.0, 2);
+    expect(aeRun.primary.value).toBeCloseTo(168.0, 2);
   });
 
   it('correctly badges manual price entries and uses user assumptions', () => {

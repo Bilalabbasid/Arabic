@@ -78,6 +78,7 @@ export interface CalculationResult {
   secondary?: ResultItem[];
   details?: ResultItem[];
   breakdown?: {
+    periodLabel?: string;
     columns: { key: string; label: string; align?: 'start' | 'end' | 'center' }[];
     rows: CalculationBreakdownRow[];
   };

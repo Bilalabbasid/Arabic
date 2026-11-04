@@ -93,6 +93,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/changelog" className="hover:text-emerald-400 transition-colors">
+                  سجل التحديثات التشريعية
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="hover:text-emerald-400 transition-colors">
                   اتصل بنا والمقترحات
                 </Link>

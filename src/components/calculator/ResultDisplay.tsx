@@ -24,6 +24,18 @@ interface Props {
   className?: string;
 }
 
+function shouldRenderUnit(formattedVal: string, unit?: string, isCurrency?: boolean): boolean {
+  if (!unit) return false;
+  if (isCurrency) return false;
+  const cleanVal = formattedVal.trim();
+  const cleanUnit = unit.trim();
+  if (!cleanUnit) return false;
+  if (cleanVal.endsWith(cleanUnit) || cleanVal.includes(cleanUnit)) return false;
+  if (cleanUnit === '%' && cleanVal.includes('%')) return false;
+  if ((cleanUnit === 'ر.س' || cleanUnit === 'SAR') && (cleanVal.includes('ر.س') || cleanVal.includes('SAR'))) return false;
+  return true;
+}
+
 export default function ResultDisplay({
   result,
   currency,
@@ -47,7 +59,10 @@ export default function ResultDisplay({
 
   const handleCopy = async () => {
     try {
-      const textToCopy = `${result.primary.label}: ${result.primary.formattedValue || result.primary.value} ${result.primary.unit || ''} — تم الحساب عبر منصة لِسيارتك lsayartk.com – نتائج استرشادية غير ملزمة رسمياً.`;
+      const primaryText = result.primary.formattedValue || String(result.primary.value);
+      const hasUnitAlready = result.primary.unit && (primaryText.includes(result.primary.unit) || result.primary.isCurrency);
+      const unitSuffix = (result.primary.unit && !hasUnitAlready) ? ` ${result.primary.unit}` : '';
+      const textToCopy = `${result.primary.label}: ${primaryText}${unitSuffix} — تم الحساب عبر منصة لِسيارتك lsayartk.com – نتائج استرشادية غير ملزمة رسمياً.`;
       if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(textToCopy);
       }
@@ -95,7 +110,7 @@ export default function ResultDisplay({
           <span className="text-3xl sm:text-5xl font-black font-sans tracking-tight" dir="ltr">
             <bdi>{result.primary.formattedValue || result.primary.value}</bdi>
           </span>
-          {result.primary.unit && !result.primary.isCurrency && (
+          {result.primary.unit && shouldRenderUnit(String(result.primary.formattedValue || result.primary.value), result.primary.unit, result.primary.isCurrency) && (
             <span className="text-base sm:text-xl font-bold text-emerald-200">
               <bdi>{result.primary.unit}</bdi>
             </span>
@@ -146,7 +161,10 @@ export default function ResultDisplay({
             >
               <div className="text-xs font-medium text-slate-500 mb-1">{sec.label}</div>
               <div className="text-lg sm:text-xl font-bold text-slate-900 font-sans" dir="ltr">
-                <bdi>{sec.formattedValue || sec.value}</bdi> {sec.unit && !sec.isCurrency ? <bdi className="text-sm font-medium text-slate-600">{sec.unit}</bdi> : ''}
+                <bdi>{sec.formattedValue || sec.value}</bdi>
+                {shouldRenderUnit(String(sec.formattedValue || sec.value), sec.unit, sec.isCurrency) ? (
+                  <bdi className="text-sm font-medium text-slate-600"> {sec.unit}</bdi>
+                ) : null}
               </div>
             </div>
           ))}
@@ -165,7 +183,9 @@ export default function ResultDisplay({
             <table className="w-full text-xs sm:text-sm text-start divide-y divide-slate-100">
               <thead className="bg-slate-50/80 text-slate-600 font-bold">
                 <tr>
-                  <th className="py-3 px-4 text-start font-semibold">الفترة / الشريحة</th>
+                  <th className="py-3 px-4 text-start font-semibold">
+                    {result.breakdown.periodLabel || 'الفترة / الشريحة'}
+                  </th>
                   {result.breakdown.columns.map((col) => (
                     <th key={col.key} className="py-3 px-4 text-start font-semibold">
                       {col.label}

@@ -31,21 +31,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/pages/faq',
-        destination: '/about',
-        permanent: true,
-      },
-      {
-        source: '/collections/:path*',
-        destination: '/calculators',
-        permanent: true,
-      },
-      {
-        source: '/collections',
-        destination: '/calculators',
-        permanent: true,
-      },
-      {
         source: '/calculators/car-fuel-cost',
         destination: '/calculators/fuel-cost',
         permanent: true,

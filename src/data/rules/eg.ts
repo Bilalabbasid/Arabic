@@ -57,9 +57,9 @@ export const EG_RULES: CountryLegalRules = {
   },
   fuelPrices: {
     value: {
-      octane91: 12.25,
-      octane95: 15.00,
-      diesel: 11.50,
+      octane91: 22.25,
+      octane95: 24.00,
+      diesel: 20.50,
       pricingModel: 'تسعير ربع سنوي تقرره لجنة التسعير التلقائي للمنتجات البترولية',
     },
     unit: 'جنيه/لتر',

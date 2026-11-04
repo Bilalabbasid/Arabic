@@ -199,10 +199,10 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
           {countryContent?.h1 || `${calc.nameAr} في ${country.nameAr}`}
         </h1>
-        {calc.answerFirstAr && (
+        {(countryContent?.answerFirstAr || calc.answerFirstAr) && (
           <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-emerald-950 font-medium text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
             <span className="font-extrabold text-emerald-800 shrink-0">إجابة مباشرة:</span>
-            <span>{calc.answerFirstAr}</span>
+            <span>{countryContent?.answerFirstAr || calc.answerFirstAr}</span>
           </div>
         )}
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
