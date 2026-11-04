@@ -6,7 +6,8 @@ import { generateOrganizationSchema } from '@/lib/seo/metadata';
 describe('Phase 8: Trust & Transparency Pages (/about, /contact, /methodology, /sources)', () => {
   it('/about page explains team background, real 10-calculator scale, and funding model', () => {
     const aboutContent = fs.readFileSync(path.join(process.cwd(), 'src/app/about/page.tsx'), 'utf8');
-    expect(aboutContent).toContain('[FILL: real name or company + 2–3 sentences of real background]');
+    expect(aboutContent).toContain('تدار منصة لِسيارتك بواسطة فريق تحرير وتطوير تقني مستقل');
+    expect(aboutContent).not.toContain('[FILL');
     expect(aboutContent).not.toContain('200–400+');
     expect(aboutContent).not.toContain('200-400+');
     expect(aboutContent).toContain('10 حاسبات متخصصة');
@@ -15,11 +16,11 @@ describe('Phase 8: Trust & Transparency Pages (/about, /contact, /methodology, /
     expect(aboutContent).toContain('/methodology');
   });
 
-  it('/contact page provides contact email placeholder, response time, and jurisdiction', () => {
+  it('/contact page provides contact email, response time, and no placeholder address', () => {
     const contactContent = fs.readFileSync(path.join(process.cwd(), 'src/app/contact/page.tsx'), 'utf8');
-    expect(contactContent).toContain('[FILL: contact email]');
+    expect(contactContent).toContain('info@lsayartk.com');
     expect(contactContent).toContain('48 ساعة عمل');
-    expect(contactContent).toContain('[FILL: legal entity, country/city]');
+    expect(contactContent).not.toContain('[FILL');
   });
 
   it('/methodology page includes update frequency schedule, rounding standards, and real changelog', () => {
@@ -45,7 +46,7 @@ describe('Phase 8: Trust & Transparency Pages (/about, /contact, /methodology, /
     expect(schema.name).toBe('لِسيارتك');
     expect(schema.url).toMatch(/^https?:\/\//);
     expect(schema.logo).toMatch(/\/icon\.svg$/);
-    expect(schema.email).toContain('[FILL: contact email]');
+    expect(schema.email).toBe('info@lsayartk.com');
     expect(schema.publishingPrinciples).toMatch(/\/methodology$/);
   });
 });

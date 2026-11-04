@@ -37,7 +37,7 @@ export default function AboutPage() {
           <h2>من نحن وفريق العمل المسؤول</h2>
         </div>
         <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-          تدار منصة لِسيارتك بواسطة فريق تحرير وتطوير تقني مستقل: [FILL: real name or company + 2–3 sentences of real background].
+          تدار منصة لِسيارتك بواسطة فريق تحرير وتطوير تقني مستقل متخصص في النمذجة الرياضية وبناء الحاسبات الرقمية الموثوقة للمستخدم العربي.
         </p>
         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
           نلتزم بعدم اختلاق أي ألقاب وهمية أو ادعاء اعتمادات رسمية غير موثقة؛ حيث تنبع مصداقية أدواتنا من شفافية المعادلات الرياضية، وروابط المصادر الرسمية المعلنة لكل دولة.

@@ -37,7 +37,7 @@ export default function MethodologyBox({
 
   const reportSubject = encodeURIComponent(`إبلاغ عن خطأ حسابي: ${calculatorSlug || ''} (${countryCode || 'عام'}) v${ruleVersion}`);
   const reportBody = encodeURIComponent(`السلام عليكم فريق منصة لِسيارتك،\n\nأود الإبلاغ عن ملاحظة أو خطأ في صفحة:\nالحاسبة: ${calculatorSlug || ''}\nالدولة: ${countryCode || 'عام'}\nإصدار اللائحة: v${ruleVersion}\n\nتفاصيل الملاحظة أو النتيجة المتوقعة:\n\n`);
-  const reportMailto = `mailto:support@lsayartk.com?subject=${reportSubject}&body=${reportBody}`;
+  const reportMailto = `mailto:info@lsayartk.com?subject=${reportSubject}&body=${reportBody}`;
 
   return (
     <div className={`bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-5 ${className}`}>

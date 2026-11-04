@@ -259,7 +259,7 @@ export function generateOrganizationSchema() {
     name: 'لِسيارتك',
     url: SITE_URL,
     logo: `${SITE_URL}/icon.svg`,
-    email: '[FILL: contact email]',
+    email: 'info@lsayartk.com',
     sameAs: [],
     publishingPrinciples: `${SITE_URL}/methodology`,
   };

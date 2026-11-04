@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import ContactForm from '@/components/common/ContactForm';
-import { Mail, Clock, MapPin, MessageSquare, AlertCircle } from 'lucide-react';
+import { Mail, Clock, MessageSquare, AlertCircle } from 'lucide-react';
 import { formatMetaTitle, constructCanonicalUrl } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = {
@@ -30,16 +30,20 @@ export default function ContactPage() {
       </div>
 
       {/* Info Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm space-y-2">
           <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
             <Mail className="w-4 h-4" />
           </div>
           <h2 className="text-sm font-bold text-slate-900">البريد الإلكتروني المباشر</h2>
-          <p className="text-xs text-slate-600 font-mono" dir="ltr">
-            [FILL: contact email]
-          </p>
-          <span className="text-[11px] text-slate-400 block">للمراسلات الرسمية والتحريرية</span>
+          <a
+            href="mailto:info@lsayartk.com"
+            className="text-xs text-emerald-700 hover:text-emerald-800 font-mono font-semibold block"
+            dir="ltr"
+          >
+            info@lsayartk.com
+          </a>
+          <span className="text-[11px] text-slate-400 block">للمراسلات الرسمية والتحريرية والمقترحات</span>
         </div>
 
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm space-y-2">
@@ -51,17 +55,6 @@ export default function ContactPage() {
             خلال 48 ساعة عمل
           </p>
           <span className="text-[11px] text-slate-400 block">من الأحد إلى الخميس</span>
-        </div>
-
-        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm space-y-2">
-          <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
-            <MapPin className="w-4 h-4" />
-          </div>
-          <h2 className="text-sm font-bold text-slate-900">الجهة المشغلة والولاية القضائية</h2>
-          <p className="text-xs text-slate-600">
-            [FILL: legal entity, country/city]
-          </p>
-          <span className="text-[11px] text-slate-400 block">الجهة القانونية المسجلة</span>
         </div>
       </div>
 

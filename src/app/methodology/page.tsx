@@ -176,7 +176,7 @@ export default function MethodologyPage() {
             <h2>الإبلاغ عن خطأ أو تعديل في اللوائح</h2>
           </div>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-            إذا لاحظت أي اختلاف بين النتائج والتعرفات المحلية المطبقة في مدينتك، أو صدر قرار حكومي جديد لم يتم تحديثه، يرجى مراسلتنا فوراً عبر البريد الإلكتروني المباشر <code className="bg-slate-800 text-emerald-300 px-2 py-0.5 rounded font-mono text-xs">[FILL: contact email]</code> أو من خلال صفحة الاتصال، وسيقوم فريق التحرير بمراجعة المصدر وتحديث الحاسبة خلال 24–48 ساعة.
+            إذا لاحظت أي اختلاف بين النتائج والتعرفات المحلية المطبقة في مدينتك، أو صدر قرار حكومي جديد لم يتم تحديثه، يرجى مراسلتنا فوراً عبر البريد الإلكتروني المباشر <a href="mailto:info@lsayartk.com" className="text-emerald-400 font-mono font-bold hover:underline" dir="ltr">info@lsayartk.com</a> أو من خلال صفحة الاتصال، وسيقوم فريق التحرير بمراجعة المصدر وتحديث الحاسبة خلال 24–48 ساعة.
           </p>
           <div className="pt-2">
             <Link
