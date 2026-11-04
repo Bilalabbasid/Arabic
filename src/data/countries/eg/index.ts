@@ -53,42 +53,59 @@ export const COUNTRY_DATA_EG: CountryData = {
     "status": "verified",
     "value": {
       "hasPersonalIncomeTax": true,
-      "standardDeduction": 60000,
+      "standardDeduction": 20000,
+      "roundDownTo": 10,
       "brackets": [
-        {
-          "thresholdUpTo": 40000,
-          "rate": 0
-        },
-        {
-          "thresholdUpTo": 55000,
-          "rate": 10
-        },
-        {
-          "thresholdUpTo": 70000,
-          "rate": 15
-        },
-        {
-          "thresholdUpTo": 200000,
-          "rate": 20
-        },
-        {
-          "thresholdUpTo": 400000,
-          "rate": 22.5
-        },
-        {
-          "thresholdUpTo": 1200000,
-          "rate": 25
-        },
-        {
-          "rate": 27.5
-        }
+        { "thresholdUpTo": 40000, "rate": 0 },
+        { "thresholdUpTo": 55000, "rate": 10 },
+        { "thresholdUpTo": 70000, "rate": 15 },
+        { "thresholdUpTo": 200000, "rate": 20 },
+        { "thresholdUpTo": 400000, "rate": 22.5 },
+        { "thresholdUpTo": 1200000, "rate": 25 },
+        { "rate": 27.5 }
+      ],
+      "schedules": [
+        { "maxTaxable": 600000, "brackets": [
+          { "thresholdUpTo": 40000, "rate": 0 },
+          { "thresholdUpTo": 55000, "rate": 10 },
+          { "thresholdUpTo": 70000, "rate": 15 },
+          { "thresholdUpTo": 200000, "rate": 20 },
+          { "thresholdUpTo": 400000, "rate": 22.5 },
+          { "rate": 25 }
+        ] },
+        { "maxTaxable": 700000, "brackets": [
+          { "thresholdUpTo": 55000, "rate": 10 },
+          { "thresholdUpTo": 70000, "rate": 15 },
+          { "thresholdUpTo": 200000, "rate": 20 },
+          { "thresholdUpTo": 400000, "rate": 22.5 },
+          { "rate": 25 }
+        ] },
+        { "maxTaxable": 800000, "brackets": [
+          { "thresholdUpTo": 70000, "rate": 15 },
+          { "thresholdUpTo": 200000, "rate": 20 },
+          { "thresholdUpTo": 400000, "rate": 22.5 },
+          { "rate": 25 }
+        ] },
+        { "maxTaxable": 900000, "brackets": [
+          { "thresholdUpTo": 200000, "rate": 20 },
+          { "thresholdUpTo": 400000, "rate": 22.5 },
+          { "rate": 25 }
+        ] },
+        { "maxTaxable": 1200000, "brackets": [
+          { "thresholdUpTo": 400000, "rate": 22.5 },
+          { "rate": 25 }
+        ] },
+        { "brackets": [
+          { "thresholdUpTo": 1200000, "rate": 25 },
+          { "rate": 27.5 }
+        ] }
       ]
     },
-    "law": "قانون الضريبة على الدخل رقم 91 لسنة 2005 وتعديلاته بالقانون رقم 30 لسنة 2023 والقانون رقم 7 لسنة 2024",
+    "law": "قانون الضريبة على الدخل رقم 91 لسنة 2005 والمادتان 8 و13 كما استبدلتا بالقانون رقم 7 لسنة 2024 (إعفاء شخصي 20,000 جنيه سنوياً)",
     "authority": "مصلحة الضرائب المصرية",
-    "sourceUrl": "https://www.eta.gov.eg",
+    "sourceUrl": "https://eta.gov.eg/sites/default/files/2024-03/law_no.7-2024.pdf",
     "validFrom": "2024-03-01",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 365
   },
   "socialInsurance": {
@@ -98,15 +115,16 @@ export const COUNTRY_DATA_EG: CountryData = {
       "nationalEmployerRate": 18.75,
       "expatEmployeeRate": 0,
       "expatEmployerRate": 2,
-      "maxMonthlyWageCap": 12600,
+      "maxMonthlyWageCap": 16700,
+      "minMonthlyWage": 2700,
       "agencyNameAr": "الهيئة القومية للتأمين الاجتماعي",
       "agencyAcronym": "NOSI"
     },
     "law": "قانون التأمينات الاجتماعية والمعاشات رقم 148 لسنة 2019",
     "authority": "الهيئة القومية للتأمين الاجتماعي (NOSI)",
-    "sourceUrl": "https://www.nosi.gov.eg",
-    "validFrom": "2020-01-01",
-    "checkedAt": "2026-11-01",
+    "sourceUrl": "https://www.nosi.gov.eg/ar/News/Pages/2025-11-30.aspx",
+    "validFrom": "2026-01-01",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 365
   },
   "endOfService": {
@@ -159,7 +177,7 @@ export const COUNTRY_DATA_EG: CountryData = {
       "grades": {
         "octane80": {
           "nameAr": "بنزين 80",
-          "pricePerLiter": 20.00,
+          "pricePerLiter": 20.75,
           "unitAr": "ج.م/لتر"
         },
         "octane92": {
@@ -182,9 +200,9 @@ export const COUNTRY_DATA_EG: CountryData = {
     },
     "law": "قرارات لجنة التسعير التلقائي للمنتجات البترولية الصادرة عن مجلس الوزراء",
     "authority": "وزارة البترول والثروة المعدنية",
-    "sourceUrl": "https://www.petroleum.gov.eg",
-    "validFrom": "2024-10-18",
-    "checkedAt": "2026-11-01",
+    "sourceUrl": "https://gate.ahram.org.eg/News/5565403.aspx",
+    "validFrom": "2026-03-10",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 35
   },
   "electricity": {
@@ -244,7 +262,7 @@ export const COUNTRY_DATA_EG: CountryData = {
       "drivingLicenceRenewal10Yr": 1200,
       "customsDutyPercent": 40,
       "customsVatPercent": 14,
-      "maxImportAgeYears": 1,
+      "maxImportAgeYears": 0,
       "trafficFines": [
         {
           "categoryAr": "الإشارات المرورية",

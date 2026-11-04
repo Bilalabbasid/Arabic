@@ -6,9 +6,9 @@ import { COUNTRY_DATA_KW } from '../../data/countries/kw';
 describe('Vehicle Fees Engine', () => {
   it('calculates Saudi registration and inspection fees for 3 years accurately', () => {
     const result = calculateVehicleFees({ renewalYears: 3, includeInspection: true }, COUNTRY_DATA_SA);
-    expect(result.primary.value).toBe(384);
+    expect(result.primary.value).toBe(415);
     expect(result.secondary?.[0].value).toBe(300);
-    expect(result.secondary?.[1].value).toBe(84);
+    expect(result.secondary?.[1].value).toBe(115);
   });
 
   it('calculates 1 year renewal without inspection', () => {

@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const isIndexable = isCountryHubIndexable(country.countryCode);
-  const title = formatMetaTitle(`حاسبات ${country.nameAr} – العملة والضرائب واللوائح الرسمية`);
+  const title = formatMetaTitle(`حاسبات ${country.nameAr}: الضريبة والوقود والرواتب`);
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}`);
 
   return {

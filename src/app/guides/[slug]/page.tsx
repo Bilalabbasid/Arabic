@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = formatMetaTitle(guide.titleAr);
+  const title = formatMetaTitle(guide.metaTitleAr ?? guide.titleAr);
   const canonical = constructCanonicalUrl(`/guides/${guide.slug}`);
 
   return {

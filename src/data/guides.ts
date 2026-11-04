@@ -1,6 +1,8 @@
 export interface GuideArticle {
   slug: string;
   titleAr: string;
+  /** Optional shorter <title> for search results (<= 60 chars); titleAr stays the on-page H1. */
+  metaTitleAr?: string;
   summaryAr: string;
   category: string;
   readingTimeMinutes: number;
@@ -19,6 +21,7 @@ export interface GuideArticle {
 export const GUIDES: GuideArticle[] = [
   {
     slug: 'how-to-calculate-car-fuel-cost',
+    metaTitleAr: 'طريقة حساب استهلاك وقود السيارة وتكلفة المشاوير',
     titleAr: 'دليل حساب استهلاك وقود السيارة وتكلفة السفر والمشاوير بدقة',
     summaryAr: 'تعرف على الطريقة الرياضية المعتمدة لحساب لترات البنزين المستهلكة لكل 100 كيلومتر وتأثير السرعة والوزن والمكيف على تكلفة المشاوير الشهرية.',
     category: 'cars-transportation',
@@ -58,6 +61,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'saudi-end-of-service-gratuity-guide',
+    metaTitleAr: 'مكافأة نهاية الخدمة في السعودية: المادتان 84 و85 بالأمثلة',
     titleAr: 'الدليل الشامل لمكافأة نهاية الخدمة وفق المادتين 84 و 85 من نظام العمل السعودي',
     summaryAr: 'شرح قانوني ورياضي مفصل لكيفية احتساب مكافأة نهاية الخدمة للقطاع الخاص في السعودية، والفرق بين انتهاء العقد والاستقالة وحساب البدلات وأجزاء السنة.',
     category: 'salary-employment',
@@ -97,6 +101,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'ac-electricity-consumption-guide',
+    metaTitleAr: 'حساب استهلاك المكيف للكهرباء وتكلفته الشهرية',
     titleAr: 'كيف تحسب استهلاك المكيف للكهرباء وتكلفة تشغيله شهرياً؟',
     summaryAr: 'دليل عملي لحساب استهلاك أجهزة التكييف بالواط والكيلوواط ساعة، وتقدير تكلفة تشغيل المكيف على فاتورة الكهرباء الشهرية في الصيف.',
     category: 'electricity-energy',
@@ -136,6 +141,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'ac-sizing-guide',
+    metaTitleAr: 'كيف تختار حجم المكيف المناسب؟ حساب الطن وBTU',
     titleAr: 'كيف تختار حجم المكيف المناسب للغرفة (حساب أطنان التبريد و BTU)؟',
     summaryAr: 'دليل عملي لاختيار سعة المكيف الملائمة لمساحة غرفتك، وحساب وحدات BTU المطلوبة وأطنان التبريد لتفادي هدر الطاقة أو ضعف التبريد.',
     category: 'electricity-energy',
@@ -175,6 +181,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'trip-fuel-cost-guide',
+    metaTitleAr: 'حساب تكلفة البنزين للسفر البري بين المدن',
     titleAr: 'كيف تحسب تكلفة البنزين للرحلات والسفر البري بين المدن؟',
     summaryAr: 'طريقة تخطيط ميزانية وقود السفر البري، واحتساب لترات البنزين ذهاباً وإياباً، وتأثير السرعة وحمولة الحقائب والمسارات الجبلية على تكلفة الرحلة.',
     category: 'cars-transportation',
@@ -214,6 +221,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'ecommerce-profit-calculation-guide',
+    metaTitleAr: 'حساب ربح المتجر الإلكتروني بعد الإعلانات والعمولات',
     titleAr: 'طريقة حساب ربح المتجر الإلكتروني بعد الإعلانات وبوابات الدفع',
     summaryAr: 'دليل عملي وتطبيقي لاحتساب صافي أرباح المتاجر الإلكترونية، وهامش الربح الإجمالي، وتكلفة الإعلانات والشحن ونسب بوابات الدفع والضرائب.',
     category: 'e-commerce',
@@ -253,6 +261,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'loan-installment-calculation-guide',
+    metaTitleAr: 'حساب القسط الشهري: الفائدة المتناقصة مقابل الثابتة',
     titleAr: 'كيف تحسب القسط الشهري والفوائد البنكية (فائدة متناقصة مقابل ثابتة)؟',
     summaryAr: 'شرح الفرق بين النسبة السنوية الثابتة ومعدل النسبة السنوية الفعلي (APR)، وطريقة احتساب أقساط القروض وجدول إهلاك الفوائد المتناقصة.',
     category: 'loans-installments',
@@ -292,6 +301,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'vat-calculation-guide',
+    metaTitleAr: 'طريقة حساب ضريبة القيمة المضافة واستخراجها من المبلغ',
     titleAr: 'دليل حساب ضريبة القيمة المضافة 15% و 5% وطريقة استخراج أصل المبلغ',
     summaryAr: 'شرح كامل لمعادلات حساب ضريبة القيمة المضافة للأمام وللخلف، وطريقة استخراج السعر قبل الضريبة من المبلغ الإجمالي، مع جداول الفواتير الضريبية.',
     category: 'taxation',
@@ -331,6 +341,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'zakat-wealth-calculation-guide',
+    metaTitleAr: 'طريقة حساب زكاة المال والمدخرات والذهب',
     titleAr: 'دليل حساب زكاة المال والمدخرات النقدية وعروض التجارة والذهب',
     summaryAr: 'دليل شرعي ورياضي مفصل لحساب زكاة المال، وشروط النصاب والحول، وطريقة حساب ربع العشر 2.5% على الأرصدة البنكية والذهب وعروض التجارة.',
     category: 'taxation',
@@ -370,6 +381,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'bmi-healthy-weight-guide',
+    metaTitleAr: 'دليل مؤشر كتلة الجسم BMI والوزن الصحي',
     titleAr: 'دليل حساب مؤشر كتلة الجسم (BMI) والوزن الصحي المثالي',
     summaryAr: 'دليل صحي وعلمي لحساب مؤشر كتلة الجسم، وفهم تصنيفات منظمة الصحة العالمية للنحافة والوزن المثالي والسمنة، وحساب الوزن الصحي المستهدف.',
     category: 'health-fitness',
@@ -409,6 +421,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'car-finance-installment-guide',
+    metaTitleAr: 'قسط تمويل السيارة: النسبة الثابتة والمتناقصة والبالون',
     titleAr: 'كيف تحسب قسط تمويل السيارة بدقة؟ النسبة الثابتة مقابل المتناقصة والدفعة الأخيرة',
     summaryAr: 'شرح عملي بالأرقام لطريقة حساب القسط الشهري لتمويل السيارة، وكيف تقارن بين عرض بنسبة ثابتة وآخر بنسبة سنوية متناقصة، وما التكلفة الحقيقية للدفعة الأخيرة وحد الاستقطاع من الراتب.',
     category: 'loans-installments',
@@ -452,6 +465,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'uae-end-of-service-gratuity-guide',
+    metaTitleAr: 'مكافأة نهاية الخدمة في الإمارات: طريقة الحساب بالأمثلة',
     titleAr: 'حساب مكافأة نهاية الخدمة في الإمارات وفق المرسوم بقانون 33 لسنة 2021',
     summaryAr: 'دليل مفصل لحساب مكافأة نهاية الخدمة للعاملين في القطاع الخاص بالإمارات: شرط السنة الأولى، 21 يوماً عن كل سنة من السنوات الخمس الأولى، 30 يوماً بعدها، الحد الأقصى، وأثر الاستقالة في القانون الجديد مع أمثلة محسوبة.',
     category: 'salary-employment',
@@ -491,6 +505,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: 'hijri-gregorian-date-conversion-guide',
+    metaTitleAr: 'تحويل التاريخ من هجري إلى ميلادي: الطريقة والمعادلة',
     titleAr: 'كيف تحول التاريخ من هجري إلى ميلادي؟ شرح التقويم القمري وأم القرى وطريقة الحساب',
     summaryAr: 'شرح مبسط لكيفية التحويل بين التاريخ الهجري والميلادي: لماذا تتقدم الأشهر الهجرية 11 يوماً كل عام، الفرق بين تقويم أم القرى والتقويم الحسابي، معادلة التحويل التقريبية، وحساب العمر بالهجري.',
     category: 'dates-time',

@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useId, useTransition } from 'react';
+import React, { useState, useEffect, useId, useRef, useTransition } from 'react';
+import { DEFAULT_COUNTRY } from '@/data/countries/legacy';
 import { CalculatorInput, CalculationResult, SelectOption } from '@/types/calculator';
 import { loadCalculatorEngine } from '@/lib/calculators/dynamic-loader';
 import ResultDisplay from './ResultDisplay';
@@ -100,6 +101,17 @@ export default function CalculatorRunner({
     return init;
   });
 
+  // Calculators without their own country field (net salary, fuel prices, traffic fines, vehicle
+  // fees, import customs) take their country from the header selector on generic pages.
+  const hasCountryInput = inputDefs.some((inp) => inp.id === 'country' || inp.type === 'country');
+  const activeCountryRef = useRef<string | undefined>(
+    countryCode ?? (hasCountryInput ? undefined : DEFAULT_COUNTRY.countryCode.toUpperCase())
+  );
+  const inputsRef = useRef(inputs);
+  useEffect(() => {
+    inputsRef.current = inputs;
+  }, [inputs]);
+
   // State: Validation Errors
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
@@ -125,6 +137,11 @@ export default function CalculatorRunner({
     // Sync country changes from header CountrySelector when on generic calculator
     const countryHandler = (e: any) => {
       const newCountry = e.detail?.countryCode;
+      if (!countryCode && newCountry && !hasCountryInput) {
+        activeCountryRef.current = String(newCountry).toUpperCase();
+        runCalculation(inputsRef.current);
+        return;
+      }
       if (!countryCode && newCountry) {
         const countryInput = inputDefs.find((inp) => inp.id === 'country' || inp.type === 'country');
         if (countryInput) {
@@ -140,7 +157,12 @@ export default function CalculatorRunner({
     // Check stored user country on mount
     if (!countryCode && typeof window !== 'undefined') {
       const saved = localStorage.getItem('lsayartk_user_country');
-      if (saved) {
+      if (saved && !hasCountryInput) {
+        if (saved.toUpperCase() !== activeCountryRef.current) {
+          activeCountryRef.current = saved.toUpperCase();
+          runCalculation(inputsRef.current);
+        }
+      } else if (saved) {
         const countryInput = inputDefs.find((inp) => inp.id === 'country' || inp.type === 'country');
         if (countryInput && countryInput.options?.some((o: any) => o.value.toUpperCase() === saved.toUpperCase())) {
           handleInputChange(countryInput.id, saved.toUpperCase());
@@ -211,7 +233,7 @@ export default function CalculatorRunner({
       if (engineFn) {
         startTransition(() => {
           const res = engineFn(currentInputs, {
-            countryCode,
+            countryCode: countryCode ?? activeCountryRef.current,
             currencyCode,
           });
           setResult(res);

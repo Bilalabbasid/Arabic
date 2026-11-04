@@ -69,13 +69,26 @@ export const COUNTRY_DATA_AE: CountryData = {
       "expatEmployerRate": 0,
       "maxMonthlyWageCap": 50000,
       "agencyNameAr": "الهيئة العامة للمعاشات والتأمينات الاجتماعية",
-      "agencyAcronym": "GPSSA"
+      "agencyAcronym": "GPSSA",
+      "minMonthlyWage": 1000,
+      "legacySystemLabelAr": "القانون الاتحادي 7 لسنة 1999 (مسجل قبل 31 أكتوبر 2023): 5% على الموظف",
+      "newSystem": {
+        "labelAr": "المرسوم بقانون 57 لسنة 2023 (أول تسجيل بعد 31 أكتوبر 2023): 11% على الموظف",
+        "effectiveFrom": "2023-10-31",
+        "nationalEmployeeRate": 11,
+        "nationalEmployerRate": 15,
+        "reducedEmployerRate": 12.5,
+        "reducedEmployerRateBelowWage": 20000,
+        "maxMonthlyWageCap": 70000,
+        "minMonthlyWage": 3000,
+        "noteAr": "تتحمل الحكومة 2.5% من حصة صاحب العمل في القطاع الخاص إذا قل راتب حساب الاشتراك عن 20,000 درهم."
+      }
     },
-    "law": "قانون المعاشات والتأمينات الاجتماعية الاتحادي رقم 7 لسنة 1999 وتعديلاته",
+    "law": "القانون الاتحادي رقم 7 لسنة 1999 والمرسوم بقانون اتحادي رقم 57 لسنة 2023 في شأن المعاشات والتأمينات الاجتماعية",
     "authority": "الهيئة العامة للمعاشات والتأمينات الاجتماعية (GPSSA)",
-    "sourceUrl": "https://gpssa.gov.ae",
+    "sourceUrl": "https://www.wam.ae/en/article/b1zox7e-gpssa-explains-rules-for-calculating-contributions",
     "validFrom": "1999-01-01",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 365
   },
   "endOfService": {
@@ -124,22 +137,22 @@ export const COUNTRY_DATA_AE: CountryData = {
       "grades": {
         "super98": {
           "nameAr": "سوبر 98 ممتاز",
-          "pricePerLiter": 4.40,
+          "pricePerLiter": 4.16,
           "unitAr": "د.إ/لتر"
         },
         "special95": {
           "nameAr": "خصوصي 95",
-          "pricePerLiter": 4.28,
+          "pricePerLiter": 4.04,
           "unitAr": "د.إ/لتر"
         },
         "eplus91": {
           "nameAr": "إي بلس 91",
-          "pricePerLiter": 4.20,
+          "pricePerLiter": 3.97,
           "unitAr": "د.إ/لتر"
         },
         "diesel": {
           "nameAr": "ديزل",
-          "pricePerLiter": 4.80,
+          "pricePerLiter": 4.75,
           "unitAr": "د.إ/لتر"
         }
       },
@@ -147,19 +160,19 @@ export const COUNTRY_DATA_AE: CountryData = {
         {
           "date": "2026-11-01",
           "prices": {
-            "super98": 3.14,
-            "special95": 3.03,
-            "eplus91": 2.95,
-            "diesel": 3.08
+            "super98": 4.16,
+            "special95": 4.04,
+            "eplus91": 3.97,
+            "diesel": 4.75
           }
         },
         {
           "date": "2026-10-01",
           "prices": {
-            "super98": 3.07,
-            "special95": 2.95,
-            "eplus91": 2.88,
-            "diesel": 3.04
+            "super98": 4.40,
+            "special95": 4.28,
+            "eplus91": 4.21,
+            "diesel": 4.80
           }
         }
       ],
@@ -167,9 +180,9 @@ export const COUNTRY_DATA_AE: CountryData = {
     },
     "law": "قرار تحرير أسعار الوقود الصادر عن مجلس الوزراء بربط الأسعار بالمتوسط العالمي",
     "authority": "لجنة متابعة أسعار الوقود / وزارة الطاقة والبنية التحتية",
-    "sourceUrl": "https://www.moei.gov.ae",
+    "sourceUrl": "https://www.wam.ae/en/article/17i2n96-uae-fuel-prices-for-november-2026-announced",
     "validFrom": "2015-08-01",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 35
   },
   "electricity": {
@@ -224,10 +237,10 @@ export const COUNTRY_DATA_AE: CountryData = {
         },
         {
           "categoryAr": "السرعة الزائدة",
-          "violationAr": "تجاوز السرعة بما يزيد عن 60 كم/س",
-          "minFine": 1500,
-          "maxFine": 1500,
-          "blackPoints": 6
+          "violationAr": "تجاوز السرعة بما يزيد عن 60 كم/س (مع حجز المركبة 30 يوماً)",
+          "minFine": 2000,
+          "maxFine": 2000,
+          "blackPoints": 12
         },
         {
           "categoryAr": "الإشارات المرورية",
@@ -254,8 +267,8 @@ export const COUNTRY_DATA_AE: CountryData = {
     },
     "law": "القرار الوزاري رقم (178) لسنة 2017 بشأن قواعد وإجراءات الضبط المروري",
     "authority": "وزارة الداخلية / هيئة الطرق والمواصلات بدبي (RTA)",
-    "sourceUrl": "https://www.moi.gov.ae",
-    "checkedAt": "2026-11-01",
+    "sourceUrl": "https://elaws.moj.gov.ae",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 365
   },
   "zakat": {

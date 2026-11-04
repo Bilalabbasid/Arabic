@@ -25,10 +25,19 @@ export const SITE_NAME = 'لِسيارتك';
 export const DEFAULT_META_DESCRIPTION =
   'منصة لِسيارتك (lsayartk.com) – حاسبات عربية دقيقة ومجانية: حاسبات السيارات وتكلفة الوقود، القروض والتمويل، ضريبة القيمة المضافة، مكافأة نهاية الخدمة، وفاتورة الكهرباء لعدة دول عربية.';
 
+/** Google truncates titles at roughly 60 characters (~580px). */
+export const MAX_TITLE_LENGTH = 60;
+
+/**
+ * Appends the brand suffix only when the full title still fits; otherwise returns the
+ * page title alone so the keyword-bearing part is never cut off in search results
+ * (Google shows the site name separately above the result).
+ */
 export function formatMetaTitle(pageTitle: string): string {
   if (!pageTitle) return SITE_NAME;
   if (pageTitle.includes(SITE_NAME)) return pageTitle;
-  return `${pageTitle} | ${SITE_NAME}`;
+  const branded = `${pageTitle} | ${SITE_NAME}`;
+  return branded.length <= MAX_TITLE_LENGTH ? branded : pageTitle;
 }
 
 export function constructCanonicalUrl(path: string): string {

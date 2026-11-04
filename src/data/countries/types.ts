@@ -66,7 +66,16 @@ export interface CountryData {
   incomeTax: RuleValue<{
     hasPersonalIncomeTax: boolean;
     brackets?: Array<{ thresholdUpTo?: number; rate: number }>;
+    /** Annual personal exemption deducted before applying brackets */
     standardDeduction?: number;
+    /**
+     * Income-dependent bracket schedules (e.g. Egypt Law 7/2024 removes the lower bands as
+     * taxable income rises). The first schedule whose maxTaxable >= taxable income applies;
+     * when omitted, `brackets` applies to all incomes.
+     */
+    schedules?: Array<{ maxTaxable?: number; brackets: Array<{ thresholdUpTo?: number; rate: number }> }>;
+    /** Round annual taxable income down to this multiple (Egypt: 10 EGP) */
+    roundDownTo?: number;
   }>;
   socialInsurance: RuleValue<{
     nationalEmployeeRate: number;
@@ -74,8 +83,24 @@ export interface CountryData {
     expatEmployeeRate?: number;
     expatEmployerRate?: number;
     maxMonthlyWageCap?: number;
+    minMonthlyWage?: number;
     agencyNameAr: string;
     agencyAcronym: string;
+    /** Label for the legacy scheme when a newer scheme exists for first-time registrants */
+    legacySystemLabelAr?: string;
+    /** Newer scheme that applies to nationals first registered on/after `effectiveFrom` */
+    newSystem?: {
+      labelAr: string;
+      effectiveFrom: string;
+      nationalEmployeeRate: number;
+      nationalEmployerRate: number;
+      /** Lower employer rate below a wage threshold (UAE: government pays 2.5% under AED 20,000) */
+      reducedEmployerRate?: number;
+      reducedEmployerRateBelowWage?: number;
+      maxMonthlyWageCap?: number;
+      minMonthlyWage?: number;
+      noteAr?: string;
+    };
   }>;
   endOfService: RuleValue<{
     standardFormula: string;

@@ -22,6 +22,18 @@ export const netSalarySchema: CalculatorInput[] = [
     ],
   },
   {
+    id: 'insuranceSystem',
+    label: 'نظام التأمينات للمواطن',
+    type: 'select',
+    defaultValue: 'legacy',
+    options: [
+      { value: 'legacy', label: 'مسجل قبل صدور النظام الجديد' },
+      { value: 'new', label: 'أول تسجيل بعد صدور النظام الجديد' },
+    ],
+    helpText:
+      'السعودية: النظام الجديد يطبق على من سُجل لأول مرة بعد 3 يوليو 2024. الإمارات: على من سُجل لأول مرة بعد 31 أكتوبر 2023. لا يؤثر في بقية الدول ولا على المقيمين.',
+  },
+  {
     id: 'fixedAllowances',
     label: 'بدلات إضافية غير خاضعة للتأمينات (اختياري)',
     type: 'currency',

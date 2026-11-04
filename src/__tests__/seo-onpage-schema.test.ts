@@ -16,15 +16,21 @@ import {
 import { KEYWORDS_REGISTRY, getKeywordMetadata } from '@/seo/keywords';
 
 describe('SEO On-Page & Schema.org Validation', () => {
-  it('Title tags: every calculator has a title with single | لِسيارتك suffix (test)', () => {
+  it('Title tags: every calculator title is <= 60 chars, unique, with the brand suffix at most once (test)', () => {
     const titles = new Set<string>();
 
     for (const calc of ALL_CALCULATORS) {
       const title = formatMetaTitle(calc.metaTitle);
 
-      // Check single suffix
+      // Google truncates around 60 characters
+      expect(title.length, `Title "${title}" is ${title.length} chars`).toBeLessThanOrEqual(60);
+
+      // Brand suffix appears at most once, and is present whenever it fits
       const occurrences = (title.match(new RegExp(SITE_NAME, 'g')) || []).length;
-      expect(occurrences, `Title "${title}" has ${occurrences} occurrences of site name`).toBe(1);
+      expect(occurrences, `Title "${title}" has ${occurrences} occurrences of site name`).toBeLessThanOrEqual(1);
+      if (`${calc.metaTitle} | ${SITE_NAME}`.length <= 60) {
+        expect(occurrences, `Title "${title}" should carry the brand suffix`).toBe(1);
+      }
 
       // Unique titles
       expect(titles.has(title), `Duplicate title found: ${title}`).toBe(false);

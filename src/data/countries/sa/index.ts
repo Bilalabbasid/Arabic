@@ -68,13 +68,24 @@ export const COUNTRY_DATA_SA: CountryData = {
       "expatEmployerRate": 2,
       "maxMonthlyWageCap": 45000,
       "agencyNameAr": "المؤسسة العامة للتأمينات الاجتماعية",
-      "agencyAcronym": "GOSI"
+      "agencyAcronym": "GOSI",
+      "minMonthlyWage": 1500,
+      "legacySystemLabelAr": "النظام السابق (مسجل قبل 3 يوليو 2024): معاشات 9% + ساند 0.75% على الموظف",
+      "newSystem": {
+        "labelAr": "نظام التأمينات الجديد (أول تسجيل بعد 3 يوليو 2024): معاشات 10% + ساند 0.75% على الموظف",
+        "effectiveFrom": "2026-07-01",
+        "nationalEmployeeRate": 10.75,
+        "nationalEmployerRate": 12.75,
+        "maxMonthlyWageCap": 45000,
+        "minMonthlyWage": 1500,
+        "noteAr": "ترتفع نسبة المعاشات في النظام الجديد 0.5% على كل طرف في 1 يوليو من كل عام حتى تبلغ 11% لكل طرف في يوليو 2028."
+      }
     },
-    "law": "نظام التأمينات الاجتماعية ونظام التأمين ضد التعطل عن العمل (ساند)",
+    "law": "نظام التأمينات الاجتماعية الصادر بالمرسوم الملكي م/273 (نافذ 3 يوليو 2024) ونظام التأمين ضد التعطل عن العمل (ساند)",
     "authority": "المؤسسة العامة للتأمينات الاجتماعية (GOSI)",
-    "sourceUrl": "https://gosi.gov.sa",
+    "sourceUrl": "https://awareness.gosi.gov.sa/businessJourney.html",
     "validFrom": "2014-06-01",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 365
   },
   "endOfService": {
@@ -174,9 +185,9 @@ export const COUNTRY_DATA_SA: CountryData = {
     },
     "law": "السقف السعري الرسمي المعتمد بالأمر الملكي الكريم لحماية المستهلك",
     "authority": "وزارة الطاقة / شركة أرامكو السعودية",
-    "sourceUrl": "https://www.aramco.com/ar/creating-value/products/retail-fuels",
+    "sourceUrl": "https://www.aramco.com/ar/what-we-do/energy-products/retail-fuels",
     "validFrom": "2021-07-10",
-    "checkedAt": "2026-11-01",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 35
   },
   "electricity": {
@@ -207,7 +218,7 @@ export const COUNTRY_DATA_SA: CountryData = {
     "status": "verified",
     "value": {
       "registrationFeeAnnual": 100,
-      "periodicInspectionFee": 84,
+      "periodicInspectionFee": 115,
       "drivingLicenceRenewal10Yr": 400,
       "customsDutyPercent": 5,
       "customsVatPercent": 15,
@@ -215,13 +226,13 @@ export const COUNTRY_DATA_SA: CountryData = {
       "importAgeRules": "لا يتجاوز موديل سيارات الركوب الصغيرة 5 سنوات من سنة الصنع، وشاحنات النقل 10 سنوات.",
       "trafficFines": [
         {
-          "categoryAr": "السرعة الزائدة (حد 120 كم/س)",
+          "categoryAr": "السرعة الزائدة (طرق حدها 120 كم/س أو أقل)",
           "violationAr": "تجاوز السرعة بأكثر من 10 إلى 20 كم/س",
           "minFine": 150,
           "maxFine": 300
         },
         {
-          "categoryAr": "السرعة الزائدة (حد 120 كم/س)",
+          "categoryAr": "السرعة الزائدة (طرق حدها 120 كم/س أو أقل)",
           "violationAr": "تجاوز السرعة بأكثر من 20 إلى 30 كم/س",
           "minFine": 300,
           "maxFine": 500
@@ -246,10 +257,10 @@ export const COUNTRY_DATA_SA: CountryData = {
         }
       ]
     },
-    "law": "نظام المرور ولائحته التنفيذية ولائحة الاستيراد الجمركي",
+    "law": "نظام المرور (م/85 لعام 1428هـ) وجداول المخالفات المعدلة بالمرسوم م/115، ومقابل الفحص الفني الدوري المعلن من هيئة المواصفات",
     "authority": "الإدارة العامة للمرور / هيئة الزكاة والضريبة والجمارك",
-    "sourceUrl": "https://www.moi.gov.sa",
-    "checkedAt": "2026-11-01",
+    "sourceUrl": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/85364e57-c01e-41ba-8def-a9a700f183e9/1",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 365
   },
   "zakat": {

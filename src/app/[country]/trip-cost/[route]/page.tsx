@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = formatMetaTitle(`تكلفة السفر من ${route.fromCityAr} إلى ${route.toCityAr} بالسيارة – مسافة ${route.distanceKm} كم`);
+  const title = formatMetaTitle(`تكلفة السفر من ${route.fromCityAr} إلى ${route.toCityAr} بالسيارة (${route.distanceKm} كم)`);
   const description = `احسب تكلفة استهلاك بنزين السفر من ${route.fromCityAr} إلى ${route.toCityAr} (مسافة ${route.distanceKm} كم) بالسيارة وفق أحدث أسعار الوقود الرسمية في ${country.nameAr}.`;
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/trip-cost/${route.id}`);
 

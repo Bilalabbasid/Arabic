@@ -28,6 +28,7 @@ import CountryVariantsBlock from '@/components/calculator/CountryVariantsBlock';
 import AdSlot from '@/components/layout/AdSlot';
 import { getGuidesByCalculatorSlug } from '@/data/guides';
 import { CalculationResult } from '@/types/calculator';
+import { DEFAULT_COUNTRY } from '@/data/countries/legacy';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -104,7 +105,12 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
 
   let initialResult: CalculationResult;
   try {
-    initialResult = calc.calculate(defaultInputs);
+    // Calculators without a country field render for the header's default country, which the
+    // client then swaps for the visitor's saved/selected country.
+    const hasCountryInput = calc.inputs.some((inp) => inp.id === 'country' || inp.type === 'country');
+    initialResult = hasCountryInput
+      ? calc.calculate(defaultInputs)
+      : calc.calculate(defaultInputs, { countryCode: DEFAULT_COUNTRY.countryCode });
   } catch (err) {
     initialResult = {
       primary: {

@@ -18,6 +18,8 @@ import { EG_ELECTRICITY_RULES } from '@/countries/eg/electricity/rules';
 import { EG_EMPLOYMENT_RULES } from '@/countries/eg/employment/rules';
 import { EG_TAX_RULES } from '@/countries/eg/tax/rules';
 
+import { VERIFIED_REGULATED_RULES } from '@/countries/regulated/verified-rules';
+
 // Aggregated Master Registry of Country Rules
 export const ALL_COUNTRY_RULES: CountryRegulatedRule<any>[] = [
   ...SA_ELECTRICITY_RULES,
@@ -31,6 +33,7 @@ export const ALL_COUNTRY_RULES: CountryRegulatedRule<any>[] = [
   ...EG_ELECTRICITY_RULES,
   ...EG_EMPLOYMENT_RULES,
   ...EG_TAX_RULES,
+  ...VERIFIED_REGULATED_RULES,
 ];
 
 /**
