@@ -55,6 +55,7 @@ const fees = (d: CountryData) => ({
   registrationFeeAnnual: d.vehicle.value?.registrationFeeAnnual,
   periodicInspectionFee: d.vehicle.value?.periodicInspectionFee,
   drivingLicenceRenewal10Yr: d.vehicle.value?.drivingLicenceRenewal10Yr,
+  drivingLicenceValidityYears: d.vehicle.value?.drivingLicenceValidityYears ?? 10,
 });
 const customs = (d: CountryData) => ({
   customsDutyPercent: d.vehicle.value?.customsDutyPercent,
@@ -97,8 +98,11 @@ export const VERIFIED_REGULATED_RULES: CountryRegulatedRule[] = [
   }),
   makeRule({
     calculatorId: 'traffic-fines', data: COUNTRY_DATA_EG, jurisdiction: 'Egypt Ministry of Interior', effectiveFrom: '2014-07-03',
-    sourceIds: ['eg-traffic-law-66'], parameters: fines(COUNTRY_DATA_EG), status: 'REVIEW_REQUIRED',
-    limitations: ['قيمة قطع الإشارة مؤكدة من نص القانون؛ قيم السرعة والحزام والهاتف بثقة متوسطة لعدم توفر النص الرسمي المعدل، وبوابة المرور تعرض قيماً قديمة.'],
+    sourceIds: ['eg-traffic-law-66'], parameters: fines(COUNTRY_DATA_EG), status: 'APPROVED',
+    limitations: [
+      'وفق القانون 66 لسنة 1973 المعدل بالقانون 121 لسنة 2008 والقرار بقانون 59 لسنة 2014؛ سُحب مشروع تعديل 2025 من البرلمان في 3 فبراير 2026 ولم يصدر قانون جديد حتى نوفمبر 2026.',
+      'تتضاعف الغرامة عند العود خلال ستة أشهر، وقد يُضاف الحبس في مخالفة السرعة.',
+    ],
   }),
 
   // ---------------- Vehicle fees ----------------
@@ -112,13 +116,17 @@ export const VERIFIED_REGULATED_RULES: CountryRegulatedRule[] = [
     sourceIds: ['ae-rta-vehicle-fees'], parameters: fees(COUNTRY_DATA_AE), status: 'APPROVED',
     limitations: [
       'الرسوم وفق إمارة دبي وتضاف 20 درهماً رسوم المعرفة والابتكار لكل معاملة.',
-      'صلاحية رخصة القيادة 10 سنوات للمواطنين ومواطني الخليج و5 سنوات للمقيمين.',
+      'يُقسم رسم رخصة القيادة على 5 سنوات وفق صلاحيتها للمقيمين (أغلب السائقين)؛ صلاحيتها للمواطنين ومواطني الخليج 10 سنوات.',
     ],
   }),
   makeRule({
     calculatorId: 'vehicle-fees', data: COUNTRY_DATA_EG, jurisdiction: 'Egypt Ministry of Interior', effectiveFrom: '2026-10-01',
-    sourceIds: ['eg-traffic-law-66'], parameters: fees(COUNTRY_DATA_EG), status: 'REVIEW_REQUIRED',
-    limitations: ['طبقت مصر منذ 1 أكتوبر 2026 نظام سداد موحد لرسوم الترخيص مع ضريبة سنوية حسب سعة المحرك وتأمين إجباري؛ القيم الحالية غير موثقة.'],
+    sourceIds: ['eg-development-fee-147-1984', 'eg-traffic-law-66'], parameters: fees(COUNTRY_DATA_EG), status: 'REVIEW_REQUIRED',
+    limitations: [
+      'رسم التنمية السنوي لتجديد ترخيص سيارة ملاكي 1330-1630 سم3 هو 750 جنيهاً وفق القانون 147 لسنة 1984 (يختلف حسب السعة).',
+      'منذ 1 أكتوبر 2026 يُسدد مقابل خدمة موحد (نحو 310 جنيهات للتجديد و1,650 للإصدار وفق لوحات وحدات المرور) غير منشور رسمياً، ولا تشمل الحسبة التأمين الإجباري وضريبة المرور.',
+      'رسم الفحص الفني بعد نظام أكتوبر 2026 غير موثق رسمياً.',
+    ],
   }),
 
   // ---------------- Car import customs ----------------
@@ -134,10 +142,13 @@ export const VERIFIED_REGULATED_RULES: CountryRegulatedRule[] = [
   }),
   makeRule({
     calculatorId: 'car-import-customs', data: COUNTRY_DATA_EG, jurisdiction: 'Egyptian Customs Authority', effectiveFrom: '2022-01-01',
-    sourceIds: ['eg-customs-vehicle-tariff', 'eg-eta-vat-14'], parameters: customs(COUNTRY_DATA_EG), status: 'REVIEW_REQUIRED',
+    sourceIds: ['eg-customs-vehicle-tariff', 'eg-development-fee-147-1984', 'eg-eta-vat-14'],
+    parameters: { ...customs(COUNTRY_DATA_EG), importTaxes: COUNTRY_DATA_EG.vehicle.value?.importTaxes },
+    status: 'APPROVED',
     limitations: [
-      'الضريبة الجمركية تعتمد على سعة المحرك والمنشأ: 40% حتى 1600 سم3 و135% لما يزيد، و0% لمنشأ الاتحاد الأوروبي، مع ضريبة جدول ورسم تنمية؛ المحرك الحالي يطبق نسبة ثابتة.',
-      'يُشترط في سيارات الركوب أن تكون جديدة ومن سنة الموديل.',
+      'يحسب سيارات الركوب بمحرك احتراق داخلي فقط؛ للسيارات الهجينة والكهربائية فئات مختلفة.',
+      'يُشترط أن تكون سيارة الركوب جديدة ومن سنة الموديل؛ لا تشمل الحسبة رسم ترخيص السيارة الجديدة ولا مبادرة سيارات المصريين بالخارج.',
+      'الإعفاء الأوروبي للضريبة الجمركية فقط ويتطلب شهادة منشأ تفضيلية EUR.1.',
     ],
   }),
 

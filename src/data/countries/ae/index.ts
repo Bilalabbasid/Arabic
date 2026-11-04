@@ -225,6 +225,7 @@ export const COUNTRY_DATA_AE: CountryData = {
       "registrationFeeAnnual": 350,
       "periodicInspectionFee": 170,
       "drivingLicenceRenewal10Yr": 300,
+      "drivingLicenceValidityYears": 5,
       "customsDutyPercent": 5,
       "customsVatPercent": 5,
       "trafficFines": [

@@ -118,31 +118,37 @@ export const COUNTRY_DATA_BH: CountryData = {
   "fuel": {
     "status": "verified",
     "value": {
-      "pricingModel": "fixed_official",
+      "pricingModel": "monthly_adjusted",
       "grades": {
-        "mumtaz95": {
-          "nameAr": "بنزين ممتاز 95",
-          "pricePerLiter": 0.2,
-          "unitAr": "د.ب/لتر"
-        },
         "jayyid91": {
           "nameAr": "بنزين جيد 91",
-          "pricePerLiter": 0.14,
+          "pricePerLiter": 0.235,
+          "unitAr": "د.ب/لتر"
+        },
+        "mumtaz95": {
+          "nameAr": "بنزين ممتاز 95",
+          "pricePerLiter": 0.277,
+          "unitAr": "د.ب/لتر"
+        },
+        "super98": {
+          "nameAr": "بنزين سوبر 98",
+          "pricePerLiter": 0.41,
           "unitAr": "د.ب/لتر"
         },
         "diesel": {
           "nameAr": "ديزل",
-          "pricePerLiter": 0.18,
+          "pricePerLiter": 0.26,
           "unitAr": "د.ب/لتر"
         }
       },
-      "updateCadenceDays": 180
+      "updateCadenceDays": 30
     },
-    "law": "التعرفة الرسمية للوقود المعتمدة من الهيئة الوطنية للنفط والغاز وشركة بابكو",
-    "authority": "شركة بابكو للتزويد (Bapco Tazweed) / وزارة النفط والبيئة",
-    "sourceUrl": "https://www.bapco.net",
-    "checkedAt": "2026-11-01",
-    "staleAfterDays": 90
+    "law": "قرارات لجنة تسعير ومراقبة الوقود الشهرية (منذ 30 ديسمبر 2025)",
+    "authority": "لجنة تسعير ومراقبة الوقود / بابكو إنرجيز",
+    "sourceUrl": "https://www.alayam.com/online/Economy/1150433/News.html",
+    "validFrom": "2026-11-02",
+    "checkedAt": "2026-11-05",
+    "staleAfterDays": 35
   },
   "electricity": {
     "status": "verified",

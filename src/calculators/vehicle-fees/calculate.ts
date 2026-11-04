@@ -15,7 +15,8 @@ export function calculateVehicleFees(inputs: VehicleFeesInputs, country?: Countr
 
   const regAnnual = country?.vehicle.value?.registrationFeeAnnual ?? 100;
   const inspectionFee = includeInspection ? (country?.vehicle.value?.periodicInspectionFee ?? 84) : 0;
-  const licenceAnnual = (country?.vehicle.value?.drivingLicenceRenewal10Yr ?? 400) / 10;
+  const licenceValidityYears = country?.vehicle.value?.drivingLicenceValidityYears ?? 10;
+  const licenceAnnual = (country?.vehicle.value?.drivingLicenceRenewal10Yr ?? 400) / licenceValidityYears;
 
   const totalRegistration = regAnnual * years;
   const totalFees = totalRegistration + inspectionFee;
@@ -58,7 +59,7 @@ export function calculateVehicleFees(inputs: VehicleFeesInputs, country?: Countr
       { label: 'المصطلح المحلي لرخصة السير', value: localRegTerm },
       { label: 'المصطلح المحلي للفحص الفني', value: localInspTerm },
       { label: 'الرسم السنوي لرخصة السير', value: `${fmt(regAnnual)} ${currencySymbol}/سنة` },
-      { label: 'الرسم السنوي التقديري لرخصة القيادة', value: `${fmt(licenceAnnual)} ${currencySymbol}/سنة` },
+      { label: 'الرسم السنوي التقديري لرخصة القيادة', value: `${fmt(licenceAnnual)} ${currencySymbol}/سنة (رخصة صالحة ${licenceValidityYears} سنوات)` },
       { label: 'الجهة المنظمة للرسوم', value: country?.vehicle.authority || 'الإدارة العامة للمرور' },
     ],
     calculationSteps: [

@@ -132,11 +132,28 @@ export interface CountryData {
   vehicle: RuleValue<{
     registrationFeeAnnual: number;
     periodicInspectionFee: number;
+    /** Fee for one driving-licence renewal (despite the name, valid for `drivingLicenceValidityYears`) */
     drivingLicenceRenewal10Yr: number;
+    /** Validity of a renewed private driving licence in years (default 10) */
+    drivingLicenceValidityYears?: number;
     customsDutyPercent: number;
     customsVatPercent: number;
     maxImportAgeYears?: number;
     importAgeRules?: string;
+    /**
+     * Engine-size based import tax chain (Egypt). When present, the customs engine computes:
+     * duty on CIF -> schedule tax on (CIF + duty) -> VAT on (CIF + duty + schedule tax)
+     * -> development fee on the running total. Each band applies when engineCc <= maxCc
+     * (the last band has no maxCc).
+     */
+    importTaxes?: {
+      dutyBands: Array<{ maxCc?: number; rate: number }>;
+      preferentialOriginDutyRate?: number;
+      preferentialOriginLabelAr?: string;
+      scheduleTaxBands?: Array<{ maxCc?: number; rate: number }>;
+      developmentFeeBands?: Array<{ maxCc?: number; rate: number }>;
+      vatRate: number;
+    };
     trafficFines?: TrafficFineItem[];
   }>;
   zakat: RuleValue<{

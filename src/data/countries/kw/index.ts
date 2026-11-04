@@ -131,7 +131,7 @@ export const COUNTRY_DATA_KW: CountryData = {
         },
         "ultra98": {
           "nameAr": "بنزين ألترا 98",
-          "pricePerLiter": 0.21,
+          "pricePerLiter": 0.275,
           "unitAr": "د.ك/لتر"
         },
         "diesel": {
@@ -144,8 +144,8 @@ export const COUNTRY_DATA_KW: CountryData = {
     },
     "law": "قرارات لجنة مراجعة أسعار البنزين الحكومية الصادرة عن مجلس الوزراء",
     "authority": "شركة البترول الوطنية الكويتية (KNPC) / وزارة النفط",
-    "sourceUrl": "https://www.knpc.com",
-    "checkedAt": "2026-11-01",
+    "sourceUrl": "https://www.arabtimesonline.com/news/new-fuel-prices-take-effect-july-1-in-kuwait/",
+    "checkedAt": "2026-11-05",
     "staleAfterDays": 90
   },
   "electricity": {

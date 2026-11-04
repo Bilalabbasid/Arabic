@@ -257,12 +257,31 @@ export const COUNTRY_DATA_EG: CountryData = {
   "vehicle": {
     "status": "verified",
     "value": {
-      "registrationFeeAnnual": 350,
+      "registrationFeeAnnual": 750,
       "periodicInspectionFee": 250,
       "drivingLicenceRenewal10Yr": 1200,
       "customsDutyPercent": 40,
       "customsVatPercent": 14,
       "maxImportAgeYears": 0,
+      "importTaxes": {
+        "dutyBands": [
+          { "maxCc": 1600, "rate": 40 },
+          { "rate": 135 }
+        ],
+        "preferentialOriginDutyRate": 0,
+        "preferentialOriginLabelAr": "منشأ الاتحاد الأوروبي (بشهادة منشأ تفضيلية EUR.1)",
+        "scheduleTaxBands": [
+          { "maxCc": 1600, "rate": 1 },
+          { "maxCc": 2000, "rate": 15 },
+          { "rate": 30 }
+        ],
+        "developmentFeeBands": [
+          { "maxCc": 1599, "rate": 3 },
+          { "maxCc": 1999, "rate": 5 },
+          { "rate": 8.5 }
+        ],
+        "vatRate": 14
+      },
       "trafficFines": [
         {
           "categoryAr": "الإشارات المرورية",
