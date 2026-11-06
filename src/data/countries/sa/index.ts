@@ -288,7 +288,8 @@ export const COUNTRY_DATA_SA: CountryData = {
       "id": "riyadh-dammam",
       "fromCityAr": "الرياض",
       "toCityAr": "الدمام",
-      "distanceKm": 395,
+      "distanceKm": 400,
+      "durationMinutes": 225,
       "source": "الهيئة العامة للطرق - طريق الرياض الدمام السريع"
     },
     {
@@ -316,7 +317,8 @@ export const COUNTRY_DATA_SA: CountryData = {
       "id": "khobar-jubail",
       "fromCityAr": "الخبر",
       "toCityAr": "الجبيل",
-      "distanceKm": 95,
+      "distanceKm": 105,
+      "durationMinutes": 70,
       "source": "الهيئة العامة للطرق"
     }
   ]

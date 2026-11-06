@@ -149,9 +149,27 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
     { label: calc.shortNameAr || calc.nameAr, href: `/${country.countryCode.toLowerCase()}/${calc.slug}` },
   ];
 
-  const effectiveFaqs = countryContent?.faqs?.length
+  const baseFaqs = countryContent?.faqs?.length
     ? countryContent.faqs
     : calc.faqs;
+
+  // Official fuel prices per litre and per US gallon (3.785 L) for fuel-cost pages.
+  const US_GALLON_LITERS = 3.785411784;
+  const showFuelPriceTable =
+    (calc.slug === 'fuel-cost' || calc.slug === 'car-fuel-cost') && countryData?.fuel?.status === 'verified';
+  const fuelGrades = showFuelPriceTable ? Object.values(countryData?.fuel?.value?.grades || {}) : [];
+  const fuelPriceFaqs =
+    fuelGrades.length > 0
+      ? [
+          {
+            question: `كم سعر جالون البنزين في ${country.nameAr}؟`,
+            answer: `الجالون الأمريكي يساوي 3.785 لتر، وبحسب السعر الرسمي الحالي: ${fuelGrades
+              .map((g) => `${g.nameAr} ${(g.pricePerLiter * US_GALLON_LITERS).toFixed(2)} ${country.currencySymbolAr} للجالون (${g.pricePerLiter} ${country.currencySymbolAr} للتر)`)
+              .join('، ')}.`,
+          },
+        ]
+      : [];
+  const effectiveFaqs = [...fuelPriceFaqs, ...(baseFaqs || [])];
 
   const calculatorSchema = generateCalculatorSchema({
     nameAr: countryContent?.h1 || calc.nameAr,
@@ -290,6 +308,43 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         countryCode={country.countryCode}
         currencyCode={country.currencyCode}
       />
+
+      {/* Official fuel prices per litre and per gallon */}
+      {fuelGrades.length > 0 && (
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-3">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <Fuel className="w-5 h-5 text-emerald-600" />
+            <span>سعر البنزين اليوم في {country.nameAr} باللتر والجالون</span>
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-right text-xs sm:text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-slate-500 font-bold bg-slate-50/50">
+                  <th className="p-3">نوع الوقود</th>
+                  <th className="p-3">سعر اللتر</th>
+                  <th className="p-3">سعر الجالون (3.785 لتر)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 font-medium">
+                {fuelGrades.map((g) => (
+                  <tr key={g.nameAr}>
+                    <td className="p-3 font-bold text-slate-800">{g.nameAr}</td>
+                    <td className="p-3 text-slate-600">{g.pricePerLiter} {country.currencySymbolAr}</td>
+                    <td className="p-3 font-extrabold text-emerald-700">
+                      {(g.pricePerLiter * US_GALLON_LITERS).toFixed(2)} {country.currencySymbolAr}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {countryData?.fuel?.checkedAt && (
+            <p className="text-[11px] text-slate-500">
+              السعر الرسمي المعتمد، آخر تحقق: {countryData.fuel.checkedAt}. الجالون المستخدم هو الجالون الأمريكي.
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Exemptions or Exclusions Section */}
       {countryContent?.exemptionsOrExclusions && countryContent.exemptionsOrExclusions.length > 0 && (

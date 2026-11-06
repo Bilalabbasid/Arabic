@@ -147,53 +147,55 @@ export function calculateElectricityBill(
       const params = rule.parameters;
       const slabs = params.slabs;
 
-      if (kwh > 1000) {
-        // Non-subsidized full recalculation at flat rate tier 7
-        const flatRate = params.nonsubsidizedRateOver1000;
-        energyCost = kwh * flatRate;
-        meterServiceFee = slabs[6].serviceFee;
+      // Egypt bills by consumption group (EgyptERA): once a household passes
+      // 100 kWh it loses the 0-100 rates, past 650 kWh all units are billed at
+      // band 6, and past 1000 kWh all units are billed at band 7.
+      // Each part is [band index, kWh in that band].
+      let parts: Array<[number, number]>;
+      if (kwh <= 50) parts = [[0, kwh]];
+      else if (kwh <= 100) parts = [[0, 50], [1, kwh - 50]];
+      else if (kwh <= 200) parts = [[2, kwh]];
+      else if (kwh <= 350) parts = [[2, 200], [3, kwh - 200]];
+      else if (kwh <= 650) parts = [[2, 200], [3, 150], [4, kwh - 350]];
+      else if (kwh <= 1000) parts = [[5, kwh]];
+      else parts = [[6, kwh]];
 
+      const bandLabel = (i: number) =>
+        i === 2 ? 'من صفر إلى 200' : i === 5 ? 'من صفر إلى 1000' : i === 6 ? 'أكثر من 1000' : `${slabs[i].min} - ${slabs[i].max}`;
+
+      for (const [i, units] of parts) {
+        const slab = slabs[i];
+        const slabCost = units * slab.rate;
+        energyCost += slabCost;
         breakdownRows.push({
-          period: 'استهلاك غير مدعوم (أكثر من 1000 ك.و.س)',
+          period: `الشريحة ${i + 1} (${bandLabel(i)} ك.و.س)`,
           values: {
-            units: `${formatNumber(kwh)} ك.و.س`,
-            rate: `${flatRate} ${currency}`,
-            cost: formatCurrency(energyCost, currency),
+            units: `${formatNumber(units)} ك.و.س`,
+            rate: `${slab.rate} ${currency}`,
+            cost: formatCurrency(slabCost, currency),
           },
         });
-        steps.push(`الاستهلاك تجاوز 1000 ك.و.س، فتم احتساب كامل الاستهلاك بدون دعم: ${formatNumber(kwh)} × ${flatRate} = ${formatCurrency(energyCost, currency)}`);
-      } else {
-        // Progressive tiers
-        let remainingKwh = kwh;
-        for (let i = 0; i < slabs.length && remainingKwh > 0; i++) {
-          const slab = slabs[i];
-          if (kwh <= 100 && i >= 2) break;
-          const slabCapacity = slab.max - slab.min + 1;
-          const slabUnits = Math.min(remainingKwh, slabCapacity);
-          const slabCost = slabUnits * slab.rate;
-          energyCost += slabCost;
-          remainingKwh -= slabUnits;
+        steps.push(`الشريحة ${i + 1}: ${formatNumber(units)} ك.و.س × ${slab.rate} = ${formatCurrency(slabCost, currency)}`);
+      }
+      energyCost = Math.round(energyCost * 100) / 100;
+      meterServiceFee = slabs[parts[parts.length - 1][0]].serviceFee;
 
-          breakdownRows.push({
-            period: `الشريحة ${i + 1} (${slab.min} - ${slab.max} ك.و.س)`,
-            values: {
-              units: `${formatNumber(slabUnits)} ك.و.س`,
-              rate: `${slab.rate} ${currency}`,
-              cost: formatCurrency(slabCost, currency),
-            },
-          });
-          meterServiceFee = slab.serviceFee;
-        }
-        steps.push(`حساب مجموع استهلاك الشرائح المنزلية: ${formatCurrency(energyCost, currency)}`);
+      if (kwh > 100 && kwh <= 650) {
+        steps.unshift('الاستهلاك تجاوز 100 ك.و.س، لذلك لا تُطبق أسعار أول 100 ك.و.س المدعومة ويُحسب أول 200 ك.و.س بسعر الشريحة الثالثة.');
+      } else if (kwh > 650 && kwh <= 1000) {
+        steps.unshift('الاستهلاك تجاوز 650 ك.و.س، لذلك يُحسب كامل الاستهلاك بسعر الشريحة السادسة.');
+      } else if (kwh > 1000) {
+        steps.unshift('الاستهلاك تجاوز 1000 ك.و.س، لذلك يُحسب كامل الاستهلاك بسعر الشريحة السابعة بدون دعم.');
       }
 
       totalBill = energyCost + meterServiceFee;
-      steps.push(`مقابل خدمة العملاء والدمغات: ${formatCurrency(meterServiceFee, currency)}`);
+      steps.push(`مقابل خدمة العملاء: ${formatCurrency(meterServiceFee, currency)}`);
       steps.push(`إجمالي الفاتورة: ${formatCurrency(totalBill, currency)}`);
 
       assumptionsList = [
-        'تطبق تعرفة جهاز تنظيم مرفق الكهرباء وحماية المستهلك (EgyptERA) لعام 2024/2026 في جمهورية مصر العربية.',
-        'الاستهلاك الذي يتجاوز 1000 ك.و.س شهرياً يُحسب بالكامل بسعر 2.23 ج.م بدون دعم تبادلي.',
+        'تطبق تعرفة جهاز تنظيم مرفق الكهرباء وحماية المستهلك (EgyptERA) السارية من 1 أغسطس 2026 على الاستهلاك المنزلي في جمهورية مصر العربية.',
+        `إذا تجاوز الاستهلاك 650 ك.و.س يُحسب كامله بسعر ${slabs[5].rate} ج.م، وفوق 1000 ك.و.س بسعر ${slabs[6].rate} ج.م بدون دعم.`,
+        'لا تشمل النتيجة الدمغات أو رسوم النظافة والإذاعة المحلية التي قد تضاف إلى الفاتورة.',
       ];
     }
   } else {
@@ -268,7 +270,7 @@ export function calculateElectricityBill(
       rows: breakdownRows,
     },
     calculationSteps: steps,
-    directAnswer: `فاتورة الكهرباء لاستهلاك قدره ${formatNumber(kwh)} ك.و.س في ${country} تبلغ ${formatCurrency(totalBill, currency)} شاملة الرسوم والضرائب المقررة.`,
+    directAnswer: `فاتورة الكهرباء لاستهلاك قدره ${formatNumber(kwh)} ك.و.س في ${({ SA: "السعودية", AE: "الإمارات", EG: "مصر" } as Record<string, string>)[country] || country} تبلغ ${formatCurrency(totalBill, currency)} شاملة الرسوم والضرائب المقررة.`,
     assumptions: assumptionsList,
     sources: sourceCitations,
     relevantRuleVersion: ruleVersion,

@@ -8,7 +8,7 @@ export const tripCostSchema: CalculatorInput[] = [
     defaultValue: 'riyadh-jeddah',
     options: [
       { value: 'riyadh-jeddah', label: 'الرياض ↔ جدة (950 كم)' },
-      { value: 'riyadh-dammam', label: 'الرياض ↔ الدمام (395 كم)' },
+      { value: 'riyadh-dammam', label: 'الرياض ↔ الدمام (400 كم)' },
       { value: 'jeddah-madinah', label: 'جدة ↔ المدينة المنورة (420 كم)' },
       { value: 'dubai-abudhabi', label: 'دبي ↔ أبوظبي (140 كم)' },
       { value: 'cairo-alexandria', label: 'القاهرة ↔ الإسكندرية (215 كم)' },

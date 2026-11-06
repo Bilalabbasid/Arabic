@@ -3,15 +3,35 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { getCountryByCode, getCountryData, COUNTRIES } from '@/data/countries';
-import { formatMetaTitle, constructCanonicalUrl, generateBreadcrumbSchema, DEFAULT_OG_IMAGES } from '@/lib/seo/metadata';
+import { formatMetaTitle, constructCanonicalUrl, generateBreadcrumbSchema, generateFaqSchema, DEFAULT_OG_IMAGES } from '@/lib/seo/metadata';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
-import { Navigation, Fuel, ArrowRightLeft, ShieldCheck, MapPin, Calculator, Calendar } from 'lucide-react';
+import { Navigation, Fuel, ArrowRightLeft, ShieldCheck, MapPin, Calculator, Calendar, Clock } from 'lucide-react';
+import FaqAccordion from '@/components/calculator/FaqAccordion';
 import { formatDateAr } from '@/lib/formatters';
 
 interface PageProps {
   params: Promise<{ country: string; route: string }>;
+}
+
+// Average highway speed used when a route has no verified driving time.
+const AVG_HIGHWAY_SPEED_KMH = 90;
+
+function estimateDriveMinutes(distanceKm: number, durationMinutes?: number): number {
+  if (durationMinutes && durationMinutes > 0) return durationMinutes;
+  return Math.max(5, Math.round(((distanceKm / AVG_HIGHWAY_SPEED_KMH) * 60) / 5) * 5);
+}
+
+function formatDriveDuration(totalMinutes: number): string {
+  const h = Math.floor(totalMinutes / 60);
+  const m = totalMinutes % 60;
+  const hoursText =
+    h === 0 ? '' : h === 1 ? 'ساعة' : h === 2 ? 'ساعتين' : h <= 10 ? `${h} ساعات` : `${h} ساعة`;
+  const minutesText = m === 0 ? '' : m >= 3 && m <= 10 ? `${m} دقائق` : `${m} دقيقة`;
+  if (!hoursText) return minutesText;
+  if (!minutesText) return hoursText;
+  return `${hoursText} و${minutesText}`;
 }
 
 export async function generateStaticParams() {
@@ -45,8 +65,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = formatMetaTitle(`تكلفة السفر من ${route.fromCityAr} إلى ${route.toCityAr} بالسيارة (${route.distanceKm} كم)`);
-  const description = `احسب تكلفة استهلاك بنزين السفر من ${route.fromCityAr} إلى ${route.toCityAr} (مسافة ${route.distanceKm} كم) بالسيارة وفق أحدث أسعار الوقود الرسمية في ${country.nameAr}.`;
+  const duration = formatDriveDuration(estimateDriveMinutes(route.distanceKm, route.durationMinutes));
+  const title = formatMetaTitle(`المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم وتكلفة البنزين`);
+  const description = `تبعد ${route.toCityAr} عن ${route.fromCityAr} حوالي ${route.distanceKm} كم بالسيارة (نحو ${duration} قيادة). احسب لترات البنزين وتكلفة المشوار ذهاباً وإياباً بأسعار الوقود الرسمية في ${country.nameAr}.`;
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/trip-cost/${route.id}`);
 
   return {
@@ -92,6 +113,33 @@ export default async function TripRoutePage({ params }: PageProps) {
 
   const primaryGrade = gradeEntries[0] ? gradeEntries[0][1] : undefined;
   const primaryCost = primaryGrade ? (fuelLiters * primaryGrade.pricePerLiter).toFixed(2) : null;
+  const durationText = formatDriveDuration(estimateDriveMinutes(route.distanceKm, route.durationMinutes));
+  const from = route.fromCityAr;
+  const to = route.toCityAr;
+
+  const routeFaqs = [
+    {
+      question: `كم تبعد ${to} عن ${from}؟`,
+      answer: `تبعد ${to} عن ${from} حوالي ${route.distanceKm} كم بالسيارة عبر الطريق البري المعتمد، وهي المسافة نفسها تقريباً في الاتجاه العكسي من ${to} إلى ${from}. ذهاباً وإياباً تبلغ المسافة نحو ${route.distanceKm * 2} كم.`,
+    },
+    {
+      question: `كم ساعة من ${from} إلى ${to} بالسيارة؟`,
+      answer: `تستغرق القيادة من ${from} إلى ${to} نحو ${durationText} في الظروف المرورية العادية، وقد تزيد المدة مع الازدحام أو أعمال الطرق أو التوقف للاستراحة والتزود بالوقود.`,
+    },
+    {
+      question: `كم لتر بنزين تحتاج الرحلة من ${from} إلى ${to}؟`,
+      answer: `تحتاج سيارة سيدان متوسطة (8 لتر/100 كم) إلى نحو ${fuelLiters.toFixed(1)} لتر للذهاب فقط، والسيارة الاقتصادية (7 لتر/100 كم) نحو ${(route.distanceKm * 0.07).toFixed(1)} لتر، بينما تحتاج سيارة SUV (10.5 لتر/100 كم) نحو ${(route.distanceKm * 0.105).toFixed(1)} لتر.`,
+    },
+    ...(primaryGrade && primaryCost
+      ? [
+          {
+            question: `كم تكلفة البنزين من ${from} إلى ${to} ذهاباً وإياباً؟`,
+            answer: `بسعر ${primaryGrade.nameAr} الرسمي (${primaryGrade.pricePerLiter} ${currencySymbol}/لتر) تبلغ تكلفة الذهاب نحو ${primaryCost} ${currencySymbol}، والذهاب والعودة (${route.distanceKm * 2} كم) نحو ${(Number(primaryCost) * 2).toFixed(2)} ${currencySymbol} لسيارة تستهلك 8 لتر/100 كم.`,
+          },
+        ]
+      : []),
+  ];
+  const faqSchema = generateFaqSchema(routeFaqs);
 
   const breadcrumbs = [
     { label: country.nameAr, href: `/${country.countryCode.toLowerCase()}` },
@@ -114,6 +162,12 @@ export default async function TripRoutePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <Breadcrumbs items={breadcrumbs} />
 
@@ -130,14 +184,14 @@ export default async function TripRoutePage({ params }: PageProps) {
         </div>
 
         <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-          تكلفة السفر من {route.fromCityAr} إلى {route.toCityAr} بالسيارة
+          المسافة بين {route.fromCityAr} و{route.toCityAr} بالسيارة وتكلفة البنزين
         </h1>
 
         {/* Direct Answer Box */}
         <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-emerald-950 font-medium text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
           <span className="font-extrabold text-emerald-800 shrink-0">إجابة مباشرة:</span>
           <span>
-            تبلغ مسافة الطريق البري بين {route.fromCityAr} و{route.toCityAr} حوالي <strong>{route.distanceKm} كم</strong>. لسيارة تستهلك 8 لتر/100 كم، يحتاج المشوار إلى قرابة <strong>{fuelLiters.toFixed(1)} لتر</strong> وقود، بتكلفة تقديرية تبدأ من {primaryCost ? `${primaryCost} ${currencySymbol}` : 'حسب التسعيرة'} لنوع {primaryGrade?.nameAr || 'الوقود'}.
+            تبعد {route.toCityAr} عن {route.fromCityAr} حوالي <strong>{route.distanceKm} كم</strong> بالسيارة ({route.distanceKm * 2} كم ذهاباً وإياباً)، وتستغرق القيادة نحو <strong>{durationText}</strong> في الظروف العادية. لسيارة تستهلك 8 لتر/100 كم يحتاج المشوار إلى قرابة <strong>{fuelLiters.toFixed(1)} لتر</strong> وقود، بتكلفة تقديرية تبدأ من {primaryCost ? `${primaryCost} ${currencySymbol}` : 'حسب التسعيرة'} لنوع {primaryGrade?.nameAr || 'الوقود'}.
           </span>
         </div>
 
@@ -147,7 +201,7 @@ export default async function TripRoutePage({ params }: PageProps) {
       </div>
 
       {/* Calculated Breakdown Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs space-y-2">
           <div className="flex items-center justify-between text-slate-500 text-xs font-bold">
             <span>المسافة المقطوعة</span>
@@ -157,6 +211,15 @@ export default async function TripRoutePage({ params }: PageProps) {
             {route.distanceKm} <span className="text-sm font-bold text-slate-500">كم</span>
           </div>
           <p className="text-[11px] text-slate-500">طريق سريع معتمد باتجاه واحد</p>
+        </div>
+
+        <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs space-y-2">
+          <div className="flex items-center justify-between text-slate-500 text-xs font-bold">
+            <span>مدة القيادة</span>
+            <Clock className="w-4 h-4 text-emerald-600" />
+          </div>
+          <div className="text-lg font-black text-slate-900 leading-snug">{durationText}</div>
+          <p className="text-[11px] text-slate-500">تقريباً في الظروف العادية</p>
         </div>
 
         <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs space-y-2">
@@ -251,6 +314,8 @@ export default async function TripRoutePage({ params }: PageProps) {
           <strong>إرشادات السلامة والتزود بالوقود:</strong> يُنصح بتعبئة خزان الوقود بالكامل قبل مغادرة {route.fromCityAr} ومتابعة مؤشر الوقود عند الاقتراب من منتصف المسافة، والالتزام بالسرعات القانونية المحددة على الطريق السريع لضمان سلامتك وتحقيق أفضل كفاءة استهلاك ممكنة لسيارتك.
         </div>
       </div>
+
+      <FaqAccordion faqs={routeFaqs} />
 
       {/* Other Intercity Routes in Country */}
       {countryData.routes && countryData.routes.filter((r) => r.id !== route.id).length > 0 && (

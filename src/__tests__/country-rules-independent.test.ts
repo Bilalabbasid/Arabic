@@ -145,17 +145,36 @@ describe('Phase G: Electricity Independent Benchmark Tests', () => {
   });
 
   it('benchmark: Egypt 1200 kWh exceeding 1000 kWh threshold (Non-subsidized full recalculation)', () => {
-    // 1200 kWh * 2.23 EGP = 2,676.00 EGP
-    // Service fee slab 7 = 40.00 EGP
-    // Total = 2,716.00 EGP
+    // August 2026 tariff: 1200 kWh * 2.74 EGP = 3,288.00 EGP
+    // Service fee band 7 = 100.00 EGP
+    // Total = 3,388.00 EGP
     const result = calculateElectricityBill({
       kwh: 1200,
       tariffCategory: 'residential',
       country: 'EG',
     });
 
-    expect(result.primary.value).toBe(2716.0);
-    expect(result.secondary?.[0].value).toBe(2676.0);
+    expect(result.primary.value).toBe(3388.0);
+    expect(result.secondary?.[0].value).toBe(3288.0);
+  });
+
+  // EgyptERA sample bills for the August 2026 tariff (energy only, before the service fee)
+  it.each([
+    [50, 34],
+    [100, 83],
+    [200, 230],
+    [300, 403],
+    [400, 596.5],
+    [1000, 2410],
+    [2000, 5480],
+  ])('benchmark: Egypt %i kWh energy cost matches EgyptERA sample bill (%d EGP)', (kwh, energy) => {
+    const result = calculateElectricityBill({ kwh, tariffCategory: 'residential', country: 'EG' });
+    expect(result.secondary?.[0].value).toBeCloseTo(energy, 2);
+  });
+
+  it('benchmark: Egypt 300 kWh total bill includes the 20 EGP band-4 service fee', () => {
+    const result = calculateElectricityBill({ kwh: 300, tariffCategory: 'residential', country: 'EG' });
+    expect(result.primary.value).toBeCloseTo(423, 2);
   });
 });
 

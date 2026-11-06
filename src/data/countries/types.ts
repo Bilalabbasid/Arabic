@@ -30,6 +30,8 @@ export interface IntercityRoute {
   fromCityAr: string;
   toCityAr: string;
   distanceKm: number;
+  /** Typical driving time in minutes; when absent the page estimates it from distance. */
+  durationMinutes?: number;
   source: string;
 }
 

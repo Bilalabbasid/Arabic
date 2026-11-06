@@ -11,7 +11,7 @@ describe('Trip Cost Calculator Engine', () => {
 
   it('splits trip cost per passenger evenly', () => {
     const result = calculateTripCost({ routeId: 'riyadh-dammam', fuelConsumption: 10, passengersCount: 4 }, COUNTRY_DATA_SA);
-    expect(result.secondary?.[1].value).toBeCloseTo(21.53, 1);
+    expect(result.secondary?.[1].value).toBeCloseTo(21.8, 1);
   });
 
   it('calculates Cairo to Alexandria trip cost in Egypt', () => {

@@ -217,41 +217,41 @@ export const COUNTRY_DATA_EG: CountryData = {
         {
           "minKwh": 51,
           "maxKwh": 100,
-          "ratePerKwh": 0.78
+          "ratePerKwh": 0.98
         },
         {
           "minKwh": 101,
           "maxKwh": 200,
-          "ratePerKwh": 0.95
+          "ratePerKwh": 1.15
         },
         {
           "minKwh": 201,
           "maxKwh": 350,
-          "ratePerKwh": 1.55
+          "ratePerKwh": 1.73
         },
         {
           "minKwh": 351,
           "maxKwh": 650,
-          "ratePerKwh": 1.95
+          "ratePerKwh": 2.14
         },
         {
           "minKwh": 651,
           "maxKwh": 1000,
-          "ratePerKwh": 2.1
+          "ratePerKwh": 2.41
         },
         {
           "minKwh": 1001,
-          "ratePerKwh": 2.23
+          "ratePerKwh": 2.74
         }
       ],
-      "meterServiceFeeMonthly": 9,
+      "meterServiceFeeMonthly": 30,
       "vatApplies": false
     },
-    "law": "تعريفة بيع الطاقة الكهربائية المعتمدة بقرار وزير الكهرباء رقم 123 لسنة 2024",
+    "law": "تعريفة بيع الطاقة الكهربائية للاستخدام المنزلي الصادرة عن جهاز تنظيم مرفق الكهرباء (سارية من 1 أغسطس 2026)",
     "authority": "جهاز تنظيم مرفق الكهرباء وحماية المستهلك (EgyptERA)",
     "sourceUrl": "http://egyptera.org",
-    "validFrom": "2024-08-01",
-    "checkedAt": "2026-11-01",
+    "validFrom": "2026-08-01",
+    "checkedAt": "2026-11-07",
     "staleAfterDays": 400
   },
   "vehicle": {
@@ -354,14 +354,16 @@ export const COUNTRY_DATA_EG: CountryData = {
       "id": "cairo-luxor",
       "fromCityAr": "القاهرة",
       "toCityAr": "الأقصر",
-      "distanceKm": 670,
+      "distanceKm": 640,
+      "durationMinutes": 480,
       "source": "طريق الصعيد الصحراوي الشرقي"
     },
     {
       "id": "cairo-aswan",
       "fromCityAr": "القاهرة",
       "toCityAr": "أسوان",
-      "distanceKm": 880,
+      "distanceKm": 850,
+      "durationMinutes": 630,
       "source": "طريق الصعيد الصحراوي الغربي"
     },
     {
@@ -369,6 +371,7 @@ export const COUNTRY_DATA_EG: CountryData = {
       "fromCityAr": "القاهرة",
       "toCityAr": "السويس",
       "distanceKm": 130,
+      "durationMinutes": 90,
       "source": "طريق القاهرة - السويس الحر"
     }
   ]
