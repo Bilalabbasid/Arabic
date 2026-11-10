@@ -24,6 +24,7 @@ import {
   DEFAULT_OG_IMAGES,
 } from '@/lib/seo/metadata';
 import { getCountryCalculatorContent } from '@/data/country-content';
+import { getFuelPriceSeo } from '@/lib/seo/fuel-price-seo';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountryFlag from '@/components/common/CountryFlag';
 import CalculatorRunner from '@/components/calculator/CalculatorRunner';
@@ -72,8 +73,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = generateLocalizedCalculatorTitle(calc, country);
-  const description = generateLocalizedCalculatorDescription(calc, country);
+  const fuelSeo = getFuelPriceSeo(calc.slug, country.countryCode);
+  const title = fuelSeo ? formatMetaTitle(fuelSeo.title) : generateLocalizedCalculatorTitle(calc, country);
+  const description = fuelSeo ? fuelSeo.description : generateLocalizedCalculatorDescription(calc, country);
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/${calc.slug}`);
   const alternatesLanguages = generateHreflangAlternates(calc);
 
@@ -169,10 +171,17 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
           },
         ]
       : [];
-  const effectiveFaqs = [...fuelPriceFaqs, ...(baseFaqs || [])];
+  const fuelSeo = getFuelPriceSeo(calc.slug, country.countryCode);
+  const effectiveFaqs = [
+    ...(fuelSeo?.sarFaq ? [fuelSeo.sarFaq] : []),
+    ...fuelPriceFaqs,
+    ...(baseFaqs || []),
+  ];
+  const pageH1 = fuelSeo?.h1 || countryContent?.h1 || `${calc.nameAr} في ${country.nameAr}`;
+  const answerFirst = fuelSeo?.answerFirst || countryContent?.answerFirstAr || calc.answerFirstAr;
 
   const calculatorSchema = generateCalculatorSchema({
-    nameAr: countryContent?.h1 || calc.nameAr,
+    nameAr: pageH1,
     descriptionAr: countryContent?.intro || calc.descriptionAr,
     slug: calc.slug,
     countryCode: country.countryCode,
@@ -218,12 +227,12 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         </div>
 
         <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-          {countryContent?.h1 || `${calc.nameAr} في ${country.nameAr}`}
+          {pageH1}
         </h1>
-        {(countryContent?.answerFirstAr || calc.answerFirstAr) && (
+        {answerFirst && (
           <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-emerald-950 font-medium text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
             <span className="font-extrabold text-emerald-800 shrink-0">إجابة مباشرة:</span>
-            <span>{countryContent?.answerFirstAr || calc.answerFirstAr}</span>
+            <span>{answerFirst}</span>
           </div>
         )}
         <p className="text-sm sm:text-base text-slate-600 leading-relaxed">

@@ -66,8 +66,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const duration = formatDriveDuration(estimateDriveMinutes(route.distanceKm, route.durationMinutes));
-  const title = formatMetaTitle(`المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم وتكلفة البنزين`);
-  const description = `تبعد ${route.toCityAr} عن ${route.fromCityAr} حوالي ${route.distanceKm} كم بالسيارة (نحو ${duration} قيادة). احسب لترات البنزين وتكلفة المشوار ذهاباً وإياباً بأسعار الوقود الرسمية في ${country.nameAr}.`;
+  // Searchers ask "كم كيلو" / "كم ساعة" / "كم تبعد": put both answers in the snippet.
+  const title = formatMetaTitle(`المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration} بالسيارة)`);
+  const description = `كم تبعد ${route.toCityAr} عن ${route.fromCityAr}؟ المسافة ${route.distanceKm} كم بالسيارة وتستغرق القيادة نحو ${duration}. اعرف كم لتر بنزين يحتاج المشوار وتكلفته ذهاباً وإياباً (${route.distanceKm * 2} كم) بأسعار الوقود الرسمية.`;
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/trip-cost/${route.id}`);
 
   return {
