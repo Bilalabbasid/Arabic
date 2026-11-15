@@ -36,8 +36,8 @@ export function getCountriesSitemap(): SitemapUrlEntry[] {
   // Indexable country hubs (SA, AE, EG only)
   for (const c of COUNTRIES) {
     const cCode = c.countryCode.toLowerCase();
+    const cData = getCountryData(cCode);
     if (isCountryHubIndexable(cCode)) {
-      const cData = getCountryData(cCode);
       const hubLastmod = cData?.fuel?.checkedAt || cData?.vat?.checkedAt || '2026-10-15';
 
       entries.push({
@@ -47,15 +47,16 @@ export function getCountriesSitemap(): SitemapUrlEntry[] {
 
       // Note: there is no per-country fuel-prices page (/{cc}/fuel-prices 308-redirects to
       // /calculators/fuel-prices), so it must not be listed here.
+    }
 
-      // Intercity trip routes
-      if (cData?.routes && cData.fuel?.status === 'verified') {
-        for (const route of cData.routes.slice(0, 5)) {
-          entries.push({
-            url: constructCanonicalUrl(`/${cCode}/trip-cost/${route.id}`),
-            lastmod: cData.fuel.checkedAt || '2026-11-01',
-          });
-        }
+    // Intercity trip routes: every route page is indexable in every country, because the
+    // distance/drive-time content stands on its own (fuel cost is shown only when verified).
+    if (cData?.routes && cData.routes.length > 0) {
+      for (const route of cData.routes) {
+        entries.push({
+          url: constructCanonicalUrl(`/${cCode}/trip-cost/${route.id}`),
+          lastmod: cData.fuel?.checkedAt || '2026-11-15',
+        });
       }
     }
   }

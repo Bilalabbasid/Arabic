@@ -423,8 +423,8 @@ export default function CalculatorRunner({
                   <div className="relative">
                     <input
                       id={inputId}
-                      type={def.type === 'number' || def.type === 'decimal' || def.type === 'currency' || def.type === 'percentage' ? 'number' : 'text'}
-                      dir={def.type === 'number' || def.type === 'decimal' || def.type === 'currency' || def.type === 'percentage' ? 'ltr' : 'rtl'}
+                      type={def.type === 'number' || def.type === 'decimal' || def.type === 'currency' || def.type === 'percentage' ? 'number' : def.type === 'date' ? 'date' : 'text'}
+                      dir={def.type === 'number' || def.type === 'decimal' || def.type === 'currency' || def.type === 'percentage' || def.type === 'date' ? 'ltr' : 'rtl'}
                       value={inputs[def.id] ?? ''}
                       min={def.min}
                       max={def.max}

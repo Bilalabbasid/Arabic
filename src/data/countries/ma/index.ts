@@ -291,6 +291,110 @@ export const COUNTRY_DATA_MA: CountryData = {
       "toCityAr": "أكادير",
       "distanceKm": 260,
       "source": "الطريق السيار A3 مراكش - أكادير"
+    },
+    {
+      "id": "marrakech-essaouira",
+      "fromCityAr": "مراكش",
+      "toCityAr": "الصويرة",
+      "distanceKm": 185,
+      "durationMinutes": 160,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "casablanca-agadir",
+      "fromCityAr": "الدار البيضاء",
+      "toCityAr": "أكادير",
+      "distanceKm": 462,
+      "durationMinutes": 310,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "tangier-tetouan",
+      "fromCityAr": "طنجة",
+      "toCityAr": "تطوان",
+      "distanceKm": 61,
+      "durationMinutes": 65,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "laayoune-dakhla",
+      "fromCityAr": "العيون",
+      "toCityAr": "الداخلة",
+      "distanceKm": 540,
+      "durationMinutes": 425,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "casablanca-el-jadida",
+      "fromCityAr": "الدار البيضاء",
+      "toCityAr": "الجديدة",
+      "distanceKm": 101,
+      "durationMinutes": 75,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "fes-meknes",
+      "fromCityAr": "فاس",
+      "toCityAr": "مكناس",
+      "distanceKm": 66,
+      "durationMinutes": 50,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "rabat-tangier",
+      "fromCityAr": "الرباط",
+      "toCityAr": "طنجة",
+      "distanceKm": 245,
+      "durationMinutes": 170,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "casablanca-fes",
+      "fromCityAr": "الدار البيضاء",
+      "toCityAr": "فاس",
+      "distanceKm": 294,
+      "durationMinutes": 200,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "rabat-marrakech",
+      "fromCityAr": "الرباط",
+      "toCityAr": "مراكش",
+      "distanceKm": 320,
+      "durationMinutes": 220,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "marrakech-fes",
+      "fromCityAr": "مراكش",
+      "toCityAr": "فاس",
+      "distanceKm": 523,
+      "durationMinutes": 350,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "marrakech-ouarzazate",
+      "fromCityAr": "مراكش",
+      "toCityAr": "ورزازات",
+      "distanceKm": 195,
+      "durationMinutes": 225,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "fes-tangier",
+      "fromCityAr": "فاس",
+      "toCityAr": "طنجة",
+      "distanceKm": 398,
+      "durationMinutes": 270,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "oujda-fes",
+      "fromCityAr": "وجدة",
+      "toCityAr": "فاس",
+      "distanceKm": 328,
+      "durationMinutes": 220,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
     }
   ]
 };

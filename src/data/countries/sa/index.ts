@@ -320,6 +320,326 @@ export const COUNTRY_DATA_SA: CountryData = {
       "distanceKm": 105,
       "durationMinutes": 70,
       "source": "الهيئة العامة للطرق"
+    },
+    {
+      "id": "riyadh-kharj",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الخرج",
+      "distanceKm": 95,
+      "durationMinutes": 85,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-hail",
+      "fromCityAr": "الرياض",
+      "toCityAr": "حائل",
+      "distanceKm": 614,
+      "durationMinutes": 355,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-dawadmi",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الدوادمي",
+      "distanceKm": 316,
+      "durationMinutes": 220,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-majmaah",
+      "fromCityAr": "الرياض",
+      "toCityAr": "المجمعة",
+      "distanceKm": 195,
+      "durationMinutes": 115,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-zulfi",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الزلفي",
+      "distanceKm": 270,
+      "durationMinutes": 165,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-quwayiyah",
+      "fromCityAr": "الرياض",
+      "toCityAr": "القويعية",
+      "distanceKm": 172,
+      "durationMinutes": 115,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-shaqra",
+      "fromCityAr": "الرياض",
+      "toCityAr": "شقراء",
+      "distanceKm": 191,
+      "durationMinutes": 130,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-ahsa",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الأحساء",
+      "distanceKm": 326,
+      "durationMinutes": 225,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-aflaj",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الأفلاج",
+      "distanceKm": 293,
+      "durationMinutes": 215,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-taif",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الطائف",
+      "distanceKm": 788,
+      "durationMinutes": 515,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-makkah",
+      "fromCityAr": "الرياض",
+      "toCityAr": "مكة المكرمة",
+      "distanceKm": 871,
+      "durationMinutes": 575,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-madinah",
+      "fromCityAr": "الرياض",
+      "toCityAr": "المدينة المنورة",
+      "distanceKm": 826,
+      "durationMinutes": 460,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-tabuk",
+      "fromCityAr": "الرياض",
+      "toCityAr": "تبوك",
+      "distanceKm": 1351,
+      "durationMinutes": 830,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-rumah",
+      "fromCityAr": "الرياض",
+      "toCityAr": "رماح",
+      "distanceKm": 127,
+      "durationMinutes": 95,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-muzahmiyah",
+      "fromCityAr": "الرياض",
+      "toCityAr": "المزاحمية",
+      "distanceKm": 59,
+      "durationMinutes": 45,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-afif",
+      "fromCityAr": "الرياض",
+      "toCityAr": "عفيف",
+      "distanceKm": 487,
+      "durationMinutes": 340,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-wadi-aldawasir",
+      "fromCityAr": "الرياض",
+      "toCityAr": "وادي الدواسر",
+      "distanceKm": 619,
+      "durationMinutes": 445,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-huraymila",
+      "fromCityAr": "الرياض",
+      "toCityAr": "حريملاء",
+      "distanceKm": 88,
+      "durationMinutes": 60,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-hafar-albatin",
+      "fromCityAr": "الرياض",
+      "toCityAr": "حفر الباطن",
+      "distanceKm": 499,
+      "durationMinutes": 330,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "dammam-ahsa",
+      "fromCityAr": "الدمام",
+      "toCityAr": "الأحساء",
+      "distanceKm": 150,
+      "durationMinutes": 105,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "dammam-khobar",
+      "fromCityAr": "الدمام",
+      "toCityAr": "الخبر",
+      "distanceKm": 29,
+      "durationMinutes": 25,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "dammam-jubail",
+      "fromCityAr": "الدمام",
+      "toCityAr": "الجبيل",
+      "distanceKm": 87,
+      "durationMinutes": 60,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "dammam-khafji",
+      "fromCityAr": "الدمام",
+      "toCityAr": "الخفجي",
+      "distanceKm": 297,
+      "durationMinutes": 195,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "dammam-nairyah",
+      "fromCityAr": "الدمام",
+      "toCityAr": "النعيرية",
+      "distanceKm": 210,
+      "durationMinutes": 140,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "khobar-ahsa",
+      "fromCityAr": "الخبر",
+      "toCityAr": "الأحساء",
+      "distanceKm": 153,
+      "durationMinutes": 105,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "jeddah-makkah",
+      "fromCityAr": "جدة",
+      "toCityAr": "مكة المكرمة",
+      "distanceKm": 83,
+      "durationMinutes": 60,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "makkah-madinah",
+      "fromCityAr": "مكة المكرمة",
+      "toCityAr": "المدينة المنورة",
+      "distanceKm": 436,
+      "durationMinutes": 290,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "jeddah-taif",
+      "fromCityAr": "جدة",
+      "toCityAr": "الطائف",
+      "distanceKm": 165,
+      "durationMinutes": 125,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "makkah-taif",
+      "fromCityAr": "مكة المكرمة",
+      "toCityAr": "الطائف",
+      "distanceKm": 89,
+      "durationMinutes": 75,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "jeddah-yanbu",
+      "fromCityAr": "جدة",
+      "toCityAr": "ينبع",
+      "distanceKm": 336,
+      "durationMinutes": 225,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "jeddah-umluj",
+      "fromCityAr": "جدة",
+      "toCityAr": "أملج",
+      "distanceKm": 482,
+      "durationMinutes": 325,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "jeddah-rabigh",
+      "fromCityAr": "جدة",
+      "toCityAr": "رابغ",
+      "distanceKm": 161,
+      "durationMinutes": 110,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-hail",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "حائل",
+      "distanceKm": 429,
+      "durationMinutes": 280,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-alula",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "العلا",
+      "distanceKm": 339,
+      "durationMinutes": 305,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "tabuk-alula",
+      "fromCityAr": "تبوك",
+      "toCityAr": "العلا",
+      "distanceKm": 450,
+      "durationMinutes": 350,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "hail-qassim",
+      "fromCityAr": "حائل",
+      "toCityAr": "القصيم (بريدة)",
+      "distanceKm": 267,
+      "durationMinutes": 160,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "hail-tabuk",
+      "fromCityAr": "حائل",
+      "toCityAr": "تبوك",
+      "distanceKm": 674,
+      "durationMinutes": 485,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "taif-baha",
+      "fromCityAr": "الطائف",
+      "toCityAr": "الباحة",
+      "distanceKm": 218,
+      "durationMinutes": 150,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "abha-namas",
+      "fromCityAr": "أبها",
+      "toCityAr": "النماص",
+      "distanceKm": 144,
+      "durationMinutes": 105,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "tabuk-tayma",
+      "fromCityAr": "تبوك",
+      "toCityAr": "تيماء",
+      "distanceKm": 265,
+      "durationMinutes": 190,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
     }
   ]
 };

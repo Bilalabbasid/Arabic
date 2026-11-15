@@ -47,6 +47,22 @@ describe('Phase 4: Categories Architecture', () => {
     expect(mathCalcs.some((c) => c.slug === 'percentage-calculator')).toBe(true);
     expect(mathCalcs.some((c) => c.slug === 'length-converter')).toBe(true);
     expect(mathCalcs.some((c) => c.slug === 'time-converter')).toBe(true);
+    for (const slug of ['gpa-calculator', 'weighted-percentage', 'discount-calculator']) {
+      expect(mathCalcs.some((c) => c.slug === slug), slug).toBe(true);
+    }
+  });
+
+  it('new general calculators sit in their fitting categories', () => {
+    expect(getCalculatorsByCategory('dates-time').some((c) => c.slug === 'date-difference')).toBe(true);
+    expect(getCalculatorsByCategory('health-fitness').some((c) => c.slug === 'ideal-weight')).toBe(true);
+    expect(getCalculatorsByCategory('finance-savings').some((c) => c.slug === 'discount-calculator')).toBe(true);
+  });
+
+  it('sitemap lists the new general calculator pages', () => {
+    const urls = sitemap().map((e) => e.url);
+    for (const slug of ['gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight']) {
+      expect(urls).toContain(`https://www.lsayartk.com/calculators/${slug}`);
+    }
   });
 
   it('unit-conversion category should have at least 3 live calculators', () => {

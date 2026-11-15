@@ -373,6 +373,118 @@ export const COUNTRY_DATA_EG: CountryData = {
       "distanceKm": 130,
       "durationMinutes": 90,
       "source": "طريق القاهرة - السويس الحر"
+    },
+    {
+      "id": "cairo-port-said",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "بورسعيد",
+      "distanceKm": 197,
+      "durationMinutes": 145,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-mansoura",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "المنصورة",
+      "distanceKm": 128,
+      "durationMinutes": 110,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-asyut",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "أسيوط",
+      "distanceKm": 385,
+      "durationMinutes": 265,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-matruh",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "مرسى مطروح",
+      "distanceKm": 461,
+      "durationMinutes": 310,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-north-coast",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "الساحل الشمالي (العلمين)",
+      "distanceKm": 260,
+      "durationMinutes": 175,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-minya",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "المنيا",
+      "distanceKm": 254,
+      "durationMinutes": 185,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-beni-suef",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "بني سويف",
+      "distanceKm": 122,
+      "durationMinutes": 90,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-tanta",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "طنطا",
+      "distanceKm": 98,
+      "durationMinutes": 75,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-dahab",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "دهب",
+      "distanceKm": 539,
+      "durationMinutes": 405,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-ras-sudr",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "رأس سدر",
+      "distanceKm": 199,
+      "durationMinutes": 150,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-marsa-alam",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "مرسى علم",
+      "distanceKm": 738,
+      "durationMinutes": 500,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-sokhna",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "العين السخنة",
+      "distanceKm": 130,
+      "durationMinutes": 95,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-fayoum",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "الفيوم",
+      "distanceKm": 100,
+      "durationMinutes": 75,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-ismailia",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "الإسماعيلية",
+      "distanceKm": 126,
+      "durationMinutes": 95,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
     }
   ]
 };

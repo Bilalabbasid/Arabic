@@ -5,6 +5,7 @@ import { COUNTRIES, getCountryByCode, getCountryData } from '@/data/countries';
 import { isIndexable, getIndexableCalculatorsForCountry, isCountryHubGatedIndexable } from '@/lib/seo/gating';
 import { GUIDES } from '@/data/guides';
 import { getCalculatorSeoMeta } from './calculatorSeoData';
+import { getRelatedRoutes } from '@/lib/routes';
 
 export type BlockType =
   | 'breadcrumb'
@@ -123,8 +124,8 @@ export function buildLinkGraph(): LinkGraph {
       }
 
       // Trip routes if fuel verified and routes exist
-      if (countryData && countryData.routes && countryData.fuel?.status === 'verified') {
-        for (const route of countryData.routes.slice(0, 5)) {
+      if (countryData && countryData.routes) {
+        for (const route of countryData.routes) {
           addNode(`/${cCode}/trip-cost/${route.id}`, 'trip-route');
         }
       }
@@ -241,10 +242,10 @@ export function buildLinkGraph(): LinkGraph {
       addEdge(hubUrl, `/${cCode}/fuel-prices`, `أسعار الوقود في ${countryName}`, 'hub-list');
     }
 
-    // Top routes
+    // All routes (the hub page lists every route)
     const cData = getCountryData(cCode);
     if (cData && cData.routes) {
-      for (const route of cData.routes.slice(0, 5)) {
+      for (const route of cData.routes) {
         if (nodes.has(`/${cCode}/trip-cost/${route.id}`)) {
           addEdge(hubUrl, `/${cCode}/trip-cost/${route.id}`, `تكلفة السفر من ${route.fromCityAr} إلى ${route.toCityAr}`, 'routes');
         }
@@ -291,7 +292,7 @@ export function buildLinkGraph(): LinkGraph {
     const cData = getCountryData(cCode);
     if (!cData || !cData.routes) continue;
 
-    for (const route of cData.routes.slice(0, 5)) {
+    for (const route of cData.routes) {
       const routeUrl = `/${cCode}/trip-cost/${route.id}`;
       if (!nodes.has(routeUrl)) continue;
 
@@ -308,7 +309,9 @@ export function buildLinkGraph(): LinkGraph {
         addEdge(routeUrl, `/${cCode}/trip-cost`, 'حاسبة مسار الرحلة العامة', 'related');
       }
 
-      for (const otherRoute of cData.routes.slice(0, 5)) {
+      // Mirrors the route page: routes sharing a city first, top 12.
+      const relatedRoutes = getRelatedRoutes(cData.routes, route, 12);
+      for (const otherRoute of relatedRoutes) {
         if (otherRoute.id !== route.id && nodes.has(`/${cCode}/trip-cost/${otherRoute.id}`)) {
           addEdge(routeUrl, `/${cCode}/trip-cost/${otherRoute.id}`, `مسار ${otherRoute.fromCityAr} - ${otherRoute.toCityAr}`, 'routes');
         }

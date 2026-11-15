@@ -9,7 +9,9 @@ import { calculatePercentage } from '@/lib/calculators/math';
 import { calculateLengthConverter, calculateTimeConverter } from '@/lib/calculators/converters';
 
 import { NEW_17_CALCULATORS } from './new-calculators';
+import { GENERAL_CALCULATORS } from './general-calculators';
 export * from './new-calculators';
+export * from './general-calculators';
 
 const LEGACY_CALCULATORS: CalculatorDefinition[] = [
   {
@@ -199,7 +201,7 @@ const LEGACY_CALCULATORS: CalculatorDefinition[] = [
     additionalCategories: ['finance-savings'],
     subcategory: 'ضريبة القيمة المضافة (VAT)',
     descriptionAr: 'احسب ضريبة القيمة المضافة أو استخرج المبلغ الأساسي قبل الضريبة لجميع الدول العربية (السعودية 15%، الإمارات 5%، مصر 14%، وغيرها).',
-    metaTitle: 'حاسبة ضريبة القيمة المضافة: إضافة واستخراج الضريبة',
+    metaTitle: 'حاسبة الضريبة: إضافة واستخراج ضريبة القيمة المضافة',
     metaDescription: 'أداة احترافية لحساب ضريبة القيمة المضافة وإضافتها على السعر الصافي، أو استخراج أصل المبلغ والضريبة من الفاتورة الإجمالية بدقة متناهية.',
     h1: 'حاسبة ضريبة القيمة المضافة',
     searchKeywords: [
@@ -699,7 +701,7 @@ const LEGACY_CALCULATORS: CalculatorDefinition[] = [
     additionalCategories: ['finance-savings'],
     subcategory: 'زكاة المال والأسهم',
     descriptionAr: 'احسب زكاة أموالك، الأرصدة البنكية، عروض التجارة، والأسهم، مع التحقق التلقائي من بلوغ النصاب الشرعي (85 غرام ذهب عيار 24).',
-    metaTitle: 'حاسبة زكاة المال والنصاب وعروض التجارة',
+    metaTitle: 'حساب الزكاة: زكاة المال والنصاب وعروض التجارة',
     metaDescription: 'أداة شرعية دقيقة لحساب زكاة المال والأرصدة النقدية وعروض التجارة بنسبة 2.5% للسنة الهجرية أو 2.577% للميلادية مع التحقق من النصاب.',
     h1: 'حاسبة زكاة المال وعروض التجارة',
     searchKeywords: [
@@ -1168,7 +1170,7 @@ const LEGACY_CALCULATORS: CalculatorDefinition[] = [
     additionalCategories: ['unit-conversion'],
     subcategory: 'حساب النسب المئوية',
     descriptionAr: 'احسب النسبة المئوية من أي مبلغ، أو احسب نسبة عدد من آخر، ومعدل الزيادة أو النقصان المئوي بدقة وفورية.',
-    metaTitle: 'حاسبة النسبة المئوية والزيادة والنقصان',
+    metaTitle: 'حساب النسبة المئوية من المبلغ والزيادة والنقصان',
     metaDescription: 'أداة سهلة وسريعة لحساب النسب المئوية: كم يساوي X% من Y، أو نسبة رقم إلى رقم آخر، وحساب نسبة الخصم والزيادة المئوية خطوة بخطوة.',
     h1: 'حاسبة النسبة المئوية والتغير المئوي',
     searchKeywords: [
@@ -1478,7 +1480,7 @@ const LEGACY_CALCULATORS: CalculatorDefinition[] = [
     additionalCategories: ['mathematics-percentages'],
     subcategory: 'تحويل الوقت والزمن',
     descriptionAr: 'تحويل دقيق وفوري بين وحدات الزمن: الثواني، الدقائق، الساعات، الأيام، الأسابيع، والسنوات مع تحليل وتفكيك المدة الزمنية المركبة.',
-    metaTitle: 'تحويل وحدات الوقت: ثوانٍ ودقائق وساعات وأيام',
+    metaTitle: 'تحويل الوقت: الساعات إلى أيام ودقائق وثوانٍ',
     metaDescription: 'أداة مجانية للتحويل بين مختلف وحدات الوقت: تحويل الدقائق إلى ساعات، الساعات إلى أيام، الثواني إلى دقائق، مع تفكيك المدة المركبة بدقة رياضية كاملة.',
     h1: 'محول وحدات الوقت والمدة الزمنية',
     searchKeywords: [
@@ -1655,6 +1657,7 @@ const LEGACY_CALCULATORS: CalculatorDefinition[] = [
 export const ALL_CALCULATORS: CalculatorDefinition[] = [
   ...LEGACY_CALCULATORS,
   ...NEW_17_CALCULATORS,
+  ...GENERAL_CALCULATORS,
 ];
 
 // O(1) lookup map

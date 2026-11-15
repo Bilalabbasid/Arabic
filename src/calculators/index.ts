@@ -24,3 +24,8 @@ export * as bmi_calculator from './bmi-calculator';
 export * as percentage_calculator from './percentage-calculator';
 export * as length_converter from './length-converter';
 export * as time_converter from './time-converter';
+export * as gpa_calculator from './gpa-calculator';
+export * as weighted_percentage from './weighted-percentage';
+export * as discount_calculator from './discount-calculator';
+export * as date_difference from './date-difference';
+export * as ideal_weight from './ideal-weight';

@@ -10,6 +10,7 @@ import AdSlot from '@/components/layout/AdSlot';
 import { Navigation, Fuel, ArrowRightLeft, ShieldCheck, MapPin, Calculator, Calendar, Clock } from 'lucide-react';
 import FaqAccordion from '@/components/calculator/FaqAccordion';
 import { formatDateAr } from '@/lib/formatters';
+import { getRelatedRoutes } from '@/lib/routes';
 
 interface PageProps {
   params: Promise<{ country: string; route: string }>;
@@ -40,7 +41,8 @@ export async function generateStaticParams() {
   for (const c of COUNTRIES) {
     const cCode = c.countryCode.toLowerCase();
     const cData = getCountryData(cCode);
-    if (cData && cData.routes && cData.fuel?.status === 'verified') {
+    // Distance and drive time are useful on their own; fuel cost is only shown when prices are verified.
+    if (cData && cData.routes && cData.routes.length > 0) {
       for (const r of cData.routes) {
         paramsList.push({
           country: cCode,
@@ -68,7 +70,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const duration = formatDriveDuration(estimateDriveMinutes(route.distanceKm, route.durationMinutes));
   // Searchers ask "كم كيلو" / "كم ساعة" / "كم تبعد": put both answers in the snippet.
   const title = formatMetaTitle(`المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration} بالسيارة)`);
-  const description = `كم تبعد ${route.toCityAr} عن ${route.fromCityAr}؟ المسافة ${route.distanceKm} كم بالسيارة وتستغرق القيادة نحو ${duration}. اعرف كم لتر بنزين يحتاج المشوار وتكلفته ذهاباً وإياباً (${route.distanceKm * 2} كم) بأسعار الوقود الرسمية.`;
+  const fuelVerified = countryData.fuel?.status === 'verified';
+  const description = `كم تبعد ${route.toCityAr} عن ${route.fromCityAr}؟ المسافة ${route.distanceKm} كم بالسيارة وتستغرق القيادة نحو ${duration}. اعرف كم لتر بنزين يحتاج المشوار ${fuelVerified ? `وتكلفته ذهاباً وإياباً (${route.distanceKm * 2} كم) بأسعار الوقود الرسمية` : `ذهاباً وإياباً (${route.distanceKm * 2} كم)`}.`;
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/trip-cost/${route.id}`);
 
   return {
@@ -104,7 +107,8 @@ export default async function TripRoutePage({ params }: PageProps) {
   }
 
   const fuelRule = countryData.fuel;
-  const grades = fuelRule?.value?.grades || {};
+  const fuelVerified = fuelRule?.status === 'verified';
+  const grades = fuelVerified ? fuelRule?.value?.grades || {} : {};
   const gradeEntries = Object.entries(grades);
   const currencySymbol = country.currencySymbolAr;
 
@@ -192,12 +196,14 @@ export default async function TripRoutePage({ params }: PageProps) {
         <div className="p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-emerald-950 font-medium text-xs sm:text-sm leading-relaxed flex items-start gap-3 shadow-xs">
           <span className="font-extrabold text-emerald-800 shrink-0">إجابة مباشرة:</span>
           <span>
-            تبعد {route.toCityAr} عن {route.fromCityAr} حوالي <strong>{route.distanceKm} كم</strong> بالسيارة ({route.distanceKm * 2} كم ذهاباً وإياباً)، وتستغرق القيادة نحو <strong>{durationText}</strong> في الظروف العادية. لسيارة تستهلك 8 لتر/100 كم يحتاج المشوار إلى قرابة <strong>{fuelLiters.toFixed(1)} لتر</strong> وقود، بتكلفة تقديرية تبدأ من {primaryCost ? `${primaryCost} ${currencySymbol}` : 'حسب التسعيرة'} لنوع {primaryGrade?.nameAr || 'الوقود'}.
+            تبعد {route.toCityAr} عن {route.fromCityAr} حوالي <strong>{route.distanceKm} كم</strong> بالسيارة ({route.distanceKm * 2} كم ذهاباً وإياباً)، وتستغرق القيادة نحو <strong>{durationText}</strong> في الظروف العادية. لسيارة تستهلك 8 لتر/100 كم يحتاج المشوار إلى قرابة <strong>{fuelLiters.toFixed(1)} لتر</strong> وقود{primaryCost ? `، بتكلفة تقديرية تبدأ من ${primaryCost} ${currencySymbol} لنوع ${primaryGrade?.nameAr}` : ''}.
           </span>
         </div>
 
         <p className="text-sm text-slate-600 leading-relaxed">
-          تم احتساب كميات وتكاليف الوقود استناداً إلى مسافات الطرق السريعة المعتمدة من {route.source} وأحدث تسعيرة معتمدة للوقود في {country.nameAr}.
+          {fuelVerified
+            ? `تم احتساب كميات وتكاليف الوقود استناداً إلى مسافة الطريق البري (المصدر: ${route.source}) وأحدث تسعيرة معتمدة للوقود في ${country.nameAr}.`
+            : `المسافة ومدة القيادة محسوبتان لأقصر طريق بري بالسيارة (المصدر: ${route.source}). أسعار الوقود في ${country.nameAr} حرة وتختلف بين المحطات، لذا نعرض كمية الوقود باللتر ويمكنك إدخال سعر محطتك في حاسبة تكلفة الرحلة.`}
         </p>
       </div>
 
@@ -288,7 +294,7 @@ export default async function TripRoutePage({ params }: PageProps) {
           تفاصيل رحلة الذهاب والعودة (مسار كامل {route.distanceKm * 2} كم)
         </h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          في حال التخطيط لرحلة ذهاباً وإياباً بين {route.fromCityAr} و{route.toCityAr}، تبلغ المسافة الإجمالية المقطوعة <strong>{route.distanceKm * 2} كم</strong>. ويتطلب المشوار الكامل ما يقارب <strong>{(fuelLiters * 2).toFixed(1)} لتر</strong> من الوقود، بتكلفة تقديرية إجمالية تبدأ من {primaryCost ? `${(Number(primaryCost) * 2).toFixed(2)} ${currencySymbol}` : 'حسب التسعيرة'} لنوع {primaryGrade?.nameAr || 'الوقود'}.
+          في حال التخطيط لرحلة ذهاباً وإياباً بين {route.fromCityAr} و{route.toCityAr}، تبلغ المسافة الإجمالية المقطوعة <strong>{route.distanceKm * 2} كم</strong>. ويتطلب المشوار الكامل ما يقارب <strong>{(fuelLiters * 2).toFixed(1)} لتر</strong> من الوقود{primaryCost ? `، بتكلفة تقديرية إجمالية تبدأ من ${(Number(primaryCost) * 2).toFixed(2)} ${currencySymbol} لنوع ${primaryGrade?.nameAr}` : ''}.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -325,10 +331,7 @@ export default async function TripRoutePage({ params }: PageProps) {
             مسارات أخرى بين المدن في {country.nameAr}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {countryData.routes
-              .filter((r) => r.id !== route.id)
-              .slice(0, 6)
-              .map((otherRoute) => (
+            {getRelatedRoutes(countryData.routes, route, 12).map((otherRoute) => (
                 <Link
                   key={otherRoute.id}
                   href={`/${country.countryCode.toLowerCase()}/trip-cost/${otherRoute.id}`}

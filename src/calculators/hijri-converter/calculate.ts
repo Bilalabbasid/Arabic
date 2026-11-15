@@ -7,19 +7,19 @@ export interface HijriConverterInputs {
   conversionMode?: 'gregorian_to_hijri' | 'hijri_to_gregorian';
 }
 
-const HIJRI_MONTHS = [
+export const HIJRI_MONTHS = [
   'محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر',
   'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان',
   'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة',
 ];
 
-const GREGORIAN_MONTHS = [
+export const GREGORIAN_MONTHS = [
   'يناير', 'فبراير', 'مارس', 'أبريل',
   'مايو', 'يونيو', 'يوليو', 'أغسطس',
   'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر',
 ];
 
-const WEEKDAYS = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+export const WEEKDAYS = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
 // Algorithmic Kuwaiti/Umm al-Qura Julian Day conversion
 export function gregorianToJulianDay(year: number, month: number, day: number): number {
@@ -47,7 +47,7 @@ function julianDayToGregorian(jd: number): { year: number; month: number; day: n
   return { year, month, day, weekday: WEEKDAYS[dayOfWeekIndex] };
 }
 
-function julianDayToHijri(jd: number): { year: number; month: number; day: number; weekday: string } {
+export function julianDayToHijri(jd: number): { year: number; month: number; day: number; weekday: string } {
   const l = Math.floor(jd - 1948440 + 10632);
   const n = Math.floor((l - 1) / 10631);
   const l1 = l - 10631 * n + 354;

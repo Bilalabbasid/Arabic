@@ -420,4 +420,43 @@ describe('Phase 3: Master Numerical Calculation & Matrix Verification', () => {
       expect(res.primary.formattedValue).toBe('-');
     });
   });
+
+  // 10. General calculators (registry-level checks through the published definitions)
+  describe('General calculators: gpa / weighted / discount / date-difference / ideal-weight', () => {
+    const run = (slug: string, inputs: Record<string, any>) => getCalculatorBySlug(slug)!.calculate(inputs);
+
+    it('registry defaults compute without errors for all five', () => {
+      for (const slug of ['gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight']) {
+        const calc = getCalculatorBySlug(slug);
+        expect(calc, slug).toBeDefined();
+        expect(calc!.publicationStatus).toBe('PUBLISHED');
+        const defaults: Record<string, any> = {};
+        for (const inp of calc!.inputs) defaults[inp.id] = inp.defaultValue;
+        const res = calc!.calculate(defaults);
+        expect(res.error, slug).toBeUndefined();
+        expect(Number.isFinite(Number(res.primary.value)), slug).toBe(true);
+      }
+    });
+
+    it('gpa: 3h A+ and 3h B on the 5-scale = 4.50', () => {
+      expect(run('gpa-calculator', { scale: '5', coursesCount: '2', course1Hours: 3, course1Grade: 'A+', course2Hours: 3, course2Grade: 'B' }).primary.value).toBe(4.5);
+    });
+
+    it('weighted: 90/80/85 at 30/30/40 = 85', () => {
+      expect(run('weighted-percentage', { preset: '30-30-40', highSchool: 90, qudurat: 80, tahsili: 85 }).primary.value).toBe(85);
+    });
+
+    it('discount: 200 at 25% = 150', () => {
+      expect(run('discount-calculator', { mode: 'percent', originalPrice: 200, discountPercent: 25, vat: 'none' }).primary.value).toBe(150);
+    });
+
+    it('date-difference: 2026-01-01 to 2026-03-01 = 59 days', () => {
+      expect(run('date-difference', { startDate: '2026-01-01', endDate: '2026-03-01', includeEndDay: 'no', weekend: 'fri-sat' }).primary.value).toBe(59);
+    });
+
+    it('ideal-weight: Devine male 180 cm = 75.0 kg', () => {
+      const res = run('ideal-weight', { heightCm: 180, sex: 'male', frame: 'medium' });
+      expect(res.secondary?.find((s) => s.id === 'devine')?.value).toBe(75);
+    });
+  });
 });

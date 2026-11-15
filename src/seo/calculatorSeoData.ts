@@ -237,6 +237,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     slug: 'vat-calculator',
     relatedCalculators: [
       { slug: 'percentage-calculator', reason: 'حساب نسب الخصم والزيادة المئوية بدون ضرائب' },
+      { slug: 'discount-calculator', reason: 'السعر بعد الخصم مع إضافة ضريبة 15% على المبلغ المخفض' },
       { slug: 'zakat-wealth', reason: 'حساب زكاة المال وعروض التجارة وفق الأحكام الشرعية' },
       { slug: 'car-import-customs', reason: 'احتساب ضريبة القيمة المضافة مع الرسوم الجمركية للسيارات' },
       { slug: 'electricity-bill', reason: 'حساب الضريبة المضافة على فواتير الطاقة والخدمات' },
@@ -332,6 +333,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
   'bmi-calculator': {
     slug: 'bmi-calculator',
     relatedCalculators: [
+      { slug: 'ideal-weight', reason: 'احسب وزنك المثالي المستهدف حسب طولك وجنسك' },
       { slug: 'length-converter', reason: 'تحويل الطول بين المتر والسنتيمتر والقدم والبوصة' },
       { slug: 'percentage-calculator', reason: 'حساب نسبة الدهون والتغير في وزن الجسم' },
       { slug: 'time-converter', reason: 'جدولة خطط التمارين وفترات الراحة الأسبوعية' },
@@ -339,6 +341,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     guides: ['bmi-healthy-weight-guide'],
     intentTags: ['health', 'fitness', 'weight', 'wellness'],
     contextualLinks: [
+      { slug: 'ideal-weight', anchorText: 'حساب الوزن المثالي حسب الطول' },
       { slug: 'length-converter', anchorText: 'تحويل وحدات الطول والقامة' },
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
       { slug: 'time-converter', anchorText: 'تحويل الساعات والدقائق للتمارين' },
@@ -347,6 +350,9 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
   'percentage-calculator': {
     slug: 'percentage-calculator',
     relatedCalculators: [
+      { slug: 'discount-calculator', reason: 'السعر بعد الخصم ونسبة التخفيض والخصم المضاعف' },
+      { slug: 'weighted-percentage', reason: 'حساب النسبة الموزونة من الثانوية والقدرات والتحصيلي' },
+      { slug: 'gpa-calculator', reason: 'حساب المعدل التراكمي الجامعي من 5 ومن 4' },
       { slug: 'vat-calculator', reason: 'تطبيق النسبة المئوية على الضرائب والرسوم التجارية' },
       { slug: 'loan-calculator', reason: 'حساب نسبة الفائدة وهوامش الربح المصرفية' },
       { slug: 'net-salary', reason: 'احتساب نسب استقطاع التأمينات والخصومات الشهرية' },
@@ -356,6 +362,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     intentTags: ['math', 'percentages', 'business', 'tools'],
     contextualLinks: [
       { slug: 'vat-calculator', anchorText: 'حاسبة ضريبة القيمة المضافة' },
+      { slug: 'discount-calculator', anchorText: 'حساب الخصم والسعر بعد التخفيض' },
       { slug: 'loan-calculator', anchorText: 'حاسبة نسب فوائد التمويل' },
       { slug: 'zakat-wealth', anchorText: 'حساب زكاة المال النقدية' },
     ],
@@ -397,6 +404,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     relatedCalculators: [
       { slug: 'hijri-age', reason: 'حساب العمر الدقيق بالتقويم الهجري والشمسي الميلادي' },
       { slug: 'ramadan-countdown', reason: 'معرفة موعد دخول شهر رمضان وعيدي الفطر والأضحى' },
+      { slug: 'date-difference', reason: 'حساب عدد الأيام وأيام العمل بين أي تاريخين' },
       { slug: 'time-converter', reason: 'تحويل الفترات الزمنية بين الأيام والأسابيع والشهور' },
     ],
     guides: ['hijri-gregorian-date-conversion-guide'],
@@ -411,6 +419,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     slug: 'hijri-age',
     relatedCalculators: [
       { slug: 'hijri-converter', reason: 'تحويل تاريخ ميلادك بين التقويمين الهجري والميلادي' },
+      { slug: 'date-difference', reason: 'حساب المدة بالأيام والأسابيع والأشهر بين تاريخين' },
       { slug: 'time-converter', reason: 'حساب عدد الساعات والأيام التي عشتها بالتفصيل' },
       { slug: 'ramadan-countdown', reason: 'معرفة المناسبات الدينية القادمة في عامك الجديد' },
     ],
@@ -418,6 +427,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     intentTags: ['calendar', 'age', 'hijri', 'birthdays'],
     contextualLinks: [
       { slug: 'hijri-converter', anchorText: 'تحويل تاريخ الميلاد' },
+      { slug: 'date-difference', anchorText: 'حساب الأيام بين تاريخين' },
       { slug: 'time-converter', anchorText: 'تحويل وحدات الزمن' },
       { slug: 'ramadan-countdown', anchorText: 'العد التنازلي للمواسم المباركة' },
     ],
@@ -436,6 +446,82 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'zakat-wealth', anchorText: 'حاسبة زكاة المال وزكاة الفطر' },
       { slug: 'hijri-converter', anchorText: 'تقويم الشهور الهجرية' },
       { slug: 'time-converter', anchorText: 'تحويل الساعات والدقائق' },
+    ],
+  },
+  'gpa-calculator': {
+    slug: 'gpa-calculator',
+    relatedCalculators: [
+      { slug: 'weighted-percentage', reason: 'احسب نسبتك الموزونة للقبول الجامعي قبل التقديم' },
+      { slug: 'percentage-calculator', reason: 'حوّل معدلك إلى نسبة مئوية أو احسب نسبة التحسن' },
+      { slug: 'date-difference', reason: 'احسب الأيام المتبقية حتى الاختبارات النهائية' },
+    ],
+    guides: [],
+    intentTags: ['education', 'gpa', 'university', 'students'],
+    contextualLinks: [
+      { slug: 'weighted-percentage', anchorText: 'حساب النسبة الموزونة' },
+      { slug: 'percentage-calculator', anchorText: 'حاسبة النسبة المئوية' },
+      { slug: 'date-difference', anchorText: 'كم يوم بين تاريخين' },
+    ],
+  },
+  'weighted-percentage': {
+    slug: 'weighted-percentage',
+    relatedCalculators: [
+      { slug: 'gpa-calculator', reason: 'بعد القبول احسب معدلك التراكمي الجامعي من 5 أو 4' },
+      { slug: 'percentage-calculator', reason: 'احسب نسبة أي درجة من الدرجة الكلية' },
+      { slug: 'date-difference', reason: 'عدّ الأيام المتبقية حتى موعد اختبار القدرات أو التحصيلي' },
+    ],
+    guides: [],
+    intentTags: ['education', 'admission', 'qudurat', 'tahsili'],
+    contextualLinks: [
+      { slug: 'gpa-calculator', anchorText: 'حساب المعدل التراكمي' },
+      { slug: 'percentage-calculator', anchorText: 'حساب النسبة المئوية للدرجات' },
+      { slug: 'date-difference', anchorText: 'حساب الأيام بين تاريخين' },
+    ],
+  },
+  'discount-calculator': {
+    slug: 'discount-calculator',
+    relatedCalculators: [
+      { slug: 'percentage-calculator', reason: 'حساب أي نسبة مئوية أو نسبة الزيادة والنقصان' },
+      { slug: 'vat-calculator', reason: 'إضافة أو استخراج ضريبة القيمة المضافة من السعر' },
+      { slug: 'loan-calculator', reason: 'قارن الشراء نقداً بعد الخصم مع التقسيط' },
+    ],
+    guides: ['vat-calculation-guide', 'ecommerce-profit-calculation-guide'],
+    intentTags: ['shopping', 'discount', 'percentages', 'vat'],
+    contextualLinks: [
+      { slug: 'percentage-calculator', anchorText: 'حاسبة النسبة المئوية' },
+      { slug: 'vat-calculator', anchorText: 'حاسبة ضريبة القيمة المضافة 15%' },
+      { slug: 'loan-calculator', anchorText: 'حاسبة القرض والأقساط' },
+    ],
+  },
+  'date-difference': {
+    slug: 'date-difference',
+    relatedCalculators: [
+      { slug: 'hijri-converter', reason: 'حوّل أي تاريخ بين الهجري والميلادي' },
+      { slug: 'hijri-age', reason: 'احسب عمرك بالهجري والميلادي بالسنوات والأشهر والأيام' },
+      { slug: 'time-converter', reason: 'حوّل المدة بين الأيام والساعات والدقائق' },
+      { slug: 'ramadan-countdown', reason: 'كم يوم باقي على رمضان والعيد' },
+    ],
+    guides: ['hijri-gregorian-date-conversion-guide'],
+    intentTags: ['dates', 'calendar', 'working-days', 'duration'],
+    contextualLinks: [
+      { slug: 'hijri-converter', anchorText: 'تحويل التاريخ من ميلادي إلى هجري' },
+      { slug: 'hijri-age', anchorText: 'حساب العمر بالهجري والميلادي' },
+      { slug: 'time-converter', anchorText: 'تحويل وحدات الوقت' },
+    ],
+  },
+  'ideal-weight': {
+    slug: 'ideal-weight',
+    relatedCalculators: [
+      { slug: 'bmi-calculator', reason: 'اعرف تصنيف وزنك الحالي بمؤشر كتلة الجسم' },
+      { slug: 'length-converter', reason: 'حوّل طولك من القدم والبوصة إلى سنتيمتر' },
+      { slug: 'percentage-calculator', reason: 'احسب نسبة نزول الوزن المطلوبة للوصول لهدفك' },
+    ],
+    guides: ['bmi-healthy-weight-guide'],
+    intentTags: ['health', 'weight', 'fitness', 'wellness'],
+    contextualLinks: [
+      { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم BMI' },
+      { slug: 'length-converter', anchorText: 'تحويل الطول من قدم إلى سم' },
+      { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
     ],
   },
 };

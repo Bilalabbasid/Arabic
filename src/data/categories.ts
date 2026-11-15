@@ -11,7 +11,7 @@ export const CATEGORIES: CategoryDefinition[] = [
     metaTitle: 'حاسبات النسبة المئوية والرياضيات',
     metaDescription: 'مجموعة أدوات رياضية مجانية لحساب النسبة المئوية من مبلغ، التغير المئوي، النسبة والتناسب، وتوزيع الحصص بسهولة ودقة.',
     iconName: 'Percent',
-    subcategories: ['حساب النسب المئوية', 'النسب والتناسب', 'الكسور والعمليات', 'الجذور والقوى'],
+    subcategories: ['حساب النسب المئوية', 'المعدلات والنسب الدراسية', 'النسب والتناسب', 'الكسور والعمليات', 'الجذور والقوى'],
     relatedCategorySlugs: ['statistics-science', 'business-profitability', 'finance-savings'],
   },
   {

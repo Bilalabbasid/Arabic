@@ -92,6 +92,15 @@ export function getDisclaimerForCalculator(
         lastChecked: '2026-11-01',
       };
 
+    case 'ideal-weight':
+      return {
+        disclaimerType: 'health',
+        disclaimerText: 'الوزن المثالي ناتج معادلات إحصائية للبالغين ونطاق مؤشر كتلة الجسم الصحي، ولا يغني عن الاستشارة الطبية المتخصصة، ولا ينطبق على الأطفال أو الحوامل أو الرياضيين ذوي الكتلة العضلية العالية.',
+        authority: 'منظمة الصحة العالمية (WHO) – نطاق مؤشر كتلة الجسم الصحي 18.5–24.9',
+        sourceUrl: 'https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight',
+        lastChecked: '2026-11-15',
+      };
+
     case 'bmi-calculator':
       return {
         disclaimerType: 'health',
@@ -191,6 +200,34 @@ export function getDisclaimerForCalculator(
         authority: 'تقويم أم القرى والمحاكم العليا وهيئات الإفتاء الشرعية',
         sourceUrl: 'https://www.ummulqura.org.sa',
         lastChecked: '2026-11-01',
+      };
+
+    case 'date-difference':
+      return {
+        disclaimerType: 'calendar',
+        disclaimerText: 'عدد الأيام محسوب بالتقويم الميلادي مع مراعاة السنوات الكبيسة، وأيام العمل تستبعد العطلة الأسبوعية فقط دون الإجازات الرسمية. التاريخ الهجري المقابل تقديري وقد يختلف يوماً عن تقويم أم القرى أو الرؤية.',
+        authority: 'التقويم الميلادي (معيار ISO 8601) وتقويم أم القرى',
+        sourceUrl: 'https://www.ummulqura.org.sa',
+        lastChecked: '2026-11-15',
+      };
+
+    case 'gpa-calculator':
+    case 'weighted-percentage':
+      return {
+        disclaimerType: 'math-units',
+        disclaimerText: 'نتيجة استرشادية بالمعادلة المعيارية؛ المعدل والنسبة الموزونة الرسميان هما ما تعتمده جامعتك وفق لائحتها والأوزان المعلنة في دليل القبول.',
+        authority: 'لوائح الدراسة والقبول في الجامعات',
+        sourceUrl: 'https://www.lsayartk.com/methodology',
+        lastChecked: '2026-11-15',
+      };
+
+    case 'discount-calculator':
+      return {
+        disclaimerType: 'math-units',
+        disclaimerText: 'نتيجة حسابية دقيقة لنسبة الخصم والسعر بعده؛ ضريبة القيمة المضافة المضافة اختيارياً بنسبة 15% المعمول بها في السعودية، وقد يختلف السعر النهائي حسب سياسة المتجر.',
+        authority: 'المعايير الرياضية القياسية وهيئة الزكاة والضريبة والجمارك (نسبة 15%)',
+        sourceUrl: 'https://zatca.gov.sa',
+        lastChecked: '2026-11-15',
       };
 
     case 'electricity-bill': {

@@ -1,0 +1,60 @@
+import { CalculatorInput } from '../../types/calculator';
+
+export const idealWeightSchema: CalculatorInput[] = [
+  {
+    id: 'heightCm',
+    label: 'الطول',
+    type: 'number',
+    defaultValue: 175,
+    min: 120,
+    max: 230,
+    step: 1,
+    unit: 'سم',
+    required: true,
+    exampleValue: 175,
+    helpText: 'طولك بالسنتيمتر بدون حذاء.',
+  },
+  {
+    id: 'sex',
+    label: 'الجنس',
+    type: 'select',
+    defaultValue: 'male',
+    options: [
+      { value: 'male', label: 'ذكر' },
+      { value: 'female', label: 'أنثى' },
+    ],
+  },
+  {
+    id: 'frame',
+    label: 'بنية الجسم (اختياري)',
+    type: 'select',
+    defaultValue: 'medium',
+    options: [
+      { value: 'medium', label: 'متوسطة' },
+      { value: 'small', label: 'صغيرة (عظام رفيعة)' },
+      { value: 'large', label: 'كبيرة (عظام عريضة)' },
+    ],
+    helpText: 'تعدّل نتيجة معادلة هاموي بنسبة 10% نقصاً أو زيادة.',
+  },
+  {
+    id: 'age',
+    label: 'العمر (اختياري)',
+    type: 'number',
+    defaultValue: 30,
+    min: 0,
+    max: 120,
+    unit: 'سنة',
+    helpText: 'المعادلات للبالغين؛ نُنبهك إذا كان العمر أقل من 18 سنة.',
+  },
+  {
+    id: 'currentWeightKg',
+    label: 'وزنك الحالي (اختياري)',
+    type: 'decimal',
+    defaultValue: 0,
+    min: 0,
+    max: 400,
+    step: 0.1,
+    unit: 'كغ',
+    helpText: 'أدخله لمقارنته بالنطاق الصحي، أو اتركه 0.',
+  },
+];

@@ -238,11 +238,11 @@ export default async function CountryHubPage({ params }: PageProps) {
       )}
 
 {/* Section: Intercity Trip Routes */}
-      {countryData?.routes && countryData.routes.length > 0 && countryData.fuel?.status === 'verified' && (
+      {countryData?.routes && countryData.routes.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-              تكلفة السفر والتنقل بالسيارة بين مدن {country.nameAr}
+              المسافة بين مدن {country.nameAr} بالسيارة وتكلفة السفر
             </h2>
             <Link
               href={`/${country.countryCode.toLowerCase()}/fuel-cost`}
@@ -253,7 +253,7 @@ export default async function CountryHubPage({ params }: PageProps) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {countryData.routes.slice(0, 6).map((route) => (
+            {countryData.routes.map((route) => (
               <Link
                 key={route.id}
                 href={`/${country.countryCode.toLowerCase()}/trip-cost/${route.id}`}
@@ -264,7 +264,7 @@ export default async function CountryHubPage({ params }: PageProps) {
                     من {route.fromCityAr} إلى {route.toCityAr}
                   </div>
                   <div className="text-xs text-slate-500 mt-1">
-                    مسافة {route.distanceKm} كم • طريق سريع
+                    {route.distanceKm} كم بالسيارة
                   </div>
                 </div>
                 <div className="p-2 rounded-xl bg-slate-50 group-hover:bg-emerald-50 text-slate-400 group-hover:text-emerald-600 transition-colors">

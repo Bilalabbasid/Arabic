@@ -266,6 +266,30 @@ export const COUNTRY_DATA_OM: CountryData = {
       "toCityAr": "عبري",
       "distanceKm": 290,
       "source": "طريق مسقط - عبري"
+    },
+    {
+      "id": "muscat-samail",
+      "fromCityAr": "مسقط",
+      "toCityAr": "سمائل",
+      "distanceKm": 74,
+      "durationMinutes": 55,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "muscat-haima",
+      "fromCityAr": "مسقط",
+      "toCityAr": "هيماء",
+      "distanceKm": 525,
+      "durationMinutes": 345,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "salalah-taqah",
+      "fromCityAr": "صلالة",
+      "toCityAr": "طاقة",
+      "distanceKm": 37,
+      "durationMinutes": 30,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
     }
   ]
 };
