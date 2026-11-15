@@ -18,13 +18,14 @@ describe('Phase 4: Categories Architecture', () => {
     }
   });
 
-  it('should have exactly 7 indexable categories with current live calculators', () => {
+  it('should have exactly 8 indexable categories with current live calculators', () => {
     const indexableCats = CATEGORIES.filter((c) => isCategoryIndexable(c.id));
     expect(indexableCats.map((c) => c.id).sort()).toEqual(
       [
         'cars-transportation',
         'dates-time',
         'finance-savings',
+        'health-fitness',
         'loans-installments',
         'mathematics-percentages',
         'taxation',
@@ -55,12 +56,13 @@ describe('Phase 4: Categories Architecture', () => {
   it('new general calculators sit in their fitting categories', () => {
     expect(getCalculatorsByCategory('dates-time').some((c) => c.slug === 'date-difference')).toBe(true);
     expect(getCalculatorsByCategory('health-fitness').some((c) => c.slug === 'ideal-weight')).toBe(true);
+    expect(getCalculatorsByCategory('health-fitness').some((c) => c.slug === 'pregnancy-calculator')).toBe(true);
     expect(getCalculatorsByCategory('finance-savings').some((c) => c.slug === 'discount-calculator')).toBe(true);
   });
 
   it('sitemap lists the new general calculator pages', () => {
     const urls = sitemap().map((e) => e.url);
-    for (const slug of ['gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight']) {
+    for (const slug of ['gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight', 'pregnancy-calculator']) {
       expect(urls).toContain(`https://www.lsayartk.com/calculators/${slug}`);
     }
   });

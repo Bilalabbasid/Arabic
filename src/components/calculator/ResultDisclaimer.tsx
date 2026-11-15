@@ -92,6 +92,15 @@ export function getDisclaimerForCalculator(
         lastChecked: '2026-11-01',
       };
 
+    case 'pregnancy-calculator':
+      return {
+        disclaimerType: 'health',
+        disclaimerText: 'موعد الولادة وعمر الحمل تقديريان بقاعدة نيجل (280 يوماً من أول يوم في آخر دورة)، ولا يغنيان عن متابعة الطبيبة؛ وإذا اختلف سونار الثلث الأول عن الحساب بالدورة يُعتمد تاريخ السونار.',
+        authority: 'الكلية الأمريكية لأطباء النساء والتوليد (ACOG) – طرق تقدير موعد الولادة',
+        sourceUrl: 'https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/05/methods-for-estimating-the-due-date',
+        lastChecked: '2026-11-15',
+      };
+
     case 'ideal-weight':
       return {
         disclaimerType: 'health',

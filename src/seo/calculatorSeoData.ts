@@ -342,6 +342,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     intentTags: ['health', 'fitness', 'weight', 'wellness'],
     contextualLinks: [
       { slug: 'ideal-weight', anchorText: 'حساب الوزن المثالي حسب الطول' },
+      { slug: 'pregnancy-calculator', anchorText: 'حاسبة الحمل وموعد الولادة' },
       { slug: 'length-converter', anchorText: 'تحويل وحدات الطول والقامة' },
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
       { slug: 'time-converter', anchorText: 'تحويل الساعات والدقائق للتمارين' },
@@ -500,6 +501,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'hijri-age', reason: 'احسب عمرك بالهجري والميلادي بالسنوات والأشهر والأيام' },
       { slug: 'time-converter', reason: 'حوّل المدة بين الأيام والساعات والدقائق' },
       { slug: 'ramadan-countdown', reason: 'كم يوم باقي على رمضان والعيد' },
+      { slug: 'pregnancy-calculator', reason: 'احسبي موعد الولادة وعمر الحمل بالأسابيع' },
     ],
     guides: ['hijri-gregorian-date-conversion-guide'],
     intentTags: ['dates', 'calendar', 'working-days', 'duration'],
@@ -507,6 +509,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'hijri-converter', anchorText: 'تحويل التاريخ من ميلادي إلى هجري' },
       { slug: 'hijri-age', anchorText: 'حساب العمر بالهجري والميلادي' },
       { slug: 'time-converter', anchorText: 'تحويل وحدات الوقت' },
+      { slug: 'pregnancy-calculator', anchorText: 'حساب موعد الولادة' },
     ],
   },
   'ideal-weight': {
@@ -515,6 +518,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'bmi-calculator', reason: 'اعرف تصنيف وزنك الحالي بمؤشر كتلة الجسم' },
       { slug: 'length-converter', reason: 'حوّل طولك من القدم والبوصة إلى سنتيمتر' },
       { slug: 'percentage-calculator', reason: 'احسب نسبة نزول الوزن المطلوبة للوصول لهدفك' },
+      { slug: 'pregnancy-calculator', reason: 'احسبي موعد الولادة وعمر الحمل بالأسابيع والشهور' },
     ],
     guides: ['bmi-healthy-weight-guide'],
     intentTags: ['health', 'weight', 'fitness', 'wellness'],
@@ -522,6 +526,23 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم BMI' },
       { slug: 'length-converter', anchorText: 'تحويل الطول من قدم إلى سم' },
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
+      { slug: 'pregnancy-calculator', anchorText: 'حاسبة الحمل بالأسابيع' },
+    ],
+  },
+  'pregnancy-calculator': {
+    slug: 'pregnancy-calculator',
+    relatedCalculators: [
+      { slug: 'date-difference', reason: 'احسبي عدد الأيام والأسابيع بين أي تاريخين' },
+      { slug: 'hijri-converter', reason: 'حوّلي موعد الولادة بين الميلادي والهجري' },
+      { slug: 'ideal-weight', reason: 'اعرفي الوزن الصحي لطولك قبل الحمل وبعده' },
+      { slug: 'bmi-calculator', reason: 'احسبي مؤشر كتلة الجسم قبل الحمل' },
+    ],
+    guides: [],
+    intentTags: ['health', 'pregnancy', 'due-date', 'dates'],
+    contextualLinks: [
+      { slug: 'date-difference', anchorText: 'حساب الأيام بين تاريخين' },
+      { slug: 'hijri-converter', anchorText: 'تحويل التاريخ من ميلادي إلى هجري' },
+      { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم' },
     ],
   },
 };

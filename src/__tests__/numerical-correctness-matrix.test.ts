@@ -454,6 +454,17 @@ describe('Phase 3: Master Numerical Calculation & Matrix Verification', () => {
       expect(run('date-difference', { startDate: '2026-01-01', endDate: '2026-03-01', includeEndDay: 'no', weekend: 'fri-sat' }).primary.value).toBe(59);
     });
 
+    it('pregnancy: LMP 2026-01-01 = due 2026-10-08, week 18 on 2026-05-01', () => {
+      const calc = getCalculatorBySlug('pregnancy-calculator');
+      expect(calc?.publicationStatus).toBe('PUBLISHED');
+      const defaults: Record<string, any> = {};
+      for (const inp of calc!.inputs) defaults[inp.id] = inp.defaultValue;
+      expect(calc!.calculate(defaults).error).toBeUndefined();
+      const res = run('pregnancy-calculator', { method: 'lmp', startDate: '2026-01-01', cycleLength: 28, asOfDate: '2026-05-01' });
+      expect(res.primary.value).toBe('2026-10-08');
+      expect(res.secondary?.find((s) => s.id === 'currentWeek')?.value).toBe(18);
+    });
+
     it('ideal-weight: Devine male 180 cm = 75.0 kg', () => {
       const res = run('ideal-weight', { heightCm: 180, sex: 'male', frame: 'medium' });
       expect(res.secondary?.find((s) => s.id === 'devine')?.value).toBe(75);

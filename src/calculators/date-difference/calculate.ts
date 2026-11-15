@@ -106,7 +106,7 @@ const plural = (n: number, one: string, two: string, few: string, many: string) 
   return `${n} ${many}`;
 };
 
-function weeksDaysText(weeks: number, days: number): string {
+export function weeksDaysText(weeks: number, days: number): string {
   const w = weeks === 0 ? '' : plural(weeks, 'أسبوع واحد', 'أسبوعان', 'أسابيع', 'أسبوعاً');
   const d = days === 0 ? '' : plural(days, 'يوم واحد', 'يومان', 'أيام', 'يوماً');
   if (!w && !d) return '0 يوم';

@@ -117,6 +117,7 @@ export const INDEXABLE_CATEGORIES = [
   'cars-transportation',
   'dates-time',
   'finance-savings',
+  'health-fitness',
   'loans-installments',
   'mathematics-percentages',
   'taxation',
