@@ -336,12 +336,13 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'ideal-weight', reason: 'احسب وزنك المثالي المستهدف حسب طولك وجنسك' },
       { slug: 'length-converter', reason: 'تحويل الطول بين المتر والسنتيمتر والقدم والبوصة' },
       { slug: 'percentage-calculator', reason: 'حساب نسبة الدهون والتغير في وزن الجسم' },
-      { slug: 'time-converter', reason: 'جدولة خطط التمارين وفترات الراحة الأسبوعية' },
+      { slug: 'calorie-calculator', reason: 'احسب السعرات اليومية للوصول إلى وزن صحي' },
     ],
     guides: ['bmi-healthy-weight-guide'],
     intentTags: ['health', 'fitness', 'weight', 'wellness'],
     contextualLinks: [
       { slug: 'ideal-weight', anchorText: 'حساب الوزن المثالي حسب الطول' },
+      { slug: 'calorie-calculator', anchorText: 'حساب السعرات الحرارية لإنقاص الوزن' },
       { slug: 'pregnancy-calculator', anchorText: 'حاسبة الحمل وموعد الولادة' },
       { slug: 'length-converter', anchorText: 'تحويل وحدات الطول والقامة' },
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
@@ -517,13 +518,14 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
     relatedCalculators: [
       { slug: 'bmi-calculator', reason: 'اعرف تصنيف وزنك الحالي بمؤشر كتلة الجسم' },
       { slug: 'length-converter', reason: 'حوّل طولك من القدم والبوصة إلى سنتيمتر' },
-      { slug: 'percentage-calculator', reason: 'احسب نسبة نزول الوزن المطلوبة للوصول لهدفك' },
+      { slug: 'calorie-calculator', reason: 'احسب كم سعرة تحتاج يومياً للوصول إلى وزنك المثالي' },
       { slug: 'pregnancy-calculator', reason: 'احسبي موعد الولادة وعمر الحمل بالأسابيع والشهور' },
     ],
     guides: ['bmi-healthy-weight-guide'],
     intentTags: ['health', 'weight', 'fitness', 'wellness'],
     contextualLinks: [
       { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم BMI' },
+      { slug: 'calorie-calculator', anchorText: 'حساب السعرات الحرارية اليومية' },
       { slug: 'length-converter', anchorText: 'تحويل الطول من قدم إلى سم' },
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
       { slug: 'pregnancy-calculator', anchorText: 'حاسبة الحمل بالأسابيع' },
@@ -543,6 +545,22 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'date-difference', anchorText: 'حساب الأيام بين تاريخين' },
       { slug: 'hijri-converter', anchorText: 'تحويل التاريخ من ميلادي إلى هجري' },
       { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم' },
+    ],
+  },
+  'calorie-calculator': {
+    slug: 'calorie-calculator',
+    relatedCalculators: [
+      { slug: 'ideal-weight', reason: 'حدد وزنك المستهدف قبل اختيار هدف السعرات' },
+      { slug: 'bmi-calculator', reason: 'اعرف تصنيف وزنك الحالي بمؤشر كتلة الجسم' },
+      { slug: 'percentage-calculator', reason: 'احسب نسبة نزول وزنك من البداية' },
+      { slug: 'date-difference', reason: 'احسب عدد الأسابيع حتى موعد هدفك' },
+    ],
+    guides: ['bmi-healthy-weight-guide'],
+    intentTags: ['health', 'fitness', 'weight', 'nutrition', 'calories'],
+    contextualLinks: [
+      { slug: 'ideal-weight', anchorText: 'حساب الوزن المثالي' },
+      { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم BMI' },
+      { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
     ],
   },
 };

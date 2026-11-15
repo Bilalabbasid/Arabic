@@ -465,6 +465,17 @@ describe('Phase 3: Master Numerical Calculation & Matrix Verification', () => {
       expect(res.secondary?.find((s) => s.id === 'currentWeek')?.value).toBe(18);
     });
 
+    it('calorie-calculator: male 30y 175 cm 80 kg moderate = TDEE 2711, lose 0.5 kg/week = 2161', () => {
+      const calc = getCalculatorBySlug('calorie-calculator');
+      expect(calc?.publicationStatus).toBe('PUBLISHED');
+      const defaults: Record<string, any> = {};
+      for (const inp of calc!.inputs) defaults[inp.id] = inp.defaultValue;
+      expect(calc!.calculate(defaults).error).toBeUndefined();
+      const res = run('calorie-calculator', { sex: 'male', age: 30, heightCm: 175, weightKg: 80, activity: 'moderate', goal: 'lose05', bodyFatPercent: 0 });
+      expect(res.primary.value).toBe(2161);
+      expect(res.secondary?.find((s) => s.id === 'tdee')?.value).toBe(2711);
+    });
+
     it('ideal-weight: Devine male 180 cm = 75.0 kg', () => {
       const res = run('ideal-weight', { heightCm: 180, sex: 'male', frame: 'medium' });
       expect(res.secondary?.find((s) => s.id === 'devine')?.value).toBe(75);

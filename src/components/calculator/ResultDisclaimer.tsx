@@ -101,6 +101,15 @@ export function getDisclaimerForCalculator(
         lastChecked: '2026-11-15',
       };
 
+    case 'calorie-calculator':
+      return {
+        disclaimerType: 'health',
+        disclaimerText: 'السعرات المحسوبة تقديرية بمعادلة ميفلين-سانت جيور ومعامل النشاط بهامش نحو ±10%، ولا تناسب الحوامل والمرضعات أو أصحاب الأمراض المزمنة؛ ولا يُنصح بأقل من 1200 سعرة للنساء و1500 للرجال دون إشراف طبي.',
+        authority: 'معادلة ميفلين-سانت جيور – المجلة الأمريكية للتغذية السريرية (1990)',
+        sourceUrl: 'https://doi.org/10.1093/ajcn/51.2.241',
+        lastChecked: '2026-11-15',
+      };
+
     case 'ideal-weight':
       return {
         disclaimerType: 'health',
