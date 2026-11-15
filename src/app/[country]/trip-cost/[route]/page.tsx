@@ -11,6 +11,7 @@ import { Navigation, Fuel, ArrowRightLeft, ShieldCheck, MapPin, Calculator, Cale
 import FaqAccordion from '@/components/calculator/FaqAccordion';
 import { formatDateAr } from '@/lib/formatters';
 import { getRelatedRoutes } from '@/lib/routes';
+import { computeRouteInsights, BREAK_LENGTH_MIN, EV_KWH_PER_100, TANK_LITERS } from '@/lib/route-insights';
 
 interface PageProps {
   params: Promise<{ country: string; route: string }>;
@@ -23,6 +24,12 @@ function estimateDriveMinutes(distanceKm: number, durationMinutes?: number): num
   if (durationMinutes && durationMinutes > 0) return durationMinutes;
   return Math.max(5, Math.round(((distanceKm / AVG_HIGHWAY_SPEED_KMH) * 60) / 5) * 5);
 }
+
+const timesAr = (n: number) => (n === 1 ? 'مرة واحدة' : n === 2 ? 'مرتين' : `${n} مرات`);
+const breaksAr = (n: number) => (n === 1 ? 'استراحة واحدة' : n === 2 ? 'استراحتين' : n <= 10 ? `${n} استراحات` : `${n} استراحة`);
+// Money: 2 decimals for small amounts, whole units with separators for large ones (e.g. Iraqi dinars).
+const f2 = (n: number) =>
+  n.toLocaleString('en-US', Math.abs(n) >= 1000 ? { maximumFractionDigits: 0 } : { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 function formatDriveDuration(totalMinutes: number): string {
   const h = Math.floor(totalMinutes / 60);
@@ -116,11 +123,15 @@ export default async function TripRoutePage({ params }: PageProps) {
   const consumptionRate = 8.0;
   const fuelLiters = (route.distanceKm * consumptionRate) / 100;
 
-  const primaryGrade = gradeEntries[0] ? gradeEntries[0][1] : undefined;
-  const primaryCost = primaryGrade ? (fuelLiters * primaryGrade.pricePerLiter).toFixed(2) : null;
-  const durationText = formatDriveDuration(estimateDriveMinutes(route.distanceKm, route.durationMinutes));
+  const driveMinutes = estimateDriveMinutes(route.distanceKm, route.durationMinutes);
+  const durationText = formatDriveDuration(driveMinutes);
   const from = route.fromCityAr;
   const to = route.toCityAr;
+  const relatedRoutes = getRelatedRoutes(countryData.routes, route, 12);
+  const ins = computeRouteInsights(route, driveMinutes, countryData, relatedRoutes);
+  // Regular petrol (91 or the nearest local grade), not whatever grade happens to be listed first.
+  const primaryGrade = ins.price ? { nameAr: ins.price.nameAr, pricePerLiter: ins.price.perLiter } : undefined;
+  const primaryCost = ins.costOneWay !== undefined ? f2(ins.costOneWay) : null;
 
   const routeFaqs = [
     {
@@ -139,7 +150,29 @@ export default async function TripRoutePage({ params }: PageProps) {
       ? [
           {
             question: `كم تكلفة البنزين من ${from} إلى ${to} ذهاباً وإياباً؟`,
-            answer: `بسعر ${primaryGrade.nameAr} الرسمي (${primaryGrade.pricePerLiter} ${currencySymbol}/لتر) تبلغ تكلفة الذهاب نحو ${primaryCost} ${currencySymbol}، والذهاب والعودة (${route.distanceKm * 2} كم) نحو ${(Number(primaryCost) * 2).toFixed(2)} ${currencySymbol} لسيارة تستهلك 8 لتر/100 كم.`,
+            answer: `بسعر ${primaryGrade.nameAr} الرسمي (${primaryGrade.pricePerLiter} ${currencySymbol}/لتر) تبلغ تكلفة الذهاب نحو ${primaryCost} ${currencySymbol}، والذهاب والعودة (${route.distanceKm * 2} كم) نحو ${f2((ins.costOneWay ?? 0) * 2)} ${currencySymbol} لسيارة تستهلك 8 لتر/100 كم.`,
+          },
+        ]
+      : []),
+    {
+      question: `هل يكفي خزان وقود واحد للذهاب من ${from} إلى ${to} والعودة؟`,
+      answer:
+        ins.tank.refuelsRound === 0
+          ? `نعم، يستهلك الذهاب والعودة (${route.distanceKm * 2} كم) نحو ${(fuelLiters * 2).toFixed(1)} لتر لسيارة سيدان، وهذا أقل من 85% من خزان سعته ${TANK_LITERS} لتراً، فلا تحتاج للتزود بالوقود إذا انطلقت بخزان ممتلئ.`
+          : `الذهاب وحده يستهلك نحو ${ins.tank.shareOneWay}% من خزان سعته ${TANK_LITERS} لتراً${ins.tank.refuelsOneWay ? `، وتحتاج للتزود بالوقود ${timesAr(ins.tank.refuelsOneWay)} في الطريق` : ''}، أما الذهاب والعودة (${route.distanceKm * 2} كم) فيحتاجان نحو ${(fuelLiters * 2).toFixed(1)} لتر، أي التزود بالوقود ${timesAr(ins.tank.refuelsRound)} على الأقل.`,
+    },
+    {
+      question: `كم استراحة أحتاج في الطريق من ${from} إلى ${to}؟`,
+      answer:
+        ins.breaks.count === 0
+          ? `مدة القيادة ${durationText}، أي أقل من ساعتين، فلا تحتاج عادة إلى استراحة، وإن كان التوقف القصير مفيداً عند الشعور بالتعب.`
+          : `يُنصح بالتوقف نحو ${BREAK_LENGTH_MIN} دقيقة كل ساعتين من القيادة، فرحلة مدتها ${durationText} تحتاج ${breaksAr(ins.breaks.count)}، فتصبح المدة الكلية قرابة ${formatDriveDuration(ins.breaks.totalMinutes)}.`,
+    },
+    ...(ins.perPassenger.length
+      ? [
+          {
+            question: `كم نصيب كل شخص من بنزين المشوار بين ${from} و${to}؟`,
+            answer: `تكلفة الذهاب نحو ${primaryCost} ${currencySymbol} لسيارة سيدان؛ فإذا تقاسمها شخصان فنصيب كل منهما ${f2(ins.perPassenger[0].cost)} ${currencySymbol}، وثلاثة أشخاص ${f2(ins.perPassenger[1].cost)} ${currencySymbol}، وأربعة ${f2(ins.perPassenger[2].cost)} ${currencySymbol} لكل شخص.`,
           },
         ]
       : []),
@@ -202,8 +235,8 @@ export default async function TripRoutePage({ params }: PageProps) {
 
         <p className="text-sm text-slate-600 leading-relaxed">
           {fuelVerified
-            ? `تم احتساب كميات وتكاليف الوقود استناداً إلى مسافة الطريق البري (المصدر: ${route.source}) وأحدث تسعيرة معتمدة للوقود في ${country.nameAr}.`
-            : `المسافة ومدة القيادة محسوبتان لأقصر طريق بري بالسيارة (المصدر: ${route.source}). أسعار الوقود في ${country.nameAr} حرة وتختلف بين المحطات، لذا نعرض كمية الوقود باللتر ويمكنك إدخال سعر محطتك في حاسبة تكلفة الرحلة.`}
+            ? `حسبنا وقود مسار ${from} – ${to} وتكلفته من مسافة الطريق البري ${route.distanceKm} كم (المصدر: ${route.source}) وأحدث تسعيرة معتمدة للوقود في ${country.nameAr}${primaryGrade ? ` (${primaryGrade.nameAr} بسعر ${primaryGrade.pricePerLiter} ${currencySymbol} للتر)` : ''}.`
+            : `مسافة ${route.distanceKm} كم ومدة ${durationText} بين ${from} و${to} محسوبتان لأقصر طريق بري بالسيارة (المصدر: ${route.source}). أسعار الوقود في ${country.nameAr} حرة وتختلف بين المحطات، لذا نعرض كمية الوقود باللتر ويمكنك إدخال سعر محطتك في حاسبة تكلفة الرحلة.`}
         </p>
       </div>
 
@@ -272,7 +305,7 @@ export default async function TripRoutePage({ params }: PageProps) {
               </thead>
               <tbody className="divide-y divide-slate-100 font-medium">
                 {gradeEntries.map(([key, grade]) => {
-                  const cost = (fuelLiters * grade.pricePerLiter).toFixed(2);
+                  const cost = f2(fuelLiters * grade.pricePerLiter);
                   return (
                     <tr key={key}>
                       <td className="p-3 font-bold text-slate-800">{grade.nameAr}</td>
@@ -288,38 +321,119 @@ export default async function TripRoutePage({ params }: PageProps) {
         </div>
       )}
 
-{/* Round Trip Calculation & Highway Analysis */}
+{/* Round trip, car size, speed/AC, stops: numbers worked out for this route */}
       <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
         <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
           تفاصيل رحلة الذهاب والعودة (مسار كامل {route.distanceKm * 2} كم)
         </h2>
         <p className="text-sm text-slate-600 leading-relaxed">
-          في حال التخطيط لرحلة ذهاباً وإياباً بين {route.fromCityAr} و{route.toCityAr}، تبلغ المسافة الإجمالية المقطوعة <strong>{route.distanceKm * 2} كم</strong>. ويتطلب المشوار الكامل ما يقارب <strong>{(fuelLiters * 2).toFixed(1)} لتر</strong> من الوقود{primaryCost ? `، بتكلفة تقديرية إجمالية تبدأ من ${(Number(primaryCost) * 2).toFixed(2)} ${currencySymbol} لنوع ${primaryGrade?.nameAr}` : ''}.
+          في حال التخطيط لرحلة ذهاباً وإياباً بين {from} و{to}، تبلغ المسافة الإجمالية المقطوعة <strong>{route.distanceKm * 2} كم</strong>. ويتطلب المشوار الكامل ما يقارب <strong>{(fuelLiters * 2).toFixed(1)} لتر</strong> من الوقود{primaryCost ? `، بتكلفة تقديرية إجمالية تبدأ من ${f2((ins.costOneWay ?? 0) * 2)} ${currencySymbol} لنوع ${primaryGrade?.nameAr}` : ''}.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+        <div className="space-y-3">
+          <h3 className="font-bold text-base text-slate-800">تكلفة مشوار {from} – {to} حسب حجم سيارتك</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-right text-xs sm:text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-slate-500 font-bold bg-slate-50/50">
+                  <th className="p-3">نوع السيارة</th>
+                  <th className="p-3">الاستهلاك</th>
+                  <th className="p-3">لترات الذهاب</th>
+                  {primaryGrade && <th className="p-3">تكلفة الذهاب</th>}
+                  {primaryGrade && <th className="p-3">ذهاب وعودة</th>}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 font-medium">
+                {ins.byCar.map((c) => (
+                  <tr key={c.id}>
+                    <td className="p-3 font-bold text-slate-800">{c.nameAr}</td>
+                    <td className="p-3 text-slate-600">{c.l100} لتر/100 كم</td>
+                    <td className="p-3 text-slate-600">{c.liters} لتر</td>
+                    {primaryGrade && <td className="p-3 font-bold text-emerald-700">{f2(c.costOneWay ?? 0)} {currencySymbol}</td>}
+                    {primaryGrade && <td className="p-3 text-slate-700">{f2(c.costRound ?? 0)} {currencySymbol}</td>}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            {`على طريق ${from} – ${to} تستهلك سيارة الدفع الرباعي الكبيرة نحو ${ins.economyVsLargeLiters} لتر أكثر من السيارة الصغيرة في الاتجاه الواحد${
+              primaryGrade && ins.byCar[3].costOneWay !== undefined && ins.byCar[0].costOneWay !== undefined
+                ? `، أي فرق ${f2(ins.byCar[3].costOneWay - ins.byCar[0].costOneWay)} ${currencySymbol} في الذهاب و${f2((ins.byCar[3].costOneWay - ins.byCar[0].costOneWay) * 2)} ${currencySymbol} في الذهاب والعودة`
+                : ''
+            }. ${primaryGrade ? `الأسعار محسوبة بسعر ${primaryGrade.nameAr} (${primaryGrade.pricePerLiter} ${currencySymbol} للتر).` : 'اضرب عدد اللترات في سعر اللتر في محطتك لمعرفة التكلفة.'}`}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-2">
-            <h3 className="font-bold text-sm text-slate-800">معدل الاستهلاك حسب نوع وحجم السيارة</h3>
-            <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
-              <li><strong>سيارة سيدان اقتصادية (4 سلندر):</strong> حوالي 6.5 إلى 7.5 لتر / 100 كم ({(route.distanceKm * 0.07).toFixed(1)} لتر ذهاباً).</li>
-              <li><strong>سيارة عائلية متوسطة (SUV 6 سلندر):</strong> حوالي 9.5 إلى 11.5 لتر / 100 كم ({(route.distanceKm * 0.105).toFixed(1)} لتر ذهاباً).</li>
-              <li><strong>مركبة دفع رباعي ثقيلة أو نقل:</strong> حوالي 12.0 إلى 15.0 لتر / 100 كم ({(route.distanceKm * 0.135).toFixed(1)} لتر ذهاباً).</li>
-            </ul>
+            <h3 className="font-bold text-sm text-slate-800">السرعة والمكيف على طريق {from} – {to}</h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {`القيادة بسرعة 120 كم/س بدل 100 كم/س (حيث يسمح الحد القانوني) تزيد الاستهلاك نحو 20%، أي ${ins.speed.extraLiters} لتر إضافية على هذا المسار${
+                ins.speed.extraCost !== undefined ? ` بتكلفة ${f2(ins.speed.extraCost)} ${currencySymbol}` : ''
+              }، مقابل توفير نظري قدره ${ins.speed.minutesSaved} دقيقة فقط من زمن الرحلة.`}
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {`أما تشغيل المكيف طوال الطريق فيضيف 5% إلى 12% من الوقود، أي بين ${ins.ac.minLiters} و${ins.ac.maxLiters} لتر${
+                ins.ac.minCost !== undefined && ins.ac.maxCost !== undefined ? ` (${f2(ins.ac.minCost)} إلى ${f2(ins.ac.maxCost)} ${currencySymbol})` : ''
+              } في الاتجاه الواحد.`}
+            </p>
           </div>
 
           <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-2">
-            <h3 className="font-bold text-sm text-slate-800">عوامل مؤثرة على استهلاك البنزين أثناء السفر</h3>
-            <ul className="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
-              <li><strong>السرعة الزائدة:</strong> القيادة بسرعة 120 كم/س تستهلك وقوداً إضافياً بنسبة تصل إلى 20% مقارنة بالسرعة الاقتصادية 90-100 كم/س.</li>
-              <li><strong>مكيف الهواء:</strong> يزيد تشغيل التكييف في الأجواء الحارة من استهلاك المحرك بنسبة تتراوح بين 5% و12%.</li>
-              <li><strong>ضغط الإطارات:</strong> انخفاض ضغط الإطارات عن المستوى الموصى به يرفع مقاومة الدوران ويزيد حرق الوقود.</li>
-            </ul>
+            <h3 className="font-bold text-sm text-slate-800">التزود بالوقود والاستراحات بين {from} و{to}</h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {`يستهلك الذهاب نحو ${ins.tank.shareOneWay}% من خزان سيدان سعته ${TANK_LITERS} لتراً، ${
+                ins.tank.refuelsOneWay === 0
+                  ? `فيكفي خزان ممتلئ من ${from} للوصول إلى ${to}`
+                  : `فتحتاج للتزود بالوقود ${timesAr(ins.tank.refuelsOneWay)} في الطريق، ويفضل أن يكون ذلك قرب منتصف المسافة عند الكيلو ${ins.tank.halfwayKm}`
+              }، ${ins.tank.refuelsRound === 0 ? 'ويكفي الخزان نفسه للعودة أيضاً.' : `وللذهاب والعودة تحتاج للتزود ${timesAr(ins.tank.refuelsRound)} على الأقل.`}`}
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              {ins.breaks.count === 0
+                ? `مدة القيادة ${durationText} قصيرة نسبياً ولا تتطلب استراحة.`
+                : `بمعدل استراحة ${BREAK_LENGTH_MIN} دقيقة كل ساعتين تحتاج ${breaksAr(ins.breaks.count)}، فتصبح الرحلة قرابة ${formatDriveDuration(ins.breaks.totalMinutes)} بدلاً من ${durationText}.`}
+            </p>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/70 text-amber-900 text-xs sm:text-sm leading-relaxed">
-          <strong>إرشادات السلامة والتزود بالوقود:</strong> يُنصح بتعبئة خزان الوقود بالكامل قبل مغادرة {route.fromCityAr} ومتابعة مؤشر الوقود عند الاقتراب من منتصف المسافة، والالتزام بالسرعات القانونية المحددة على الطريق السريع لضمان سلامتك وتحقيق أفضل كفاءة استهلاك ممكنة لسيارتك.
-        </div>
+        {ins.perPassenger.length === 3 && (
+          <p className="text-sm text-slate-600 leading-relaxed">
+            <strong>تقاسم التكلفة: </strong>
+            {`إذا تقاسم بنزين الذهاب من ${from} إلى ${to} شخصان فنصيب كل منهما ${f2(ins.perPassenger[0].cost)} ${currencySymbol}، وإذا كانوا ثلاثة فـ${f2(ins.perPassenger[1].cost)} ${currencySymbol} لكل شخص، وأربعة ${f2(ins.perPassenger[2].cost)} ${currencySymbol} لكل شخص.`}
+          </p>
+        )}
+
+        {ins.ev && (
+          <p className="text-sm text-slate-600 leading-relaxed">
+            <strong>بالسيارة الكهربائية: </strong>
+            {`تحتاج سيارة تستهلك ${EV_KWH_PER_100} ك.و.س/100 كم إلى نحو ${ins.ev.kwh} ك.و.س للذهاب من ${from} إلى ${to}، بتكلفة ${f2(ins.ev.cost)} ${currencySymbol} عند الشحن المنزلي بتعرفة ${ins.ev.rate} ${currencySymbol} للكيلوواط${
+              ins.ev.savingVsSedan !== undefined && ins.ev.savingVsSedan > 0 ? `، أي أقل من البنزين بنحو ${f2(ins.ev.savingVsSedan)} ${currencySymbol}` : ''
+            }${
+              ins.ev.chargingStops > 0
+                ? `، مع ${ins.ev.chargingStops === 1 ? 'توقف واحد' : `${ins.ev.chargingStops} توقفات`} للشحن في الطريق لسيارة مداها الفعلي نحو 320 كم على الطرق السريعة.`
+                : '، ويكفي شحن واحد كامل لقطع المسافة.'
+            }`}
+          </p>
+        )}
+
+        {ins.nearby.length > 0 && (
+          <div className="space-y-2">
+            <h3 className="font-bold text-base text-slate-800">مقارنة مع مسارات قريبة من {from} و{to}</h3>
+            <ul className="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+              {ins.nearby.map((n) => (
+                <li key={n.route.id}>
+                  <Link href={`/${country.countryCode.toLowerCase()}/trip-cost/${n.route.id}`} className="font-bold text-emerald-700 hover:underline">
+                    {n.route.fromCityAr} – {n.route.toCityAr}
+                  </Link>
+                  {`: ${n.route.distanceKm} كم، ${
+                    n.diffKm === 0 ? 'بالمسافة نفسها تقريباً' : `${n.diffKm > 0 ? 'أطول' : 'أقصر'} بـ ${Math.abs(n.diffKm)} كم من مسار ${from} – ${to}`
+                  }${n.costOneWay !== undefined ? `، وبنزينها نحو ${f2(n.costOneWay)} ${currencySymbol} للذهاب` : ''}.`}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <FaqAccordion faqs={routeFaqs} />
@@ -331,7 +445,7 @@ export default async function TripRoutePage({ params }: PageProps) {
             مسارات أخرى بين المدن في {country.nameAr}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {getRelatedRoutes(countryData.routes, route, 12).map((otherRoute) => (
+            {relatedRoutes.map((otherRoute) => (
                 <Link
                   key={otherRoute.id}
                   href={`/${country.countryCode.toLowerCase()}/trip-cost/${otherRoute.id}`}

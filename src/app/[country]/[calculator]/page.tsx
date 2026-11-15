@@ -39,6 +39,8 @@ import { getGuidesByCalculatorSlug } from '@/data/guides';
 import AdSlot from '@/components/layout/AdSlot';
 import { CalculationResult } from '@/types/calculator';
 import { ExternalLink, ShieldCheck, AlertCircle, FileText, CheckCircle2, Fuel } from 'lucide-react';
+import CountryFuelInsights from '@/components/calculator/CountryFuelInsights';
+import { getCountryFuelInsights, countryFuelFaqs } from '@/lib/country-fuel-insights';
 
 interface PageProps {
   params: Promise<{ country: string; calculator: string }>;
@@ -172,9 +174,11 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
         ]
       : [];
   const fuelSeo = getFuelPriceSeo(calc.slug, country.countryCode);
+  const fuelInsights = showFuelPriceTable ? getCountryFuelInsights(country.countryCode) : null;
   const effectiveFaqs = [
     ...(fuelSeo?.sarFaq ? [fuelSeo.sarFaq] : []),
     ...fuelPriceFaqs,
+    ...(fuelInsights ? countryFuelFaqs(fuelInsights) : []),
     ...(baseFaqs || []),
   ];
   const pageH1 = fuelSeo?.h1 || countryContent?.h1 || `${calc.nameAr} في ${country.nameAr}`;
@@ -354,6 +358,8 @@ export default async function CountryCalculatorPage({ params }: PageProps) {
           )}
         </div>
       )}
+
+      {fuelInsights && <CountryFuelInsights ins={fuelInsights} countryCode={country.countryCode} />}
 
       {/* Exemptions or Exclusions Section */}
       {countryContent?.exemptionsOrExclusions && countryContent.exemptionsOrExclusions.length > 0 && (
