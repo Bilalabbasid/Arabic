@@ -476,6 +476,17 @@ describe('Phase 3: Master Numerical Calculation & Matrix Verification', () => {
       expect(res.secondary?.find((s) => s.id === 'tdee')?.value).toBe(2711);
     });
 
+    it('ovulation-calculator: LMP 2026-01-01, 28-day cycle = ovulation 2026-01-15', () => {
+      const calc = getCalculatorBySlug('ovulation-calculator');
+      expect(calc?.publicationStatus).toBe('PUBLISHED');
+      const defaults: Record<string, any> = {};
+      for (const inp of calc!.inputs) defaults[inp.id] = inp.defaultValue;
+      expect(calc!.calculate(defaults).error).toBeUndefined();
+      const res = run('ovulation-calculator', { lmpDate: '2026-01-01', cycleLength: 28, cyclesToShow: 3 });
+      expect(res.primary.value).toBe('2026-01-15');
+      expect(res.secondary?.find((s) => s.id === 'cycleDay')?.value).toBe(15);
+    });
+
     it('ideal-weight: Devine male 180 cm = 75.0 kg', () => {
       const res = run('ideal-weight', { heightCm: 180, sex: 'male', frame: 'medium' });
       expect(res.secondary?.find((s) => s.id === 'devine')?.value).toBe(75);

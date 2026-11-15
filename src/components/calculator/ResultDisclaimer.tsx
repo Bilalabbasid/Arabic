@@ -110,6 +110,15 @@ export function getDisclaimerForCalculator(
         lastChecked: '2026-11-15',
       };
 
+    case 'ovulation-calculator':
+      return {
+        disclaimerType: 'health',
+        disclaimerText: 'مواعيد التبويض وأيام الخصوبة تقديرية تفترض 14 يوماً بين التبويض والدورة التالية، وقد تختلف من دورة لأخرى؛ لا تستخدمي الحاسبة وسيلةً لمنع الحمل، وراجعي الطبيبة إذا لم يحدث حمل بعد سنة من المحاولة (أو 6 أشهر بعد سن 35).',
+        authority: 'دراسة Wilcox وزملائه عن توقيت الخصوبة – مجلة نيو إنجلاند الطبية (1995)',
+        sourceUrl: 'https://doi.org/10.1056/NEJM199512073332301',
+        lastChecked: '2026-11-15',
+      };
+
     case 'ideal-weight':
       return {
         disclaimerType: 'health',

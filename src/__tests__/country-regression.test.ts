@@ -170,7 +170,7 @@ describe('Phase 16: Multi-Country Regression & Isolation Suite (SA, AE, EG, KW, 
   // 4. SEO & URL Architecture Invariants
   describe('SEO Country Route & Invariant Verification', () => {
     it('strictly forbids universal calculators from generating country-specific routes', () => {
-      const universalSlugs = ['percentage-calculator', 'bmi-calculator', 'zakat-wealth', 'gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight', 'pregnancy-calculator', 'calorie-calculator'];
+      const universalSlugs = ['percentage-calculator', 'bmi-calculator', 'zakat-wealth', 'gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight', 'pregnancy-calculator', 'calorie-calculator', 'ovulation-calculator'];
       for (const slug of universalSlugs) {
         const calc = getCalculatorBySlug(slug);
         expect(calc).toBeDefined();

@@ -176,7 +176,7 @@ export default function ResultDisplay({
         <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
           <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center gap-2 text-slate-800 font-bold text-sm sm:text-base">
             <Table className="w-4 h-4 text-emerald-600" />
-            <span>جدول التفاصيل والاستهلاك التدريجي</span>
+            <span>{result.breakdown.title || 'جدول التفاصيل والاستهلاك التدريجي'}</span>
           </div>
 
           <div className="overflow-x-auto">

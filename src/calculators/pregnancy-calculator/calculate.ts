@@ -54,7 +54,8 @@ const MONTH_ORDINAL_AR = ['', 'الأول', 'الثاني', 'الثالث', 'ا�
 
 const toIso = (ms: number) => new Date(ms).toISOString().slice(0, 10);
 
-function describe(ms: number): { gregorian: string; hijri: string; weekday: string; full: string } {
+/** Gregorian, Hijri and weekday text for a UTC-midnight timestamp. */
+export function describeDate(ms: number): { gregorian: string; hijri: string; weekday: string; full: string } {
   const t = new Date(ms);
   const y = t.getUTCFullYear();
   const m = t.getUTCMonth() + 1;
@@ -111,8 +112,8 @@ export function calculatePregnancy(inputs: PregnancyInputs): CalculationResult {
   const remainingDays = Math.round((dueMs - asOfMs) / DAY_MS);
 
   const warnings: string[] = [];
-  const due = describe(dueMs);
-  const asOfInfo = describe(asOfMs);
+  const due = describeDate(dueMs);
+  const asOfInfo = describeDate(asOfMs);
 
   const secondary: CalculationResult['secondary'] = [];
   let directAnswer: string;
@@ -156,7 +157,7 @@ export function calculatePregnancy(inputs: PregnancyInputs): CalculationResult {
     directAnswer = `موعد الولادة المتوقع ${due.full} (يوافق ${due.hijri})، وعمر الحمل في ${asOfInfo.gregorian} هو ${gaText}، أي الأسبوع ${week} في الشهر ${MONTH_ORDINAL_AR[month]} (${TRIMESTER_AR[trimester]})${remainingDays > 0 ? `، والمتبقي ${remainingDays} يوماً` : ''}.`;
   }
 
-  const milestone = (d: number) => describe(day0 + d * DAY_MS).gregorian;
+  const milestone = (d: number) => describeDate(day0 + d * DAY_MS).gregorian;
 
   return {
     primary: {
@@ -171,9 +172,9 @@ export function calculatePregnancy(inputs: PregnancyInputs): CalculationResult {
     directAnswer,
     secondary,
     details: [
-      { label: 'التاريخ المُدخل', value: `${METHOD_LABEL[method]}: ${describe(enteredMs).gregorian}` },
+      { label: 'التاريخ المُدخل', value: `${METHOD_LABEL[method]}: ${describeDate(enteredMs).gregorian}` },
       { label: 'موعد الولادة بالهجري', value: due.hijri },
-      { label: 'التاريخ التقريبي للإخصاب', value: describe(conceptionMs).gregorian },
+      { label: 'التاريخ التقريبي للإخصاب', value: describeDate(conceptionMs).gregorian },
       { label: 'نهاية الثلث الأول (13 أسبوعاً و6 أيام)', value: milestone(97) },
       { label: 'فحص السونار التفصيلي (الأسبوع 18–22)', value: `${milestone(126)} – ${milestone(154)}` },
       { label: 'بداية الثلث الثالث (28 أسبوعاً)', value: milestone(196) },

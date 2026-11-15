@@ -537,11 +537,12 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'date-difference', reason: 'احسبي عدد الأيام والأسابيع بين أي تاريخين' },
       { slug: 'hijri-converter', reason: 'حوّلي موعد الولادة بين الميلادي والهجري' },
       { slug: 'ideal-weight', reason: 'اعرفي الوزن الصحي لطولك قبل الحمل وبعده' },
-      { slug: 'bmi-calculator', reason: 'احسبي مؤشر كتلة الجسم قبل الحمل' },
+      { slug: 'ovulation-calculator', reason: 'احسبي أيام التبويض والخصوبة لزيادة فرص الحمل' },
     ],
     guides: [],
     intentTags: ['health', 'pregnancy', 'due-date', 'dates'],
     contextualLinks: [
+      { slug: 'ovulation-calculator', anchorText: 'حاسبة التبويض وأيام الخصوبة' },
       { slug: 'date-difference', anchorText: 'حساب الأيام بين تاريخين' },
       { slug: 'hijri-converter', anchorText: 'تحويل التاريخ من ميلادي إلى هجري' },
       { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم' },
@@ -561,6 +562,22 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'ideal-weight', anchorText: 'حساب الوزن المثالي' },
       { slug: 'bmi-calculator', anchorText: 'حاسبة مؤشر كتلة الجسم BMI' },
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
+    ],
+  },
+  'ovulation-calculator': {
+    slug: 'ovulation-calculator',
+    relatedCalculators: [
+      { slug: 'pregnancy-calculator', reason: 'احسبي موعد الولادة وعمر الحمل بعد حدوثه' },
+      { slug: 'date-difference', reason: 'احسبي عدد الأيام بين دورتين لمعرفة طول دورتك' },
+      { slug: 'hijri-converter', reason: 'حوّلي مواعيد التبويض والدورة إلى الهجري' },
+      { slug: 'ideal-weight', reason: 'الوزن الصحي يساعد على انتظام التبويض' },
+    ],
+    guides: [],
+    intentTags: ['health', 'fertility', 'ovulation', 'pregnancy', 'dates'],
+    contextualLinks: [
+      { slug: 'pregnancy-calculator', anchorText: 'حاسبة الحمل وموعد الولادة' },
+      { slug: 'date-difference', anchorText: 'حساب عدد الأيام بين تاريخين' },
+      { slug: 'hijri-converter', anchorText: 'تحويل التاريخ من ميلادي إلى هجري' },
     ],
   },
 };
