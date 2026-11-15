@@ -25,6 +25,8 @@ import RelatedGuides from '@/components/calculator/RelatedGuides';
 import FaqAccordion from '@/components/calculator/FaqAccordion';
 import RelatedCalculatorsBlock from '@/components/calculator/RelatedCalculatorsBlock';
 import CountryVariantsBlock from '@/components/calculator/CountryVariantsBlock';
+import LiveGoldPrice from '@/components/calculator/LiveGoldPrice';
+import GoldWeightConverter from '@/components/calculator/GoldWeightConverter';
 import AdSlot from '@/components/layout/AdSlot';
 import { getGuidesByCalculatorSlug } from '@/data/guides';
 import { CalculationResult } from '@/types/calculator';
@@ -173,6 +175,10 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
       {/* Available in Specific Countries Block */}
       <CountryVariantsBlock calculatorSlug={calc.slug} />
 
+      {/* Today's gold price, pre-filled into the calculator and editable by the visitor */}
+      {calc.slug === 'gold-calculator' && <LiveGoldPrice slug={calc.slug} />}
+      {calc.slug === 'zakat-wealth' && <LiveGoldPrice slug={calc.slug} inputId="goldGramPrice" />}
+
       {/* Interactive Calculator Runner */}
       <CalculatorRunner
         slug={calc.slug}
@@ -182,6 +188,8 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
         initialResult={initialResult}
         calculationEngineId={calc.calculationEngineId}
       />
+
+      {calc.slug === 'gold-calculator' && <GoldWeightConverter />}
 
       {/* Ad slot */}
       <AdSlot slotId="calc-mid" />

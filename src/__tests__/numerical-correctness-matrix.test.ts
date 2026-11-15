@@ -487,6 +487,16 @@ describe('Phase 3: Master Numerical Calculation & Matrix Verification', () => {
       expect(res.secondary?.find((s) => s.id === 'cycleDay')?.value).toBe(15);
     });
 
+    it('gold-calculator: 10 g 21K at 480/g, 20/g making, Saudi 15% VAT = 5,060', () => {
+      const calc = getCalculatorBySlug('gold-calculator');
+      expect(calc?.publicationStatus).toBe('PUBLISHED');
+      const defaults: Record<string, any> = {};
+      for (const inp of calc!.inputs) defaults[inp.id] = inp.defaultValue;
+      expect(calc!.calculate(defaults).error).toBeUndefined();
+      const res = run('gold-calculator', { mode: 'buy', weightGrams: 10, karat: '21', goldPrice24: 480, makingChargePerGram: 20, vatPercent: '' });
+      expect(res.primary.value).toBe(5060);
+    });
+
     it('ideal-weight: Devine male 180 cm = 75.0 kg', () => {
       const res = run('ideal-weight', { heightCm: 180, sex: 'male', frame: 'medium' });
       expect(res.secondary?.find((s) => s.id === 'devine')?.value).toBe(75);

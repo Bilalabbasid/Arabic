@@ -30,16 +30,17 @@ export const fuelCostSchema: CalculatorInput[] = [
     type: 'select',
     defaultValue: 'octane91',
     options: [
-      { value: 'octane91', label: 'بنزين 91 ممتاز' },
-      { value: 'octane95', label: 'بنزين 95 سوبر' },
-      { value: 'diesel', label: 'ديزل' },
+      { value: 'octane91', label: 'بنزين عادي (91 أو أقرب نوع)' },
+      { value: 'octane95', label: 'بنزين 95 أو أعلى' },
+      { value: 'diesel', label: 'ديزل / سولار' },
     ],
   },
   {
     id: 'customFuelPrice',
-    label: 'سعر مخصص للتر الوقود (اختياري)',
+    label: 'سعر لتر الوقود اليوم (اختياري)',
     type: 'currency',
     defaultValue: '',
-    helpText: 'اتركه فارغاً لاستخدام التسعيرة الرسمية المعتمدة لدولتك.',
+    min: 0,
+    helpText: 'اتركه فارغاً لاستخدام السعر الرسمي المسجل لدولتك، أو أدخل سعر المحطة اليوم إذا تغير.',
   },
 ];

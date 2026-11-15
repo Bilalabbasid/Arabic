@@ -1,6 +1,7 @@
 import { CalculationResult } from '@/types/calculator';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/formatters';
 import { ALL_COUNTRY_LEGAL_RULES } from '@/data/rules';
+import { GOLD_REFERENCE, goldCurrencyFor, referencePricePerGram24 } from '@/data/gold-prices';
 
 export const COUNTRY_VAT_RATES: Record<string, { rate: number; nameAr: string; currency: string }> = Object.fromEntries(
   Object.entries(ALL_COUNTRY_LEGAL_RULES).map(([code, rule]) => [
@@ -124,15 +125,17 @@ export function calculateVat(
  */
 export function calculateZakatWealth(
   inputs: Record<string, any>,
-  context?: { currencyCode?: string }
+  context?: { currencyCode?: string; countryCode?: string }
 ): CalculationResult {
   const cash = Number(inputs.cash || 0);
   const tradeGoods = Number(inputs.tradeGoods || 0);
   const receivables = Number(inputs.receivables || 0);
   const debtsToDeduct = Number(inputs.debtsToDeduct || 0);
   const calendarType = String(inputs.calendarType || 'hijri'); // 'hijri' (2.5%) or 'gregorian' (2.577%)
-  const goldGramPrice = Number(inputs.goldGramPrice || 280); // Default estimate per gram 24k
-  const currency = context?.currencyCode || inputs.currency || 'SAR';
+  // Blank price → reference 24K price per gram in the visitor's currency (the page pre-fills today's price).
+  const typedGoldPrice = Number(inputs.goldGramPrice) || 0;
+  const goldGramPrice = typedGoldPrice > 0 ? typedGoldPrice : referencePricePerGram24(context?.countryCode);
+  const currency = context?.currencyCode || inputs.currency || goldCurrencyFor(context?.countryCode).code;
 
   const totalAssets = cash + tradeGoods + receivables;
   const netZakatableWealth = Math.max(0, totalAssets - debtsToDeduct);
@@ -191,6 +194,10 @@ export function calculateZakatWealth(
     directAnswer: isEligible
       ? `مقدار الزكاة الواجب إخراجها هو ${formatCurrency(zakatAmount, currency)} على صافي ثروة بلغ ${formatCurrency(netZakatableWealth, currency)}.`
       : `لا تجب الزكاة لعدم بلوغ النصاب الشرعي (${formatCurrency(nisabGold85g, currency)}).`,
+    warnings:
+      typedGoldPrice > 0
+        ? undefined
+        : [`لم يُدخل سعر الذهب، فاستخدمنا السعر المرجعي بتاريخ ${GOLD_REFERENCE.asOf} (${formatCurrency(goldGramPrice, currency)} للغرام عيار 24)؛ أدخل سعر اليوم لتحديد النصاب بدقة.`],
     assumptions: [
       'يشترط لوجوب الزكاة مضي حول كامل (عام هجري أو ميلادي) على امتلاك النصاب.',
       'عروض القنية (مثل المنزل الشخصي والسيارة الخاصة والأثاث المكتبي غير المعد للبيع) لا زكاة فيها بالإجماع.',

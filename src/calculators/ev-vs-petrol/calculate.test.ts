@@ -20,4 +20,16 @@ describe('EV vs Petrol Running Cost Engine', () => {
     const result = calculateEvVsPetrol({ annualKm: 15000 }, COUNTRY_DATA_EG);
     expect(result.primary.value).toBeGreaterThan(0);
   });
+
+  it('uses typed petrol and charging prices', () => {
+    // 10,000 km: 8 L/100km × 3 = 2,400; 20 kWh/100km × 0.5 = 1,000 → saves 1,400
+    const res = calculateEvVsPetrol({ annualKm: 10000, petrolConsumptionL100km: 8, evEfficiencyKwh100km: 20, petrolPricePerLiter: 3, electricityRatePerKwh: 0.5 });
+    expect(res.primary.value).toBeCloseTo(1400, 6);
+  });
+
+  it("uses Egypt's own petrol price, not the Saudi fallback", () => {
+    const p92 = COUNTRY_DATA_EG.fuel.value!.grades.octane92.pricePerLiter;
+    const res = calculateEvVsPetrol({ annualKm: 10000, petrolConsumptionL100km: 10, evEfficiencyKwh100km: 18 }, COUNTRY_DATA_EG);
+    expect(res.secondary?.[0].value).toBeCloseTo(1000 * p92, 6);
+  });
 });

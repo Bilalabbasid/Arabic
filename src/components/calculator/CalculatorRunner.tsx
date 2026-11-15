@@ -154,6 +154,16 @@ export default function CalculatorRunner({
     };
     window.addEventListener('lsayartk_country_changed', countryHandler);
 
+    // Live-data widgets (e.g. today's gold price) pre-fill fields; the visitor can still edit them.
+    const setInputsHandler = (e: any) => {
+      if (e.detail?.slug !== slug || !e.detail?.values) return;
+      const updated = { ...inputsRef.current, ...e.detail.values };
+      inputsRef.current = updated;
+      setInputs(updated);
+      runCalculation(updated);
+    };
+    window.addEventListener('lsayartk_set_inputs', setInputsHandler);
+
     // Check stored user country on mount
     if (!countryCode && typeof window !== 'undefined') {
       const saved = localStorage.getItem('lsayartk_user_country');
@@ -173,6 +183,7 @@ export default function CalculatorRunner({
     return () => {
       window.removeEventListener('lsayartk_favorites_changed', handler);
       window.removeEventListener('lsayartk_country_changed', countryHandler);
+      window.removeEventListener('lsayartk_set_inputs', setInputsHandler);
     };
   }, [slug, countryCode, inputDefs]);
 
@@ -196,6 +207,9 @@ export default function CalculatorRunner({
         errors[def.id] = 'هذا الحقل مطلوب لإتمام الحساب.';
         continue;
       }
+
+      // Optional fields left blank mean "use the stored value"; don't range-check an empty box.
+      if (!def.required && (val === undefined || val === null || val === '')) continue;
 
       if (def.type === 'number' || def.type === 'decimal' || def.type === 'currency' || def.type === 'percentage') {
         const num = Number(val);

@@ -29,4 +29,21 @@ export const evVsPetrolSchema: CalculatorInput[] = [
     max: 35,
     helpText: 'المعدل الشائع لمعظم السيارات الكهربائية مثل تسلا وباي دي يبلغ 15 إلى 20 ك.و.س لكل 100 كم.',
   },
+  {
+    id: 'petrolPricePerLiter',
+    label: 'سعر لتر البنزين اليوم (اختياري)',
+    type: 'currency',
+    defaultValue: '',
+    min: 0,
+    helpText: 'اتركه فارغاً لاستخدام السعر الرسمي المسجل لدولتك، أو أدخل سعر المحطة اليوم.',
+  },
+  {
+    id: 'electricityRatePerKwh',
+    label: 'سعر الكيلوواط ساعة للشحن (اختياري)',
+    type: 'decimal',
+    defaultValue: '',
+    min: 0,
+    step: 0.01,
+    helpText: 'اتركه فارغاً لاستخدام تعرفة الكهرباء المنزلية المسجلة لدولتك، أو أدخل سعر محطة الشحن.',
+  },
 ];

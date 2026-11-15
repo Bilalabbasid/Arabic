@@ -19,4 +19,22 @@ describe('Trip Cost Calculator Engine', () => {
     expect(result.primary.value).toBeGreaterThan(0);
     expect(result.secondary?.[0].value).toBe(Number(result.primary.value) * 2);
   });
+
+  it('uses the price the visitor typed instead of the stored one', () => {
+    // 950 km × 10 L/100km = 95 L × 3.00 = 285
+    const result = calculateTripCost({ routeId: 'riyadh-jeddah', fuelConsumption: 10, customFuelPrice: 3 }, COUNTRY_DATA_SA);
+    expect(result.primary.value).toBeCloseTo(285, 6);
+  });
+
+  it('a typed distance overrides the selected route', () => {
+    // 100 km × 10 L/100km = 10 L × 2.00 = 20
+    const result = calculateTripCost({ routeId: 'riyadh-jeddah', customDistanceKm: 100, fuelConsumption: 10, customFuelPrice: 2 }, COUNTRY_DATA_SA);
+    expect(result.primary.value).toBeCloseTo(20, 6);
+  });
+
+  it('honours the diesel choice in Egypt (solar)', () => {
+    const solar = COUNTRY_DATA_EG.fuel.value!.grades.solar.pricePerLiter;
+    const result = calculateTripCost({ customDistanceKm: 100, fuelConsumption: 10, fuelGrade: 'diesel' }, COUNTRY_DATA_EG);
+    expect(result.primary.value).toBeCloseTo(10 * solar, 6);
+  });
 });

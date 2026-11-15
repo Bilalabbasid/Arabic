@@ -1,5 +1,6 @@
 import { CountryData } from '../../data/countries/types';
 import { CalculationResult } from '../../types/calculator';
+import { resolveFuelGrade } from './grades';
 
 export interface FuelCostInputs {
   distanceKm: number;
@@ -22,11 +23,10 @@ export function calculateFuelCost(inputs: FuelCostInputs, country?: CountryData)
     pricePerLiter = Number(inputs.customFuelPrice);
     gradeName = 'سعر مخصص';
   } else if (country?.fuel.value?.grades) {
-    const grades = country.fuel.value.grades;
-    const selectedKey = inputs.fuelGrade && grades[inputs.fuelGrade] ? inputs.fuelGrade : Object.keys(grades)[0];
-    if (grades[selectedKey]) {
-      pricePerLiter = grades[selectedKey].pricePerLiter;
-      gradeName = grades[selectedKey].nameAr;
+    const resolved = resolveFuelGrade(country.fuel.value.grades, inputs.fuelGrade);
+    if (resolved) {
+      pricePerLiter = resolved.grade.pricePerLiter;
+      gradeName = resolved.grade.nameAr;
     }
   }
 
@@ -75,6 +75,11 @@ export function calculateFuelCost(inputs: FuelCostInputs, country?: CountryData)
       `كمية الوقود المطلوبة = (${distance} كم ÷ 100) × ${consumptionRate} = ${fmt(litersNeeded)} لتر`,
       `تكلفة الوقود (ذهاب) = ${fmt(litersNeeded)} لتر × ${fmt(pricePerLiter)} = ${fmt(tripCost)} ${currencySymbol}`,
       `تكلفة الوقود (ذهاب وعودة) = ${fmt(tripCost)} × 2 = ${fmt(roundTripCost)} ${currencySymbol}`,
+    ],
+    assumptions: [
+      gradeName === 'سعر مخصص'
+        ? 'حُسبت التكلفة بسعر اللتر الذي أدخلته.'
+        : `حُسبت التكلفة بالسعر الرسمي المسجل لدينا${country?.fuel.checkedAt ? ` (آخر تحقق ${country.fuel.checkedAt})` : ''}؛ إذا تغير السعر في محطتك اليوم فأدخله في حقل «سعر لتر الوقود اليوم».`,
     ],
     country: country?.countryCode,
     currency: country?.basics.currency.code,

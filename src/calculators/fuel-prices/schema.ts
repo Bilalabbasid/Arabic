@@ -18,9 +18,9 @@ export const fuelPricesSchema: CalculatorInput[] = [
     type: 'select',
     defaultValue: 'octane91',
     options: [
-      { value: 'octane91', label: 'بنزين 91 ممتاز' },
-      { value: 'octane95', label: 'بنزين 95 سوبر' },
-      { value: 'diesel', label: 'ديزل' },
+      { value: 'octane91', label: 'بنزين عادي (91 أو أقرب نوع)' },
+      { value: 'octane95', label: 'بنزين 95 أو أعلى' },
+      { value: 'diesel', label: 'ديزل / سولار' },
     ],
   },
 ];

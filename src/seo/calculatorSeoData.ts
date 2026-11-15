@@ -241,6 +241,7 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'zakat-wealth', reason: 'حساب زكاة المال وعروض التجارة وفق الأحكام الشرعية' },
       { slug: 'car-import-customs', reason: 'احتساب ضريبة القيمة المضافة مع الرسوم الجمركية للسيارات' },
       { slug: 'electricity-bill', reason: 'حساب الضريبة المضافة على فواتير الطاقة والخدمات' },
+      { slug: 'gold-calculator', reason: 'سعر الذهب مع المصنعية وضريبة القيمة المضافة' },
     ],
     guides: ['vat-calculation-guide', 'ecommerce-profit-calculation-guide'],
     intentTags: ['tax', 'vat', 'business', 'shopping'],
@@ -305,10 +306,12 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'vat-calculator', reason: 'التفريق بين الضريبة الإلزامية وفريضة الزكاة الشرعية' },
       { slug: 'net-salary', reason: 'تقدير المدخرات الفائضة عن الحاجة الأصلية من الراتب' },
       { slug: 'ramadan-countdown', reason: 'الاستعداد لإخراج زكاة المال والفطر في شهر رمضان' },
+      { slug: 'gold-calculator', reason: 'اعرف سعر غرام الذهب اليوم بعملتك لحساب النصاب' },
     ],
     guides: ['zakat-wealth-calculation-guide'],
     intentTags: ['zakat', 'islamic-finance', 'charity', 'wealth'],
     contextualLinks: [
+      { slug: 'gold-calculator', anchorText: 'سعر غرام الذهب اليوم' },
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة 2.5% الشرعية' },
       { slug: 'net-salary', anchorText: 'صافي الدخل السنوي والمدخرات' },
       { slug: 'ramadan-countdown', anchorText: 'العد التنازلي لموسم رمضان المبارك' },
@@ -564,6 +567,22 @@ export const CALCULATOR_SEO_METADATA: Record<string, CalculatorSeoMeta> = {
       { slug: 'percentage-calculator', anchorText: 'حساب نسبة نزول الوزن' },
     ],
   },
+  'gold-calculator': {
+    slug: 'gold-calculator',
+    relatedCalculators: [
+      { slug: 'zakat-wealth', reason: 'احسب زكاة الذهب والمال ونصاب 85 غراماً' },
+      { slug: 'vat-calculator', reason: 'احسب ضريبة القيمة المضافة على أي مبلغ' },
+      { slug: 'percentage-calculator', reason: 'احسب نسبة ارتفاع سعر الذهب أو انخفاضه' },
+      { slug: 'discount-calculator', reason: 'احسب السعر بعد خصم المصنعية أو العروض' },
+    ],
+    guides: ['zakat-wealth-calculation-guide'],
+    intentTags: ['gold', 'prices', 'zakat', 'savings', 'shopping'],
+    contextualLinks: [
+      { slug: 'zakat-wealth', anchorText: 'حساب زكاة الذهب' },
+      { slug: 'vat-calculator', anchorText: 'حاسبة ضريبة القيمة المضافة' },
+      { slug: 'percentage-calculator', anchorText: 'حساب نسبة تغير سعر الذهب' },
+    ],
+  },
   'ovulation-calculator': {
     slug: 'ovulation-calculator',
     relatedCalculators: [
@@ -586,4 +605,3 @@ export function getCalculatorSeoMeta(slug: string): CalculatorSeoMeta | undefine
   const normSlug = slug === 'car-fuel-cost' ? 'fuel-cost' : slug;
   return CALCULATOR_SEO_METADATA[slug] || CALCULATOR_SEO_METADATA[normSlug];
 }
-

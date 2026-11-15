@@ -24,7 +24,7 @@ export const CATEGORIES: CategoryDefinition[] = [
     metaTitle: 'حاسبات المال والادخار والعائد المركب',
     metaDescription: 'احسب نمو أموالك مع حاسبة الفائدة المركبة، خطط التوفير الشهرية، وحساب القيمة المستقبلية للأموال بمختلف العملات العربية.',
     iconName: 'TrendingUp',
-    subcategories: ['العائد المركب', 'خطط الادخار', 'التضخم والقوة الشرائية', 'صندوق الطوارئ'],
+    subcategories: ['العائد المركب', 'خطط الادخار', 'التضخم والقوة الشرائية', 'صندوق الطوارئ', 'الذهب والمعادن الثمينة'],
     relatedCategorySlugs: ['loans-installments', 'business-profitability', 'taxation'],
   },
   {

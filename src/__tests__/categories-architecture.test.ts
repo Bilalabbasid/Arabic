@@ -60,11 +60,12 @@ describe('Phase 4: Categories Architecture', () => {
     expect(getCalculatorsByCategory('health-fitness').some((c) => c.slug === 'calorie-calculator')).toBe(true);
     expect(getCalculatorsByCategory('health-fitness').some((c) => c.slug === 'ovulation-calculator')).toBe(true);
     expect(getCalculatorsByCategory('finance-savings').some((c) => c.slug === 'discount-calculator')).toBe(true);
+    expect(getCalculatorsByCategory('finance-savings').some((c) => c.slug === 'gold-calculator')).toBe(true);
   });
 
   it('sitemap lists the new general calculator pages', () => {
     const urls = sitemap().map((e) => e.url);
-    for (const slug of ['gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight', 'pregnancy-calculator', 'calorie-calculator', 'ovulation-calculator']) {
+    for (const slug of ['gpa-calculator', 'weighted-percentage', 'discount-calculator', 'date-difference', 'ideal-weight', 'pregnancy-calculator', 'calorie-calculator', 'ovulation-calculator', 'gold-calculator']) {
       expect(urls).toContain(`https://www.lsayartk.com/calculators/${slug}`);
     }
   });

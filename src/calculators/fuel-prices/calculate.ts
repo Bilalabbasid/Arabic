@@ -1,5 +1,6 @@
 import { CountryData } from '../../data/countries/types';
 import { CalculationResult } from '../../types/calculator';
+import { resolveFuelGrade } from '../fuel-cost/grades';
 
 export interface FuelPricesInputs {
   tankSizeLiters?: number;
@@ -18,8 +19,7 @@ export function calculateFuelPrices(inputs: FuelPricesInputs, country?: CountryD
     diesel: { nameAr: 'ديزل', pricePerLiter: 1.79, unitAr: 'ر.س/لتر' },
   };
 
-  const selectedKey = inputs.fuelGrade && grades[inputs.fuelGrade] ? inputs.fuelGrade : Object.keys(grades)[0];
-  const selectedGrade = grades[selectedKey] || Object.values(grades)[0];
+  const selectedGrade = resolveFuelGrade(grades, inputs.fuelGrade)?.grade || Object.values(grades)[0];
   const price = selectedGrade.pricePerLiter;
 
   const fullTankCost = tankSize * price;

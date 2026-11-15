@@ -1,5 +1,6 @@
 import { CountryData } from '../../data/countries/types';
 import { CalculationResult } from '../../types/calculator';
+import { resolveFuelGrade } from '../fuel-cost/grades';
 
 export interface TripCostInputs {
   routeId?: string;
@@ -8,6 +9,7 @@ export interface TripCostInputs {
   fuelGrade?: string;
   tollFees?: number;
   passengersCount?: number;
+  customFuelPrice?: number | string;
 }
 
 export function calculateTripCost(inputs: TripCostInputs, country?: CountryData): CalculationResult {
@@ -21,15 +23,14 @@ export function calculateTripCost(inputs: TripCostInputs, country?: CountryData)
   let distanceKm = 400;
   let routeName = 'مشوار مخصص';
 
-  if (inputs.routeId && country?.routes) {
-    const found = country.routes.find((r) => r.id === inputs.routeId);
-    if (found) {
-      distanceKm = found.distanceKm;
-      routeName = `من ${found.fromCityAr} إلى ${found.toCityAr}`;
-    }
-  } else if (inputs.customDistanceKm && Number(inputs.customDistanceKm) > 0) {
+  const found = inputs.routeId ? country?.routes?.find((r) => r.id === inputs.routeId) : undefined;
+  if (inputs.customDistanceKm && Number(inputs.customDistanceKm) > 0) {
+    // A typed distance always wins over the route list.
     distanceKm = Number(inputs.customDistanceKm);
     routeName = `مسار مخصص (${distanceKm} كم)`;
+  } else if (found) {
+    distanceKm = found.distanceKm;
+    routeName = `من ${found.fromCityAr} إلى ${found.toCityAr}`;
   } else if (country?.routes?.[0]) {
     const first = country.routes[0];
     distanceKm = first.distanceKm;
@@ -38,10 +39,15 @@ export function calculateTripCost(inputs: TripCostInputs, country?: CountryData)
 
   // Fuel price
   let pricePerLiter = 2.18;
-  const grades = country?.fuel.value?.grades;
-  if (grades) {
-    const gradeKey = inputs.fuelGrade && grades[inputs.fuelGrade] ? inputs.fuelGrade : Object.keys(grades)[0];
-    if (grades[gradeKey]) pricePerLiter = grades[gradeKey].pricePerLiter;
+  let gradeName = 'بنزين 91';
+  const customPrice = Number(inputs.customFuelPrice) || 0;
+  const resolved = country?.fuel.value?.grades ? resolveFuelGrade(country.fuel.value.grades, inputs.fuelGrade) : null;
+  if (customPrice > 0) {
+    pricePerLiter = customPrice;
+    gradeName = 'سعر أدخلته';
+  } else if (resolved) {
+    pricePerLiter = resolved.grade.pricePerLiter;
+    gradeName = resolved.grade.nameAr;
   }
 
   const fuelLiters = (distanceKm / 100) * consumption;
@@ -85,6 +91,7 @@ export function calculateTripCost(inputs: TripCostInputs, country?: CountryData)
       { label: 'المسار المحدد', value: routeName },
       { label: 'المسافة الإجمالية', value: `${distanceKm} كم` },
       { label: 'كمية الوقود المطلوبة', value: `${fmt(fuelLiters)} لتر` },
+      { label: 'سعر اللتر المعتمد', value: `${fmt(pricePerLiter)} ${currencySymbol} (${gradeName})` },
       { label: 'تكلفة الوقود الصافية', value: `${fmt(fuelCostOneWay)} ${currencySymbol}` },
       ...(toll > 0 ? [{ label: 'رسوم بوابات الطرق (Tolls)', value: `${fmt(toll)} ${currencySymbol}` }] : []),
       { label: 'عدد الركاب المشاركين', value: `${passengers} أشخاص` },
@@ -94,6 +101,11 @@ export function calculateTripCost(inputs: TripCostInputs, country?: CountryData)
       `تكلفة الوقود = ${fmt(fuelLiters)} لتر × ${fmt(pricePerLiter)} = ${fmt(fuelCostOneWay)} ${currencySymbol}`,
       toll > 0 ? `المجموع شامل رسوم الطرق (${fmt(toll)}) = ${fmt(totalCostOneWay)} ${currencySymbol}` : `المجموع = ${fmt(totalCostOneWay)} ${currencySymbol}`,
       `نصيب الراكب (${passengers} ركاب) = ${fmt(costPerPassenger)} ${currencySymbol}`,
+    ],
+    assumptions: [
+      customPrice > 0
+        ? 'حُسبت التكلفة بسعر اللتر الذي أدخلته.'
+        : `حُسبت التكلفة بالسعر الرسمي المسجل لدينا${country?.fuel.checkedAt ? ` (آخر تحقق ${country.fuel.checkedAt})` : ''}؛ إذا تغير السعر اليوم فأدخله في حقل «سعر لتر الوقود اليوم».`,
     ],
     country: country?.countryCode,
     currency: country?.basics.currency.code,

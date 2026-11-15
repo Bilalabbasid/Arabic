@@ -29,6 +29,26 @@ export const tripCostSchema: CalculatorInput[] = [
     defaultValue: 8.5,
   },
   {
+    id: 'fuelGrade',
+    label: 'نوع الوقود',
+    type: 'select',
+    defaultValue: 'octane91',
+    helpText: 'نختار أقرب نوع متوفر في بلدك (مثل 92 في مصر أو بدون رصاص في المغرب).',
+    options: [
+      { value: 'octane91', label: 'بنزين عادي (91 أو أقرب نوع)' },
+      { value: 'octane95', label: 'بنزين 95 أو أعلى' },
+      { value: 'diesel', label: 'ديزل / سولار' },
+    ],
+  },
+  {
+    id: 'customFuelPrice',
+    label: 'سعر لتر الوقود اليوم (اختياري)',
+    type: 'currency',
+    defaultValue: '',
+    min: 0,
+    helpText: 'اتركه فارغاً لاستخدام السعر الرسمي المسجل لدولتك، أو أدخل سعر المحطة اليوم.',
+  },
+  {
     id: 'tollFees',
     label: 'رسوم بوابات العبور أو الطرق السريعة (اختياري)',
     type: 'currency',

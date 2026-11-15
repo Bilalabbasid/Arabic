@@ -119,6 +119,15 @@ export function getDisclaimerForCalculator(
         lastChecked: '2026-11-15',
       };
 
+    case 'gold-calculator':
+      return {
+        disclaimerType: 'finance',
+        disclaimerText: 'سعر الذهب في الصفحة مأخوذ من سعر الأونصة العالمي وسعر الصرف الحالي وقد يتأخر دقائق، وأسعار المحلات تزيد عادة بهامش ربح، والمصنعية تختلف من محل لآخر؛ عدّل سعر الغرام بسعر محلك، فالسعر النهائي يحدده البائع.',
+        authority: 'هيئة الزكاة والضريبة والجمارك (ضريبة القيمة المضافة على الذهب في السعودية)',
+        sourceUrl: 'https://zatca.gov.sa',
+        lastChecked: '2026-11-15',
+      };
+
     case 'ideal-weight':
       return {
         disclaimerType: 'health',
