@@ -245,6 +245,7 @@ export const COUNTRY_DATA_IQ: CountryData = {
       "fromCityAr": "بغداد",
       "toCityAr": "البصرة",
       "distanceKm": 545,
+      "durationMinutes": 350,
       "source": "طريق المرور السريع رقم 1"
     },
     {
@@ -252,6 +253,7 @@ export const COUNTRY_DATA_IQ: CountryData = {
       "fromCityAr": "بغداد",
       "toCityAr": "أربيل",
       "distanceKm": 360,
+      "durationMinutes": 270,
       "source": "طريق بغداد - كركوك - أربيل السريع"
     },
     {
@@ -259,6 +261,7 @@ export const COUNTRY_DATA_IQ: CountryData = {
       "fromCityAr": "بغداد",
       "toCityAr": "الموصل",
       "distanceKm": 400,
+      "durationMinutes": 290,
       "source": "طريق بغداد - تكريت - الموصل"
     },
     {
@@ -266,6 +269,7 @@ export const COUNTRY_DATA_IQ: CountryData = {
       "fromCityAr": "بغداد",
       "toCityAr": "النجف الأشرف",
       "distanceKm": 160,
+      "durationMinutes": 125,
       "source": "طريق بغداد - الحلة - النجف"
     },
     {
@@ -273,6 +277,7 @@ export const COUNTRY_DATA_IQ: CountryData = {
       "fromCityAr": "بغداد",
       "toCityAr": "كربلاء المقدسة",
       "distanceKm": 105,
+      "durationMinutes": 90,
       "source": "طريق بغداد - المحمودية - كربلاء"
     }
   ]

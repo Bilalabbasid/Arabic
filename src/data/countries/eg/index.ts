@@ -334,6 +334,7 @@ export const COUNTRY_DATA_EG: CountryData = {
       "fromCityAr": "القاهرة",
       "toCityAr": "الإسكندرية",
       "distanceKm": 215,
+      "durationMinutes": 145,
       "source": "طريق القاهرة - الإسكندرية الصحراوي"
     },
     {
@@ -341,6 +342,7 @@ export const COUNTRY_DATA_EG: CountryData = {
       "fromCityAr": "القاهرة",
       "toCityAr": "الغردقة",
       "distanceKm": 460,
+      "durationMinutes": 315,
       "source": "طريق الزعفرانة - الغردقة"
     },
     {
@@ -348,6 +350,7 @@ export const COUNTRY_DATA_EG: CountryData = {
       "fromCityAr": "القاهرة",
       "toCityAr": "شرم الشيخ",
       "distanceKm": 500,
+      "durationMinutes": 355,
       "source": "طريق نفق الشهيد أحمد حمدي - عيون موسى"
     },
     {

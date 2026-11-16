@@ -237,6 +237,7 @@ export const COUNTRY_DATA_SD: CountryData = {
       "fromCityAr": "الخرطوم",
       "toCityAr": "بورتسودان",
       "distanceKm": 800,
+      "durationMinutes": 585,
       "source": "طريق التحدي - طريق بورتسودan القومي"
     },
     {
@@ -244,6 +245,7 @@ export const COUNTRY_DATA_SD: CountryData = {
       "fromCityAr": "الخرطوم",
       "toCityAr": "ود مدني",
       "distanceKm": 180,
+      "durationMinutes": 130,
       "source": "طريق الخرطوم - مدني الشرقي والغربي"
     },
     {
@@ -258,6 +260,7 @@ export const COUNTRY_DATA_SD: CountryData = {
       "fromCityAr": "الخرطوم",
       "toCityAr": "كسلا",
       "distanceKm": 600,
+      "durationMinutes": 425,
       "source": "طريق الخرطوم - مدني - القضارف - كسلا"
     },
     {

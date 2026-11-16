@@ -215,6 +215,7 @@ export const COUNTRY_DATA_LY: CountryData = {
       "fromCityAr": "طرابلس",
       "toCityAr": "بنغازي",
       "distanceKm": 1000,
+      "durationMinutes": 625,
       "source": "الطريق الساحلي الليبي السريع"
     },
     {
@@ -222,6 +223,7 @@ export const COUNTRY_DATA_LY: CountryData = {
       "fromCityAr": "طرابلس",
       "toCityAr": "مصراتة",
       "distanceKm": 210,
+      "durationMinutes": 135,
       "source": "الطريق الساحلي طرابلس مصراتة"
     },
     {
@@ -229,6 +231,7 @@ export const COUNTRY_DATA_LY: CountryData = {
       "fromCityAr": "طرابلس",
       "toCityAr": "الزاوية",
       "distanceKm": 45,
+      "durationMinutes": 30,
       "source": "الطريق الساحلي الغربي"
     },
     {
@@ -236,6 +239,7 @@ export const COUNTRY_DATA_LY: CountryData = {
       "fromCityAr": "طرابلس",
       "toCityAr": "سرت",
       "distanceKm": 450,
+      "durationMinutes": 285,
       "source": "الطريق الساحلي عبر مصراتة"
     },
     {
@@ -243,6 +247,7 @@ export const COUNTRY_DATA_LY: CountryData = {
       "fromCityAr": "بنغازي",
       "toCityAr": "طبرق",
       "distanceKm": 470,
+      "durationMinutes": 305,
       "source": "الطريق الساحلي الشرقي"
     }
   ]

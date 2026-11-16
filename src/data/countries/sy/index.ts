@@ -236,6 +236,7 @@ export const COUNTRY_DATA_SY: CountryData = {
       "fromCityAr": "دمشق",
       "toCityAr": "حمص",
       "distanceKm": 160,
+      "durationMinutes": 115,
       "source": "طريق دمشق - حمص الدولي M5"
     },
     {
@@ -243,6 +244,7 @@ export const COUNTRY_DATA_SY: CountryData = {
       "fromCityAr": "دمشق",
       "toCityAr": "حلب",
       "distanceKm": 355,
+      "durationMinutes": 250,
       "source": "الأوتوستراد الدولي M5"
     },
     {
@@ -250,6 +252,7 @@ export const COUNTRY_DATA_SY: CountryData = {
       "fromCityAr": "دمشق",
       "toCityAr": "اللاذقية",
       "distanceKm": 345,
+      "durationMinutes": 245,
       "source": "طريق دمشق - حمص - طرطوس - اللاذقية"
     },
     {
@@ -257,6 +260,7 @@ export const COUNTRY_DATA_SY: CountryData = {
       "fromCityAr": "دمشق",
       "toCityAr": "درعا",
       "distanceKm": 105,
+      "durationMinutes": 80,
       "source": "أوتوستراد درعا الدولي M5"
     },
     {
@@ -264,6 +268,7 @@ export const COUNTRY_DATA_SY: CountryData = {
       "fromCityAr": "حمص",
       "toCityAr": "حماة",
       "distanceKm": 45,
+      "durationMinutes": 35,
       "source": "طريق حمص حماة M5"
     }
   ]

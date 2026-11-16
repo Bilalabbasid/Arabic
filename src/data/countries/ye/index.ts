@@ -223,6 +223,7 @@ export const COUNTRY_DATA_YE: CountryData = {
       "fromCityAr": "صنعاء",
       "toCityAr": "عدن",
       "distanceKm": 360,
+      "durationMinutes": 265,
       "source": "طريق صنعاء - ذمار - إب - تعز - عدن"
     },
     {
@@ -230,6 +231,7 @@ export const COUNTRY_DATA_YE: CountryData = {
       "fromCityAr": "صنعاء",
       "toCityAr": "تعز",
       "distanceKm": 260,
+      "durationMinutes": 230,
       "source": "طريق صنعاء - إب - تعز الرئيسي"
     },
     {
@@ -237,6 +239,7 @@ export const COUNTRY_DATA_YE: CountryData = {
       "fromCityAr": "صنعاء",
       "toCityAr": "الحديدة",
       "distanceKm": 225,
+      "durationMinutes": 215,
       "source": "طريق صنعاء - مناخة - الحديدة"
     },
     {
@@ -251,6 +254,7 @@ export const COUNTRY_DATA_YE: CountryData = {
       "fromCityAr": "عدن",
       "toCityAr": "تعز",
       "distanceKm": 180,
+      "durationMinutes": 160,
       "source": "طريق عدن لحج تعز"
     }
   ]

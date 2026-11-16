@@ -262,6 +262,7 @@ export const COUNTRY_DATA_MA: CountryData = {
       "fromCityAr": "الدار البيضاء",
       "toCityAr": "الرباط",
       "distanceKm": 87,
+      "durationMinutes": 70,
       "source": "الطريق السيار A1 الدار البيضاء - الرباط"
     },
     {
@@ -276,6 +277,7 @@ export const COUNTRY_DATA_MA: CountryData = {
       "fromCityAr": "الدار البيضاء",
       "toCityAr": "طنجة",
       "distanceKm": 340,
+      "durationMinutes": 235,
       "source": "الطريق السيار A1 الرباط - طنجة"
     },
     {
@@ -283,6 +285,7 @@ export const COUNTRY_DATA_MA: CountryData = {
       "fromCityAr": "الرباط",
       "toCityAr": "فاس",
       "distanceKm": 200,
+      "durationMinutes": 140,
       "source": "الطريق السيار A2 الرباط - فاس - وجدة"
     },
     {
@@ -290,6 +293,7 @@ export const COUNTRY_DATA_MA: CountryData = {
       "fromCityAr": "مراكش",
       "toCityAr": "أكادير",
       "distanceKm": 260,
+      "durationMinutes": 250,
       "source": "الطريق السيار A3 مراكش - أكادير"
     },
     {

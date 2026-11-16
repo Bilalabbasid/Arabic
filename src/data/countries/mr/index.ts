@@ -229,6 +229,7 @@ export const COUNTRY_DATA_MR: CountryData = {
       "fromCityAr": "نواكشوط",
       "toCityAr": "نواذيبو",
       "distanceKm": 470,
+      "durationMinutes": 360,
       "source": "طريق نواكشوط - نواذيبو الساحلي RN2"
     },
     {
@@ -243,6 +244,7 @@ export const COUNTRY_DATA_MR: CountryData = {
       "fromCityAr": "نواكشوط",
       "toCityAr": "كيفه",
       "distanceKm": 600,
+      "durationMinutes": 465,
       "source": "طريق الأمل الوطني RN3"
     },
     {
@@ -257,6 +259,7 @@ export const COUNTRY_DATA_MR: CountryData = {
       "fromCityAr": "نواكشوط",
       "toCityAr": "كيهيدي",
       "distanceKm": 430,
+      "durationMinutes": 340,
       "source": "طريق بوغي - كيهيدي"
     }
   ]

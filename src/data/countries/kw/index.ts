@@ -227,6 +227,7 @@ export const COUNTRY_DATA_KW: CountryData = {
       "fromCityAr": "مدينة الكويت",
       "toCityAr": "الجهراء",
       "distanceKm": 32,
+      "durationMinutes": 25,
       "source": "الهيئة العامة للطرق والنقل البري"
     },
     {
@@ -234,6 +235,7 @@ export const COUNTRY_DATA_KW: CountryData = {
       "fromCityAr": "مدينة الكويت",
       "toCityAr": "الأحمدي",
       "distanceKm": 38,
+      "durationMinutes": 30,
       "source": "الهيئة العامة للطرق"
     },
     {

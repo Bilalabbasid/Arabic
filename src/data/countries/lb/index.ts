@@ -246,6 +246,7 @@ export const COUNTRY_DATA_LB: CountryData = {
       "fromCityAr": "بيروت",
       "toCityAr": "طرابلس",
       "distanceKm": 80,
+      "durationMinutes": 65,
       "source": "الأوتوستراد الساحلي الشمالي M51"
     },
     {
@@ -253,6 +254,7 @@ export const COUNTRY_DATA_LB: CountryData = {
       "fromCityAr": "بيروت",
       "toCityAr": "صيدا",
       "distanceKm": 45,
+      "durationMinutes": 35,
       "source": "الأوتوستراد الساحلي الجنوبي"
     },
     {
@@ -260,6 +262,7 @@ export const COUNTRY_DATA_LB: CountryData = {
       "fromCityAr": "بيروت",
       "toCityAr": "صور",
       "distanceKm": 80,
+      "durationMinutes": 65,
       "source": "أوتوستراد الجنوب السريع"
     },
     {
@@ -267,6 +270,7 @@ export const COUNTRY_DATA_LB: CountryData = {
       "fromCityAr": "بيروت",
       "toCityAr": "زحلة (البقاع)",
       "distanceKm": 55,
+      "durationMinutes": 45,
       "source": "طريق بيروت - دمشق الدولي"
     },
     {
@@ -274,6 +278,7 @@ export const COUNTRY_DATA_LB: CountryData = {
       "fromCityAr": "بيروت",
       "toCityAr": "جبيل",
       "distanceKm": 40,
+      "durationMinutes": 35,
       "source": "أوتوستراد جونيه - جبيل الساحلي"
     }
   ]

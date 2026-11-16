@@ -258,6 +258,7 @@ export const COUNTRY_DATA_JO: CountryData = {
       "fromCityAr": "عَمّان",
       "toCityAr": "الزرقاء",
       "distanceKm": 25,
+      "durationMinutes": 20,
       "source": "طريق الأوتوستراد وطريق عمان الزرقاء السريع"
     },
     {
@@ -265,6 +266,7 @@ export const COUNTRY_DATA_JO: CountryData = {
       "fromCityAr": "عَمّان",
       "toCityAr": "إربد",
       "distanceKm": 85,
+      "durationMinutes": 65,
       "source": "طريق الأردن السريع 35"
     },
     {
@@ -272,6 +274,7 @@ export const COUNTRY_DATA_JO: CountryData = {
       "fromCityAr": "عَمّان",
       "toCityAr": "العقبة",
       "distanceKm": 330,
+      "durationMinutes": 240,
       "source": "الطريق الصحراوي 15"
     },
     {
@@ -279,6 +282,7 @@ export const COUNTRY_DATA_JO: CountryData = {
       "fromCityAr": "عَمّان",
       "toCityAr": "البحر الميت",
       "distanceKm": 55,
+      "durationMinutes": 45,
       "source": "طريق ناعور - البحر الميت"
     },
     {
@@ -286,6 +290,7 @@ export const COUNTRY_DATA_JO: CountryData = {
       "fromCityAr": "عَمّان",
       "toCityAr": "الكرك",
       "distanceKm": 125,
+      "durationMinutes": 100,
       "source": "الطريق الصحراوي عبر القطرانة"
     }
   ]

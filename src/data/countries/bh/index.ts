@@ -239,6 +239,7 @@ export const COUNTRY_DATA_BH: CountryData = {
       "fromCityAr": "المنامة",
       "toCityAr": "الرفاع",
       "distanceKm": 18,
+      "durationMinutes": 20,
       "source": "وزارة الأشغال - شارع الشيخ عيسى بن سلمان"
     },
     {
@@ -246,6 +247,7 @@ export const COUNTRY_DATA_BH: CountryData = {
       "fromCityAr": "المنامة",
       "toCityAr": "المحرق",
       "distanceKm": 8,
+      "durationMinutes": 15,
       "source": "جسر الشيخ عيسى بن سلمان وجسر الشيخ حمد"
     },
     {
@@ -253,6 +255,7 @@ export const COUNTRY_DATA_BH: CountryData = {
       "fromCityAr": "المنامة",
       "toCityAr": "مدينة حمد",
       "distanceKm": 22,
+      "durationMinutes": 20,
       "source": "شارع الشيخ خليفة بن سلمان السريع"
     },
     {
@@ -267,6 +270,7 @@ export const COUNTRY_DATA_BH: CountryData = {
       "fromCityAr": "المنامة",
       "toCityAr": "الزلاق",
       "distanceKm": 30,
+      "durationMinutes": 25,
       "source": "شارع خليج البحرين"
     }
   ]

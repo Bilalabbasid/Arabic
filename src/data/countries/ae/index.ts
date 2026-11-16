@@ -291,6 +291,7 @@ export const COUNTRY_DATA_AE: CountryData = {
       "fromCityAr": "دبي",
       "toCityAr": "أبوظبي",
       "distanceKm": 140,
+      "durationMinutes": 90,
       "source": "هيئة الطرق والمواصلات - طريق الشيخ زايد E11"
     },
     {
@@ -305,6 +306,7 @@ export const COUNTRY_DATA_AE: CountryData = {
       "fromCityAr": "دبي",
       "toCityAr": "العين",
       "distanceKm": 135,
+      "durationMinutes": 90,
       "source": "طريق دبي - العين E66"
     },
     {
@@ -312,6 +314,7 @@ export const COUNTRY_DATA_AE: CountryData = {
       "fromCityAr": "أبوظبي",
       "toCityAr": "العين",
       "distanceKm": 160,
+      "durationMinutes": 90,
       "source": "طريق أبوظبي - العين E22"
     },
     {
@@ -319,6 +322,7 @@ export const COUNTRY_DATA_AE: CountryData = {
       "fromCityAr": "دبي",
       "toCityAr": "الفجيرة",
       "distanceKm": 120,
+      "durationMinutes": 90,
       "source": "طريق الشيخ خليفة السريع E84"
     },
     {
@@ -326,6 +330,7 @@ export const COUNTRY_DATA_AE: CountryData = {
       "fromCityAr": "دبي",
       "toCityAr": "رأس الخيمة",
       "distanceKm": 110,
+      "durationMinutes": 75,
       "source": "طريق محمد بن زايد E311"
     }
   ]

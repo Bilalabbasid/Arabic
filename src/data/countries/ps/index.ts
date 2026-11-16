@@ -259,6 +259,7 @@ export const COUNTRY_DATA_PS: CountryData = {
       "fromCityAr": "رام الله",
       "toCityAr": "نابلس",
       "distanceKm": 45,
+      "durationMinutes": 50,
       "source": "طريق رام الله - نابلس الرئيسي 60"
     },
     {
@@ -273,6 +274,7 @@ export const COUNTRY_DATA_PS: CountryData = {
       "fromCityAr": "رام الله",
       "toCityAr": "الخليل",
       "distanceKm": 55,
+      "durationMinutes": 60,
       "source": "طريق وادي النار - الخليل 60"
     },
     {
@@ -287,6 +289,7 @@ export const COUNTRY_DATA_PS: CountryData = {
       "fromCityAr": "رام الله",
       "toCityAr": "أريحا",
       "distanceKm": 38,
+      "durationMinutes": 40,
       "source": "طريق المعرجات - أريحا"
     }
   ]

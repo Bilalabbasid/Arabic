@@ -250,6 +250,7 @@ export const COUNTRY_DATA_QA: CountryData = {
       "fromCityAr": "الدوحة",
       "toCityAr": "الوكرة",
       "distanceKm": 20,
+      "durationMinutes": 20,
       "source": "هيئة الأشغال العامة (أشغال) - طريق الوكرة الرئيسي"
     },
     {
@@ -257,6 +258,7 @@ export const COUNTRY_DATA_QA: CountryData = {
       "fromCityAr": "الدوحة",
       "toCityAr": "مسيعيد",
       "distanceKm": 45,
+      "durationMinutes": 40,
       "source": "هيئة الأشغال العامة - طريق مسيعيد"
     },
     {
@@ -264,6 +266,7 @@ export const COUNTRY_DATA_QA: CountryData = {
       "fromCityAr": "الدوحة",
       "toCityAr": "الرويس (شمال قطر)",
       "distanceKm": 110,
+      "durationMinutes": 80,
       "source": "طريق الشمال السريع Q1"
     },
     {

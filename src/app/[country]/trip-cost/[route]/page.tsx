@@ -17,6 +17,13 @@ interface PageProps {
   params: Promise<{ country: string; route: string }>;
 }
 
+// Where the shortest road and the real journey can differ a lot (closures, checkpoints, conflict).
+const ROAD_CONDITION_NOTES: Record<string, string> = {
+  ye: 'منذ سنوات الحرب أُغلقت بعض الطرق المباشرة بين المدن اليمنية، مثل الطريق بين صنعاء وتعز، فقد تسلك الرحلة طرقاً بديلة أطول بكثير من المسافة والمدة المعروضتين؛ تحقق من حالة الطريق قبل السفر.',
+  ps: 'تمر الطرق بين مدن الضفة الغربية بحواجز عسكرية قد تطيل زمن الرحلة كثيراً أو تغلق الطريق مؤقتاً، والمسافة والمدة المعروضتان للطريق نفسه دون وقت الانتظار على الحواجز.',
+  sd: 'بسبب الحرب قد تكون بعض الطرق بين المدن السودانية مغلقة أو غير آمنة، فتحقق من حالة الطريق قبل السفر؛ المسافة والمدة المعروضتان لأقصر طريق بري في الظروف العادية.',
+};
+
 // Average highway speed used when a route has no verified driving time.
 const AVG_HIGHWAY_SPEED_KMH = 90;
 
@@ -74,11 +81,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const duration = formatDriveDuration(estimateDriveMinutes(route.distanceKm, route.durationMinutes));
-  // Searchers ask "كم كيلو" / "كم ساعة" / "كم تبعد": put both answers in the snippet.
-  const title = formatMetaTitle(`المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration} بالسيارة)`);
-  const fuelVerified = countryData.fuel?.status === 'verified';
-  const description = `كم تبعد ${route.toCityAr} عن ${route.fromCityAr}؟ المسافة ${route.distanceKm} كم بالسيارة وتستغرق القيادة نحو ${duration}. اعرف كم لتر بنزين يحتاج المشوار ${fuelVerified ? `وتكلفته ذهاباً وإياباً (${route.distanceKm * 2} كم) بأسعار الوقود الرسمية` : `ذهاباً وإياباً (${route.distanceKm * 2} كم)`}.`;
+  const driveMinutes = estimateDriveMinutes(route.distanceKm, route.durationMinutes);
+  const duration = formatDriveDuration(driveMinutes);
+  const ins = computeRouteInsights(route, driveMinutes, countryData, getRelatedRoutes(countryData.routes, route, 3));
+  const sym = country.currencySymbolAr;
+  // Searchers ask "كم كيلو" / "كم ساعة" / "كم تبعد": distance and time stay in the title; the fuel cost
+  // (which the title does not answer) is the reason to click, so it leads the description.
+  const fullTitle = `المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration}) وتكلفة البنزين`;
+  const title = formatMetaTitle(
+    fullTitle.length <= 65 ? fullTitle : `المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration} بالسيارة)`
+  );
+  const tankText =
+    ins.tank.refuelsRound === 0
+      ? 'ويكفي خزان واحد للذهاب والعودة'
+      : ins.tank.refuelsOneWay === 0
+        ? 'ويكفي خزان واحد للذهاب'
+        : `وتحتاج للتزود بالوقود ${ins.tank.refuelsOneWay === 1 ? 'مرة' : `${ins.tank.refuelsOneWay} مرات`} في الطريق`;
+  const description =
+    ins.costOneWay !== undefined
+      ? `كم تبعد ${route.toCityAr} عن ${route.fromCityAr}؟ ${route.distanceKm} كم بالسيارة ونحو ${duration}. بنزين الذهاب لسيارة سيدان ${f2(ins.costOneWay)} ${sym} و${f2(ins.costOneWay * 2)} ${sym} ذهاباً وإياباً، ${tankText}. قارن تكلفة سيارتك.`
+      : `كم تبعد ${route.toCityAr} عن ${route.fromCityAr}؟ ${route.distanceKm} كم بالسيارة ونحو ${duration}. يحتاج الذهاب نحو ${ins.liters} لتر بنزين لسيارة سيدان و${ins.byCar[2].liters} لتر لسيارة SUV، ${tankText}.`;
   const canonical = constructCanonicalUrl(`/${country.countryCode.toLowerCase()}/trip-cost/${route.id}`);
 
   return {
@@ -233,6 +255,12 @@ export default async function TripRoutePage({ params }: PageProps) {
           </span>
         </div>
 
+        {ROAD_CONDITION_NOTES[country.countryCode.toLowerCase()] && (
+          <p className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs sm:text-sm leading-relaxed">
+            <strong>تنبيه عن حالة الطريق: </strong>
+            {ROAD_CONDITION_NOTES[country.countryCode.toLowerCase()]}
+          </p>
+        )}
         <p className="text-sm text-slate-600 leading-relaxed">
           {fuelVerified
             ? `حسبنا وقود مسار ${from} – ${to} وتكلفته من مسافة الطريق البري ${route.distanceKm} كم (المصدر: ${route.source}) وأحدث تسعيرة معتمدة للوقود في ${country.nameAr}${primaryGrade ? ` (${primaryGrade.nameAr} بسعر ${primaryGrade.pricePerLiter} ${currencySymbol} للتر)` : ''}.`

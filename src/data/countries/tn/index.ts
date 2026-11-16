@@ -258,6 +258,7 @@ export const COUNTRY_DATA_TN: CountryData = {
       "fromCityAr": "تونس العاصمة",
       "toCityAr": "سوسة",
       "distanceKm": 145,
+      "durationMinutes": 110,
       "source": "الطريق السيارة A1 تونس - مساكن"
     },
     {
@@ -265,6 +266,7 @@ export const COUNTRY_DATA_TN: CountryData = {
       "fromCityAr": "تونس العاصمة",
       "toCityAr": "صفاقس",
       "distanceKm": 270,
+      "durationMinutes": 205,
       "source": "الطريق السيارة A1 تونس - صفاقس"
     },
     {
@@ -272,6 +274,7 @@ export const COUNTRY_DATA_TN: CountryData = {
       "fromCityAr": "تونس العاصمة",
       "toCityAr": "بنزرت",
       "distanceKm": 65,
+      "durationMinutes": 50,
       "source": "الطريق السيارة A4 تونس - بنزرت"
     },
     {
@@ -279,6 +282,7 @@ export const COUNTRY_DATA_TN: CountryData = {
       "fromCityAr": "تونس العاصمة",
       "toCityAr": "قابس",
       "distanceKm": 400,
+      "durationMinutes": 280,
       "source": "الطريق السيارة A1 تونس - قابس"
     },
     {
@@ -286,6 +290,7 @@ export const COUNTRY_DATA_TN: CountryData = {
       "fromCityAr": "تونس العاصمة",
       "toCityAr": "القيروان",
       "distanceKm": 160,
+      "durationMinutes": 130,
       "source": "الطريق الوطنية رقم 3"
     }
   ]

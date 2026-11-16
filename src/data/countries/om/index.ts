@@ -237,6 +237,7 @@ export const COUNTRY_DATA_OM: CountryData = {
       "fromCityAr": "مسقط",
       "toCityAr": "صحار",
       "distanceKm": 210,
+      "durationMinutes": 145,
       "source": "طريق الباطنة السريع"
     },
     {
@@ -244,6 +245,7 @@ export const COUNTRY_DATA_OM: CountryData = {
       "fromCityAr": "مسقط",
       "toCityAr": "صلالة",
       "distanceKm": 1000,
+      "durationMinutes": 660,
       "source": "طريق أدم - ثمريت - صلالة 31"
     },
     {
@@ -251,6 +253,7 @@ export const COUNTRY_DATA_OM: CountryData = {
       "fromCityAr": "مسقط",
       "toCityAr": "نزوى",
       "distanceKm": 160,
+      "durationMinutes": 110,
       "source": "طريق مسقط - نزوى المزدوج 15"
     },
     {
@@ -258,6 +261,7 @@ export const COUNTRY_DATA_OM: CountryData = {
       "fromCityAr": "مسقط",
       "toCityAr": "صور",
       "distanceKm": 205,
+      "durationMinutes": 150,
       "source": "طريق قريات - صور الساحلي"
     },
     {
@@ -265,6 +269,7 @@ export const COUNTRY_DATA_OM: CountryData = {
       "fromCityAr": "مسقط",
       "toCityAr": "عبري",
       "distanceKm": 290,
+      "durationMinutes": 190,
       "source": "طريق مسقط - عبري"
     },
     {

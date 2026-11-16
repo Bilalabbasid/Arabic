@@ -244,6 +244,7 @@ export const COUNTRY_DATA_KM: CountryData = {
       "fromCityAr": "موروني",
       "toCityAr": "مطار الأمير سعيد إبراهيم الدولي (هاهايا)",
       "distanceKm": 20,
+      "durationMinutes": 20,
       "source": "طريق المطار الدولي RN1"
     },
     {
@@ -251,6 +252,7 @@ export const COUNTRY_DATA_KM: CountryData = {
       "fromCityAr": "موتسامودو (أنجوان)",
       "toCityAr": "دوموني",
       "distanceKm": 30,
+      "durationMinutes": 60,
       "source": "طريق موتسامودو دوموني الرئيسي"
     }
   ]

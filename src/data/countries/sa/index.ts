@@ -282,6 +282,7 @@ export const COUNTRY_DATA_SA: CountryData = {
       "fromCityAr": "الرياض",
       "toCityAr": "جدة",
       "distanceKm": 950,
+      "durationMinutes": 625,
       "source": "الهيئة العامة للطرق - مسار طريق مكة السريع"
     },
     {
@@ -297,6 +298,7 @@ export const COUNTRY_DATA_SA: CountryData = {
       "fromCityAr": "الرياض",
       "toCityAr": "القصيم (بريدة)",
       "distanceKm": 330,
+      "durationMinutes": 190,
       "source": "الهيئة العامة للطرق"
     },
     {
@@ -304,6 +306,7 @@ export const COUNTRY_DATA_SA: CountryData = {
       "fromCityAr": "جدة",
       "toCityAr": "المدينة المنورة",
       "distanceKm": 420,
+      "durationMinutes": 290,
       "source": "الهيئة العامة للطرق - طريق الهجرة"
     },
     {
@@ -311,6 +314,7 @@ export const COUNTRY_DATA_SA: CountryData = {
       "fromCityAr": "الرياض",
       "toCityAr": "أبها",
       "distanceKm": 960,
+      "durationMinutes": 690,
       "source": "الهيئة العامة للطرق"
     },
     {

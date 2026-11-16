@@ -254,6 +254,7 @@ export const COUNTRY_DATA_DZ: CountryData = {
       "fromCityAr": "الجزائر العاصمة",
       "toCityAr": "وهران",
       "distanceKm": 415,
+      "durationMinutes": 280,
       "source": "الطريق السيار شرق - غرب A1"
     },
     {
@@ -261,6 +262,7 @@ export const COUNTRY_DATA_DZ: CountryData = {
       "fromCityAr": "الجزائر العاصمة",
       "toCityAr": "قسنطينة",
       "distanceKm": 400,
+      "durationMinutes": 285,
       "source": "الطريق السيار شرق - غرب A1"
     },
     {
@@ -268,6 +270,7 @@ export const COUNTRY_DATA_DZ: CountryData = {
       "fromCityAr": "الجزائر العاصمة",
       "toCityAr": "سطيف",
       "distanceKm": 300,
+      "durationMinutes": 220,
       "source": "الطريق السيار شرق - غرب"
     },
     {
@@ -275,6 +278,7 @@ export const COUNTRY_DATA_DZ: CountryData = {
       "fromCityAr": "الجزائر العاصمة",
       "toCityAr": "عنابة",
       "distanceKm": 540,
+      "durationMinutes": 385,
       "source": "الطريق السيار شرق - غرب المقطع الشرقي"
     },
     {

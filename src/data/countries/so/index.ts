@@ -200,6 +200,7 @@ export const COUNTRY_DATA_SO: CountryData = {
       "fromCityAr": "مقديشو",
       "toCityAr": "مركة",
       "distanceKm": 90,
+      "durationMinutes": 85,
       "source": "الطريق الساحلي الجنوبي"
     },
     {
@@ -207,6 +208,7 @@ export const COUNTRY_DATA_SO: CountryData = {
       "fromCityAr": "مقديشو",
       "toCityAr": "بيدوا",
       "distanceKm": 250,
+      "durationMinutes": 225,
       "source": "طريق مقديشو - بيدوا القومي"
     },
     {
@@ -214,6 +216,7 @@ export const COUNTRY_DATA_SO: CountryData = {
       "fromCityAr": "مقديشو",
       "toCityAr": "جوهر",
       "distanceKm": 90,
+      "durationMinutes": 75,
       "source": "طريق مقديشو - جوهر - بلعد"
     },
     {
@@ -221,6 +224,7 @@ export const COUNTRY_DATA_SO: CountryData = {
       "fromCityAr": "هرجيسا",
       "toCityAr": "بربرة",
       "distanceKm": 160,
+      "durationMinutes": 145,
       "source": "طريق هرجيسا - بربرة"
     }
   ]
