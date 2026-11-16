@@ -46,6 +46,9 @@ interface PageProps {
   params: Promise<{ country: string; calculator: string }>;
 }
 
+// Regenerate daily: fuel titles drop a price automatically once it passes its re-check date.
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
   const paramsList: { country: string; calculator: string }[] = [];
 

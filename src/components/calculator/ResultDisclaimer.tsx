@@ -1,6 +1,14 @@
 import React from 'react';
 import { CalculationResult } from '@/types/calculator';
 import { ALL_COUNTRY_LEGAL_RULES } from '@/data/rules';
+import { getCountryData } from '@/data/countries';
+
+const FUEL_PRICING_AR: Record<string, string> = {
+  fixed_official: 'سعر رسمي ثابت',
+  monthly_adjusted: 'تسعيرة تُراجع دورياً',
+  subsidised_cap: 'سقف سعري مدعوم',
+  liberalised: 'أسعار محررة',
+};
 import { Info, ExternalLink } from 'lucide-react';
 
 interface Props {
@@ -151,6 +159,16 @@ export function getDisclaimerForCalculator(
     case 'fuel-prices':
     case 'trip-cost':
     case 'fuel-consumption-converter': {
+      const fuel = getCountryData(code.toLowerCase())?.fuel;
+      if (fuel?.status === 'verified' && fuel.value) {
+        return {
+          disclaimerType: 'fuel-electricity',
+          disclaimerText: `تعتمد التكلفة على أسعار الوقود الرسمية المعلنة من ${fuel.authority || 'الجهة المختصة'} (${FUEL_PRICING_AR[fuel.value.pricingModel] || 'تسعيرة رسمية'})؛ وإذا تغير السعر في محطتك فأدخله في حقل سعر اللتر. قد يختلف الاستهلاك الفعلي حسب ظروف القيادة وحالة المحرك والمكيف.`,
+          authority: fuel.authority || 'الجهة المختصة بتسعير الوقود',
+          sourceUrl: fuel.sourceUrl || 'https://www.aramco.com',
+          lastChecked: fuel.checkedAt || '2026-11-01',
+        };
+      }
       if (rule && rule.fuelPrices) {
         return {
           disclaimerType: 'fuel-electricity',

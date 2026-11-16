@@ -10,6 +10,7 @@ import {
 } from '@/data/countries';
 import { ALL_CALCULATORS } from '@/data/calculators';
 import { getCountryLegalRules } from '@/data/rules';
+import { resolveFuelGrade } from '@/calculators/fuel-cost/grades';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
@@ -78,6 +79,8 @@ export default async function CountryHubPage({ params }: PageProps) {
   }
 
   const countryRules = getCountryLegalRules(country.countryCode);
+  const hubFuel = getCountryData(country.countryCode.toLowerCase())?.fuel;
+  const hubRegular = hubFuel?.status === 'verified' && hubFuel.value?.grades ? resolveFuelGrade(hubFuel.value.grades, 'octane91') : null;
   const countryData = getCountryData(country.countryCode.toLowerCase());
 
   // Separate localized calculators from generic/universal calculators
@@ -178,12 +181,12 @@ export default async function CountryHubPage({ params }: PageProps) {
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-1.5">
               <span className="text-xs font-bold text-slate-500 block">تسعيرة الوقود والبنزين:</span>
               <span className="text-sm font-extrabold text-slate-800 block">
-                {countryRules.fuelPrices
-                  ? `بنزين 91: ${countryRules.fuelPrices.value.octane91} ${country.currencySymbolAr}`
+                {hubRegular
+                  ? `${hubRegular.grade.nameAr}: ${hubRegular.grade.pricePerLiter} ${country.currencySymbolAr}`
                   : 'أسعار متغيرة بحسب المحطة'}
               </span>
               <span className="text-xs text-slate-500 line-clamp-2">
-                {countryRules.fuelPrices?.authority || 'يتطلب إدخال سعر اللتر الفعلي'}
+                {hubRegular ? `${hubFuel?.authority || 'السعر الرسمي'}${hubFuel?.checkedAt ? ` • تحقق ${hubFuel.checkedAt}` : ''}` : 'يتطلب إدخال سعر اللتر الفعلي'}
               </span>
             </div>
           </div>
