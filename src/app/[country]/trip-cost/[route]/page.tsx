@@ -12,6 +12,7 @@ import FaqAccordion from '@/components/calculator/FaqAccordion';
 import { formatDateAr } from '@/lib/formatters';
 import { getRelatedRoutes } from '@/lib/routes';
 import { computeRouteInsights, BREAK_LENGTH_MIN, EV_KWH_PER_100, TANK_LITERS } from '@/lib/route-insights';
+import { COST_FIRST_TITLE_ROUTES, costFirstRouteTitle } from '@/lib/seo/route-title-test';
 
 interface PageProps {
   params: Promise<{ country: string; route: string }>;
@@ -88,8 +89,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Searchers ask "كم كيلو" / "كم ساعة" / "كم تبعد": distance and time stay in the title; the fuel cost
   // (which the title does not answer) is the reason to click, so it leads the description.
   const fullTitle = `المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration}) وتكلفة البنزين`;
+  const inCostFirstTest =
+    country.countryCode.toLowerCase() === 'sa' && COST_FIRST_TITLE_ROUTES.has(route.id) && ins.costOneWay !== undefined;
   const title = formatMetaTitle(
-    fullTitle.length <= 65 ? fullTitle : `المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration} بالسيارة)`
+    inCostFirstTest
+      ? costFirstRouteTitle(route.fromCityAr, route.toCityAr, route.distanceKm, duration, ins.costOneWay!, 'ريال')
+      : fullTitle.length <= 65
+        ? fullTitle
+        : `المسافة بين ${route.fromCityAr} و${route.toCityAr} ${route.distanceKm} كم (${duration} بالسيارة)`
   );
   const tankText =
     ins.tank.refuelsRound === 0
