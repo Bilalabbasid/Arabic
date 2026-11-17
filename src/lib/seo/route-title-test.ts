@@ -5,6 +5,9 @@
  * answer box already gives distance and time, and so did our title. Group B leads with the fuel
  * cost, which Google's box does not show; group A keeps the distance-and-time title as the control.
  *
+ * Routes added after the split (27 Saudi routes on 2026-11-18) are outside the test: leave them out
+ * of both groups when comparing.
+ *
  * Groups were split on 24-hour impressions (A 552, B 548) from the Search Console export of
  * 2026-11-17. Compare clicks and CTR per group in Search Console with a page filter
  * (regex on the ids below) over the same dates. Remove this file and the branch in the route

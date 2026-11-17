@@ -488,6 +488,62 @@ export const COUNTRY_DATA_EG: CountryData = {
       "distanceKm": 126,
       "durationMinutes": 95,
       "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "luxor-aswan",
+      "fromCityAr": "الأقصر",
+      "toCityAr": "أسوان",
+      "distanceKm": 213,
+      "durationMinutes": 155,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "cairo-sadat-city",
+      "fromCityAr": "القاهرة",
+      "toCityAr": "مدينة السادات",
+      "distanceKm": 90,
+      "durationMinutes": 65,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "tanta-alexandria",
+      "fromCityAr": "طنطا",
+      "toCityAr": "الإسكندرية",
+      "distanceKm": 124,
+      "durationMinutes": 105,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "tanta-mansoura",
+      "fromCityAr": "طنطا",
+      "toCityAr": "المنصورة",
+      "distanceKm": 55,
+      "durationMinutes": 50,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "alexandria-matruh",
+      "fromCityAr": "الإسكندرية",
+      "toCityAr": "مرسى مطروح",
+      "distanceKm": 291,
+      "durationMinutes": 230,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "asyut-sohag",
+      "fromCityAr": "أسيوط",
+      "toCityAr": "سوهاج",
+      "distanceKm": 97,
+      "durationMinutes": 90,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "alexandria-dabaa",
+      "fromCityAr": "الإسكندرية",
+      "toCityAr": "الضبعة",
+      "distanceKm": 169,
+      "durationMinutes": 145,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
     }
   ]
 };

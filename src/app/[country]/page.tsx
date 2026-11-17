@@ -11,6 +11,7 @@ import {
 import { ALL_CALCULATORS } from '@/data/calculators';
 import { getCountryLegalRules } from '@/data/rules';
 import { resolveFuelGrade } from '@/calculators/fuel-cost/grades';
+import { getCountryFuelInsights } from '@/lib/country-fuel-insights';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
@@ -82,6 +83,22 @@ export default async function CountryHubPage({ params }: PageProps) {
   const hubFuel = getCountryData(country.countryCode.toLowerCase())?.fuel;
   const hubRegular = hubFuel?.status === 'verified' && hubFuel.value?.grades ? resolveFuelGrade(hubFuel.value.grades, 'octane91') : null;
   const countryData = getCountryData(country.countryCode.toLowerCase());
+
+  // Route facts for this country: longest trips with time and fuel cost, shortest, average.
+  const hubFuelInsights = getCountryFuelInsights(country.countryCode);
+  const hubRoutes = countryData?.routes ?? [];
+  const routeMinutes = (km: number, min?: number) => (min && min > 0 ? min : Math.round(((km / 90) * 60) / 5) * 5);
+  const hoursText = (min: number) => {
+    const h = Math.floor(min / 60);
+    const m = min % 60;
+    return h ? `${h} س${m ? ` و${m} د` : ''}` : `${m} د`;
+  };
+  const money = (n: number) => n.toLocaleString('en-US', Math.abs(n) >= 1000 ? { maximumFractionDigits: 0 } : { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const routeCost = (km: number) => (hubFuelInsights ? (km / 100) * 8 * hubFuelInsights.regular.price : undefined);
+  const longestRoutes = [...hubRoutes].sort((a, b) => b.distanceKm - a.distanceKm).slice(0, 5);
+  const shortestRoute = [...hubRoutes].sort((a, b) => a.distanceKm - b.distanceKm)[0];
+  const avgRouteKm = hubRoutes.length ? Math.round(hubRoutes.reduce((t, r) => t + r.distanceKm, 0) / hubRoutes.length) : 0;
+  const hubVatRate = countryRules?.hasVat ? countryRules.vatStandardRate?.value : undefined;
 
   // Separate localized calculators from generic/universal calculators
   const localizedCalculators = ALL_CALCULATORS.filter(
@@ -276,6 +293,45 @@ export default async function CountryHubPage({ params }: PageProps) {
               </Link>
             ))}
           </div>
+
+          {longestRoutes.length >= 3 && (
+            <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs space-y-3">
+              <h3 className="text-base font-bold text-slate-900">أطول مشاوير السفر بالسيارة في {country.nameAr}</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-right text-xs sm:text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-200 text-slate-500 font-bold bg-slate-50/50">
+                      <th className="p-2">المسار</th>
+                      <th className="p-2">المسافة</th>
+                      <th className="p-2">مدة القيادة</th>
+                      {hubFuelInsights && <th className="p-2">بنزين الذهاب (سيدان)</th>}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {longestRoutes.map((r) => (
+                      <tr key={r.id}>
+                        <td className="p-2 font-bold">
+                          <Link href={`/${country.countryCode.toLowerCase()}/trip-cost/${r.id}`} className="text-emerald-700 hover:underline">
+                            {r.fromCityAr} – {r.toCityAr}
+                          </Link>
+                        </td>
+                        <td className="p-2">{r.distanceKm} كم</td>
+                        <td className="p-2">{hoursText(routeMinutes(r.distanceKm, r.durationMinutes))}</td>
+                        {hubFuelInsights && <td className="p-2">{money(routeCost(r.distanceKm) ?? 0)} {country.currencySymbolAr}</td>}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {`يضم الدليل ${hubRoutes.length} مساراً بين مدن ${country.nameAr} بمتوسط ${avgRouteKm} كم للمسار، أطولها ${longestRoutes[0].fromCityAr} – ${longestRoutes[0].toCityAr} (${longestRoutes[0].distanceKm} كم) وأقصرها ${shortestRoute.fromCityAr} – ${shortestRoute.toCityAr} (${shortestRoute.distanceKm} كم).${
+                  hubFuelInsights
+                    ? ` وبسعر ${hubFuelInsights.regular.nameAr} (${hubFuelInsights.regular.price} ${country.currencySymbolAr} للتر) تكلف كل 100 كم نحو ${money(hubFuelInsights.per100)} ${country.currencySymbolAr} لسيارة سيدان تستهلك 8 لترات.`
+                    : ' وأسعار الوقود هنا حرة وتختلف بين المحطات، فأدخل سعر محطتك في حاسبة تكلفة الرحلة.'
+                }${hubVatRate ? ` وتطبق ${country.nameAr} ضريبة القيمة المضافة بنسبة ${hubVatRate}% على معظم السلع والخدمات.` : ''}`}
+              </p>
+            </div>
+          )}
         </div>
       )}
 

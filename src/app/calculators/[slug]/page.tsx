@@ -27,6 +27,8 @@ import RelatedCalculatorsBlock from '@/components/calculator/RelatedCalculatorsB
 import CountryVariantsBlock from '@/components/calculator/CountryVariantsBlock';
 import LiveGoldPrice from '@/components/calculator/LiveGoldPrice';
 import GoldWeightConverter from '@/components/calculator/GoldWeightConverter';
+import { ArabVatRatesTable } from '@/components/calculator/VatInsights';
+import ArabFuelPricesTable from '@/components/calculator/ArabFuelPricesTable';
 import AdSlot from '@/components/layout/AdSlot';
 import { getGuidesByCalculatorSlug } from '@/data/guides';
 import { CalculationResult } from '@/types/calculator';
@@ -190,6 +192,8 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
       />
 
       {calc.slug === 'gold-calculator' && <GoldWeightConverter />}
+      {calc.slug === 'vat-calculator' && <ArabVatRatesTable />}
+      {calc.slug === 'fuel-cost' && <ArabFuelPricesTable />}
 
       {/* Ad slot */}
       <AdSlot slotId="calc-mid" />

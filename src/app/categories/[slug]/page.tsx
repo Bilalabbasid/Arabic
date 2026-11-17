@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { CATEGORIES, getCategoryBySlug, CATEGORY_RICH_INTROS } from '@/data/categories';
+import { CATEGORY_FAQS } from '@/data/category-faqs';
+import FaqAccordion from '@/components/calculator/FaqAccordion';
 import { getCalculatorsByCategory } from '@/data/calculators';
 import { GUIDES } from '@/data/guides';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
@@ -72,6 +74,7 @@ export default async function CategoryDetailPage({ params }: PageProps) {
   const isIndexable = isCategoryIndexable(category.id);
   const calculators = getCalculatorsByCategory(category.id);
   const richIntro = CATEGORY_RICH_INTROS[category.id];
+  const categoryFaqs = isIndexable ? CATEGORY_FAQS[category.id] || [] : [];
 
   const categoryCalcSlugs = new Set(calculators.map((c) => c.slug));
   const relatedGuides = GUIDES.filter(
@@ -241,6 +244,7 @@ export default async function CategoryDetailPage({ params }: PageProps) {
       )}
 
       <AdSlot slotId="category-bottom" />
+      {categoryFaqs.length > 0 && <FaqAccordion faqs={categoryFaqs} />}
     </div>
   );
 }

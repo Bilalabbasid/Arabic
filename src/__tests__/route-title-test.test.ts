@@ -6,7 +6,7 @@ describe('route title test', () => {
   it('test group is half of the Saudi routes and every id exists', () => {
     const ids = new Set(COUNTRY_DATA_SA.routes.map((r) => r.id));
     expect(COST_FIRST_TITLE_ROUTES.size).toBe(23);
-    expect(ids.size).toBe(46);
+    expect(ids.size).toBeGreaterThanOrEqual(46); // routes added after the split are outside the test
     for (const id of COST_FIRST_TITLE_ROUTES) expect(ids.has(id), id).toBe(true);
   });
 

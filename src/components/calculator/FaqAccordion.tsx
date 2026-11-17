@@ -49,11 +49,13 @@ export default function FaqAccordion({ faqs, className = '' }: Props) {
                 />
               </button>
 
-              {isOpen && (
-                <div className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                  {faq.answer}
-                </div>
-              )}
+              {/* Always in the HTML (collapsed with `hidden`), so search engines read every answer. */}
+              <div
+                hidden={!isOpen}
+                className="px-4 pb-4 sm:px-5 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3"
+              >
+                {faq.answer}
+              </div>
             </div>
           );
         })}

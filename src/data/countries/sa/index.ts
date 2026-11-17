@@ -644,6 +644,222 @@ export const COUNTRY_DATA_SA: CountryData = {
       "distanceKm": 265,
       "durationMinutes": 190,
       "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "khafji-kuwait",
+      "fromCityAr": "الخفجي",
+      "toCityAr": "مدينة الكويت",
+      "distanceKm": 123,
+      "durationMinutes": 85,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-yanbu",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "ينبع",
+      "distanceKm": 240,
+      "durationMinutes": 170,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "abha-taif",
+      "fromCityAr": "أبها",
+      "toCityAr": "الطائف",
+      "distanceKm": 546,
+      "durationMinutes": 390,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-hanakiyah",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "الحناكية",
+      "distanceKm": 122,
+      "durationMinutes": 80,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-khobar",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الخبر",
+      "distanceKm": 424,
+      "durationMinutes": 240,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "buraidah-rass",
+      "fromCityAr": "بريدة",
+      "toCityAr": "الرس",
+      "distanceKm": 90,
+      "durationMinutes": 65,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "qassim-zulfi",
+      "fromCityAr": "بريدة",
+      "toCityAr": "الزلفي",
+      "distanceKm": 101,
+      "durationMinutes": 65,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-alula",
+      "fromCityAr": "الرياض",
+      "toCityAr": "العلا",
+      "distanceKm": 1035,
+      "durationMinutes": 655,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "jeddah-lith",
+      "fromCityAr": "جدة",
+      "toCityAr": "الليث",
+      "distanceKm": 207,
+      "durationMinutes": 145,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "ahsa-nairyah",
+      "fromCityAr": "الأحساء",
+      "toCityAr": "النعيرية",
+      "distanceKm": 299,
+      "durationMinutes": 210,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "tabuk-umluj",
+      "fromCityAr": "تبوك",
+      "toCityAr": "أملج",
+      "distanceKm": 509,
+      "durationMinutes": 360,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "dammam-abqaiq",
+      "fromCityAr": "الدمام",
+      "toCityAr": "بقيق",
+      "distanceKm": 84,
+      "durationMinutes": 60,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-bisha",
+      "fromCityAr": "الرياض",
+      "toCityAr": "بيشة",
+      "distanceKm": 711,
+      "durationMinutes": 515,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "abha-bisha",
+      "fromCityAr": "أبها",
+      "toCityAr": "بيشة",
+      "distanceKm": 258,
+      "durationMinutes": 195,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-tabuk",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "تبوك",
+      "distanceKm": 689,
+      "durationMinutes": 490,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "dammam-hafar-albatin",
+      "fromCityAr": "الدمام",
+      "toCityAr": "حفر الباطن",
+      "distanceKm": 484,
+      "durationMinutes": 320,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "tabuk-haql",
+      "fromCityAr": "تبوك",
+      "toCityAr": "حقل",
+      "distanceKm": 229,
+      "durationMinutes": 195,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "abha-khamis-mushait",
+      "fromCityAr": "أبها",
+      "toCityAr": "خميس مشيط",
+      "distanceKm": 30,
+      "durationMinutes": 30,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "taif-ranyah",
+      "fromCityAr": "الطائف",
+      "toCityAr": "رنية",
+      "distanceKm": 366,
+      "durationMinutes": 260,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "riyadh-doha",
+      "fromCityAr": "الرياض",
+      "toCityAr": "الدوحة (قطر)",
+      "distanceKm": 582,
+      "durationMinutes": 390,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "abha-baha",
+      "fromCityAr": "أبها",
+      "toCityAr": "الباحة",
+      "distanceKm": 330,
+      "durationMinutes": 245,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "makkah-abha",
+      "fromCityAr": "مكة المكرمة",
+      "toCityAr": "أبها",
+      "distanceKm": 675,
+      "durationMinutes": 465,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "makkah-jeddah-airport",
+      "fromCityAr": "مكة المكرمة",
+      "toCityAr": "مطار جدة الدولي",
+      "distanceKm": 98,
+      "durationMinutes": 85,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "makkah-dammam",
+      "fromCityAr": "مكة المكرمة",
+      "toCityAr": "الدمام",
+      "distanceKm": 1278,
+      "durationMinutes": 805,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-qassim",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "القصيم (بريدة)",
+      "distanceKm": 500,
+      "durationMinutes": 285,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-taif",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "الطائف",
+      "distanceKm": 523,
+      "durationMinutes": 355,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
+    },
+    {
+      "id": "madinah-dammam",
+      "fromCityAr": "المدينة المنورة",
+      "toCityAr": "الدمام",
+      "distanceKm": 1225,
+      "durationMinutes": 680,
+      "source": "خرائط OpenStreetMap (محرك التوجيه OSRM)"
     }
   ]
 };
