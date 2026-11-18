@@ -12,6 +12,7 @@ import { ALL_CALCULATORS } from '@/data/calculators';
 import { getCountryLegalRules } from '@/data/rules';
 import { resolveFuelGrade } from '@/calculators/fuel-cost/grades';
 import { getCountryFuelInsights } from '@/lib/country-fuel-insights';
+import CountryHubFacts from '@/components/country/CountryHubFacts';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountryFlag from '@/components/common/CountryFlag';
 import AdSlot from '@/components/layout/AdSlot';
@@ -209,6 +210,8 @@ export default async function CountryHubPage({ params }: PageProps) {
           </div>
         </div>
       )}
+
+      <CountryHubFacts countryCode={country.countryCode} countryNameAr={country.nameAr} />
 
       {/* Section 1: Genuinely Localized Calculators */}
       {localizedCalculators.length > 0 && (
