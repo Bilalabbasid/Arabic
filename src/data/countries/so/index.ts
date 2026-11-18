@@ -187,16 +187,7 @@ export const COUNTRY_DATA_SO: CountryData = {
     "checkedAt": "2026-11-01",
     "staleAfterDays": 400
   },
-  "routes": [
-    {
-      "id": "mogadishu-baidoa",
-      "fromCityAr": "مقديشو",
-      "toCityAr": "بيدوا",
-      "distanceKm": 250,
-      "durationMinutes": 225,
-      "source": "طريق مقديشو - بيدوا القومي"
-    }
-  ]
+  "routes": []
 };
 
 export default COUNTRY_DATA_SO;

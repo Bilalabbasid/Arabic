@@ -42,7 +42,7 @@ const nextConfig: NextConfig = {
       },
       // Somali routes removed 2026-11-18: no official fuel prices, so the pages could not show
       // costs and stayed thin. Old links go to the Somalia hub.
-      ...['mogadishu-afgooye', 'mogadishu-merca', 'mogadishu-jowhar', 'hargeisa-berbera'].map((route) => ({
+      ...['mogadishu-afgooye', 'mogadishu-merca', 'mogadishu-jowhar', 'hargeisa-berbera', 'mogadishu-baidoa'].map((route) => ({
         source: `/so/trip-cost/${route}`,
         destination: '/so',
         permanent: true,

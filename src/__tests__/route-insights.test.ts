@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { computeRouteInsights } from '@/lib/route-insights';
 import { COUNTRY_DATA_SA } from '@/data/countries/sa';
-import { COUNTRY_DATA_SO } from '@/data/countries/so';
+import { COUNTRY_DATA_MA } from '@/data/countries/ma';
 
 const riyadhJeddah = COUNTRY_DATA_SA.routes.find((r) => r.id === 'riyadh-jeddah')!;
 
@@ -41,9 +41,9 @@ describe('route insights', () => {
     expect(ins.perPassenger[1].cost).toBeCloseTo((76 * p91) / 3, 2);
   });
 
-  it('no prices where fuel prices are not official (Somalia), litres still computed', () => {
-    const r = COUNTRY_DATA_SO.routes[0];
-    const so = computeRouteInsights(r, 60, COUNTRY_DATA_SO, []);
+  it('no prices where fuel prices are not official (Morocco), litres still computed', () => {
+    const r = COUNTRY_DATA_MA.routes[0];
+    const so = computeRouteInsights(r, 60, COUNTRY_DATA_MA, []);
     expect(so.price).toBeUndefined();
     expect(so.costOneWay).toBeUndefined();
     expect(so.perPassenger).toEqual([]);
