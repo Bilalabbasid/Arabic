@@ -83,7 +83,9 @@ describe('22-Country Data Layer Suite', () => {
       }
 
       // Routes
-      expect(c.routes.length).toBeGreaterThanOrEqual(4);
+      // Countries with official fuel prices need a real route set; others keep only routes whose
+      // pages carry enough on their own without costs (Somalia: Mogadishu-Baidoa).
+      expect(c.routes.length).toBeGreaterThanOrEqual(c.fuel.status === 'verified' ? 4 : 1);
       for (const route of c.routes) {
         expect(route.distanceKm).toBeGreaterThan(0);
         expect(route.fromCityAr.length).toBeGreaterThan(1);

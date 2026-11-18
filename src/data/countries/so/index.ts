@@ -189,43 +189,12 @@ export const COUNTRY_DATA_SO: CountryData = {
   },
   "routes": [
     {
-      "id": "mogadishu-afgooye",
-      "fromCityAr": "مقديشو",
-      "toCityAr": "أفجوي",
-      "distanceKm": 30,
-      "source": "طريق مقديشو - أفجوي الرئيسي"
-    },
-    {
-      "id": "mogadishu-merca",
-      "fromCityAr": "مقديشو",
-      "toCityAr": "مركة",
-      "distanceKm": 90,
-      "durationMinutes": 85,
-      "source": "الطريق الساحلي الجنوبي"
-    },
-    {
       "id": "mogadishu-baidoa",
       "fromCityAr": "مقديشو",
       "toCityAr": "بيدوا",
       "distanceKm": 250,
       "durationMinutes": 225,
       "source": "طريق مقديشو - بيدوا القومي"
-    },
-    {
-      "id": "mogadishu-jowhar",
-      "fromCityAr": "مقديشو",
-      "toCityAr": "جوهر",
-      "distanceKm": 90,
-      "durationMinutes": 75,
-      "source": "طريق مقديشو - جوهر - بلعد"
-    },
-    {
-      "id": "hargeisa-berbera",
-      "fromCityAr": "هرجيسا",
-      "toCityAr": "بربرة",
-      "distanceKm": 160,
-      "durationMinutes": 145,
-      "source": "طريق هرجيسا - بربرة"
     }
   ]
 };
